@@ -30,6 +30,10 @@ namespace Printo.Data.Data
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
+        public bool IsActive { get; set; }
+        public DateTime AddedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+
         public int? AddedUserID { get; set; }
         public virtual User AddedUser { get; set; }
         public int? UpdatedUserID { get; set; }

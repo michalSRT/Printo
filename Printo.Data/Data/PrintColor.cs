@@ -9,7 +9,7 @@ namespace Printo.Data.Data
     public class PrintColor
     {
         [Key]
-        public int ColorID { get; set; }
+        public int PrintColorID { get; set; }
 
         [Required(ErrorMessage = "Nazwa jest wymagana")]
         [Display(Name = "Nazwa")]

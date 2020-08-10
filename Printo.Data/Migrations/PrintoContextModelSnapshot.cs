@@ -97,6 +97,9 @@ namespace Printo.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("AddedUserID")
                         .HasColumnType("int");
 
@@ -118,6 +121,9 @@ namespace Printo.Data.Migrations
                     b.Property<string>("HouseNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
@@ -126,6 +132,9 @@ namespace Printo.Data.Migrations
 
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("UpdatedUserID")
                         .HasColumnType("int");
@@ -177,6 +186,17 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("DeliveryTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            DeliveryTypeID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(7797),
+                            AddedUserID = 1,
+                            Description = "Odbiór osobisty przez klienta",
+                            IsActive = true,
+                            Name = "Odbiór"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.Finishing", b =>
@@ -215,6 +235,17 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("Finishings");
+
+                    b.HasData(
+                        new
+                        {
+                            FinishingID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(721),
+                            AddedUserID = 1,
+                            Description = "Folia błysk jednostronnie na awersie",
+                            IsActive = true,
+                            Name = "Folia błysk 1/0"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.Format", b =>
@@ -253,6 +284,26 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("Formats");
+
+                    b.HasData(
+                        new
+                        {
+                            FormatID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(3688),
+                            AddedUserID = 1,
+                            Description = "210x297mm",
+                            IsActive = true,
+                            Name = "A4"
+                        },
+                        new
+                        {
+                            FormatID = 2,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(4547),
+                            AddedUserID = 1,
+                            Description = "148x210mm",
+                            IsActive = true,
+                            Name = "A5"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.Machine", b =>
@@ -291,6 +342,17 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("Machines");
+
+                    b.HasData(
+                        new
+                        {
+                            MachineID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(6632),
+                            AddedUserID = 1,
+                            Description = "RAPIDA 75",
+                            IsActive = true,
+                            Name = "KBA"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.Order", b =>
@@ -462,6 +524,17 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PaperTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            PaperTypeID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(9541),
+                            AddedUserID = 1,
+                            Description = "Papier powlekany matowy",
+                            IsActive = true,
+                            Name = "Kreda mat"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.PaperWeight", b =>
@@ -500,6 +573,17 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PaperWeights");
+
+                    b.HasData(
+                        new
+                        {
+                            PaperWeightID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 826, DateTimeKind.Local).AddTicks(2443),
+                            AddedUserID = 1,
+                            Description = "",
+                            Grammature = "130g",
+                            IsActive = true
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.PaymentType", b =>
@@ -538,6 +622,17 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PaymentTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            PaymentTypeID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 826, DateTimeKind.Local).AddTicks(5274),
+                            AddedUserID = 1,
+                            Description = "Przelew bankowy termin min. 14 dni",
+                            IsActive = true,
+                            Name = "Przelew"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.PostPress", b =>
@@ -576,11 +671,31 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PostPresses");
+
+                    b.HasData(
+                        new
+                        {
+                            PostPressID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 826, DateTimeKind.Local).AddTicks(8114),
+                            AddedUserID = 1,
+                            Description = "2 zszywki płaskie",
+                            IsActive = true,
+                            Name = "Szycie zeszytowe standard"
+                        },
+                        new
+                        {
+                            PostPressID = 2,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 826, DateTimeKind.Local).AddTicks(8982),
+                            AddedUserID = 1,
+                            Description = "2 zszywki euro",
+                            IsActive = true,
+                            Name = "Szycie zeszytowe oczko"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.PrintColor", b =>
                 {
-                    b.Property<int>("ColorID")
+                    b.Property<int>("PrintColorID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -607,13 +722,33 @@ namespace Printo.Data.Migrations
                     b.Property<int?>("UpdatedUserID")
                         .HasColumnType("int");
 
-                    b.HasKey("ColorID");
+                    b.HasKey("PrintColorID");
 
                     b.HasIndex("AddedUserID");
 
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PrintColors");
+
+                    b.HasData(
+                        new
+                        {
+                            PrintColorID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(1044),
+                            AddedUserID = 1,
+                            Description = "CMYK jednostronnie",
+                            IsActive = true,
+                            Name = "4/0 CMYK"
+                        },
+                        new
+                        {
+                            PrintColorID = 2,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(1892),
+                            AddedUserID = 1,
+                            Description = "CMYK obustronnie",
+                            IsActive = true,
+                            Name = "4/4 CMYK"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.Product", b =>
@@ -652,6 +787,35 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(6959),
+                            AddedUserID = 1,
+                            Description = "",
+                            IsActive = true,
+                            Name = "Katalog szyty"
+                        },
+                        new
+                        {
+                            ProductID = 2,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(7800),
+                            AddedUserID = 1,
+                            Description = "Standardowa",
+                            IsActive = true,
+                            Name = "Ulotka"
+                        },
+                        new
+                        {
+                            ProductID = 3,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(7829),
+                            AddedUserID = 1,
+                            Description = "Standard",
+                            IsActive = true,
+                            Name = "Plakat"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.ProductionStage", b =>
@@ -693,6 +857,35 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("ProductionStages");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductionStageID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(4031),
+                            AddedUserID = 1,
+                            Description = "Przygotowanie do druku.",
+                            IsActive = true,
+                            Name = "DTP"
+                        },
+                        new
+                        {
+                            ProductionStageID = 2,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(4891),
+                            AddedUserID = 1,
+                            Description = "Naświetlanie CTP",
+                            IsActive = true,
+                            Name = "CTP"
+                        },
+                        new
+                        {
+                            ProductionStageID = 3,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(4920),
+                            AddedUserID = 1,
+                            Description = "Naświetlanie CTP",
+                            IsActive = true,
+                            Name = "Druk"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.SheetSize", b =>
@@ -731,6 +924,35 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("SheetSizes");
+
+                    b.HasData(
+                        new
+                        {
+                            SheetSizeID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(9998),
+                            AddedUserID = 1,
+                            Description = "630x440mm",
+                            IsActive = true,
+                            Name = "A2+"
+                        },
+                        new
+                        {
+                            SheetSizeID = 2,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 828, DateTimeKind.Local).AddTicks(854),
+                            AddedUserID = 1,
+                            Description = "610x430mm",
+                            IsActive = true,
+                            Name = "A2"
+                        },
+                        new
+                        {
+                            SheetSizeID = 3,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 828, DateTimeKind.Local).AddTicks(900),
+                            AddedUserID = 1,
+                            Description = "700x500mm",
+                            IsActive = true,
+                            Name = "B2"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.ToDo", b =>
@@ -772,6 +994,18 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("ToDos");
+
+                    b.HasData(
+                        new
+                        {
+                            ToDoID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 828, DateTimeKind.Local).AddTicks(3518),
+                            AddedUserID = 1,
+                            Date = new DateTime(2020, 8, 10, 23, 30, 35, 828, DateTimeKind.Local).AddTicks(2592),
+                            Description = "Sonory 2 paczki",
+                            IsActive = true,
+                            Name = "Zamówić matryce"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.User", b =>
@@ -823,7 +1057,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             UserID = 1,
-                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 503, DateTimeKind.Local).AddTicks(6315),
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 820, DateTimeKind.Local).AddTicks(4643),
                             IsActive = true,
                             Login = "admin",
                             Name = "Admin",
@@ -864,7 +1098,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             UserTypeID = 1,
-                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(4053),
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(2017),
                             Description = "Administrator systemu",
                             IsActive = true,
                             Name = "Admin"
@@ -872,7 +1106,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             UserTypeID = 2,
-                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(4567),
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(2534),
                             Description = "Pracownik",
                             IsActive = true,
                             Name = "Pracownik"
@@ -923,7 +1157,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             VatRateID = 1,
-                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(7127),
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(5124),
                             Description = "Standardowa stawka Vat",
                             IsActive = true,
                             Name = "23%",
@@ -932,7 +1166,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             VatRateID = 2,
-                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(7604),
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(5617),
                             Description = "Stawka Vat przy numerze ISSN",
                             IsActive = true,
                             Name = "8%",
@@ -941,7 +1175,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             VatRateID = 3,
-                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(7638),
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(5644),
                             Description = "Stawka Vat przy numerze ISBN",
                             IsActive = true,
                             Name = "5%",
@@ -950,7 +1184,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             VatRateID = 5,
-                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(7641),
+                            AddedDate = new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(5647),
                             Description = "Nie dotyczy",
                             IsActive = true,
                             Name = "nd",

@@ -344,7 +344,7 @@ namespace Printo.Data.Migrations
                 name: "PrintColors",
                 columns: table => new
                 {
-                    ColorID = table.Column<int>(nullable: false)
+                    PrintColorID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
@@ -356,7 +356,7 @@ namespace Printo.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PrintColors", x => x.ColorID);
+                    table.PrimaryKey("PK_PrintColors", x => x.PrintColorID);
                     table.ForeignKey(
                         name: "FK_PrintColors_Users_AddedUserID",
                         column: x => x.AddedUserID,
@@ -543,6 +543,9 @@ namespace Printo.Data.Migrations
                     AppartmentNumber = table.Column<string>(nullable: true),
                     PostalCode = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    UpdatedDate = table.Column<DateTime>(nullable: true),
                     AddedUserID = table.Column<int>(nullable: true),
                     UpdatedUserID = table.Column<int>(nullable: true),
                     ClientID = table.Column<int>(nullable: false)
@@ -679,7 +682,7 @@ namespace Printo.Data.Migrations
                         name: "FK_Orders_PrintColors_PrintColorID",
                         column: x => x.PrintColorID,
                         principalTable: "PrintColors",
-                        principalColumn: "ColorID",
+                        principalColumn: "PrintColorID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Products_ProductID",
@@ -712,6 +715,123 @@ namespace Printo.Data.Migrations
                         principalColumn: "VatRateID",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "UserTypes",
+                columns: new[] { "UserTypeID", "AddedDate", "Description", "IsActive", "Name", "UpdatedDate" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(2017), "Administrator systemu", true, "Admin", null },
+                    { 2, new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(2534), "Pracownik", true, "Pracownik", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "VatRates",
+                columns: new[] { "VatRateID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "Rate", "UpdatedDate", "UpdatedUserID" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(5124), null, "Standardowa stawka Vat", true, "23%", 23, null, null },
+                    { 2, new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(5617), null, "Stawka Vat przy numerze ISSN", true, "8%", 8, null, null },
+                    { 3, new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(5644), null, "Stawka Vat przy numerze ISBN", true, "5%", 5, null, null },
+                    { 5, new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(5647), null, "Nie dotyczy", true, "nd", 0, null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserID", "AddedDate", "IsActive", "Login", "Name", "Password", "Surname", "UpdatedDate", "UserTypeID" },
+                values: new object[] { 1, new DateTime(2020, 8, 10, 23, 30, 35, 820, DateTimeKind.Local).AddTicks(4643), true, "admin", "Admin", "admin", "Admin", null, 1 });
+
+            migrationBuilder.InsertData(
+                table: "DeliveryTypes",
+                columns: new[] { "DeliveryTypeID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[] { 1, new DateTime(2020, 8, 10, 23, 30, 35, 824, DateTimeKind.Local).AddTicks(7797), 1, "Odbiór osobisty przez klienta", true, "Odbiór", null, null });
+
+            migrationBuilder.InsertData(
+                table: "Finishings",
+                columns: new[] { "FinishingID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[] { 1, new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(721), 1, "Folia błysk jednostronnie na awersie", true, "Folia błysk 1/0", null, null });
+
+            migrationBuilder.InsertData(
+                table: "Formats",
+                columns: new[] { "FormatID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(3688), 1, "210x297mm", true, "A4", null, null },
+                    { 2, new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(4547), 1, "148x210mm", true, "A5", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Machines",
+                columns: new[] { "MachineID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[] { 1, new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(6632), 1, "RAPIDA 75", true, "KBA", null, null });
+
+            migrationBuilder.InsertData(
+                table: "PaperTypes",
+                columns: new[] { "PaperTypeID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[] { 1, new DateTime(2020, 8, 10, 23, 30, 35, 825, DateTimeKind.Local).AddTicks(9541), 1, "Papier powlekany matowy", true, "Kreda mat", null, null });
+
+            migrationBuilder.InsertData(
+                table: "PaperWeights",
+                columns: new[] { "PaperWeightID", "AddedDate", "AddedUserID", "Description", "Grammature", "IsActive", "UpdatedDate", "UpdatedUserID" },
+                values: new object[] { 1, new DateTime(2020, 8, 10, 23, 30, 35, 826, DateTimeKind.Local).AddTicks(2443), 1, "", "130g", true, null, null });
+
+            migrationBuilder.InsertData(
+                table: "PaymentTypes",
+                columns: new[] { "PaymentTypeID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[] { 1, new DateTime(2020, 8, 10, 23, 30, 35, 826, DateTimeKind.Local).AddTicks(5274), 1, "Przelew bankowy termin min. 14 dni", true, "Przelew", null, null });
+
+            migrationBuilder.InsertData(
+                table: "PostPresses",
+                columns: new[] { "PostPressID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2020, 8, 10, 23, 30, 35, 826, DateTimeKind.Local).AddTicks(8114), 1, "2 zszywki płaskie", true, "Szycie zeszytowe standard", null, null },
+                    { 2, new DateTime(2020, 8, 10, 23, 30, 35, 826, DateTimeKind.Local).AddTicks(8982), 1, "2 zszywki euro", true, "Szycie zeszytowe oczko", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PrintColors",
+                columns: new[] { "PrintColorID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[,]
+                {
+                    { 2, new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(1892), 1, "CMYK obustronnie", true, "4/4 CMYK", null, null },
+                    { 1, new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(1044), 1, "CMYK jednostronnie", true, "4/0 CMYK", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductionStages",
+                columns: new[] { "ProductionStageID", "AddedDate", "AddedUserID", "Color", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(4031), 1, null, "Przygotowanie do druku.", true, "DTP", null, null },
+                    { 2, new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(4891), 1, null, "Naświetlanie CTP", true, "CTP", null, null },
+                    { 3, new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(4920), 1, null, "Naświetlanie CTP", true, "Druk", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(6959), 1, "", true, "Katalog szyty", null, null },
+                    { 2, new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(7800), 1, "Standardowa", true, "Ulotka", null, null },
+                    { 3, new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(7829), 1, "Standard", true, "Plakat", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SheetSizes",
+                columns: new[] { "SheetSizeID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2020, 8, 10, 23, 30, 35, 827, DateTimeKind.Local).AddTicks(9998), 1, "630x440mm", true, "A2+", null, null },
+                    { 2, new DateTime(2020, 8, 10, 23, 30, 35, 828, DateTimeKind.Local).AddTicks(854), 1, "610x430mm", true, "A2", null, null },
+                    { 3, new DateTime(2020, 8, 10, 23, 30, 35, 828, DateTimeKind.Local).AddTicks(900), 1, "700x500mm", true, "B2", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ToDos",
+                columns: new[] { "ToDoID", "AddedDate", "AddedUserID", "Date", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
+                values: new object[] { 1, new DateTime(2020, 8, 10, 23, 30, 35, 828, DateTimeKind.Local).AddTicks(3518), 1, new DateTime(2020, 8, 10, 23, 30, 35, 828, DateTimeKind.Local).AddTicks(2592), "Sonory 2 paczki", true, "Zamówić matryce", null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_AddedUserID",

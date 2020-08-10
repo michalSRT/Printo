@@ -36,7 +36,7 @@ namespace Printo.Intranet.Controllers
             var printColor = await _context.PrintColors
                 .Include(p => p.AddedUser)
                 .Include(p => p.UpdatedUser)
-                .FirstOrDefaultAsync(m => m.ColorID == id);
+                .FirstOrDefaultAsync(m => m.PrintColorID == id);
             if (printColor == null)
             {
                 return NotFound();
@@ -96,7 +96,7 @@ namespace Printo.Intranet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ColorID,Name,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] PrintColor printColor)
         {
-            if (id != printColor.ColorID)
+            if (id != printColor.PrintColorID)
             {
                 return NotFound();
             }
@@ -110,7 +110,7 @@ namespace Printo.Intranet.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PrintColorExists(printColor.ColorID))
+                    if (!PrintColorExists(printColor.PrintColorID))
                     {
                         return NotFound();
                     }
@@ -137,7 +137,7 @@ namespace Printo.Intranet.Controllers
             var printColor = await _context.PrintColors
                 .Include(p => p.AddedUser)
                 .Include(p => p.UpdatedUser)
-                .FirstOrDefaultAsync(m => m.ColorID == id);
+                .FirstOrDefaultAsync(m => m.PrintColorID == id);
             if (printColor == null)
             {
                 return NotFound();
@@ -159,7 +159,7 @@ namespace Printo.Intranet.Controllers
 
         private bool PrintColorExists(int id)
         {
-            return _context.PrintColors.Any(e => e.ColorID == id);
+            return _context.PrintColors.Any(e => e.PrintColorID == id);
         }
     }
 }

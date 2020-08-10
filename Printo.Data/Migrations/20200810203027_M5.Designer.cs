@@ -10,8 +10,8 @@ using Printo.Data.Data;
 namespace Printo.Data.Migrations
 {
     [DbContext(typeof(PrintoContext))]
-    [Migration("20200810192050_Initial-Create")]
-    partial class InitialCreate
+    [Migration("20200810203027_M5")]
+    partial class M5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -323,7 +323,7 @@ namespace Printo.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("FinishingID")
@@ -331,9 +331,6 @@ namespace Printo.Data.Migrations
 
                     b.Property<int>("FormatID")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Invoice")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -380,7 +377,7 @@ namespace Printo.Data.Migrations
                     b.Property<string>("SheetsNumberPrinted")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -823,6 +820,19 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UserTypeID");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 503, DateTimeKind.Local).AddTicks(6315),
+                            IsActive = true,
+                            Login = "admin",
+                            Name = "Admin",
+                            Password = "admin",
+                            Surname = "Admin",
+                            UserTypeID = 1
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.UserType", b =>
@@ -851,6 +861,24 @@ namespace Printo.Data.Migrations
                     b.HasKey("UserTypeID");
 
                     b.ToTable("UserTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            UserTypeID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(4053),
+                            Description = "Administrator systemu",
+                            IsActive = true,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            UserTypeID = 2,
+                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(4567),
+                            Description = "Pracownik",
+                            IsActive = true,
+                            Name = "Pracownik"
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.VatRate", b =>
@@ -892,6 +920,44 @@ namespace Printo.Data.Migrations
                     b.HasIndex("UpdatedUserID");
 
                     b.ToTable("VatRates");
+
+                    b.HasData(
+                        new
+                        {
+                            VatRateID = 1,
+                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(7127),
+                            Description = "Standardowa stawka Vat",
+                            IsActive = true,
+                            Name = "23%",
+                            Rate = 23
+                        },
+                        new
+                        {
+                            VatRateID = 2,
+                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(7604),
+                            Description = "Stawka Vat przy numerze ISSN",
+                            IsActive = true,
+                            Name = "8%",
+                            Rate = 8
+                        },
+                        new
+                        {
+                            VatRateID = 3,
+                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(7638),
+                            Description = "Stawka Vat przy numerze ISBN",
+                            IsActive = true,
+                            Name = "5%",
+                            Rate = 5
+                        },
+                        new
+                        {
+                            VatRateID = 5,
+                            AddedDate = new DateTime(2020, 8, 10, 22, 30, 26, 507, DateTimeKind.Local).AddTicks(7641),
+                            Description = "Nie dotyczy",
+                            IsActive = true,
+                            Name = "nd",
+                            Rate = 0
+                        });
                 });
 
             modelBuilder.Entity("Printo.Data.Data.Client", b =>

@@ -1,0 +1,156 @@
+﻿@model Printo.Data.Data.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClientID" class="control-label"></label>
+                <select asp-for="ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryAdressID" class="control-label"></label>
+                <select asp-for="DeliveryAdressID" class ="form-control" asp-items="ViewBag.DeliveryAdressID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryTypeID" class="control-label"></label>
+                <select asp-for="DeliveryTypeID" class ="form-control" asp-items="ViewBag.DeliveryTypeID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FinishingID" class="control-label"></label>
+                <select asp-for="FinishingID" class ="form-control" asp-items="ViewBag.FinishingID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormatID" class="control-label"></label>
+                <select asp-for="FormatID" class ="form-control" asp-items="ViewBag.FormatID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MachineID" class="control-label"></label>
+                <select asp-for="MachineID" class ="form-control" asp-items="ViewBag.MachineID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaperWeightID" class="control-label"></label>
+                <select asp-for="PaperWeightID" class ="form-control" asp-items="ViewBag.PaperWeightID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaperTypeID" class="control-label"></label>
+                <select asp-for="PaperTypeID" class ="form-control" asp-items="ViewBag.PaperTypeID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentTypeID" class="control-label"></label>
+                <select asp-for="PaymentTypeID" class ="form-control" asp-items="ViewBag.PaymentTypeID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostPressID" class="control-label"></label>
+                <select asp-for="PostPressID" class ="form-control" asp-items="ViewBag.PostPressID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrintColorID" class="control-label"></label>
+                <select asp-for="PrintColorID" class ="form-control" asp-items="ViewBag.PrintColorID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductID" class="control-label"></label>
+                <select asp-for="ProductID" class ="form-control" asp-items="ViewBag.ProductID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductionStageID" class="control-label"></label>
+                <select asp-for="ProductionStageID" class ="form-control" asp-items="ViewBag.ProductionStageID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SheetSizeID" class="control-label"></label>
+                <select asp-for="SheetSizeID" class ="form-control" asp-items="ViewBag.SheetSizeID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="VatRateID" class="control-label"></label>
+                <select asp-for="VatRateID" class ="form-control" asp-items="ViewBag.VatRateID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NetPrice" class="control-label"></label>
+                <input asp-for="NetPrice" class="form-control" />
+                <span asp-validation-for="NetPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsReprint" /> @Html.DisplayNameFor(model => model.IsReprint)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReprintDateAndInfo" class="control-label"></label>
+                <input asp-for="ReprintDateAndInfo" class="form-control" />
+                <span asp-validation-for="ReprintDateAndInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SheetsNumber" class="control-label"></label>
+                <input asp-for="SheetsNumber" class="form-control" />
+                <span asp-validation-for="SheetsNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SheetsNumberPrinted" class="control-label"></label>
+                <input asp-for="SheetsNumberPrinted" class="form-control" />
+                <span asp-validation-for="SheetsNumberPrinted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Comments" class="control-label"></label>
+                <input asp-for="Comments" class="form-control" />
+                <span asp-validation-for="Comments" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddedDate" class="control-label"></label>
+                <input asp-for="AddedDate" class="form-control" />
+                <span asp-validation-for="AddedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatedDate" class="control-label"></label>
+                <input asp-for="UpdatedDate" class="form-control" />
+                <span asp-validation-for="UpdatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddedUserID" class="control-label"></label>
+                <select asp-for="AddedUserID" class ="form-control" asp-items="ViewBag.AddedUserID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatedUserID" class="control-label"></label>
+                <select asp-for="UpdatedUserID" class ="form-control" asp-items="ViewBag.UpdatedUserID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

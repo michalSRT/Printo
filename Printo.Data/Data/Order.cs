@@ -46,12 +46,10 @@ namespace Printo.Data.Data
         [Display(Name = "Stawka VAT")]
         public int? VatRateID { get; set; }
 
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         [Display(Name = "Dodatkowy opis")]
         public string Description { get; set; }
-        [Display(Name = "Czy faktura?")]
-        public bool Invoice { get; set; }
         [Display(Name = "Cena netto")]
         public string NetPrice { get; set; }
         [Display(Name = "Czy dodruk?")]

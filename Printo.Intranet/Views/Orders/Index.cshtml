@@ -1,0 +1,203 @@
+﻿@model IEnumerable<Printo.Data.Data.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NetPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsReprint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReprintDateAndInfo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SheetsNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SheetsNumberPrinted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddedUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryAdress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Finishing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Format)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Machine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaperWeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaperType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostPress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrintColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductionStage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SheetSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VatRate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NetPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsReprint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReprintDateAndInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SheetsNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SheetsNumberPrinted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedUser.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedUser.Login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.ClientID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryAdress.DeliveryAdressID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Finishing.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Format.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Machine.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaperWeight.Grammature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaperType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostPress.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrintColor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SheetSize.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VatRate.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

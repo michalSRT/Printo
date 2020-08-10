@@ -32,5 +32,88 @@ namespace Printo.Data.Data
         public DbSet<VatRate> VatRates { get; set; }
         public DbSet<ToDo> ToDos { get; set; }
 
+        // SEEDERY
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            #region USERS
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    UserID = 1,
+                    Login = "admin",
+                    Password = "admin",
+                    Name = "Admin",
+                    Surname = "Admin",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    UserTypeID = 1
+                }
+                );
+            #endregion
+
+            #region USERTYPES
+            modelBuilder.Entity<UserType>().HasData(
+                new UserType
+                {
+                    UserTypeID = 1,
+                    Name = "Admin",
+                    Description = "Administrator systemu",
+                    IsActive = true,
+                    AddedDate = DateTime.Now
+                },
+                new UserType
+                {
+                    UserTypeID = 2,
+                    Name = "Pracownik",
+                    Description = "Pracownik",
+                    IsActive = true,
+                    AddedDate = DateTime.Now
+                }
+                );
+            #endregion
+
+            #region VAT RATES
+            modelBuilder.Entity<VatRate>().HasData(
+                new VatRate
+                {
+                    VatRateID = 1,
+                    Name = "23%",
+                    Rate = 23,
+                    Description = "Standardowa stawka Vat",
+                    IsActive = true,
+                    AddedDate = DateTime.Now
+                },
+                new VatRate
+                {
+                    VatRateID = 2,
+                    Name = "8%",
+                    Rate = 8,
+                    Description = "Stawka Vat przy numerze ISSN",
+                    IsActive = true,
+                    AddedDate = DateTime.Now
+                },
+                new VatRate
+                {
+                    VatRateID = 3,
+                    Name = "5%",
+                    Rate = 5,
+                    Description = "Stawka Vat przy numerze ISBN",
+                    IsActive = true,
+                    AddedDate = DateTime.Now
+                },
+                new VatRate
+                {
+                    VatRateID = 5,
+                    Name = "nd",
+                    Rate = 0,
+                    Description = "Nie dotyczy",
+                    IsActive = true,
+                    AddedDate = DateTime.Now
+                }
+                );
+            #endregion
+        }
+
     }
 }

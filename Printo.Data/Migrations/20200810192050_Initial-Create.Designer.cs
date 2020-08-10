@@ -10,8 +10,8 @@ using Printo.Data.Data;
 namespace Printo.Data.Migrations
 {
     [DbContext(typeof(PrintoContext))]
-    [Migration("20200810183922_M3")]
-    partial class M3
+    [Migration("20200810192050_Initial-Create")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,9 @@ namespace Printo.Data.Migrations
 
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
 
                     b.Property<string>("AppartmentNumber")
                         .HasColumnType("nvarchar(max)");
@@ -77,7 +80,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("ClientID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("Clients");
                 });
@@ -88,6 +98,9 @@ namespace Printo.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
 
                     b.Property<string>("AppartmentNumber")
                         .HasColumnType("nvarchar(max)");
@@ -116,9 +129,16 @@ namespace Printo.Data.Migrations
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("DeliveryAdressID");
 
+                    b.HasIndex("AddedUserID");
+
                     b.HasIndex("ClientID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("DeliveryAdresses");
                 });
@@ -133,6 +153,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -146,7 +169,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("DeliveryTypeID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("DeliveryTypes");
                 });
@@ -161,6 +191,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -174,7 +207,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("FinishingID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("Finishings");
                 });
@@ -189,6 +229,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -202,7 +245,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("FormatID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("Formats");
                 });
@@ -217,6 +267,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -230,7 +283,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("MachineID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("Machines");
                 });
@@ -329,13 +389,12 @@ namespace Printo.Data.Migrations
                     b.Property<int?>("UpdatedUserID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("VatRateID")
                         .HasColumnType("int");
 
                     b.HasKey("OrderID");
+
+                    b.HasIndex("AddedUserID");
 
                     b.HasIndex("ClientID");
 
@@ -365,7 +424,7 @@ namespace Printo.Data.Migrations
 
                     b.HasIndex("SheetSizeID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UpdatedUserID");
 
                     b.HasIndex("VatRateID");
 
@@ -382,6 +441,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -395,7 +457,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("PaperTypeID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PaperTypes");
                 });
@@ -410,6 +479,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -423,7 +495,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("PaperWeightID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PaperWeights");
                 });
@@ -438,6 +517,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -451,7 +533,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("PaymentTypeID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PaymentTypes");
                 });
@@ -466,6 +555,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -479,7 +571,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("PostPressID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PostPresses");
                 });
@@ -494,6 +593,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -507,7 +609,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("ColorID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("PrintColors");
                 });
@@ -522,6 +631,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -535,7 +647,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("ProductID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("Products");
                 });
@@ -549,6 +668,9 @@ namespace Printo.Data.Migrations
 
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
@@ -566,7 +688,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("ProductionStageID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("ProductionStages");
                 });
@@ -581,6 +710,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -594,7 +726,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("SheetSizeID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("SheetSizes");
                 });
@@ -608,6 +747,9 @@ namespace Printo.Data.Migrations
 
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
@@ -625,7 +767,14 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("ToDoID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("ToDos");
                 });
@@ -714,6 +863,9 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("AddedUserID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -730,22 +882,96 @@ namespace Printo.Data.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UpdatedUserID")
+                        .HasColumnType("int");
+
                     b.HasKey("VatRateID");
+
+                    b.HasIndex("AddedUserID");
+
+                    b.HasIndex("UpdatedUserID");
 
                     b.ToTable("VatRates");
                 });
 
+            modelBuilder.Entity("Printo.Data.Data.Client", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
             modelBuilder.Entity("Printo.Data.Data.DeliveryAdress", b =>
                 {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
                     b.HasOne("Printo.Data.Data.Client", "Client")
                         .WithMany("DeliveryAdresses")
                         .HasForeignKey("ClientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.DeliveryType", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.Finishing", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.Format", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.Machine", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
                 });
 
             modelBuilder.Entity("Printo.Data.Data.Order", b =>
                 {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
                     b.HasOne("Printo.Data.Data.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientID")
@@ -814,13 +1040,112 @@ namespace Printo.Data.Migrations
                         .WithMany()
                         .HasForeignKey("SheetSizeID");
 
-                    b.HasOne("Printo.Data.Data.User", "User")
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
                         .WithMany()
-                        .HasForeignKey("UserID");
+                        .HasForeignKey("UpdatedUserID");
 
                     b.HasOne("Printo.Data.Data.VatRate", "VatRate")
                         .WithMany()
                         .HasForeignKey("VatRateID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.PaperType", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.PaperWeight", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.PaymentType", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.PostPress", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.PrintColor", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.Product", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.ProductionStage", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.SheetSize", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.ToDo", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
                 });
 
             modelBuilder.Entity("Printo.Data.Data.User", b =>
@@ -830,6 +1155,17 @@ namespace Printo.Data.Migrations
                         .HasForeignKey("UserTypeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.VatRate", b =>
+                {
+                    b.HasOne("Printo.Data.Data.User", "AddedUser")
+                        .WithMany()
+                        .HasForeignKey("AddedUserID");
+
+                    b.HasOne("Printo.Data.Data.User", "UpdatedUser")
+                        .WithMany()
+                        .HasForeignKey("UpdatedUserID");
                 });
 #pragma warning restore 612, 618
         }

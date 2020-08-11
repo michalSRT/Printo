@@ -48,7 +48,7 @@ namespace Printo.Data.Data
 
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        [Display(Name = "Dodatkowy opis")]
+        [Display(Name = "Dodatkowy opis zamówienia")]
         public string Description { get; set; }
         [Display(Name = "Cena netto")]
         public string NetPrice { get; set; }
@@ -56,6 +56,8 @@ namespace Printo.Data.Data
         public bool IsReprint { get; set; }
         [Display(Name = "Data ostatniego druku i dodatkowe informacje")]
         public string ReprintDateAndInfo { get; set; }
+        [Display(Name = "Ilość zamówionego produktu")]
+        public string Quantity { get; set; }
         [Display(Name = "Ilość arkuszy do druku")]
         public string SheetsNumber { get; set; }
         [Display(Name = "Ilość arkuszy wydrukowanych")]

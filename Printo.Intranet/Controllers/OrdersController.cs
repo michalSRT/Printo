@@ -74,7 +74,7 @@ namespace Printo.Intranet.Controllers
             ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights, "PaperWeightID", "Grammature");
             ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes, "PaymentTypeID", "Name");
             ViewData["PostPressID"] = new SelectList(_context.PostPresses, "PostPressID", "Name");
-            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "ColorID", "Name");
+            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "PrintColorID", "Name");
             ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name");
             ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages, "ProductionStageID", "Name");
             ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name");
@@ -107,7 +107,7 @@ namespace Printo.Intranet.Controllers
             ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights, "PaperWeightID", "Grammature", order.PaperWeightID);
             ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes, "PaymentTypeID", "Name", order.PaymentTypeID);
             ViewData["PostPressID"] = new SelectList(_context.PostPresses, "PostPressID", "Name", order.PostPressID);
-            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "ColorID", "Name", order.PrintColorID);
+            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "PrintColorID", "Name", order.PrintColorID);
             ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", order.ProductID);
             ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages, "ProductionStageID", "Name", order.ProductionStageID);
             ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name", order.SheetSizeID);
@@ -140,7 +140,7 @@ namespace Printo.Intranet.Controllers
             ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights, "PaperWeightID", "Grammature", order.PaperWeightID);
             ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes, "PaymentTypeID", "Name", order.PaymentTypeID);
             ViewData["PostPressID"] = new SelectList(_context.PostPresses, "PostPressID", "Name", order.PostPressID);
-            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "ColorID", "Name", order.PrintColorID);
+            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "PrintColorID", "Name", order.PrintColorID);
             ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", order.ProductID);
             ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages, "ProductionStageID", "Name", order.ProductionStageID);
             ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name", order.SheetSizeID);
@@ -192,7 +192,7 @@ namespace Printo.Intranet.Controllers
             ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights, "PaperWeightID", "Grammature", order.PaperWeightID);
             ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes, "PaymentTypeID", "Name", order.PaymentTypeID);
             ViewData["PostPressID"] = new SelectList(_context.PostPresses, "PostPressID", "Name", order.PostPressID);
-            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "ColorID", "Name", order.PrintColorID);
+            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "PrintColorID", "Name", order.PrintColorID);
             ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", order.ProductID);
             ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages, "ProductionStageID", "Name", order.ProductionStageID);
             ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name", order.SheetSizeID);

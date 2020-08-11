@@ -24,7 +24,7 @@ namespace Printo.Data.Data
         public string HouseNumber { get; set; }
         [Display(Name = "Numer mieszkania")]
         public string AppartmentNumber { get; set; }
-        [RegularExpression(@"[0-9]{2}-[0-9]{3}", ErrorMessage = "Kod pocztowy nie jest poprawny (##-###")]
+        [RegularExpression(@"[0-9]{2}-[0-9]{3}", ErrorMessage = "Kod pocztowy nie jest poprawny (##-###)")]
         [Display(Name = "Kod pocztowy")]
         public string PostalCode { get; set; }
         [Display(Name = "Miasto")]

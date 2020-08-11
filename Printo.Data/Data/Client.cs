@@ -16,8 +16,8 @@ namespace Printo.Data.Data
         public string LastName { get; set; }
         public string CompanyName { get; set; }
         public string CompanyFullName { get; set; }
-        [MinLength(8, ErrorMessage = "Numer NIP powinien mieć 8 cyfr wpisywane bez pauz.")]
-        [MaxLength(8, ErrorMessage = "Numer NIP powinien mieć 8 cyfr wpisywane bez pauz.")]
+        [MinLength(9, ErrorMessage = "Numer NIP powinien mieć 9 cyfr wpisywane bez pauz.")]
+        [MaxLength(9, ErrorMessage = "Numer NIP powinien mieć 9 cyfr wpisywane bez pauz.")]
         public string NIP { get; set; }
 
         public string Street { get; set; }

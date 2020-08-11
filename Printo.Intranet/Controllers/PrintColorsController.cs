@@ -58,7 +58,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ColorID,Name,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] PrintColor printColor)
+        public async Task<IActionResult> Create([Bind("PrintColorID,Name,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] PrintColor printColor)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ColorID,Name,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] PrintColor printColor)
+        public async Task<IActionResult> Edit(int id, [Bind("PrintColorID,Name,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] PrintColor printColor)
         {
             if (id != printColor.PrintColorID)
             {

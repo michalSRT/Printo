@@ -60,7 +60,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DeliveryAdressID,ContactName,CompanyName,Phone,Street,HouseNumber,AppartmentNumber,PostalCode,City,AddedUserID,UpdatedUserID,ClientID")] DeliveryAdress deliveryAdress)
+        public async Task<IActionResult> Create([Bind("DeliveryAdressID,ContactName,CompanyName,Phone,Street,HouseNumber,AppartmentNumber,PostalCode,City,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID,ClientID")] DeliveryAdress deliveryAdress)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DeliveryAdressID,ContactName,CompanyName,Phone,Street,HouseNumber,AppartmentNumber,PostalCode,City,AddedUserID,UpdatedUserID,ClientID")] DeliveryAdress deliveryAdress)
+        public async Task<IActionResult> Edit(int id, [Bind("DeliveryAdressID,ContactName,CompanyName,Phone,Street,HouseNumber,AppartmentNumber,PostalCode,City,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID,ClientID")] DeliveryAdress deliveryAdress)
         {
             if (id != deliveryAdress.DeliveryAdressID)
             {

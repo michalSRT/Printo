@@ -48,6 +48,8 @@ namespace Printo.Data.Data
 
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        [Display(Name = "Nazwa zamówienia")]
+        public string OrderName { get; set; }
         [Display(Name = "Dodatkowy opis zamówienia")]
         public string Description { get; set; }
         [Display(Name = "Cena netto")]

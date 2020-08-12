@@ -181,11 +181,6 @@ C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Machines\Details.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Machines\Edit.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Machines\Index.cshtml.g.cs
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Create.cshtml.g.cs
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Delete.cshtml.g.cs
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Details.cshtml.g.cs
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Edit.cshtml.g.cs
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Index.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\PaperTypes\Create.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\PaperTypes\Delete.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\PaperTypes\Details.cshtml.g.cs
@@ -258,3 +253,8 @@ C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\DeliveryAdresses\Details.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\DeliveryAdresses\Edit.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\DeliveryAdresses\Index.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Create.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Delete.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Details.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Edit.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Index.cshtml.g.cs

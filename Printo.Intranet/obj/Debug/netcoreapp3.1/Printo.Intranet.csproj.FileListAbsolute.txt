@@ -258,3 +258,8 @@ C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Details.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Edit.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Index.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Formats\Create.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Formats\Delete.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Formats\Details.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Formats\Edit.cshtml.g.cs
+C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Formats\Index.cshtml.g.cs

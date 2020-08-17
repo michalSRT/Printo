@@ -7379,7 +7379,7 @@ button:focus {
 .dropdown-toggle::after {
   display: inline-block;
   font-family: "feather";
-  content: "\e92e";
+  /*content: "\e92e";*/
   font-size: 0.75rem; }
 
 .dropdown-toggle.more-vertical::after {
@@ -7986,7 +7986,7 @@ select {
     .horizontal .navbar-slide .nav-item .dropdown-toggle::after {
       float: right;
       position: relative;
-      content: "\e92e";
+      /*content: "\e92e";*/
       right: 0; }
     .horizontal .navbar-slide .nav-item .nav-link {
       padding: .7rem 1rem .7rem 1.5rem; }

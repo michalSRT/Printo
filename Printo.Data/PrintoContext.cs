@@ -55,6 +55,42 @@ namespace Printo.Data.Data
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
+                },
+                new Client
+                {
+                    ClientID = 2,
+                    FirstName = "Mike",
+                    LastName = "Shinoda",
+                    CompanyName = "MikeShinoda",
+                    CompanyFullName = "MikeShinoda Co",
+                    NIP = "123456789",
+                    Street = "Wallstreet",
+                    HouseNumber = "52669",
+                    PostalCode = "52-300",
+                    City = "Nowy Jork",
+                    Email = "mikeshinoda@gmail.com",
+                    Phone = "555777333",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new Client
+                {
+                    ClientID = 3,
+                    FirstName = "Jacek",
+                    LastName = "Sikora",
+                    CompanyName = "Vitberg",
+                    CompanyFullName = "Vitberg Jacek Sikora",
+                    NIP = "123456789",
+                    Street = "Borelowskiego",
+                    HouseNumber = "3",
+                    PostalCode = "33-300",
+                    City = "Nowy Sącz",
+                    Email = "js@gmail.com",
+                    Phone = "666666666",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
                 }
                 );
             #endregion

@@ -9,70 +9,67 @@
     <title>@ViewData["Title"] - Printo.Intranet</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <!-- Simple bar CSS -->
-    <link rel="stylesheet" href="css/simplebar.css">
+    <link rel="stylesheet" href="~/css/simplebar.css">
     <!-- Fonts CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Icons CSS -->
-    <link rel="stylesheet" href="css/feather.css">
-    <link rel="stylesheet" href="css/select2.css">
-    <link rel="stylesheet" href="css/dropzone.css">
-    <link rel="stylesheet" href="css/uppy.min.css">
-    <link rel="stylesheet" href="css/jquery.steps.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
-    <link rel="stylesheet" href="css/quill.snow.css">
+    <link rel="stylesheet" href="~/css/feather.css">
+    <link rel="stylesheet" href="~/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="~/css/select2.css">
+    <link rel="stylesheet" href="~/css/dropzone.css">
+    <link rel="stylesheet" href="~/css/uppy.min.css">
+    <link rel="stylesheet" href="~/css/jquery.steps.css">
+    <link rel="stylesheet" href="~/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="~/css/quill.snow.css">
     <!-- Date Range Picker CSS -->
-    <link rel="stylesheet" href="css/daterangepicker.css">
+    <link rel="stylesheet" href="~/css/daterangepicker.css">
     <!-- App CSS -->
-    <link rel="stylesheet" href="css/app-light.css" id="lightTheme">
-    <link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
+    <link rel="stylesheet" href="~/css/app-light.css" id="lightTheme">
+    <link rel="stylesheet" href="~/css/app-dark.css" id="darkTheme" disabled>
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
 
 <body class="vertical  light">
-
-    @*NAVBAR TOP*@
-    <nav class="topnav navbar navbar-light">
-        <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
-            <i class="fe fe-menu navbar-toggler-icon"></i>
-        </button>
-
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
-                    <i class="fe fe-sun fe-16"></i>
-                </a>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="avatar avatar-sm mt-2">
-                        <img src="./assets/avatars/face-1.jpg" alt="..." class="avatar-img rounded-circle">
-                    </span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">Activities</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
-    <!-- navbar -->
-
     <div class="wrapper">
+        @*NAVBAR TOP*@
+        <nav class="topnav navbar navbar-light static-top">
+            <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
+                <i class="fe fe-menu navbar-toggler-icon"></i>
+            </button>
 
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
+                        <i class="fe fe-sun fe-16"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="avatar avatar-sm mt-2">
+                            <img src="~/assets/avatars/face-1.jpg" alt="..." class="avatar-img rounded-circle">
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Activities</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!-- navbar -->
         @*SIDEBAR LEFT*@
         <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
             <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
                 <i class="fe fe-x"><span class="sr-only"></span></i>
             </a>
 
+            <!-- nav bar -->
             <nav class="vertnav navbar navbar-light">
-
-                <!-- nav bar -->
-                <div class="w-100 mb-4">
+                <div class="w-100 mb-4 d-flex">
                     <a class="navbar-brand mx-auto mt-2 flex-fill text-center" asp-controller="Home" asp-action="Index">
                         <img src="~/assets/images/logo.png" height="35" class="" alt="">
                     </a>
@@ -244,15 +241,11 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <div class="mb-2 align-items-center">
-                            <div class="card shadow mb-4">
-                                <div class="card-body">
-                                    <div class="container">
-                                        @RenderBody()
-                                    </div>
-                                </div> <!-- .card-body -->
-                            </div> <!-- .card -->
-                        </div>
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                @RenderBody()
+                            </div> <!-- .card-body -->
+                        </div> <!-- .card -->
                     </div> <!-- .col-12 -->
                 </div> <!-- .row -->
             </div> <!-- .container-fluid -->
@@ -261,39 +254,42 @@
     </div>
     <!-- .wrapper -->
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/moment.min.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/moment.min.js"></script>
     @*<script src="/js/bootstrap.min.js"></script>*@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script src="js/simplebar.min.js"></script>
-    <script src='js/daterangepicker.js'></script>
-    <script src='js/jquery.stickOnScroll.js'></script>
-    <script src="js/tinycolor-min.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/d3.min.js"></script>
-    <script src="js/topojson.min.js"></script>
-    <script src="js/datamaps.all.min.js"></script>
-    <script src="js/datamaps-zoomto.js"></script>
-    <script src="js/datamaps.custom.js"></script>
-    <script src="js/Chart.min.js"></script>
+    <script src="~/js/simplebar.min.js"></script>
+    <script src='~/js/daterangepicker.js'></script>
+    <script src='~/js/jquery.stickOnScroll.js'></script>
+    <script src="~/js/tinycolor-min.js"></script>
+    <script src="~/js/config.js"></script>
+    <script src='js/jquery.dataTables.min.js'></script>
+    <script src='js/dataTables.bootstrap4.min.js'></script>
+    <script src="~/js/d3.min.js"></script>
+    <script src="~/js/topojson.min.js"></script>
+    <script src="~/js/datamaps.all.min.js"></script>
+    <script src="~/js/datamaps-zoomto.js"></script>
+    <script src="~/js/datamaps.custom.js"></script>
+    <script src="~/js/Chart.min.js"></script>
     <script>
         /* defind global options */
         Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
         Chart.defaults.global.defaultFontColor = colors.mutedColor;
     </script>
-    <script src="js/gauge.min.js"></script>
-    <script src="js/jquery.sparkline.min.js"></script>
-    <script src="js/apexcharts.min.js"></script>
-    <script src="js/apexcharts.custom.js"></script>
-    <script src='js/jquery.mask.min.js'></script>
-    <script src='js/select2.min.js'></script>
-    <script src='js/jquery.steps.min.js'></script>
-    <script src='js/jquery.validate.min.js'></script>
-    <script src='js/jquery.timepicker.js'></script>
-    <script src='js/dropzone.min.js'></script>
-    <script src='js/uppy.min.js'></script>
-    <script src='js/quill.min.js'></script>
+    <script src="~/js/gauge.min.js"></script>
+    <script src="~/js/jquery.sparkline.min.js"></script>
+    <script src="~/js/apexcharts.min.js"></script>
+    <script src="~/js/apexcharts.custom.js"></script>
+    <script src='~/js/jquery.mask.min.js'></script>
+    <script src='~/js/select2.min.js'></script>
+    <script src='~/js/jquery.steps.min.js'></script>
+    <script src='~/js/jquery.validate.min.js'></script>
+    <script src='~/js/jquery.timepicker.js'></script>
+    <script src='~/js/dropzone.min.js'></script>
+    <script src='~/js/uppy.min.js'></script>
+    <script src='~/js/quill.min.js'></script>
+
     <script>
         $('.select2').select2(
             {
@@ -466,28 +462,9 @@
             }, false);
         })();
     </script>
-    <script>
-        var uptarg = document.getElementById('drag-drop-area');
-        if (uptarg) {
-            var uppy = Uppy.Core().use(Uppy.Dashboard,
-                {
-                    inline: true,
-                    target: uptarg,
-                    proudlyDisplayPoweredByUppy: false,
-                    theme: 'dark',
-                    width: 770,
-                    height: 210,
-                    plugins: ['Webcam']
-                }).use(Uppy.Tus,
-                    {
-                        endpoint: 'https://master.tus.io/files/'
-                    });
-            uppy.on('complete', (result) => {
-                console.log('Upload complete! We’ve uploaded these files:', result.successful)
-            });
-        }
-    </script>
-    <script src="js/apps.js"></script>
+
+    <script src="~/js/apps.js"></script>
+    <script src="~/js/site.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -10,15 +10,14 @@
     </div>
     <div class="col">
         <a class="btn btn-outline-success float-right mb-3" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Create">
-            <i class="fas fa-plus-circle"></i>
-            Dodaj nowego
+            <i class="fe fe-user-plus fe-16" style="padding-right:5px; vertical-align:text-bottom"></i>
+            Dodaj
         </a>
     </div>
 </div>
 
 
 <div class="row">
-    <!-- Small table -->
     <div class="col-md-12">
         <div class="card shadow">
             <div class="card-body">
@@ -27,16 +26,19 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.CompanyName)
+                                Nazwa firmy
+                            </th>                            
+                            <th>
+                                Nazwisko i imię
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Email)
+                                Adres e-mail
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Phone)
+                                Telefon kontaktowy
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Description)
+                                Adres
                             </th>
                             <th>Akcja</th>
                         </tr>
@@ -44,25 +46,30 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CompanyName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Email)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Phone)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.ClientID" role="button" data-toggle="tooltip" title="Edytuj">
-                                        <i class="fe fe-edit fe-16"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName) @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Street) @Html.DisplayFor(modelItem => item.HouseNumber)
+                                @if (item.AppartmentNumber != null)
+                                {<text> / </text> @Html.DisplayFor(modelItem => item.AppartmentNumber)} , @Html.DisplayFor(modelItem => item.PostalCode) @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.ClientID" role="button" data-toggle="tooltip" title="Edytuj">
+                                    <i class="fe fe-edit fe-16"></i>
+                                </a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

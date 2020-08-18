@@ -1,59 +1,59 @@
 ﻿@model IEnumerable<Printo.Data.Data.UserType>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Typy użytkowników";
 }
 
-<h1>Index</h1>
+<div class="row">
+    <div class="col">
+        <h3 class="mb-2 page-title">Typy użytkowników</h3>
+    </div>
+    <div class="col">
+        <a class="btn btn-outline-success float-right mb-3" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Create">
+            <i class="fe fe-plus fe-16" style="padding-right:5px; vertical-align:text-bottom"></i>
+            Dodaj
+        </a>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UserTypeID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserTypeID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserTypeID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-body">
+
+                <table class="table dataTable table-responsive-xl" id="dataTable-1">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nazwa
+                            </th>
+                            <th>
+                                Opis
+                            </th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.UserTypeID" role="button" data-toggle="tooltip" title="Edytuj">
+                                        <i class="fe fe-edit fe-16"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,113 +1,78 @@
 ﻿@model IEnumerable<Printo.Data.Data.DeliveryAdress>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Adresy dostawy";
 }
 
-<h1>Index</h1>
+<div class="row">
+    <div class="col">
+        <h3 class="mb-2 page-title">Adresy dostawy</h3>
+    </div>
+    <div class="col">
+        <a class="btn btn-outline-success float-right mb-3" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Create">
+            <i class="fe fe-plus fe-16" style="padding-right:5px; vertical-align:text-bottom"></i>
+            Dodaj
+        </a>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Street)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HouseNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AppartmentNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostalCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddedUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Client)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HouseNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppartmentNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddedUser.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedUser.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.ClientID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DeliveryAdressID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DeliveryAdressID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DeliveryAdressID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-body">
+                <table class="table dataTable table-responsive-xl" id="dataTable-1">
+                    <thead>
+                        <tr>
+                            <th>
+                                Klient
+                            </th>
+                            <th>
+                                Osoba kontaktowa
+                            </th>
+                            <th>
+                                Nazwa firmy
+                            </th>
+                            <th>
+                                Telefon kontaktowy
+                            </th>
+                            <th>
+                                Adres dostawy
+                            </th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Client.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Street) @Html.DisplayFor(modelItem => item.HouseNumber)
+                                @if (item.AppartmentNumber != null)
+                                {<text> / </text> @Html.DisplayFor(modelItem => item.AppartmentNumber)} , @Html.DisplayFor(modelItem => item.PostalCode) @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.DeliveryAdressID" role="button" data-toggle="tooltip" title="Edytuj">
+                                    <i class="fe fe-edit fe-16"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

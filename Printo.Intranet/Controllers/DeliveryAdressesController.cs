@@ -50,7 +50,7 @@ namespace Printo.Intranet.Controllers
         public IActionResult Create()
         {
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientID");
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "CompanyName");
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             return View();
         }

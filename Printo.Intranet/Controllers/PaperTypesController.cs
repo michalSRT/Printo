@@ -62,6 +62,8 @@ namespace Printo.Intranet.Controllers
         {
             if (ModelState.IsValid)
             {
+                paperType.IsActive = true;
+                paperType.AddedDate = DateTime.Now;
                 _context.Add(paperType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -105,6 +107,7 @@ namespace Printo.Intranet.Controllers
             {
                 try
                 {
+                    paperType.UpdatedDate = DateTime.Now;
                     _context.Update(paperType);
                     await _context.SaveChangesAsync();
                 }
@@ -154,6 +157,31 @@ namespace Printo.Intranet.Controllers
             var paperType = await _context.PaperTypes.FindAsync(id);
             _context.PaperTypes.Remove(paperType);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Patient/Deactivate/5
+        [HttpPost, ActionName("Deactivate")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeactivateConfirmed(int id)
+        {
+            var temp = await _context.PaperTypes.FindAsync(id);
+            temp.IsActive = false;
+            temp.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Admin/Restore/5
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            var temp = await _context.PaperTypes.FindAsync(id);
+            temp.IsActive = true;
+            temp.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

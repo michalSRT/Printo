@@ -8,20 +8,28 @@
     <div class="col-12">
         <div class="card shadow mb-4">
             <div class="card-header">
-                <strong class="card-title">Nowy klient</strong>
+                <div class="row">
+                    <div class="col">
+                        <h3 class="mb-2 page-title">Nowy klient</h3>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
+                            <i class="fe fe-arrow-left" style="vertical-align:text-top"></i>
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
             </div>
-
             <div class="card-body">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="card-columns">
-
                         <div class="card shadow mb-4" style="padding-top:10px">
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col">
-                                    <label asp-for="CompanyName" class="control-label">Skrócona nazwa firmy</label>
-                                    <input asp-for="CompanyName" type="text" class="form-control" />
-                                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                                    <label asp-for="Name" class="control-label">Nazwa firmy lub imię i nazwisko</label>
+                                    <input asp-for="Name" type="text" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
@@ -36,20 +44,6 @@
                                     <label asp-for="NIP" class="control-label">NIP Firmy</label>
                                     <input asp-for="NIP" type="text" class="form-control" />
                                     <span asp-validation-for="NIP" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col">
-                                    <label asp-for="FirstName" class="control-label">Imię</label>
-                                    <input asp-for="FirstName" type="text" class="form-control" />
-                                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col">
-                                    <label asp-for="LastName" class="control-label">Nazwisko</label>
-                                    <input asp-for="LastName" type="text" class="form-control" />
-                                    <span asp-validation-for="LastName" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -67,16 +61,6 @@
                                     <label asp-for="Email" class="control-label">Adres e-mail</label>
                                     <input asp-for="Email" type="email" class="form-control" />
                                     <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card shadow mb-4" style="padding-top:10px">
-                            <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col">
-                                    <label asp-for="Description" class="control-label">Dodatkowy opis</label>
-                                    <textarea asp-for="Description" rows="7" class="form-control"></textarea>
-                                    <span asp-validation-for="Description" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -114,17 +98,22 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="card shadow mb-4" style="padding-top:10px">
+                            <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
+                                <div class="form-group col">
+                                    <label asp-for="Description" class="control-label">Dodatkowy opis</label>
+                                    <textarea asp-for="Description" rows="4" class="form-control"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="form-row" style="float:right">
                         <div class="form-group" style="padding-right:5px">
                             <input type="submit" value="Zapisz" class="btn btn-success" />
-                        </div>
-                        <div class="form-group">
-                            <a class="btn btn-outline-success float-right mb-3" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
-                                <i class="fe fe-arrow-left" style="vertical-align:text-top"></i>
-                                Powrót do listy klientów
-                            </a>
                         </div>
                     </div>
                 </form>

@@ -58,10 +58,12 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientID,FirstName,LastName,CompanyName,CompanyFullName,NIP,Street,HouseNumber,AppartmentNumber,PostalCode,City,Email,Phone,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientID,Name,CompanyFullName,NIP,Street,HouseNumber,AppartmentNumber,PostalCode,City,Email,Phone,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Client client)
         {
             if (ModelState.IsValid)
             {
+                client.IsActive = true;
+                client.AddedDate = DateTime.Now;
                 _context.Add(client);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +96,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClientID,FirstName,LastName,CompanyName,CompanyFullName,NIP,Street,HouseNumber,AppartmentNumber,PostalCode,City,Email,Phone,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientID,Name,CompanyFullName,NIP,Street,HouseNumber,AppartmentNumber,PostalCode,City,Email,Phone,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Client client)
         {
             if (id != client.ClientID)
             {
@@ -105,6 +107,7 @@ namespace Printo.Intranet.Controllers
             {
                 try
                 {
+                    client.UpdatedDate = DateTime.Now;
                     _context.Update(client);
                     await _context.SaveChangesAsync();
                 }
@@ -146,7 +149,7 @@ namespace Printo.Intranet.Controllers
             return View(client);
         }
 
-        // POST: Clients/Delete/5
+        // POST: DeliveryAdresses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -154,6 +157,31 @@ namespace Printo.Intranet.Controllers
             var client = await _context.Clients.FindAsync(id);
             _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Patient/Deactivate/5
+        [HttpPost, ActionName("Deactivate")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeactivateConfirmed(int id)
+        {
+            var client = await _context.Clients.FindAsync(id);
+            client.IsActive = false;
+            client.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Admin/Restore/5
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            var client = await _context.Clients.FindAsync(id);
+            client.IsActive = true;
+            client.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

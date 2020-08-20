@@ -62,6 +62,8 @@ namespace Printo.Intranet.Controllers
         {
             if (ModelState.IsValid)
             {
+                sheetSize.IsActive = true;
+                sheetSize.AddedDate = DateTime.Now;
                 _context.Add(sheetSize);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -105,6 +107,7 @@ namespace Printo.Intranet.Controllers
             {
                 try
                 {
+                    sheetSize.UpdatedDate = DateTime.Now;
                     _context.Update(sheetSize);
                     await _context.SaveChangesAsync();
                 }
@@ -154,6 +157,31 @@ namespace Printo.Intranet.Controllers
             var sheetSize = await _context.SheetSizes.FindAsync(id);
             _context.SheetSizes.Remove(sheetSize);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Patient/Deactivate/5
+        [HttpPost, ActionName("Deactivate")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeactivateConfirmed(int id)
+        {
+            var temp = await _context.SheetSizes.FindAsync(id);
+            temp.IsActive = false;
+            temp.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Admin/Restore/5
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            var temp = await _context.SheetSizes.FindAsync(id);
+            temp.IsActive = true;
+            temp.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

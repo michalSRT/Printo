@@ -62,6 +62,8 @@ namespace Printo.Intranet.Controllers
         {
             if (ModelState.IsValid)
             {
+                postPress.IsActive = true;
+                postPress.AddedDate = DateTime.Now;
                 _context.Add(postPress);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -105,6 +107,7 @@ namespace Printo.Intranet.Controllers
             {
                 try
                 {
+                    postPress.UpdatedDate = DateTime.Now;
                     _context.Update(postPress);
                     await _context.SaveChangesAsync();
                 }
@@ -154,6 +157,31 @@ namespace Printo.Intranet.Controllers
             var postPress = await _context.PostPresses.FindAsync(id);
             _context.PostPresses.Remove(postPress);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Patient/Deactivate/5
+        [HttpPost, ActionName("Deactivate")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeactivateConfirmed(int id)
+        {
+            var temp = await _context.PostPresses.FindAsync(id);
+            temp.IsActive = false;
+            temp.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Admin/Restore/5
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            var temp = await _context.PostPresses.FindAsync(id);
+            temp.IsActive = true;
+            temp.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -50,7 +50,7 @@ namespace Printo.Intranet.Controllers
         public IActionResult Create()
         {
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "CompanyName");
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name");
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             return View();
         }
@@ -64,6 +64,8 @@ namespace Printo.Intranet.Controllers
         {
             if (ModelState.IsValid)
             {
+                deliveryAdress.IsActive = true;
+                deliveryAdress.AddedDate = DateTime.Now;
                 _context.Add(deliveryAdress);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -82,14 +84,16 @@ namespace Printo.Intranet.Controllers
                 return NotFound();
             }
 
-            var deliveryAdress = await _context.DeliveryAdresses.FindAsync(id);
+            //var deliveryAdress = await _context.DeliveryAdresses.FindAsync(id);
+            var deliveryAdress = await _context.DeliveryAdresses.Include(p => p.Client).FirstOrDefaultAsync(m => m.ClientID == id);
             if (deliveryAdress == null)
             {
                 return NotFound();
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", deliveryAdress.AddedUserID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientID", deliveryAdress.ClientID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", deliveryAdress.ClientID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", deliveryAdress.UpdatedUserID);
+            ViewBag.ClientName = deliveryAdress.Client.Name.ToString();
             return View(deliveryAdress);
         }
 
@@ -109,6 +113,7 @@ namespace Printo.Intranet.Controllers
             {
                 try
                 {
+                    deliveryAdress.UpdatedDate = DateTime.Now;
                     _context.Update(deliveryAdress);
                     await _context.SaveChangesAsync();
                 }
@@ -160,6 +165,31 @@ namespace Printo.Intranet.Controllers
             var deliveryAdress = await _context.DeliveryAdresses.FindAsync(id);
             _context.DeliveryAdresses.Remove(deliveryAdress);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Patient/Deactivate/5
+        [HttpPost, ActionName("Deactivate")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeactivateConfirmed(int id)
+        {
+            var deliveryAdress = await _context.DeliveryAdresses.FindAsync(id);
+            deliveryAdress.IsActive = false;
+            deliveryAdress.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Admin/Restore/5
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            var deliveryAdress = await _context.DeliveryAdresses.FindAsync(id);
+            deliveryAdress.IsActive = true;
+            deliveryAdress.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

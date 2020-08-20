@@ -10,11 +10,7 @@ namespace Printo.Data.Data
     {
         [Key]
         public int ClientID { get; set; }
-        [NotMapped]
-        public string FullName { get { return this.FirstName + " " + this.LastName; } }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string CompanyName { get; set; }
+        public string Name { get; set; }
         public string CompanyFullName { get; set; }
         [MinLength(9, ErrorMessage = "Numer NIP powinien mieć 9 cyfr wpisywane bez pauz.")]
         [MaxLength(9, ErrorMessage = "Numer NIP powinien mieć 9 cyfr wpisywane bez pauz.")]

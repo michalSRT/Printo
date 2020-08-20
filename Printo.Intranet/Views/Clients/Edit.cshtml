@@ -1,117 +1,199 @@
 ﻿@model Printo.Data.Data.Client
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = String.Format("Edycja klienta {0}", Model.Name);
 }
 
-<h1>Edit</h1>
-
-<h4>Client</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ClientID" />
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="mb-2 page-title">Klient @Model.Name</h5>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
+                            <i class="fe fe-arrow-left" style="vertical-align:text-top"></i>
+                            Powrót do listy klientów
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CompanyName" class="control-label"></label>
-                <input asp-for="CompanyName" class="form-control" />
-                <span asp-validation-for="CompanyName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CompanyFullName" class="control-label"></label>
-                <input asp-for="CompanyFullName" class="form-control" />
-                <span asp-validation-for="CompanyFullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NIP" class="control-label"></label>
-                <input asp-for="NIP" class="form-control" />
-                <span asp-validation-for="NIP" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Street" class="control-label"></label>
-                <input asp-for="Street" class="form-control" />
-                <span asp-validation-for="Street" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HouseNumber" class="control-label"></label>
-                <input asp-for="HouseNumber" class="form-control" />
-                <span asp-validation-for="HouseNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AppartmentNumber" class="control-label"></label>
-                <input asp-for="AppartmentNumber" class="form-control" />
-                <span asp-validation-for="AppartmentNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PostalCode" class="control-label"></label>
-                <input asp-for="PostalCode" class="form-control" />
-                <span asp-validation-for="PostalCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="AddedDate" class="control-label"></label>
-                <input asp-for="AddedDate" class="form-control" />
-                <span asp-validation-for="AddedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedDate" class="control-label"></label>
-                <input asp-for="UpdatedDate" class="form-control" />
-                <span asp-validation-for="UpdatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AddedUserID" class="control-label"></label>
-                <select asp-for="AddedUserID" class="form-control" asp-items="ViewBag.AddedUserID"></select>
-                <span asp-validation-for="AddedUserID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedUserID" class="control-label"></label>
-                <select asp-for="UpdatedUserID" class="form-control" asp-items="ViewBag.UpdatedUserID"></select>
-                <span asp-validation-for="UpdatedUserID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+            <div class="card-body">
+                <form asp-action="Edit" id="saveForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="ClientID" />
+                    <input type="hidden" asp-for="UpdatedDate" />
+                    <input type="hidden" asp-for="IsActive" />
+                    <div class="card-columns">
+                        <div class="card shadow mb-4" style="padding-top:10px">
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="Name" class="control-label">Nazwa firmy lub imię i nazwisko</label>
+                                    <input asp-for="Name" type="text" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="CompanyFullName" class="control-label">Pełna nazwa firmy</label>
+                                    <input asp-for="CompanyFullName" type="text" class="form-control" />
+                                    <span asp-validation-for="CompanyFullName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="NIP" class="control-label">NIP Firmy</label>
+                                    <input asp-for="NIP" type="text" class="form-control" />
+                                    <span asp-validation-for="NIP" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+                        <div class="card shadow mb-4" style="padding-top:10px">
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="Phone" class="control-label">Numer telefonu</label>
+                                    <input asp-for="Phone" type="text" class="form-control" />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="Email" class="control-label">Adres e-mail</label>
+                                    <input asp-for="Email" type="email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow mb-4" style="padding-top:10px">
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="Street" class="control-label">Ulica</label>
+                                    <input asp-for="Street" type="text" class="form-control" />
+                                    <span asp-validation-for="Street" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col" style="min-width: fit-content;">
+                                    <label asp-for="HouseNumber" class="control-label">Nr domu</label>
+                                    <input asp-for="HouseNumber" type="text" class="form-control" />
+                                    <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col" style="min-width: fit-content;">
+                                    <label asp-for="AppartmentNumber" class="control-label">Nr mieszkania</label>
+                                    <input asp-for="AppartmentNumber" type="text" class="form-control" />
+                                    <span asp-validation-for="AppartmentNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col" style="min-width: fit-content;">
+                                    <label asp-for="PostalCode" class="control-label">Kod pocztowy</label>
+                                    <input asp-for="PostalCode" type="text" class="form-control" />
+                                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col" style="min-width: fit-content;">
+                                    <label asp-for="City" class="control-label">Miasto</label>
+                                    <input asp-for="City" type="text" class="form-control" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow mb-4" style="padding-top:10px">
+                            <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
+                                <div class="form-group col">
+                                    <label asp-for="Description" class="control-label">Dodatkowy opis</label>
+                                    <textarea asp-for="Description" rows="4" class="form-control"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col">
+                        @if (Model.IsActive)
+                        {
+                            <!-- Button to Open the Modal -->
+                            <button type="button" class="btn btn-outline-warning buttMargin" data-toggle="modal" data-target="#myModalDeactivate">
+                                Dezaktywuj
+                            </button>
+                            <button type="button" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDelete">
+                                Usuń
+                            </button>
+
+                            <!-- The Modal -->
+                            <div class="modal" id="myModalDeactivate">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Uwaga!</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            Czy chcesz dezaktywować tego klienta?
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                            <form asp-action="Deactivate" asp-route-id="@Model.ClientID">
+                                                <input type="hidden" asp-for="ClientID" />
+                                                <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
+                                                <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- The Modal 2-->
+                            <div class="modal" id="myModalDelete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Uwaga!</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            Czy chcesz trwale usunąć tego klienta?
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                            <form asp-action="Delete" asp-route-id="@Model.ClientID">
+                                                <input type="hidden" asp-for="ClientID" />
+                                                <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
+                                                <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <form asp-action="Restore" asp-route-id="@Model.ClientID">
+                                <input type="hidden" asp-for="ClientID" />
+                                <input type="submit" value="Przywróć" class="btn btn-success buttMargin" />
+                            </form>
+                        }
+                    </div>
+                    <div class="col" style="text-align:right">
+                        <input form="saveForm" type="submit" value="Zapisz" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

@@ -41,9 +41,7 @@ namespace Printo.Data.Data
                 new Client
                 {
                     ClientID = 1,
-                    FirstName = "Joe",
-                    LastName = "Doe",
-                    CompanyName = "Joe Doe",
+                    Name = "Joe Doe",
                     CompanyFullName = "Joe Doe Co",
                     NIP = "123456789",
                     Street = "Lwowska",
@@ -59,9 +57,7 @@ namespace Printo.Data.Data
                 new Client
                 {
                     ClientID = 2,
-                    FirstName = "Mike",
-                    LastName = "Shinoda",
-                    CompanyName = "MikeShinoda",
+                    Name = "MikeShinoda",
                     CompanyFullName = "MikeShinoda Co",
                     NIP = "123456789",
                     Street = "Wallstreet",
@@ -77,9 +73,7 @@ namespace Printo.Data.Data
                 new Client
                 {
                     ClientID = 3,
-                    FirstName = "Jacek",
-                    LastName = "Sikora",
-                    CompanyName = "Vitberg",
+                    Name = "Vitberg",
                     CompanyFullName = "Vitberg Jacek Sikora",
                     NIP = "123456789",
                     Street = "Borelowskiego",

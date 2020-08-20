@@ -1,59 +1,57 @@
-﻿@model IEnumerable<Printo.Data.Data.PaperType>
+﻿@model Printo.Data.Data.PaperType
 
 @{
-    ViewData["Title"] = "Rodzaje papierów";
+    ViewData["Title"] = "Edycja rodzaju papieru";
 }
 
 <div class="row">
-    <div class="col">
-        <h3 class="mb-2 page-title">Rodzaje papierów</h3>
-    </div>
-    <div class="col">
-        <a class="btn btn-outline-success float-right mb-3" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Create">
-            <i class="fe fe-plus fe-16" style="padding-right:5px; vertical-align:text-bottom"></i>
-            Dodaj
-        </a>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card shadow">
-            <div class="card-body">
-
-                <table class="table dataTable table-responsive-xl" id="dataTable-1">
-                    <thead>
-                        <tr>
-                            <th>
-                                Nazwa
-                            </th>
-                            <th>
-                                Opis
-                            </th>
-                            <th>Akcja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.PaperTypeID" role="button" data-toggle="tooltip" title="Edytuj">
-                                        <i class="fe fe-edit fe-16"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="mb-2 page-title">Edycja rodzaju papieru</h3>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
+                            <i class="fe fe-arrow-left" style="vertical-align:text-top"></i>
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
             </div>
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="PaperTypeID" />
+                    <div class="form-row">
+                        <div class="form-group col-xl-6">
+                            <label asp-for="Name" class="control-label">Nazwa papieru (bez gramatury)</label>
+                            <input asp-for="Name" type="text" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col">
+                            <label asp-for="Description" class="control-label">Opis</label>
+                            <input asp-for="Description" type="text" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row" style="float:right">
+                        <div class="form-group" style="padding-right:5px">
+                            <input type="submit" value="Zapisz" class="btn btn-success" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

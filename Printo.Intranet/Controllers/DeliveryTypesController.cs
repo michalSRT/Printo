@@ -62,6 +62,8 @@ namespace Printo.Intranet.Controllers
         {
             if (ModelState.IsValid)
             {
+                deliveryType.IsActive = true;
+                deliveryType.AddedDate = DateTime.Now;
                 _context.Add(deliveryType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -105,6 +107,7 @@ namespace Printo.Intranet.Controllers
             {
                 try
                 {
+                    deliveryType.UpdatedDate = DateTime.Now;
                     _context.Update(deliveryType);
                     await _context.SaveChangesAsync();
                 }
@@ -146,7 +149,7 @@ namespace Printo.Intranet.Controllers
             return View(deliveryType);
         }
 
-        // POST: DeliveryTypes/Delete/5
+        // POST: DeliveryAdresses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -154,6 +157,31 @@ namespace Printo.Intranet.Controllers
             var deliveryType = await _context.DeliveryTypes.FindAsync(id);
             _context.DeliveryTypes.Remove(deliveryType);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Patient/Deactivate/5
+        [HttpPost, ActionName("Deactivate")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeactivateConfirmed(int id)
+        {
+            var deliveryType = await _context.DeliveryTypes.FindAsync(id);
+            deliveryType.IsActive = false;
+            deliveryType.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: Admin/Restore/5
+        [HttpPost, ActionName("Restore")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RestoreConfirmed(int id)
+        {
+            var deliveryType = await _context.DeliveryTypes.FindAsync(id);
+            deliveryType.IsActive = true;
+            deliveryType.UpdatedDate = DateTime.Now;
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

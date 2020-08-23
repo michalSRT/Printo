@@ -8,7 +8,10 @@ $('#dataTable-1').DataTable(
         "language": {
             "lengthMenu": "Pokaż _MENU_ pozycji",
             "search": "Szukaj:",
+            "zeroRecords": "Brak rekordów w tabeli",
             "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
+            "infoEmpty": "Brak rekordów w tabeli",
+            "infoFiltered": "(sfiltrowano z łącznie _MAX_ pozycji)",
             "paginate": {
                 "first": "Pierwsza",
                 "last": "Ostatnia",
@@ -16,9 +19,34 @@ $('#dataTable-1').DataTable(
                 "previous": "Poprzednia"
             }
         },
-        autoWidth: true,
         "lengthMenu": [
             [16, 32, 64, -1],
             [16, 32, 64, "All"]
-        ]
+        ],
+        "scrollX": true,
+        "autoWidth": true
+    });
+
+$('#dataTable-2').DataTable(
+    {
+        "language": {
+            "lengthMenu": "Pokaż _MENU_ pozycji",
+            "search": "Szukaj:",
+            "zeroRecords": "Brak rekordów w tabeli",
+            "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
+            "infoEmpty": "Brak rekordów w tabeli",
+            "infoFiltered": "(sfiltrowano z łącznie _MAX_ pozycji)",
+            "paginate": {
+                "first": "Pierwsza",
+                "last": "Ostatnia",
+                "next": "Następna",
+                "previous": "Poprzednia"
+            }
+        },
+        "lengthMenu": [
+            [16, 32, 64, -1],
+            [16, 32, 64, "All"]
+        ],
+        "scrollX": true,
+        "autoWidth": true
     });

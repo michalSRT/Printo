@@ -1,215 +1,224 @@
 ﻿@model IEnumerable<Printo.Data.Data.Order>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Zamówienia";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NetPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsReprint)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReprintDateAndInfo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SheetsNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SheetsNumberPrinted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AddedUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Client)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeliveryAdress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeliveryType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Finishing)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Format)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Machine)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaperWeight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaperType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostPress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrintColor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductionStage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SheetSize)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VatRate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NetPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsReprint)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReprintDateAndInfo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SheetsNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SheetsNumberPrinted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddedUser.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedUser.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.ClientID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryAdress.DeliveryAdressID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Finishing.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Format.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Machine.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaperWeight.Grammature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaperType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostPress.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrintColor.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SheetSize.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VatRate.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-12">
+        @*AKTYWNE*@
+        <div class="card shadow">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="mb-2 page-title">Aktualne zamówienia</h3>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Create">
+                            <i class="fe fe-plus fe-16" style="padding-right:5px; vertical-align:text-bottom"></i>
+                            Dodaj
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-1">
+                    <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Start</th>
+                            <th>Koniec</th>
+                            <th>Etap produkcji</th>
+                            <th>Klient</th>
+                            <th>Produkt</th>
+                            <th>Nazwa zamówienia</th>
+                            <th>Nakład</th>
+                            <th>Kolor druku</th>
+                            <th>Uszlachetnienia</th>
+                            <th>Introligatornia</th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.IsActive == true))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderID)
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                    <br />
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("H:mm")}
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                    <br />
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("H:mm")}
+                                </td>
+                                <td>
+                                    @if (item.ProductionStage.Color != null)
+                                    {
+                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Client.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PrintColor.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(momodelItemdel => item.Finishing.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostPress.Name)
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                        <i class="fe fe-edit fe-16"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @*NIEAKTYWNE*@
+        @foreach (var item in Model)
+        {
+            if (item.IsActive == false)
+            {
+                <div class="row">
+                    <div class="col" style="text-align:center; margin:10px">
+                        <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Nieaktywne
+                        </button>
+                    </div>
+                </div>
+                break;
+            }
+        }
+        <div class="card shadow collapse" id="collapseExample">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="mb-2 page-title">Zamówienia - pozycje dezaktywowane</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-2">
+                    <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Start</th>
+                            <th>Koniec</th>
+                            <th>Etap produkcji</th>
+                            <th>Klient</th>
+                            <th>Produkt</th>
+                            <th>Nazwa zamówienia</th>
+                            <th>Nakład</th>
+                            <th>Kolor druku</th>
+                            <th>Uszlachetnienia</th>
+                            <th>Introligatornia</th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.IsActive == false))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderID)
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                    <br />
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("H:mm")}
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                    <br />
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("H:mm")}
+                                </td>
+                                <td>
+                                    @if (item.ProductionStage.Color != null)
+                                    {
+                                        @if (item.ProductionStage.Color.ToString() == "#ffffff" || item.ProductionStage.Color.ToString() == null)
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Client.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PrintColor.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(momodelItemdel => item.Finishing.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostPress.Name)
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                        <i class="fe fe-edit fe-16"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

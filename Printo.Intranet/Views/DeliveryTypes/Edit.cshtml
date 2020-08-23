@@ -24,8 +24,9 @@
                 <form asp-action="Edit" id="saveForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="DeliveryTypeID" />
-                    <input type="hidden" asp-for="UpdatedDate" />
                     <input type="hidden" asp-for="IsActive" />
+                    <input type="hidden" asp-for="AddedDate" />
+                    <input type="hidden" asp-for="UpdatedDate" />
                     <div class="form-row">
                         <div class="form-group col-xl-6">
                             <label asp-for="Name" class="control-label">Nazwa rodzaju dostawy</label>
@@ -63,7 +64,7 @@
 
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                            Czy chcesz dezaktywować ten adres dostawy?
+                                            Czy chcesz dezaktywować ten rodzaj dostawy?
                                         </div>
 
 
@@ -90,7 +91,7 @@
 
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                            Czy chcesz trwale usunąć ten adres dostawy?
+                                            Czy chcesz trwale usunąć ten rodzaj dostawy?
                                         </div>
 
 

@@ -654,6 +654,7 @@ namespace Printo.Data.Data
                     ProductionStageID = 1,
                     Name = "NOWE",
                     Description = "Nowe zamówienie przyjęte do realizacji",
+                    Color = "#ffffff",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -663,7 +664,7 @@ namespace Printo.Data.Data
                     ProductionStageID = 2,
                     Name = "CTP",
                     Description = "Naświetlanie CTP",
-                    Color = "orange",
+                    Color = "#fdaa1c",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -673,7 +674,7 @@ namespace Printo.Data.Data
                     ProductionStageID = 3,
                     Name = "START",
                     Description = "Etap drukowania",
-                    Color = "Limegreen",
+                    Color = "#1ae000",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -683,7 +684,7 @@ namespace Printo.Data.Data
                     ProductionStageID = 4,
                     Name = "STOP",
                     Description = "Produkcja zatrzymana/anulowana",
-                    Color = "red",
+                    Color = "#f62323",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -693,7 +694,7 @@ namespace Printo.Data.Data
                     ProductionStageID = 5,
                     Name = "INTRO",
                     Description = "Obróbka introligatorska i uszlachetnienia",
-                    Color = "deepskyblue",
+                    Color = "#00a8f0",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -703,7 +704,7 @@ namespace Printo.Data.Data
                     ProductionStageID = 6,
                     Name = "GOTOWE",
                     Description = "Produkcja zakończona - zamówienie gotowe do wydania",
-                    Color = "black",
+                    Color = "#000000",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -713,6 +714,7 @@ namespace Printo.Data.Data
                     ProductionStageID = 7,
                     Name = "KONIEC",
                     Description = "Zamówienie zrealizowane",
+                    Color = "#ffffff",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1

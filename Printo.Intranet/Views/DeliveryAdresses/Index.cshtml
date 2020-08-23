@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Adresy dostawy";
 }
-
 <div class="row">
     <div class="col-md-12">
+        @*AKTYWNE*@
         <div class="card shadow">
             <div class="card-header">
                 <div class="row">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table dataTable table-responsive-lg" id="dataTable-1">
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-1">
                     <thead>
                         <tr>
                             <th>
@@ -43,7 +43,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Where(x => x.IsActive == true))
                         {
                             <tr>
                                 <td>
@@ -72,7 +72,83 @@
                         }
                     </tbody>
                 </table>
-
+            </div>
+        </div>
+        @*NIEAKTYWNE*@
+        @foreach (var item in Model)
+        {
+            if (item.IsActive == false)
+            {
+                <div class="row">
+                    <div class="col" style="text-align:center; margin:10px">
+                        <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Nieaktywne
+                        </button>
+                    </div>
+                </div>
+                break;
+            }
+        }
+        <div class="card shadow collapse" id="collapseExample">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="mb-2 page-title">Adresy dostawy - pozycje dezaktywowane</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-2">
+                    <thead>
+                        <tr>
+                            <th>
+                                Klient
+                            </th>
+                            <th>
+                                Osoba kontaktowa
+                            </th>
+                            <th>
+                                Nazwa firmy
+                            </th>
+                            <th>
+                                Telefon kontaktowy
+                            </th>
+                            <th>
+                                Adres dostawy
+                            </th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.IsActive == false))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Client.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Street) @Html.DisplayFor(modelItem => item.HouseNumber)
+                                    @if (item.AppartmentNumber != null)
+                                    {<text> / </text> @Html.DisplayFor(modelItem => item.AppartmentNumber)} , @Html.DisplayFor(modelItem => item.PostalCode) @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.DeliveryAdressID" role="button" data-toggle="tooltip" title="Edytuj">
+                                        <i class="fe fe-edit fe-16"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

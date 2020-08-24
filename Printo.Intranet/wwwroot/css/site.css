@@ -78,7 +78,7 @@ body {
     }
 }
 
-@media (min-width: 40em) {
+@media (min-width: 79em) {
     .card-columns {
         -webkit-column-count: 2;
         -moz-column-count: 2;

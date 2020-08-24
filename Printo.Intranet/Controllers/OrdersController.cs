@@ -64,7 +64,7 @@ namespace Printo.Intranet.Controllers
         public IActionResult Create()
         {
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientID");
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name");
             ViewData["DeliveryAdressID"] = new SelectList(_context.DeliveryAdresses, "DeliveryAdressID", "DeliveryAdressID");
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name");
             ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name");
@@ -99,7 +99,7 @@ namespace Printo.Intranet.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientID", order.ClientID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
             ViewData["DeliveryAdressID"] = new SelectList(_context.DeliveryAdresses, "DeliveryAdressID", "DeliveryAdressID", order.DeliveryAdressID);
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
             ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);

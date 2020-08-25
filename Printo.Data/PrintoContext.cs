@@ -15,8 +15,6 @@ namespace Printo.Data.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
-
-        public DbSet<DeliveryAdress> DeliveryAdresses { get; set; }
         public DbSet<DeliveryType> DeliveryTypes { get; set; }
         public DbSet<Finishing> Finishings { get; set; }
         public DbSet<Format> Formats { get; set; }
@@ -163,27 +161,6 @@ namespace Printo.Data.Data
                     Description = "Nie dotyczy",
                     IsActive = true,
                     AddedDate = DateTime.Now
-                }
-                );
-            #endregion
-
-            #region DELIVERY ADRESSES
-            modelBuilder.Entity<DeliveryAdress>().HasData(
-                new DeliveryAdress
-                {
-                    DeliveryAdressID = 1,
-                    ContactName = "Joe Doe",
-                    CompanyName = "Joe Doe Co",
-                    Phone = "784 138 949",
-                    Street = "Lwowska",
-                    HouseNumber = "54",
-                    AppartmentNumber = "1",
-                    PostalCode = "33-300",
-                    City = "Nowy Sącz",
-                    IsActive = true,
-                    AddedDate = DateTime.Now,
-                    AddedUserID = 1,
-                    ClientID = 1
                 }
                 );
             #endregion
@@ -452,6 +429,15 @@ namespace Printo.Data.Data
                 new PaperWeight
                 {
                     PaperWeightID = 1,
+                    Grammature = "Inna",
+                    Description = "Szczegóły w opisie druku",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new PaperWeight
+                {
+                    PaperWeightID = 2,
                     Grammature = "130g",
                     Description = "",
                     IsActive = true,
@@ -460,7 +446,7 @@ namespace Printo.Data.Data
                 },
                 new PaperWeight
                 {
-                    PaperWeightID = 2,
+                    PaperWeightID = 3,
                     Grammature = "170g",
                     Description = "",
                     IsActive = true,
@@ -469,17 +455,8 @@ namespace Printo.Data.Data
                 },
                 new PaperWeight
                 {
-                    PaperWeightID = 3,
-                    Grammature = "350g + 170g",
-                    Description = "",
-                    IsActive = true,
-                    AddedDate = DateTime.Now,
-                    AddedUserID = 1
-                },
-                new PaperWeight
-                {
                     PaperWeightID = 4,
-                    Grammature = "250g + 130g",
+                    Grammature = "200g",
                     Description = "",
                     IsActive = true,
                     AddedDate = DateTime.Now,
@@ -488,8 +465,17 @@ namespace Printo.Data.Data
                 new PaperWeight
                 {
                     PaperWeightID = 5,
-                    Grammature = "Inna",
-                    Description = "Szczegóły w opisie druku",
+                    Grammature = "350g + 170g",
+                    Description = "",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new PaperWeight
+                {
+                    PaperWeightID = 6,
+                    Grammature = "250g + 130g",
+                    Description = "",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -584,6 +570,15 @@ namespace Printo.Data.Data
                 new PrintColor
                 {
                     PrintColorID = 1,
+                    Name = "N/D",
+                    Description = "Nie dotyczy",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new PrintColor
+                {
+                    PrintColorID = 2,
                     Name = "4/0 CMYK",
                     Description = "CMYK jednostronnie",
                     IsActive = true,
@@ -592,7 +587,7 @@ namespace Printo.Data.Data
                 },
                 new PrintColor
                 {
-                    PrintColorID = 2,
+                    PrintColorID = 3,
                     Name = "4/4 CMYK",
                     Description = "CMYK obustronnie",
                     IsActive = true,
@@ -601,7 +596,7 @@ namespace Printo.Data.Data
                 },
                 new PrintColor
                 {
-                    PrintColorID = 3,
+                    PrintColorID = 4,
                     Name = "1/0 blacK",
                     Description = "Czarny jednostronnie",
                     IsActive = true,
@@ -610,7 +605,7 @@ namespace Printo.Data.Data
                 },
                 new PrintColor
                 {
-                    PrintColorID = 4,
+                    PrintColorID = 5,
                     Name = "1/1 blacK",
                     Description = "Czarny obustronnie",
                     IsActive = true,
@@ -619,7 +614,7 @@ namespace Printo.Data.Data
                 },
                 new PrintColor
                 {
-                    PrintColorID = 5,
+                    PrintColorID = 6,
                     Name = "4/4 CMYK + 1/1 blacK",
                     Description = "Okładka: CMYK obustronnie + Środek: czarny obustronnie",
                     IsActive = true,
@@ -628,7 +623,7 @@ namespace Printo.Data.Data
                 },
                 new PrintColor
                 {
-                    PrintColorID = 6,
+                    PrintColorID = 7,
                     Name = "1/0 Pantone",
                     Description = "Pantone jednostronnie",
                     IsActive = true,
@@ -637,7 +632,7 @@ namespace Printo.Data.Data
                 },
                 new PrintColor
                 {
-                    PrintColorID = 7,
+                    PrintColorID = 8,
                     Name = "Inny",
                     Description = "Szczegóły w uwagach do druku",
                     IsActive = true,
@@ -783,9 +778,18 @@ namespace Printo.Data.Data
 
             #region SHEET SIZES
             modelBuilder.Entity<SheetSize>().HasData(
+                                new SheetSize
+                                {
+                                    SheetSizeID = 1,
+                                    Name = "N/D",
+                                    Description = "Nie dotyczy",
+                                    IsActive = true,
+                                    AddedDate = DateTime.Now,
+                                    AddedUserID = 1
+                                },
                 new SheetSize
                 {
-                    SheetSizeID = 1,
+                    SheetSizeID = 2,
                     Name = "A2+",
                     Description = "630x440mm",
                     IsActive = true,
@@ -794,16 +798,25 @@ namespace Printo.Data.Data
                 },
                 new SheetSize
                 {
-                    SheetSizeID = 2,
+                    SheetSizeID = 3,
                     Name = "A2",
                     Description = "610x430mm",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
                 },
+                                new SheetSize
+                                {
+                                    SheetSizeID = 4,
+                                    Name = "A3+",
+                                    Description = "440x315mm",
+                                    IsActive = true,
+                                    AddedDate = DateTime.Now,
+                                    AddedUserID = 1
+                                },
                 new SheetSize
                 {
-                    SheetSizeID = 3,
+                    SheetSizeID = 5,
                     Name = "B2",
                     Description = "700x500mm",
                     IsActive = true,
@@ -812,25 +825,16 @@ namespace Printo.Data.Data
                 },
                 new SheetSize
                 {
-                    SheetSizeID = 4,
-                    Name = "A3+",
-                    Description = "440x315mm",
-                    IsActive = true,
-                    AddedDate = DateTime.Now,
-                    AddedUserID = 1
-                },
-                new SheetSize
-                {
-                    SheetSizeID = 5,
-                    Name = "A3",
-                    Description = "430x305mm",
-                    IsActive = true,
-                    AddedDate = DateTime.Now,
-                    AddedUserID = 1
-                },
-                new SheetSize
-                {
                     SheetSizeID = 6,
+                    Name = "B3",
+                    Description = "500x350mm",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new SheetSize
+                {
+                    SheetSizeID = 7,
                     Name = "Inny",
                     Description = "Szczegóły w uwagach do druku",
                     IsActive = true,

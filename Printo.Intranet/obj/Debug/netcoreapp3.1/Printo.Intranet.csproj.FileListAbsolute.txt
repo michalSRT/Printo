@@ -248,11 +248,6 @@ C:\Users\msier\source\repos\Printo\Printo.Intranet\bin\Debug\netcoreapp3.1\Micro
 C:\Users\msier\source\repos\Printo\Printo.Intranet\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\msier\source\repos\Printo\Printo.Intranet\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Printo.Intranet.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\DeliveryAdresses\Create.cshtml.g.cs
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\DeliveryAdresses\Delete.cshtml.g.cs
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\DeliveryAdresses\Details.cshtml.g.cs
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\DeliveryAdresses\Edit.cshtml.g.cs
-C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\DeliveryAdresses\Index.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Create.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Delete.cshtml.g.cs
 C:\Users\msier\source\repos\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Details.cshtml.g.cs

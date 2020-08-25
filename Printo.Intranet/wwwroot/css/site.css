@@ -85,3 +85,25 @@ body {
         column-count: 2;
     }
 }
+
+.select2-selection__rendered {
+    line-height: 35px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 35px !important;
+}
+
+.select2-selection__arrow {
+    height: 34px !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #3ad29f;
+    color: #fff;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #3ad29f;
+    border-color: #3ad29f;
+}

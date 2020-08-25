@@ -149,7 +149,7 @@ namespace Printo.Intranet.Controllers
             return View(client);
         }
 
-        // POST: DeliveryAdresses/Delete/5
+        // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -160,7 +160,7 @@ namespace Printo.Intranet.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: Patient/Deactivate/5
+        // POST: Clients/Deactivate/5
         [HttpPost, ActionName("Deactivate")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeactivateConfirmed(int id)
@@ -172,7 +172,7 @@ namespace Printo.Intranet.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: Admin/Restore/5
+        // POST: Clients/Restore/5
         [HttpPost, ActionName("Restore")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RestoreConfirmed(int id)

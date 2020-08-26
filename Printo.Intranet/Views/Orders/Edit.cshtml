@@ -1,177 +1,292 @@
 ﻿@model Printo.Data.Data.Order
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edycja zamówienia";
 }
 
-<h1>Edit</h1>
-
-<h4>Order</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="OrderID" />
-            <div class="form-group">
-                <label asp-for="ClientID" class="control-label"></label>
-                <select asp-for="ClientID" class="form-control" asp-items="ViewBag.ClientID"></select>
-                <span asp-validation-for="ClientID" class="text-danger"></span>
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="mb-2 page-title">Edycja zamówienia</h3>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
+                            <i class="fe fe-arrow-left" style="vertical-align:text-top"></i>
+                            Powrót do listy
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DeliveryTypeID" class="control-label"></label>
-                <select asp-for="DeliveryTypeID" class="form-control" asp-items="ViewBag.DeliveryTypeID"></select>
-                <span asp-validation-for="DeliveryTypeID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FinishingID" class="control-label"></label>
-                <select asp-for="FinishingID" class="form-control" asp-items="ViewBag.FinishingID"></select>
-                <span asp-validation-for="FinishingID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FormatID" class="control-label"></label>
-                <select asp-for="FormatID" class="form-control" asp-items="ViewBag.FormatID"></select>
-                <span asp-validation-for="FormatID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MachineID" class="control-label"></label>
-                <select asp-for="MachineID" class="form-control" asp-items="ViewBag.MachineID"></select>
-                <span asp-validation-for="MachineID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaperWeightID" class="control-label"></label>
-                <select asp-for="PaperWeightID" class="form-control" asp-items="ViewBag.PaperWeightID"></select>
-                <span asp-validation-for="PaperWeightID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaperTypeID" class="control-label"></label>
-                <select asp-for="PaperTypeID" class="form-control" asp-items="ViewBag.PaperTypeID"></select>
-                <span asp-validation-for="PaperTypeID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PaymentTypeID" class="control-label"></label>
-                <select asp-for="PaymentTypeID" class="form-control" asp-items="ViewBag.PaymentTypeID"></select>
-                <span asp-validation-for="PaymentTypeID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PostPressID" class="control-label"></label>
-                <select asp-for="PostPressID" class="form-control" asp-items="ViewBag.PostPressID"></select>
-                <span asp-validation-for="PostPressID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrintColorID" class="control-label"></label>
-                <select asp-for="PrintColorID" class="form-control" asp-items="ViewBag.PrintColorID"></select>
-                <span asp-validation-for="PrintColorID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductID" class="control-label"></label>
-                <select asp-for="ProductID" class="form-control" asp-items="ViewBag.ProductID"></select>
-                <span asp-validation-for="ProductID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductionStageID" class="control-label"></label>
-                <select asp-for="ProductionStageID" class="form-control" asp-items="ViewBag.ProductionStageID"></select>
-                <span asp-validation-for="ProductionStageID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SheetSizeID" class="control-label"></label>
-                <select asp-for="SheetSizeID" class="form-control" asp-items="ViewBag.SheetSizeID"></select>
-                <span asp-validation-for="SheetSizeID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VatRateID" class="control-label"></label>
-                <select asp-for="VatRateID" class="form-control" asp-items="ViewBag.VatRateID"></select>
-                <span asp-validation-for="VatRateID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrderName" class="control-label"></label>
-                <input asp-for="OrderName" class="form-control" />
-                <span asp-validation-for="OrderName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NetPrice" class="control-label"></label>
-                <input asp-for="NetPrice" class="form-control" />
-                <span asp-validation-for="NetPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsReprint" /> @Html.DisplayNameFor(model => model.IsReprint)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SheetsNumber" class="control-label"></label>
-                <input asp-for="SheetsNumber" class="form-control" />
-                <span asp-validation-for="SheetsNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SheetsNumberPrinted" class="control-label"></label>
-                <input asp-for="SheetsNumberPrinted" class="form-control" />
-                <span asp-validation-for="SheetsNumberPrinted" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Comments" class="control-label"></label>
-                <input asp-for="Comments" class="form-control" />
-                <span asp-validation-for="Comments" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeliveryDetails" class="control-label"></label>
-                <input asp-for="DeliveryDetails" class="form-control" />
-                <span asp-validation-for="DeliveryDetails" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="AddedDate" class="control-label"></label>
-                <input asp-for="AddedDate" class="form-control" />
-                <span asp-validation-for="AddedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedDate" class="control-label"></label>
-                <input asp-for="UpdatedDate" class="form-control" />
-                <span asp-validation-for="UpdatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AddedUserID" class="control-label"></label>
-                <select asp-for="AddedUserID" class="form-control" asp-items="ViewBag.AddedUserID"></select>
-                <span asp-validation-for="AddedUserID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedUserID" class="control-label"></label>
-                <select asp-for="UpdatedUserID" class="form-control" asp-items="ViewBag.UpdatedUserID"></select>
-                <span asp-validation-for="UpdatedUserID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+            <div class="card-body">
+                <form asp-action="Edit" id="saveForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="OrderID" />
+                    <input type="hidden" asp-for="IsActive" />
+                    <input type="hidden" asp-for="AddedDate" />
+                    <input type="hidden" asp-for="UpdatedDate" />
+                    <div class="card-columns">
+                        <div class="card shadow mb-4" style="padding-top:10px">
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="StartDate" class="control-label">Data zamówienia</label>
+                                    <input asp-for="StartDate" class="form-control" id="startDate" type="datetime-local" />
+                                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="EndDate" class="control-label">Termin realizacji</label>
+                                    <input asp-for="EndDate" class="form-control" id="endDate" type="datetime-local" />
+                                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="ProductionStageID" class="control-label">Etap produkcji</label>
+                                    <select asp-for="ProductionStageID" class="form-control" asp-items="ViewBag.ProductionStageID"></select>
+                                    <span asp-validation-for="ProductionStageID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col-4">
+                                    <label asp-for="ClientID" class="control-label">Klient</label>
+                                    <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID">
+                                        <option selected disabled value="0"></option>
+                                    </select>
+                                    <span asp-validation-for="ClientID" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-8">
+                                    <label asp-for="OrderName" class="control-label">Nazwa zamówienia</label>
+                                    <input asp-for="OrderName" class="form-control" />
+                                    <span asp-validation-for="OrderName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="ProductID" class="control-label">Produkt</label>
+                                    <select asp-for="ProductID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ProductID">
+                                        <option selected disabled value="0"></option>
+                                    </select>
+                                    <span asp-validation-for="ProductID" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="FormatID" class="control-label">Format</label>
+                                    <select asp-for="FormatID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FormatID">
+                                        <option selected disabled value="0"></option>
+                                    </select>
+                                    <span asp-validation-for="FormatID" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="Quantity" class="control-label">Nakład</label>
+                                    <input asp-for="Quantity" class="form-control" />
+                                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="PaperTypeID" class="control-label">Papier</label>
+                                    <select asp-for="PaperTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperTypeID">
+                                        <option selected disabled value="0"></option>
+                                    </select>
+                                    <span asp-validation-for="PaperTypeID" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="PaperWeightID" class="control-label">Gramatura papieru</label>
+                                    <select asp-for="PaperWeightID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperWeightID">
+                                        <option selected disabled value="0"></option>
+                                    </select>
+                                    <span asp-validation-for="PaperWeightID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label asp-for="Description" class="control-label">Opis zamówienia</label>
+                                        </div>
+                                        <div class="col">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck1" asp-for="IsReprint">
+                                                <label class="custom-control-label" for="customCheck1">Dodruk</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <textarea asp-for="Description" class="form-control"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+                        <div class="card shadow mb-4" style="padding-top:10px">
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="MachineID" class="control-label">Maszyna drukująca</label>
+                                    <select asp-for="MachineID" class="form-control myselect" style="width:100%" asp-items="ViewBag.MachineID">
+                                    </select>
+                                    <span asp-validation-for="MachineID" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="SheetSizeID" class="control-label">Format arkusza</label>
+                                    <select asp-for="SheetSizeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.SheetSizeID">
+                                    </select>
+                                    <span asp-validation-for="SheetSizeID" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="PrintColorID" class="control-label">Kolorystyka druku</label>
+                                    <select asp-for="PrintColorID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PrintColorID">
+                                    </select>
+                                    <span asp-validation-for="PrintColorID" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="SheetsNumber" class="control-label">Ilość arkuszy do druku</label>
+                                    <textarea asp-for="SheetsNumber" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="Comments" class="control-label">Uwagi do druku</label>
+                                    <textarea asp-for="Comments" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="FinishingID" class="control-label">Uszlachetnienia</label>
+                                    <select asp-for="FinishingID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FinishingID">
+                                    </select>
+                                    <span asp-validation-for="FinishingID" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="PostPressID" class="control-label">Introligatornia</label>
+                                    <select asp-for="PostPressID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PostPressID">
+                                    </select>
+                                    <span asp-validation-for="PostPressID" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow mb-4" style="padding-top:10px">
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="DeliveryTypeID" class="control-label">Rodzaj dostawy</label>
+                                    <select asp-for="DeliveryTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.DeliveryTypeID">
+                                    </select>
+                                    <span asp-validation-for="DeliveryTypeID" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px">
+                                <div class="form-group col">
+                                    <label asp-for="DeliveryDetails" class="control-label">Szczegóły dostawy</label>
+                                    <textarea asp-for="DeliveryDetails" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
+                                <div class="form-group col">
+                                    <label asp-for="PaymentTypeID" class="control-label">Sposób płatności</label>
+                                    <select asp-for="PaymentTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaymentTypeID">
+                                    </select>
+                                    <span asp-validation-for="PaymentTypeID" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="NetPrice" class="control-label">Cena netto</label>
+                                    <input asp-for="NetPrice" class="form-control" />
+                                </div>
+                                <div class="form-group col">
+                                    <label asp-for="VatRateID" class="control-label">Stawka Vat</label>
+                                    <select asp-for="VatRateID" class="form-control myselect" style="width:100%" asp-items="ViewBag.VatRateID">
+                                    </select>
+                                    <span asp-validation-for="VatRateID" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col">
+                        @if (Model.IsActive)
+                        {
+                            <!-- Button to Open the Modal -->
+                            <button type="button" class="btn btn-outline-warning buttMargin" data-toggle="modal" data-target="#myModalDeactivate">
+                                Dezaktywuj
+                            </button>
+                            <button type="button" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDelete">
+                                Usuń
+                            </button>
+
+                            <!-- The Modal -->
+                            <div class="modal" id="myModalDeactivate">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Uwaga!</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            Czy chcesz dezaktywować to zamówienie?
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                            <form asp-action="Deactivate" asp-route-id="@Model.OrderID">
+                                                <input type="hidden" asp-for="OrderID" />
+                                                <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
+                                                <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- The Modal 2-->
+                            <div class="modal" id="myModalDelete">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Uwaga!</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                            Czy chcesz trwale usunąć to zamówienie?
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                            <form asp-action="Delete" asp-route-id="@Model.OrderID">
+                                                <input type="hidden" asp-for="OrderID" />
+                                                <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
+                                                <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <form asp-action="Restore" asp-route-id="@Model.OrderID">
+                                <input type="hidden" asp-for="OrderID" />
+                                <input type="submit" value="Przywróć" class="btn btn-success buttMargin" />
+                            </form>
+                        }
+                    </div>
+                    <div class="col" style="text-align:right">
+                        <input form="saveForm" type="submit" value="Zapisz" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

@@ -21,7 +21,13 @@ namespace Printo.Intranet.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate);
+            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Where(x =>x.ProductionStage.Name != "KONIEC");
+            return View(await printoContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> FinishedOrders()
+        {
+            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Where(x => x.ProductionStage.Name == "KONIEC");
             return View(await printoContext.ToListAsync());
         }
 
@@ -129,7 +135,7 @@ namespace Printo.Intranet.Controllers
                 return NotFound();
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientID", order.ClientID);
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
             ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);
             ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name", order.FormatID);

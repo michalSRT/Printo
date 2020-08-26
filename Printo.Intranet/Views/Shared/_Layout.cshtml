@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="~/css/jquery.steps.css">
     <link rel="stylesheet" href="~/css/jquery.timepicker.css">
     <link rel="stylesheet" href="~/css/quill.snow.css">
+    <link rel="stylesheet" type="text/css" href="~/css/jquery.datetimepicker.css" />
     <!-- Date Range Picker CSS -->
     <link rel="stylesheet" href="~/css/daterangepicker.css">
     <!-- App CSS -->
@@ -226,10 +227,10 @@
         <!-- main -->
     </div>
     <!-- .wrapper -->
-
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/popper.min.js"></script>
-    <script src="~/js/moment.min.js"></script>
+    <script src="~/js/moment-with-locales.js"></script>
+    <script src="~/js/pl.js"></script>
     @*<script src="/js/bootstrap.min.js"></script>*@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="~/js/simplebar.min.js"></script>
@@ -245,6 +246,7 @@
     <script src="~/js/datamaps-zoomto.js"></script>
     <script src="~/js/datamaps.custom.js"></script>
     <script src="~/js/Chart.min.js"></script>
+
     <script>
         /* defind global options */
         Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
@@ -262,6 +264,8 @@
     <script src='~/js/dropzone.min.js'></script>
     <script src='~/js/uppy.min.js'></script>
     <script src='~/js/quill.min.js'></script>
+    <script src="~/js/jquery.datetimepicker.full.min.js"></script>
+
 
     <script>
         $('.select2').select2(
@@ -269,15 +273,15 @@
                 theme: 'bootstrap4',
             });
 
-            $('.myselect').select2(
+        $('.myselect').select2(
             {
                 width: 'resolve',
                 height: 'resolve',
                 allowClear: true,
                 placeholder: {
-                id: '0', // the value of the option
-                text: 'Wybierz...'
-              }
+                    id: '0', // the value of the option
+                    text: 'Wybierz...'
+                }
             });
 
         $('.select2-multi').select2(
@@ -285,6 +289,35 @@
                 multiple: true,
                 theme: 'bootstrap4',
             });
+
+
+            $.datetimepicker.setLocale('pl');
+
+
+            $('#startDate').datetimepicker({
+                contentWindow: window,
+                step: 30,
+                minTime: '7:00',
+                maxTime: '23:30',
+                format: 'd/m/Y H:i'
+            });
+
+            $('#endDate').datetimepicker({
+                contentWindow: window,
+                step: 30,
+                minTime: '7:00',
+                maxTime: '23:30',
+                format:'d/m/Y H:i'
+            });
+
+            $('#toDoDate').datetimepicker({
+                contentWindow: window,
+                format:'d/m/Y H:i'
+            });
+
+
+
+
         $('.drgpicker').daterangepicker(
             {
                 singleDatePicker: true,

@@ -114,6 +114,9 @@
       "jQuery/3.0.0": {
         "type": "package"
       },
+      "jQuery-datetimepicker/2.4.5": {
+        "type": "package"
+      },
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -2951,6 +2954,19 @@
         "Tools/uninstall.ps1",
         "jquery.3.0.0.nupkg.sha512",
         "jquery.nuspec"
+      ]
+    },
+    "jQuery-datetimepicker/2.4.5": {
+      "sha512": "+ZwEXXASCpGHu6u1xPYyfXi0mSun/DIYKfM82JiFv3/9G0ZbW4LmxOuCpmuA8Cp0iWaIOHXDNFQBJmhvxDqi8Q==",
+      "type": "package",
+      "path": "jquery-datetimepicker/2.4.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/Content/jquery.datetimepicker.css",
+        "content/Scripts/jquery.datetimepicker.js",
+        "jquery-datetimepicker.2.4.5.nupkg.sha512",
+        "jquery-datetimepicker.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
@@ -9045,7 +9061,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.7",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
       "Printo.Data >= 1.0.0",
-      "bootstrap >= 4.5.2"
+      "bootstrap >= 4.5.2",
+      "jQuery-datetimepicker >= 2.4.5"
     ]
   },
   "packageFolders": {
@@ -9117,6 +9134,10 @@
           "bootstrap": {
             "target": "Package",
             "version": "[4.5.2, )"
+          },
+          "jQuery-datetimepicker": {
+            "target": "Package",
+            "version": "[2.4.5, )"
           }
         },
         "imports": [

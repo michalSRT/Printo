@@ -46,6 +46,10 @@
             "bootstrap": {
               "target": "Package",
               "version": "[4.5.2, )"
+            },
+            "jQuery-datetimepicker": {
+              "target": "Package",
+              "version": "[2.4.5, )"
             }
           },
           "imports": [

@@ -30,6 +30,7 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.4",
           "Printo.Data": "1.0.0",
           "bootstrap": "4.5.2",
+          "jQuery-datetimepicker": "2.4.5",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -313,6 +314,7 @@
         }
       },
       "jQuery/3.0.0": {},
+      "jQuery-datetimepicker/2.4.5": {},
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
         "dependencies": {
           "System.Text.Encodings.Web": "4.5.0"
@@ -4036,6 +4038,13 @@
       "sha512": "sha512-FXANjZia/vux9/ObNiPwh2zNWuzcgHMKXia1OQrviuf0OKPBWB2TBIVAICgtObuzEW+XLyaBEoVuOUlMXy0kNA==",
       "path": "jquery/3.0.0",
       "hashPath": "jquery.3.0.0.nupkg.sha512"
+    },
+    "jQuery-datetimepicker/2.4.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+ZwEXXASCpGHu6u1xPYyfXi0mSun/DIYKfM82JiFv3/9G0ZbW4LmxOuCpmuA8Cp0iWaIOHXDNFQBJmhvxDqi8Q==",
+      "path": "jquery-datetimepicker/2.4.5",
+      "hashPath": "jquery-datetimepicker.2.4.5.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
       "type": "package",

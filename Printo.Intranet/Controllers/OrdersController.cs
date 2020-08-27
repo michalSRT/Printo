@@ -92,7 +92,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int? id, [Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Order order)
+        public async Task<IActionResult> Create([Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Order order)
         {
             if (ModelState.IsValid)
             {

@@ -86,7 +86,6 @@ namespace Printo.Data.Data
         public int? UpdatedUserID { get; set; } 
         public virtual User UpdatedUser { get; set; }
 
-        [ForeignKey("OrderID")]
         public virtual Client Client { get; set; }
 
         public virtual DeliveryType DeliveryType { get; set; }

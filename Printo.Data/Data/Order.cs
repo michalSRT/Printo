@@ -12,7 +12,7 @@ namespace Printo.Data.Data
         public int OrderID { get; set; }
         [Required(ErrorMessage = "Wybierz klienta")]
         [Display(Name = "Klient")]
-        public int ClientID { get; set; }   // klient
+        public int? ClientID { get; set; }   // klient
         [Required(ErrorMessage = "Wybierz rodzaj dostawy")]
         [Display(Name = "Rodzaj dostawy")]
         public int? DeliveryTypeID { get; set; }    // rodzaj dostawy
@@ -86,6 +86,7 @@ namespace Printo.Data.Data
         public int? UpdatedUserID { get; set; } 
         public virtual User UpdatedUser { get; set; }
 
+        [ForeignKey("OrderID")]
         public virtual Client Client { get; set; }
 
         public virtual DeliveryType DeliveryType { get; set; }

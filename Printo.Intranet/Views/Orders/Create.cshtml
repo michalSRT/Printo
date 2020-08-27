@@ -43,14 +43,15 @@
                                 </div>
                             </div>
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col-4">
+                                <div class="form-group col-5">
                                     <label asp-for="ClientID" class="control-label">Klient</label>
+                                    <label><a class="btn-outline-success" role="button" aria-haspopup="true" aria-expanded="false" href="@Url.Action("AddClient", "Orders", new { OrderID = ViewData["OrderID"] })"><i class="fe fe-plus"></i></a></label>
                                     <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID">
                                         <option selected disabled value="0"></option>
                                     </select>
                                     <span asp-validation-for="ClientID" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-8">
+                                <div class="form-group col-7">
                                     <label asp-for="OrderName" class="control-label">Nazwa zamówienia</label>
                                     <input asp-for="OrderName" class="form-control" />
                                     <span asp-validation-for="OrderName" class="text-danger"></span>

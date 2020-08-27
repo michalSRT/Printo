@@ -37,5 +37,8 @@ namespace Printo.Data.Data
         public virtual User AddedUser { get; set; }
         public int? UpdatedUserID { get; set; }
         public virtual User UpdatedUser { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
+
     }
 }

@@ -30,8 +30,8 @@
                             <th>Koniec</th>
                             <th>Etap produkcji</th>
                             <th>Klient</th>
-                            <th>Produkt</th>
                             <th>Nazwa zamówienia</th>
+                            <th>Produkt</th>
                             <th>Nakład</th>
                             <th>Akcja</th>
                         </tr>
@@ -39,7 +39,7 @@
                     <tbody>
                         @foreach (var item in Model.Where(x => x.IsActive == true))
                         {
-                            <tr>
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.OrderID)
                                 </td>
@@ -78,10 +78,10 @@
                                     @Html.DisplayFor(modelItem => item.Client.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                    @Html.DisplayFor(modelItem => item.OrderName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Quantity)
@@ -116,7 +116,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <h4 class="mb-2 page-title">Zamówienia - pozycje dezaktywowane</h4>
+                        <h4 class="mb-2 page-title">Zamówienia - pozycje nieaktywne</h4>
                     </div>
                 </div>
             </div>
@@ -129,8 +129,8 @@
                             <th>Koniec</th>
                             <th>Etap produkcji</th>
                             <th>Klient</th>
-                            <th>Produkt</th>
                             <th>Nazwa zamówienia</th>
+                            <th>Produkt</th>
                             <th>Nakład</th>
                             <th>Akcja</th>
                         </tr>
@@ -138,7 +138,7 @@
                     <tbody>
                         @foreach (var item in Model.Where(x => x.IsActive == false))
                         {
-                            <tr>
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.OrderID)
                                 </td>
@@ -177,10 +177,10 @@
                                     @Html.DisplayFor(modelItem => item.Client.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                    @Html.DisplayFor(modelItem => item.OrderName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Quantity)

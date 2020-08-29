@@ -37,7 +37,7 @@
                     <tbody>
                         @foreach (var item in Model.Where(x => x.IsActive == true))
                         {
-                            <tr>
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "PaperWeights", new { id = item.PaperWeightID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Grammature)
                                 </td>

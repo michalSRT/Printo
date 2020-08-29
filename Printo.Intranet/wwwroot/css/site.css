@@ -107,3 +107,11 @@ body {
     background-color: #3ad29f;
     border-color: #3ad29f;
 }
+
+.tableCursor td {
+    cursor: pointer !important;
+}
+
+.cardCursor {
+    cursor: pointer !important;
+}

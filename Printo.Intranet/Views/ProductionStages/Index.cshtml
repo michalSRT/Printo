@@ -43,7 +43,7 @@
                     <tbody>
                         @foreach (var item in Model.Where(x => x.IsActive == true))
                         {
-                            <tr>
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "ProductionStages", new { id = item.ProductionStageID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.ProductionStageID)
                                 </td>
@@ -115,7 +115,7 @@
                     <tbody>
                         @foreach (var item in Model.Where(x => x.IsActive == false))
                         {
-                            <tr>
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "ProductionStages", new { id = item.ProductionStageID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.ProductionStageID)
                                 </td>

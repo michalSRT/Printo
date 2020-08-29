@@ -1,9 +1,38 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Printo - zarządzanie zamówieniami";
 }
+    <div class="row" style="place-content:center; margin-top:10px">
+        <div class="col" style="max-width: fit-content;">
+            <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Create", "Orders"))'">
+                <div class="card-body" style="padding:0.5rem">
+                    <div class="col">
+                        <i class="fe fe-plus fe-32"></i>
+                        <br />
+                        <a class="btn" asp-area="" asp-controller="Orders" asp-action="Create">
+                            <span style="font-weight:bold">Nowe zamówienie</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="max-width: fit-content;">
+            <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "Orders"))'">
+                <div class="card-body" style="padding:0.5rem">
+                    <div class="col">
+                        <i class="fe fe-monitor fe-32"></i>
+                        <br />
+                        <a class="btn" asp-area="" asp-controller="Orders" asp-action="Index">
+                            <span style="font-weight:bold">Aktualne zamówienia : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.OrdersCount</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <div class="text-center">
-STRONA STARTOWA
+    STRONA STARTOWA
     <br />
     Tu będzie kalendarz...
 </div>

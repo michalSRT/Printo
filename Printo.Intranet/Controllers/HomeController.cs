@@ -5,23 +5,34 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Printo.Data.Data;
 using Printo.Intranet.Models;
 
 namespace Printo.Intranet.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
+        private readonly PrintoContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(PrintoContext context)
         {
-            _logger = logger;
+            _context = context;
         }
+
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
         public IActionResult Index()
         {
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "KONIEC").Count();
             return View();
+            //return View();
         }
+
+        
 
         public IActionResult Privacy()
         {

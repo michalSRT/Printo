@@ -37,9 +37,19 @@
     <div class="wrapper">
         @*NAVBAR TOP*@
         <nav class="topnav navbar navbar-light static-top">
-            <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
-                <i class="fe fe-menu navbar-toggler-icon"></i>
-            </button>
+            <ul class="nav">
+                <li class="nav-item">
+                    <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
+                        <i class="fe fe-menu navbar-toggler-icon"></i>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <a class="btn mt-2 p-0 mr-3" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="fe fe-home fe-16"></i>
+                    </a>
+                </li>
+            </ul>
+
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
@@ -89,7 +99,7 @@
                     <li class="nav-item w-100">
                         <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Index">
                             <i class="fe fe-monitor fe-16"></i>
-                            <span class="ml-3 item-text">Zamówienia</span>
+                            <span class="ml-3 item-text">Aktualne zamówienia</span>
                         </a>
                     </li>
                     <li class="nav-item w-100">
@@ -279,6 +289,11 @@
                 placeholder: {
                     id: '0', // the value of the option
                     text: 'Wybierz...'
+                },
+                sorter: function (data) {
+                    return data.sort(function (a, b) {
+                        return a.text < b.text ? -1 : a.text > b.text ? 1 : 0;
+                    })
                 }
             });
 

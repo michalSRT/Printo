@@ -22,47 +22,49 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-1">
-                    <thead>
-                        <tr>
-                            <th>
-                                Data
-                            </th>
-                            <th>
-                                Nazwa
-                            </th>
-                            <th>
-                                Opis
-                            </th>
-                            <th>Akcja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="justify-content-end">
+                    <div class="row">
                         @foreach (var item in Model.Where(x => x.IsActive == true))
                         {
-                            <tr>
-                                <td style="text-align:center">
-                                    @if (item.Date != null)
-                                    {@item.Date.Value.ToString("dd MMMM")}
-                                    <br />
-                                    @if (item.Date != null)
-                                    {@item.Date.Value.ToString("H:mm")}
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.ToDoID" role="button" data-toggle="tooltip" title="Edytuj">
-                                        <i class="fe fe-edit fe-16"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="card mb-4 border-success">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col" style="margin-top:10px">
+                                                <h4 class="card-title" style="margin-bottom:0px">@Convert.ToString($"{ item.Date:dd/MM}" + ", godz. " + $"{item.Date:h:mm}")</h4>
+                                            </div>
+                                            <div class="col-2">
+                                                <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.ToDoID" role="button" data-toggle="tooltip" title="Edytuj">
+                                                    <i class="fe fe-edit fe-16"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>@item.Name</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>@item.Description</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col" style="text-align: center;">
+                                                <form asp-action="Deactivate" asp-route-id="@item.ToDoID">
+                                                    <input type="hidden" asp-for="@item.ToDoID" />
+                                                    <input type="submit" value="Zrobione" class="btn btn-outline-dark buttMargin" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         }
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         </div>
         @*NIEAKTYWNE*@
@@ -73,7 +75,7 @@
                 <div class="row">
                     <div class="col" style="text-align:center; margin:10px">
                         <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Nieaktywne
+                            Zrobione - Archiwum
                         </button>
                     </div>
                 </div>
@@ -84,52 +86,60 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <h4 class="mb-2 page-title">Do zrobienia - pozycje dezaktywowane</h4>
+                        <h4 class="mb-2 page-title">Do zrobienia - pozycje wykonane</h4>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-2">
-                    <thead>
-                        <tr>
-                            <th>
-                                Data
-                            </th>
-                            <th>
-                                Nazwa
-                            </th>
-                            <th>
-                                Opis
-                            </th>
-                            <th>Akcja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="justify-content-end">
+                    <div class="row">
                         @foreach (var item in Model.Where(x => x.IsActive == false))
                         {
-                            <tr>
-                                <td style="text-align:center">
-                                    @if (item.Date != null)
-                                    {@item.Date.Value.ToString("dd MMMM")}
-                                    <br />
-                                    @if (item.Date != null)
-                                    {@item.Date.Value.ToString("H:mm")}
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.ToDoID" role="button" data-toggle="tooltip" title="Edytuj">
-                                        <i class="fe fe-edit fe-16"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="card mb-4 border-success">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col" style="margin-top:10px">
+                                                <h4 class="card-title" style="margin-bottom:0px">@Convert.ToString($"{ item.Date:dd/MM}" + ", godz. " + $"{item.Date:h:mm}")</h4>
+                                            </div>
+                                            <div class="col-2">
+                                                <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.ToDoID" role="button" data-toggle="tooltip" title="Edytuj">
+                                                    <i class="fe fe-edit fe-16"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5>@item.Name</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>@item.Description</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col" style="text-align: center;">
+                                                <form asp-action="Restore" asp-route-id="@item.ToDoID">
+                                                    <input type="hidden" asp-for="@item.ToDoID" />
+                                                    <input type="submit" value="Przywróc" class="btn btn-outline-dark buttMargin" />
+                                                </form>
+                                            </div>
+                                            <div class="col" style="text-align: center;">
+                                                <form asp-action="Delete" asp-route-id="@item.ToDoID">
+                                                    <input type="hidden" asp-for="@item.ToDoID" />
+                                                    <input type="submit" value="Usuń trwale" class="btn btn-outline-danger buttMargin" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         }
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

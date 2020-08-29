@@ -39,7 +39,7 @@
                     <tbody>
                         @foreach (var item in Model.Where(x => x.IsActive == true))
                         {
-                            <tr>
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.OrderID)
                                 </td>
@@ -78,10 +78,10 @@
                                     @Html.DisplayFor(modelItem => item.Client.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                    @Html.DisplayFor(modelItem => item.OrderName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Quantity)
@@ -138,7 +138,7 @@
                     <tbody>
                         @foreach (var item in Model.Where(x => x.IsActive == false))
                         {
-                            <tr>
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.OrderID)
                                 </td>
@@ -150,16 +150,16 @@
                                     {@item.StartDate.Value.ToString("H:mm")}
                                 </td>
                                 <td style="text-align:center">
-                                    @if (item.StartDate != null)
-                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                    @if (item.EndDate != null)
+                                    {@item.EndDate.Value.ToString("dd/MM")}
                                     <br />
-                                    @if (item.StartDate != null)
-                                    {@item.StartDate.Value.ToString("H:mm")}
+                                    @if (item.EndDate != null)
+                                    {@item.EndDate.Value.ToString("H:mm")}
                                 </td>
                                 <td>
                                     @if (item.ProductionStage.Color != null)
                                     {
-                                        @if (item.ProductionStage.Color.ToString() == "#ffffff" || item.ProductionStage.Color.ToString() == null)
+                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
                                         {
                                             <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
                                                 @Html.DisplayFor(modelItem => item.ProductionStage.Name)
@@ -177,10 +177,10 @@
                                     @Html.DisplayFor(modelItem => item.Client.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                    @Html.DisplayFor(modelItem => item.OrderName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Quantity)

@@ -86,6 +86,9 @@ namespace Printo.Intranet.Controllers
             {
                 return NotFound();
             }
+            var ClientOrders = _context.Orders.Include(z => z.ProductionStage).Where(x => x.IsActive == true && x.ClientID == id).ToList();
+            ViewBag.ClientOrders = ClientOrders;
+            ViewData["ClientOrders"] = ClientOrders;
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", client.AddedUserID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", client.UpdatedUserID);
             return View(client);
@@ -124,6 +127,9 @@ namespace Printo.Intranet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            var ClientOrders = _context.Orders.Include(z=>z.ProductionStage).Where(x => x.IsActive == true && x.ClientID == id).ToList();
+            ViewBag.ClientOrders = ClientOrders;
+            ViewData["ClientOrders"] = ClientOrders;
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", client.AddedUserID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", client.UpdatedUserID);
             return View(client);

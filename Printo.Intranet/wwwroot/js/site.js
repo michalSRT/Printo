@@ -6,7 +6,7 @@
 $('#dataTable-1').DataTable(
     {
         "language": {
-            "lengthMenu": "Pokaż _MENU_ pozycji",
+            "lengthMenu": "Pokaż _MENU_",
             "search": "Szukaj:",
             "zeroRecords": "Brak rekordów w tabeli",
             "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
@@ -20,16 +20,17 @@ $('#dataTable-1').DataTable(
             }
         },
         "lengthMenu": [
-            [16, 32, 64, -1],
-            [16, 32, 64, "All"]
+            [10, 50, 100, -1],
+            [10, 50, 100, "Wszystkie"]
         ],
+        "dom": "frtilp",
         //"scrollX": true,
     });
 
 $('#dataTable-2').DataTable(
     {
         "language": {
-            "lengthMenu": "Pokaż _MENU_ pozycji",
+            "lengthMenu": "Pokaż _MENU_",
             "search": "Szukaj:",
             "zeroRecords": "Brak rekordów w tabeli",
             "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
@@ -43,16 +44,17 @@ $('#dataTable-2').DataTable(
             }
         },
         "lengthMenu": [
-            [16, 32, 64, -1],
-            [16, 32, 64, "All"]
+            [10, 50, 100, -1],
+            [10, 50, 100, "Wszystkie"]
         ],
+        "dom": "frtilp",
         //"scrollX": true,
     });
 
 $('#dataTable-orders').DataTable(
     {
         "language": {
-            "lengthMenu": "Pokaż _MENU_ pozycji",
+            "lengthMenu": "Pokaż _MENU_",
             "search": "Szukaj:",
             "zeroRecords": "Brak rekordów w tabeli",
             "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
@@ -66,8 +68,10 @@ $('#dataTable-orders').DataTable(
             }
         },
         "lengthMenu": [
-            [16, 32, 64, -1],
-            [16, 32, 64, "All"]
+            [10, 50, 100, -1],
+            [10, 50, 100, "Wszystkie"]
         ],
+        "dom": "frtilp",
         //"scrollX": true
     });
+

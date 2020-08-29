@@ -1,5 +1,4 @@
 ﻿@model Printo.Data.Data.Client
-
 @{
     ViewData["Title"] = String.Format("Edycja klienta {0}", Model.Name);
 }
@@ -184,6 +183,100 @@
                         <input form="saveForm" type="submit" value="Zapisz" class="btn btn-success" />
                     </div>
                 </div>
+            </div>
+        </div>
+        @*ORDERS LIST*@
+
+        <div class="row">
+            <div class="col" style="text-align:center; margin:10px">
+                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Zamówienia klienta
+                </button>
+            </div>
+        </div>
+
+        <div class="card shadow collapse" id="collapseExample">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="mb-2 page-title">Zamówienia klienta</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders">
+                    <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Start</th>
+                            <th>Koniec</th>
+                            <th>Etap produkcji</th>
+                            <th>Klient</th>
+                            <th>Nazwa zamówienia</th>
+                            <th>Produkt</th>
+                            <th>Nakład</th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewData["ClientOrders"] as IEnumerable<Printo.Data.Data.Order>)
+                        {
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderID)
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                    <br />
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("H:mm")}
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.EndDate != null)
+                                    {@item.EndDate.Value.ToString("dd/MM")}
+                                    <br />
+                                    @if (item.EndDate != null)
+                                    {@item.EndDate.Value.ToString("H:mm")}
+                                </td>
+                                <td>
+                                    @if (item.ProductionStage.Color != null)
+                                    {
+                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Client.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                        <i class="fe fe-edit fe-16"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

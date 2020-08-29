@@ -28,6 +28,7 @@ namespace Printo.Intranet.Controllers
         public IActionResult Index()
         {
             ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "KONIEC").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
             return View();
             //return View();
         }

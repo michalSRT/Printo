@@ -20,6 +20,10 @@
     <ProjectReference Include="..\Printo.Data\Printo.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\avatars\" />
+  </ItemGroup>
+
 
 
 </Project>

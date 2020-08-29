@@ -10,7 +10,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <h3 class="mb-2 page-title">Edycja zamówienia</h3>
+                        <h4 class="mb-2 page-title">Edycja zamówienia</h4>
                     </div>
                     <div class="col">
                         <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
@@ -30,12 +30,12 @@
                     <div class="card-columns">
                         <div class="card shadow mb-4" style="padding-top:10px">
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col">
+                                <div class="form-group col-12 col-md-4">
                                     <label asp-for="StartDate" class="control-label">Data zamówienia</label>
                                     <input asp-for="StartDate" autocomplete="off" class="form-control" id="startDate" type="text" />
                                     <span asp-validation-for="StartDate" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col">
+                                <div class="form-group col-12 col-md-4">
                                     <label asp-for="EndDate" class="control-label">Termin realizacji</label>
                                     <input asp-for="EndDate" autocomplete="off" class="form-control" id="endDate" type="text" />
                                     <span asp-validation-for="EndDate" class="text-danger"></span>
@@ -47,28 +47,29 @@
                                 </div>
                             </div>
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col-4">
+                                <div class="form-group col-12 col-md-6">
                                     <label asp-for="ClientID" class="control-label">Klient</label>
+                                    <label><a class="btn-outline-success" role="button" aria-haspopup="true" aria-expanded="false" href="@Url.Action("AddClient", "Orders", new { OrderID = ViewData["OrderID"] })"><i class="fe fe-plus"></i></a></label>
                                     <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID">
                                         <option selected disabled value="0"></option>
                                     </select>
                                     <span asp-validation-for="ClientID" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-8">
+                                <div class="form-group col-12 col-md-6">
                                     <label asp-for="OrderName" class="control-label">Nazwa zamówienia</label>
                                     <input asp-for="OrderName" class="form-control" />
                                     <span asp-validation-for="OrderName" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col">
+                                <div class="form-group col-12 col-md-4">
                                     <label asp-for="ProductID" class="control-label">Produkt</label>
                                     <select asp-for="ProductID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ProductID">
                                         <option selected disabled value="0"></option>
                                     </select>
                                     <span asp-validation-for="ProductID" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col">
+                                <div class="form-group col-12 col-md-4">
                                     <label asp-for="FormatID" class="control-label">Format</label>
                                     <select asp-for="FormatID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FormatID">
                                         <option selected disabled value="0"></option>
@@ -82,15 +83,15 @@
                                 </div>
                             </div>
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col">
+                                <div class="form-group col-12 col-md-6">
                                     <label asp-for="PaperTypeID" class="control-label">Papier</label>
                                     <select asp-for="PaperTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperTypeID">
                                         <option selected disabled value="0"></option>
                                     </select>
                                     <span asp-validation-for="PaperTypeID" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col">
-                                    <label asp-for="PaperWeightID" class="control-label">Gramatura papieru</label>
+                                <div class="form-group col-12 col-md-6">
+                                    <label asp-for="PaperWeightID" class="control-label">Gramatura</label>
                                     <select asp-for="PaperWeightID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperWeightID">
                                         <option selected disabled value="0"></option>
                                     </select>
@@ -118,13 +119,13 @@
 
                         <div class="card shadow mb-4" style="padding-top:10px">
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col">
-                                    <label asp-for="MachineID" class="control-label">Maszyna drukująca</label>
+                                <div class="form-group col-6 col-md-4">
+                                    <label asp-for="MachineID" class="control-label">Maszyna</label>
                                     <select asp-for="MachineID" class="form-control myselect" style="width:100%" asp-items="ViewBag.MachineID">
                                     </select>
                                     <span asp-validation-for="MachineID" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col">
+                                <div class="form-group col-6 col-md-4">
                                     <label asp-for="SheetSizeID" class="control-label">Format arkusza</label>
                                     <select asp-for="SheetSizeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.SheetSizeID">
                                     </select>
@@ -153,13 +154,13 @@
                             </div>
 
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
-                                <div class="form-group col">
+                                <div class="form-group col-12 col-md-6">
                                     <label asp-for="FinishingID" class="control-label">Uszlachetnienia</label>
                                     <select asp-for="FinishingID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FinishingID">
                                     </select>
                                     <span asp-validation-for="FinishingID" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col">
+                                <div class="form-group col-12 col-md-6">
                                     <label asp-for="PostPressID" class="control-label">Introligatornia</label>
                                     <select asp-for="PostPressID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PostPressID">
                                     </select>
@@ -186,24 +187,25 @@
 
 
                             <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
-                                <div class="form-group col">
+                                <div class="form-group col-8 col-md-4">
                                     <label asp-for="PaymentTypeID" class="control-label">Sposób płatności</label>
                                     <select asp-for="PaymentTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaymentTypeID">
                                     </select>
                                     <span asp-validation-for="PaymentTypeID" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col">
-                                    <label asp-for="NetPrice" class="control-label">Cena netto</label>
-                                    <input asp-for="NetPrice" class="form-control" />
-                                </div>
-                                <div class="form-group col">
+                                <div class="form-group col-4 col-md-4">
                                     <label asp-for="VatRateID" class="control-label">Stawka Vat</label>
                                     <select asp-for="VatRateID" class="form-control myselect" style="width:100%" asp-items="ViewBag.VatRateID">
                                     </select>
                                     <span asp-validation-for="VatRateID" class="text-danger"></span>
                                 </div>
+                                <div class="form-group col">
+                                    <label asp-for="NetPrice" class="control-label">Cena netto</label>
+                                    <input asp-for="NetPrice" class="form-control" />
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </form>
                 <div class="row">

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Intranet\\Printo.Intranet.csproj": {}
+    "C:\\Users\\msier\\Documents\\Printo\\Printo.Intranet\\Printo.Intranet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Data\\Printo.Data.csproj": {
+    "C:\\Users\\msier\\Documents\\Printo\\Printo.Data\\Printo.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Data\\Printo.Data.csproj",
+        "projectUniqueName": "C:\\Users\\msier\\Documents\\Printo\\Printo.Data\\Printo.Data.csproj",
         "projectName": "Printo.Data",
-        "projectPath": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Data\\Printo.Data.csproj",
+        "projectPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.Data\\Printo.Data.csproj",
         "packagesPath": "C:\\Users\\msier\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Data\\obj\\",
+        "outputPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -45,15 +45,15 @@
           "dependencies": {
             "Azure.Storage.Blobs": {
               "target": "Package",
-              "version": "[12.0.0, )"
+              "version": "[12.6.0, )"
             },
             "Azure.Storage.Files.Shares": {
               "target": "Package",
-              "version": "[12.0.0-preview.5, )"
+              "version": "[12.4.0, )"
             },
             "Azure.Storage.Queues": {
               "target": "Package",
-              "version": "[12.0.0, )"
+              "version": "[12.4.2, )"
             },
             "Microsoft.CodeAnalysis.FxCopAnalyzers": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -79,7 +79,7 @@
             },
             "Microsoft.Extensions.Configuration.UserSecrets": {
               "target": "Package",
-              "version": "[3.0.0, )"
+              "version": "[3.1.7, )"
             }
           },
           "imports": [
@@ -97,18 +97,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Intranet\\Printo.Intranet.csproj": {
+    "C:\\Users\\msier\\Documents\\Printo\\Printo.Intranet\\Printo.Intranet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Intranet\\Printo.Intranet.csproj",
+        "projectUniqueName": "C:\\Users\\msier\\Documents\\Printo\\Printo.Intranet\\Printo.Intranet.csproj",
         "projectName": "Printo.Intranet",
-        "projectPath": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Intranet\\Printo.Intranet.csproj",
+        "projectPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.Intranet\\Printo.Intranet.csproj",
         "packagesPath": "C:\\Users\\msier\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Intranet\\obj\\",
+        "outputPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.Intranet\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -129,8 +129,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Data\\Printo.Data.csproj": {
-                "projectPath": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.Data\\Printo.Data.csproj"
+              "C:\\Users\\msier\\Documents\\Printo\\Printo.Data\\Printo.Data.csproj": {
+                "projectPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.Data\\Printo.Data.csproj"
               }
             }
           }
@@ -189,7 +189,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

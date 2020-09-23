@@ -10,13 +10,13 @@
       "NETCOREAPP",
       "NETCOREAPP3_1"
     ],
-    "languageVersion": "",
+    "languageVersion": "8.0",
     "platform": "",
     "allowUnsafe": false,
     "warningsAsErrors": false,
     "optimize": false,
     "keyFile": "",
-    "emitEntryPoint": true,
+    "emitEntryPoint": false,
     "xmlDoc": false,
     "debugType": "portable"
   },
@@ -111,19 +111,13 @@
           "Microsoft.CSharp.Reference": "4.0.0.0",
           "Microsoft.Extensions.Configuration.CommandLine": "3.1.0.0",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "3.1.0.0",
-          "Microsoft.Extensions.Configuration.FileExtensions.Reference": "3.1.0.0",
           "Microsoft.Extensions.Configuration.Ini": "3.1.0.0",
-          "Microsoft.Extensions.Configuration.Json.Reference": "3.1.0.0",
           "Microsoft.Extensions.Configuration.KeyPerFile": "3.1.0.0",
-          "Microsoft.Extensions.Configuration.UserSecrets.Reference": "3.1.0.0",
           "Microsoft.Extensions.Configuration.Xml": "3.1.0.0",
           "Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions": "3.1.0.0",
           "Microsoft.Extensions.Diagnostics.HealthChecks": "3.1.0.0",
-          "Microsoft.Extensions.FileProviders.Abstractions.Reference": "3.1.0.0",
           "Microsoft.Extensions.FileProviders.Composite": "3.1.0.0",
           "Microsoft.Extensions.FileProviders.Embedded": "3.1.0.0",
-          "Microsoft.Extensions.FileProviders.Physical.Reference": "3.1.0.0",
-          "Microsoft.Extensions.FileSystemGlobbing.Reference": "3.1.0.0",
           "Microsoft.Extensions.Hosting.Abstractions": "3.1.0.0",
           "Microsoft.Extensions.Hosting": "3.1.0.0",
           "Microsoft.Extensions.Http": "3.1.0.0",
@@ -307,19 +301,20 @@
           "Printo.Intranet.dll": {}
         }
       },
-      "Azure.Core/1.0.0": {
+      "Azure.Core/1.4.1": {
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
           "System.Buffers": "4.5.0",
           "System.Diagnostics.DiagnosticSource": "4.7.1",
           "System.Memory": "4.5.3",
           "System.Numerics.Vectors": "4.5.0",
+          "System.Text.Json": "4.7.1",
           "System.Threading.Tasks.Extensions": "4.5.3"
         },
         "runtime": {
           "lib/netstandard2.0/Azure.Core.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.19.52904"
+            "assemblyVersion": "1.4.1.0",
+            "fileVersion": "1.400.120.41802"
           }
         },
         "compile": {
@@ -328,7 +323,7 @@
       },
       "Azure.Identity/1.0.0": {
         "dependencies": {
-          "Azure.Core": "1.0.0",
+          "Azure.Core": "1.4.1",
           "Microsoft.Identity.Client": "4.1.0",
           "System.Memory": "4.5.3",
           "System.Security.Cryptography.ProtectedData": "4.5.0",
@@ -345,60 +340,62 @@
           "lib/netstandard2.0/Azure.Identity.dll": {}
         }
       },
-      "Azure.Storage.Blobs/12.0.0": {
+      "Azure.Storage.Blobs/12.6.0": {
         "dependencies": {
-          "Azure.Core": "1.0.0",
-          "Azure.Storage.Common": "12.0.0"
+          "Azure.Core": "1.4.1",
+          "Azure.Storage.Common": "12.5.2",
+          "System.Text.Json": "4.7.1"
         },
         "runtime": {
           "lib/netstandard2.0/Azure.Storage.Blobs.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.19.53104"
+            "assemblyVersion": "12.6.0.0",
+            "fileVersion": "12.600.20.43102"
           }
         },
         "compile": {
           "lib/netstandard2.0/Azure.Storage.Blobs.dll": {}
         }
       },
-      "Azure.Storage.Common/12.0.0": {
+      "Azure.Storage.Common/12.5.2": {
         "dependencies": {
-          "Azure.Core": "1.0.0"
+          "Azure.Core": "1.4.1"
         },
         "runtime": {
           "lib/netstandard2.0/Azure.Storage.Common.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.19.53104"
+            "assemblyVersion": "12.5.2.0",
+            "fileVersion": "12.500.220.43102"
           }
         },
         "compile": {
           "lib/netstandard2.0/Azure.Storage.Common.dll": {}
         }
       },
-      "Azure.Storage.Files.Shares/12.0.0-preview.5": {
+      "Azure.Storage.Files.Shares/12.4.0": {
         "dependencies": {
-          "Azure.Core": "1.0.0",
-          "Azure.Storage.Common": "12.0.0",
+          "Azure.Core": "1.4.1",
+          "Azure.Storage.Common": "12.5.2",
           "System.Text.Json": "4.7.1"
         },
         "runtime": {
           "lib/netstandard2.0/Azure.Storage.Files.Shares.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.19.53104"
+            "assemblyVersion": "12.4.0.0",
+            "fileVersion": "12.400.20.43102"
           }
         },
         "compile": {
           "lib/netstandard2.0/Azure.Storage.Files.Shares.dll": {}
         }
       },
-      "Azure.Storage.Queues/12.0.0": {
+      "Azure.Storage.Queues/12.4.2": {
         "dependencies": {
-          "Azure.Core": "1.0.0",
-          "Azure.Storage.Common": "12.0.0"
+          "Azure.Core": "1.4.1",
+          "Azure.Storage.Common": "12.5.2",
+          "System.Text.Json": "4.7.1"
         },
         "runtime": {
           "lib/netstandard2.0/Azure.Storage.Queues.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.19.53104"
+            "assemblyVersion": "12.4.2.0",
+            "fileVersion": "12.400.220.43102"
           }
         },
         "compile": {
@@ -876,7 +873,7 @@
       },
       "Microsoft.Extensions.Azure/1.0.0": {
         "dependencies": {
-          "Azure.Core": "1.0.0",
+          "Azure.Core": "1.4.1",
           "Azure.Identity": "1.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "3.1.7",
           "Microsoft.Extensions.Configuration.Binder": "3.1.7",
@@ -967,21 +964,48 @@
           "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Binder.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration.FileExtensions/3.0.0": {
+      "Microsoft.Extensions.Configuration.FileExtensions/3.1.7": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "3.1.7",
-          "Microsoft.Extensions.FileProviders.Physical": "3.0.0"
+          "Microsoft.Extensions.FileProviders.Physical": "3.1.7"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.FileExtensions.dll": {
+            "assemblyVersion": "3.1.7.0",
+            "fileVersion": "3.100.720.37108"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration.Json/3.0.0": {
+      "Microsoft.Extensions.Configuration.Json/3.1.7": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "3.1.7",
-          "Microsoft.Extensions.Configuration.FileExtensions": "3.0.0"
+          "Microsoft.Extensions.Configuration.FileExtensions": "3.1.7"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Json.dll": {
+            "assemblyVersion": "3.1.7.0",
+            "fileVersion": "3.100.720.37108"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Json.dll": {}
         }
       },
-      "Microsoft.Extensions.Configuration.UserSecrets/3.0.0": {
+      "Microsoft.Extensions.Configuration.UserSecrets/3.1.7": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Json": "3.0.0"
+          "Microsoft.Extensions.Configuration.Json": "3.1.7"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.UserSecrets.dll": {
+            "assemblyVersion": "3.1.7.0",
+            "fileVersion": "3.100.720.37108"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
         }
       },
       "Microsoft.Extensions.DependencyInjection/3.1.7": {
@@ -1023,18 +1047,46 @@
           "lib/netstandard2.0/Microsoft.Extensions.DependencyModel.dll": {}
         }
       },
-      "Microsoft.Extensions.FileProviders.Abstractions/3.0.0": {
+      "Microsoft.Extensions.FileProviders.Abstractions/3.1.7": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "3.1.7"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "assemblyVersion": "3.1.7.0",
+            "fileVersion": "3.100.720.37108"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.FileProviders.Physical/3.0.0": {
+      "Microsoft.Extensions.FileProviders.Physical/3.1.7": {
         "dependencies": {
-          "Microsoft.Extensions.FileProviders.Abstractions": "3.0.0",
-          "Microsoft.Extensions.FileSystemGlobbing": "3.0.0"
+          "Microsoft.Extensions.FileProviders.Abstractions": "3.1.7",
+          "Microsoft.Extensions.FileSystemGlobbing": "3.1.7"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Physical.dll": {
+            "assemblyVersion": "3.1.7.0",
+            "fileVersion": "3.100.720.37108"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Physical.dll": {}
         }
       },
-      "Microsoft.Extensions.FileSystemGlobbing/3.0.0": {},
+      "Microsoft.Extensions.FileSystemGlobbing/3.1.7": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {
+            "assemblyVersion": "3.1.7.0",
+            "fileVersion": "3.100.720.37108"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
+        }
+      },
       "Microsoft.Extensions.Logging/3.1.7": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Binder": "3.1.7",
@@ -2544,14 +2596,14 @@
       },
       "Printo.Data/1.0.0": {
         "dependencies": {
-          "Azure.Storage.Blobs": "12.0.0",
-          "Azure.Storage.Files.Shares": "12.0.0-preview.5",
-          "Azure.Storage.Queues": "12.0.0",
+          "Azure.Storage.Blobs": "12.6.0",
+          "Azure.Storage.Files.Shares": "12.4.0",
+          "Azure.Storage.Queues": "12.4.2",
           "Microsoft.EntityFrameworkCore": "3.1.7",
           "Microsoft.EntityFrameworkCore.Relational": "3.1.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.7",
           "Microsoft.Extensions.Azure": "1.0.0",
-          "Microsoft.Extensions.Configuration.UserSecrets": "3.0.0"
+          "Microsoft.Extensions.Configuration.UserSecrets": "3.1.7"
         },
         "runtime": {
           "Printo.Data.dll": {}
@@ -3040,33 +3092,15 @@
         },
         "compileOnly": true
       },
-      "Microsoft.Extensions.Configuration.FileExtensions.Reference/3.1.0.0": {
-        "compile": {
-          "Microsoft.Extensions.Configuration.FileExtensions.dll": {}
-        },
-        "compileOnly": true
-      },
       "Microsoft.Extensions.Configuration.Ini/3.1.0.0": {
         "compile": {
           "Microsoft.Extensions.Configuration.Ini.dll": {}
         },
         "compileOnly": true
       },
-      "Microsoft.Extensions.Configuration.Json.Reference/3.1.0.0": {
-        "compile": {
-          "Microsoft.Extensions.Configuration.Json.dll": {}
-        },
-        "compileOnly": true
-      },
       "Microsoft.Extensions.Configuration.KeyPerFile/3.1.0.0": {
         "compile": {
           "Microsoft.Extensions.Configuration.KeyPerFile.dll": {}
-        },
-        "compileOnly": true
-      },
-      "Microsoft.Extensions.Configuration.UserSecrets.Reference/3.1.0.0": {
-        "compile": {
-          "Microsoft.Extensions.Configuration.UserSecrets.dll": {}
         },
         "compileOnly": true
       },
@@ -3088,12 +3122,6 @@
         },
         "compileOnly": true
       },
-      "Microsoft.Extensions.FileProviders.Abstractions.Reference/3.1.0.0": {
-        "compile": {
-          "Microsoft.Extensions.FileProviders.Abstractions.dll": {}
-        },
-        "compileOnly": true
-      },
       "Microsoft.Extensions.FileProviders.Composite/3.1.0.0": {
         "compile": {
           "Microsoft.Extensions.FileProviders.Composite.dll": {}
@@ -3103,18 +3131,6 @@
       "Microsoft.Extensions.FileProviders.Embedded/3.1.0.0": {
         "compile": {
           "Microsoft.Extensions.FileProviders.Embedded.dll": {}
-        },
-        "compileOnly": true
-      },
-      "Microsoft.Extensions.FileProviders.Physical.Reference/3.1.0.0": {
-        "compile": {
-          "Microsoft.Extensions.FileProviders.Physical.dll": {}
-        },
-        "compileOnly": true
-      },
-      "Microsoft.Extensions.FileSystemGlobbing.Reference/3.1.0.0": {
-        "compile": {
-          "Microsoft.Extensions.FileSystemGlobbing.dll": {}
         },
         "compileOnly": true
       },
@@ -4176,12 +4192,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Azure.Core/1.0.0": {
+    "Azure.Core/1.4.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zh+W64u/WM+z6oz4NVQp6zHSGOA7ZzWp4OQ5XbZTLvjOJr173s3mXR4TltQY3C4fXfwZ/BkCHyXITd/skeRuuQ==",
-      "path": "azure.core/1.0.0",
-      "hashPath": "azure.core.1.0.0.nupkg.sha512"
+      "sha512": "sha512-6LbGLiZwlU6SfOaINCfrQ+f91bRWZ8XvB90Qfm69x1t3z+5D4jmXnQiuPYPZcgtxFjPKA3IwyHGuDZRkSo1Urg==",
+      "path": "azure.core/1.4.1",
+      "hashPath": "azure.core.1.4.1.nupkg.sha512"
     },
     "Azure.Identity/1.0.0": {
       "type": "package",
@@ -4190,33 +4206,33 @@
       "path": "azure.identity/1.0.0",
       "hashPath": "azure.identity.1.0.0.nupkg.sha512"
     },
-    "Azure.Storage.Blobs/12.0.0": {
+    "Azure.Storage.Blobs/12.6.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-AEwOzlxjuza/Qb3zzOQJjdY+0yHR4soY3WY9eih8hBqSQRtvACNUKlnFL2xL6TajcZEOfQl6xzyHE1vU7eUSoA==",
-      "path": "azure.storage.blobs/12.0.0",
-      "hashPath": "azure.storage.blobs.12.0.0.nupkg.sha512"
+      "sha512": "sha512-dyrUge8qg6MeI9kln5GPWm232iF+u/BpN2pkzaHUYltqkvqTv9EDIXuG7dYYVCX5ZrOQoiN+Cl42qEQSC/cLXA==",
+      "path": "azure.storage.blobs/12.6.0",
+      "hashPath": "azure.storage.blobs.12.6.0.nupkg.sha512"
     },
-    "Azure.Storage.Common/12.0.0": {
+    "Azure.Storage.Common/12.5.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oBUP9QKDT2Gsc+ZTQ+XChAXncqvuAHnv5lQtu5Eep/OJeipooWZ7lYbsFeidPc0JI8XVk3Ha5fXIcvRjRUIIoQ==",
-      "path": "azure.storage.common/12.0.0",
-      "hashPath": "azure.storage.common.12.0.0.nupkg.sha512"
+      "sha512": "sha512-Sd6C0TgGkzEHcNv95jO52vN1TroTrBRCJJOCog6NEfUoAnmxUus4j9QraDfITvxIIMdyKg7WXB6vX58Bq2/WaQ==",
+      "path": "azure.storage.common/12.5.2",
+      "hashPath": "azure.storage.common.12.5.2.nupkg.sha512"
     },
-    "Azure.Storage.Files.Shares/12.0.0-preview.5": {
+    "Azure.Storage.Files.Shares/12.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-AG3v6bF7OzrJ192uXzA1mpbmM2hMCJcbGPHd+DQF1LEYHrawJlanqdu0Hrcjboer+ZM2bzaDJEalLZzZ7n/IxQ==",
-      "path": "azure.storage.files.shares/12.0.0-preview.5",
-      "hashPath": "azure.storage.files.shares.12.0.0-preview.5.nupkg.sha512"
+      "sha512": "sha512-jONZHufJoQC7dSDuxe+sQQsbRK8P74N0nX6EHvsmOg8oRHezIrkBK/LoEHO8SqzyUmXSVmXtgviN3lvL3fFZIQ==",
+      "path": "azure.storage.files.shares/12.4.0",
+      "hashPath": "azure.storage.files.shares.12.4.0.nupkg.sha512"
     },
-    "Azure.Storage.Queues/12.0.0": {
+    "Azure.Storage.Queues/12.4.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6HuS+rUROQzBu1y3mn1DLH6hODpNYavtK5GWNV0/Kl1q8SyhbeH9hvm5G3U1uBAPoXCnPuV8MB47qehM1SnBkA==",
-      "path": "azure.storage.queues/12.0.0",
-      "hashPath": "azure.storage.queues.12.0.0.nupkg.sha512"
+      "sha512": "sha512-JaE6sIHA9MoOThTBU6+Z+fZcLBVzM8W/sdrak9egRCUpE3mAyq9FKDIwMZLaQUxtY+YgHUcKWnOmn8pgdu/icg==",
+      "path": "azure.storage.queues/12.4.2",
+      "hashPath": "azure.storage.queues.12.4.2.nupkg.sha512"
     },
     "bootstrap/4.5.2": {
       "type": "package",
@@ -4228,7 +4244,7 @@
     "jQuery/3.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-FXANjZia/vux9/ObNiPwh2zNWuzcgHMKXia1OQrviuf0OKPBWB2TBIVAICgtObuzEW+XLyaBEoVuOUlMXy0kNA==",
+      "sha512": "sha512-xFfntV19HzCtKdJWOp/XT9PUY3SslokTDDLFJZdBug36j1XVhw1+vPQ/n7Gd5y+jdpesn5B1m1yn1qIUq57jlA==",
       "path": "jquery/3.0.0",
       "hashPath": "jquery.3.0.0.nupkg.sha512"
     },
@@ -4456,26 +4472,26 @@
       "path": "microsoft.extensions.configuration.binder/3.1.7",
       "hashPath": "microsoft.extensions.configuration.binder.3.1.7.nupkg.sha512"
     },
-    "Microsoft.Extensions.Configuration.FileExtensions/3.0.0": {
+    "Microsoft.Extensions.Configuration.FileExtensions/3.1.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ldGkKUHp1l0ylmPvWFV9loI3r7odsK5v+FXhBN3+fC/Dzw1mSCRvarqdbfWvzV9asVoVxWOD8+kPd/o8puUZrQ==",
-      "path": "microsoft.extensions.configuration.fileextensions/3.0.0",
-      "hashPath": "microsoft.extensions.configuration.fileextensions.3.0.0.nupkg.sha512"
+      "sha512": "sha512-MyT8ALBcE5vZ/cbkBhoo8ZFqj6AAGUrPXQlFdLAkxS11WO0vVxtJwVQVIbIM79zWI94ZkMq8Mw4E9MvuspDj9w==",
+      "path": "microsoft.extensions.configuration.fileextensions/3.1.7",
+      "hashPath": "microsoft.extensions.configuration.fileextensions.3.1.7.nupkg.sha512"
     },
-    "Microsoft.Extensions.Configuration.Json/3.0.0": {
+    "Microsoft.Extensions.Configuration.Json/3.1.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-OPRsOom05WwlPfuN3ufHc+w/SyovJYpByn45+XrnqogXdS8z5UH03lrC/VKvEEBU0hmiw5wWCM0b2rnaMiEKdA==",
-      "path": "microsoft.extensions.configuration.json/3.0.0",
-      "hashPath": "microsoft.extensions.configuration.json.3.0.0.nupkg.sha512"
+      "sha512": "sha512-BGaWgKBQPXeRlv8g6ZKTd6clFsd7p0GBwHBIU0zxI4iy4S6xjGzpWr6LOAbzEqP5Fo2QBgL8Niq2lZONcmGLZQ==",
+      "path": "microsoft.extensions.configuration.json/3.1.7",
+      "hashPath": "microsoft.extensions.configuration.json.3.1.7.nupkg.sha512"
     },
-    "Microsoft.Extensions.Configuration.UserSecrets/3.0.0": {
+    "Microsoft.Extensions.Configuration.UserSecrets/3.1.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1UORsfr5hdPlNKzsu0ThY5SPCsYbc1yQQcTqGbOuTZz9gdCy3AL97mHUFjyGqKrQ43B7AZxwdG0JU/TlQw+vFw==",
-      "path": "microsoft.extensions.configuration.usersecrets/3.0.0",
-      "hashPath": "microsoft.extensions.configuration.usersecrets.3.0.0.nupkg.sha512"
+      "sha512": "sha512-BE4X+jKj/MthvpLoRx88Au2I4IBKogAuj5+2iopgVIFW/Fgcy1xOIh8HPTVsMaQye7Qzb0UAKNAebTSLfZgSlQ==",
+      "path": "microsoft.extensions.configuration.usersecrets/3.1.7",
+      "hashPath": "microsoft.extensions.configuration.usersecrets.3.1.7.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection/3.1.7": {
       "type": "package",
@@ -4498,26 +4514,26 @@
       "path": "microsoft.extensions.dependencymodel/3.1.3",
       "hashPath": "microsoft.extensions.dependencymodel.3.1.3.nupkg.sha512"
     },
-    "Microsoft.Extensions.FileProviders.Abstractions/3.0.0": {
+    "Microsoft.Extensions.FileProviders.Abstractions/3.1.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kahEeykb6FyQytoZNNXuz74X85B4weIEt8Kd+0klK48bkXDWOIHAOvNjlGsPMcS9CL935Te8QGQS83JqCbpdHA==",
-      "path": "microsoft.extensions.fileproviders.abstractions/3.0.0",
-      "hashPath": "microsoft.extensions.fileproviders.abstractions.3.0.0.nupkg.sha512"
+      "sha512": "sha512-nasMSdDlIIBcKgGVHoZdFSmfUY1bI0zkvfZTsWLlEFcMCVD0fzcgsVlkeZTzPLJV0w7Uwq3okOgMWpU1nFEhxg==",
+      "path": "microsoft.extensions.fileproviders.abstractions/3.1.7",
+      "hashPath": "microsoft.extensions.fileproviders.abstractions.3.1.7.nupkg.sha512"
     },
-    "Microsoft.Extensions.FileProviders.Physical/3.0.0": {
+    "Microsoft.Extensions.FileProviders.Physical/3.1.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-76yB1N8hvzDaTqx3epda5sl/3HATw2FskztmmLmfWuvaooaNgbDa37Jyc7IyBCC4PreXEW/XLEET9w6fiJZOFg==",
-      "path": "microsoft.extensions.fileproviders.physical/3.0.0",
-      "hashPath": "microsoft.extensions.fileproviders.physical.3.0.0.nupkg.sha512"
+      "sha512": "sha512-mo21yJfL3oGCjC/rcwdbs2z4KGL9R5BvTfwYR31ueyg3l77i9oPCryMtlSZ4TvpI5duENNEpZyzcpaycqERdZQ==",
+      "path": "microsoft.extensions.fileproviders.physical/3.1.7",
+      "hashPath": "microsoft.extensions.fileproviders.physical.3.1.7.nupkg.sha512"
     },
-    "Microsoft.Extensions.FileSystemGlobbing/3.0.0": {
+    "Microsoft.Extensions.FileSystemGlobbing/3.1.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-E1GcUu8JvY/8QfqMUYTs6HlDLefMYhEzeHsjrhRqOZguBmDTFU8d8m+mGtHEyYHWMRT1TEiha0a8I2AuozDUWQ==",
-      "path": "microsoft.extensions.filesystemglobbing/3.0.0",
-      "hashPath": "microsoft.extensions.filesystemglobbing.3.0.0.nupkg.sha512"
+      "sha512": "sha512-Cenv9mtZdSZ9u09rGYl3ejMB19gIOdRryXk/rYEzQsyrBTTuNzmRHwtHdy640P08DL1Rdu+0z/s2lpvFbZV8Hw==",
+      "path": "microsoft.extensions.filesystemglobbing/3.1.7",
+      "hashPath": "microsoft.extensions.filesystemglobbing.3.1.7.nupkg.sha512"
     },
     "Microsoft.Extensions.Logging/3.1.7": {
       "type": "package",
@@ -5890,27 +5906,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.Extensions.Configuration.FileExtensions.Reference/3.1.0.0": {
-      "type": "referenceassembly",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Microsoft.Extensions.Configuration.Ini/3.1.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.Extensions.Configuration.Json.Reference/3.1.0.0": {
-      "type": "referenceassembly",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Microsoft.Extensions.Configuration.KeyPerFile/3.1.0.0": {
-      "type": "referenceassembly",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.Configuration.UserSecrets.Reference/3.1.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
@@ -5930,27 +5931,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.Extensions.FileProviders.Abstractions.Reference/3.1.0.0": {
-      "type": "referenceassembly",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Microsoft.Extensions.FileProviders.Composite/3.1.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
     },
     "Microsoft.Extensions.FileProviders.Embedded/3.1.0.0": {
-      "type": "referenceassembly",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.FileProviders.Physical.Reference/3.1.0.0": {
-      "type": "referenceassembly",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Extensions.FileSystemGlobbing.Reference/3.1.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""

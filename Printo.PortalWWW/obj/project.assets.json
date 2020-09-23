@@ -177,7 +177,7 @@
       ]
     },
     "jQuery/3.0.0": {
-      "sha512": "FXANjZia/vux9/ObNiPwh2zNWuzcgHMKXia1OQrviuf0OKPBWB2TBIVAICgtObuzEW+XLyaBEoVuOUlMXy0kNA==",
+      "sha512": "xFfntV19HzCtKdJWOp/XT9PUY3SslokTDDLFJZdBug36j1XVhw1+vPQ/n7Gd5y+jdpesn5B1m1yn1qIUq57jlA==",
       "type": "package",
       "path": "jquery/3.0.0",
       "hasTools": true,
@@ -329,11 +329,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.PortalWWW\\Printo.PortalWWW.csproj",
+      "projectUniqueName": "C:\\Users\\msier\\Documents\\Printo\\Printo.PortalWWW\\Printo.PortalWWW.csproj",
       "projectName": "Printo.PortalWWW",
-      "projectPath": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.PortalWWW\\Printo.PortalWWW.csproj",
+      "projectPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.PortalWWW\\Printo.PortalWWW.csproj",
       "packagesPath": "C:\\Users\\msier\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\msier\\source\\repos\\Printo\\Printo.PortalWWW\\obj\\",
+      "outputPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.PortalWWW\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -392,7 +392,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

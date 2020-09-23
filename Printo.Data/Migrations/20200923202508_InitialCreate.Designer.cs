@@ -10,7 +10,7 @@ using Printo.Data.Data;
 namespace Printo.Data.Migrations
 {
     [DbContext(typeof(PrintoContext))]
-    [Migration("20200827215828_InitialCreate")]
+    [Migration("20200923202508_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,7 +89,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ClientID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 180, DateTimeKind.Local).AddTicks(2261),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 346, DateTimeKind.Local).AddTicks(7068),
                             AddedUserID = 1,
                             City = "Nowy Sącz",
                             CompanyFullName = "Joe Doe Co",
@@ -105,7 +105,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ClientID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 182, DateTimeKind.Local).AddTicks(7257),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 349, DateTimeKind.Local).AddTicks(2410),
                             AddedUserID = 1,
                             City = "Nowy Jork",
                             CompanyFullName = "MikeShinoda Co",
@@ -121,7 +121,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ClientID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 182, DateTimeKind.Local).AddTicks(7304),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 349, DateTimeKind.Local).AddTicks(2471),
                             AddedUserID = 1,
                             City = "Nowy Sącz",
                             CompanyFullName = "Vitberg Jacek Sikora",
@@ -177,7 +177,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             DeliveryTypeID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(3509),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(7723),
                             AddedUserID = 1,
                             Description = "Odbiór osobisty przez klienta",
                             IsActive = true,
@@ -186,7 +186,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             DeliveryTypeID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(4014),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(8607),
                             AddedUserID = 1,
                             Description = "Dostawa do klienta",
                             IsActive = true,
@@ -195,7 +195,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             DeliveryTypeID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(4039),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(8634),
                             AddedUserID = 1,
                             Description = "Wysyłka kurierska",
                             IsActive = true,
@@ -204,12 +204,42 @@ namespace Printo.Data.Migrations
                         new
                         {
                             DeliveryTypeID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(4042),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(8638),
                             AddedUserID = 1,
                             Description = "Wysyłka kurieska z opcją za pobraniem",
                             IsActive = true,
                             Name = "Wysyłka za pobraniem"
                         });
+                });
+
+            modelBuilder.Entity("Printo.Data.Data.Event", b =>
+                {
+                    b.Property<int>("EventID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("AllDay")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("BackgroundColor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EventID");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("Printo.Data.Data.Finishing", b =>
@@ -253,7 +283,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FinishingID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(5226),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(746),
                             AddedUserID = 1,
                             Description = "Brak uszlachetnień druku",
                             IsActive = true,
@@ -262,7 +292,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FinishingID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(5744),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(2214),
                             AddedUserID = 1,
                             Description = "Folia błysk jednostronnie na awersie",
                             IsActive = true,
@@ -271,7 +301,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FinishingID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(5767),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(2404),
                             AddedUserID = 1,
                             Description = "Folia mat jednostronnie na awersie",
                             IsActive = true,
@@ -280,7 +310,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FinishingID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(5771),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(2408),
                             AddedUserID = 1,
                             Description = "Folia soft-touch jednostronnie na awersie",
                             IsActive = true,
@@ -289,7 +319,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FinishingID = 5,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(5774),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(2412),
                             AddedUserID = 1,
                             Description = "Folia błysk obustronnie",
                             IsActive = true,
@@ -298,7 +328,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FinishingID = 6,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(5778),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(2416),
                             AddedUserID = 1,
                             Description = "Folia mat obustronnie",
                             IsActive = true,
@@ -307,7 +337,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FinishingID = 7,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(5781),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(2461),
                             AddedUserID = 1,
                             Description = "Folia soft-touch obustronnie",
                             IsActive = true,
@@ -316,7 +346,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FinishingID = 8,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(5784),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(2465),
                             AddedUserID = 1,
                             Description = "Folia mat jednostronnie i lakier wybiórczo błysk na awersie",
                             IsActive = true,
@@ -365,7 +395,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FormatID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(7116),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(4902),
                             AddedUserID = 1,
                             Description = "Wymiary w uwagach do druku",
                             IsActive = true,
@@ -374,7 +404,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FormatID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(7603),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(5728),
                             AddedUserID = 1,
                             Description = "440x630mm",
                             IsActive = true,
@@ -383,7 +413,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FormatID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(7628),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(5755),
                             AddedUserID = 1,
                             Description = "420x610mm",
                             IsActive = true,
@@ -392,7 +422,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FormatID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(7632),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(5759),
                             AddedUserID = 1,
                             Description = "297x420mm",
                             IsActive = true,
@@ -401,7 +431,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FormatID = 5,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(7635),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(5762),
                             AddedUserID = 1,
                             Description = "210x297mm",
                             IsActive = true,
@@ -410,7 +440,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             FormatID = 6,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(7638),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(5765),
                             AddedUserID = 1,
                             Description = "148x210mm",
                             IsActive = true,
@@ -459,7 +489,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             MachineID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(8812),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(7790),
                             AddedUserID = 1,
                             Description = "Nie dotyczy",
                             IsActive = true,
@@ -468,7 +498,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             MachineID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(9306),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(8622),
                             AddedUserID = 1,
                             Description = "Druk offsetowy KBA RAPIDA 75",
                             IsActive = true,
@@ -477,7 +507,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             MachineID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(9392),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(8690),
                             AddedUserID = 1,
                             Description = "Druk offsetowy RYOBI",
                             IsActive = true,
@@ -486,7 +516,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             MachineID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(9398),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 352, DateTimeKind.Local).AddTicks(8694),
                             AddedUserID = 1,
                             Description = "Druk cyfrowy XEROX D700",
                             IsActive = true,
@@ -680,7 +710,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperTypeID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(724),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(716),
                             AddedUserID = 1,
                             Description = "Szczegóły w uwagach do druku",
                             IsActive = true,
@@ -689,7 +719,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperTypeID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(1292),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(1541),
                             AddedUserID = 1,
                             Description = "Papier powlekany matowy",
                             IsActive = true,
@@ -698,7 +728,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperTypeID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(1318),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(1574),
                             AddedUserID = 1,
                             Description = "Papier powlekany błyszczący",
                             IsActive = true,
@@ -707,7 +737,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperTypeID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(1322),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(1577),
                             AddedUserID = 1,
                             Description = "Papier niepowlekany typu offset",
                             IsActive = true,
@@ -756,7 +786,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperWeightID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(2621),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(3614),
                             AddedUserID = 1,
                             Description = "Szczegóły w opisie druku",
                             Grammature = "Inna",
@@ -765,7 +795,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperWeightID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(3175),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(4448),
                             AddedUserID = 1,
                             Description = "",
                             Grammature = "130g",
@@ -774,7 +804,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperWeightID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(3201),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(4474),
                             AddedUserID = 1,
                             Description = "",
                             Grammature = "170g",
@@ -783,7 +813,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperWeightID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(3205),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(4477),
                             AddedUserID = 1,
                             Description = "",
                             Grammature = "200g",
@@ -792,7 +822,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperWeightID = 5,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(3208),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(4480),
                             AddedUserID = 1,
                             Description = "",
                             Grammature = "350g + 170g",
@@ -801,7 +831,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaperWeightID = 6,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(3211),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(4484),
                             AddedUserID = 1,
                             Description = "",
                             Grammature = "250g + 130g",
@@ -850,7 +880,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaymentTypeID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(4525),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(6565),
                             AddedUserID = 1,
                             Description = "Przelew bankowy termin min. 14 dni",
                             IsActive = true,
@@ -859,7 +889,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PaymentTypeID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(5079),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 353, DateTimeKind.Local).AddTicks(7395),
                             AddedUserID = 1,
                             Description = "Gotówka przy odbiorze",
                             IsActive = true,
@@ -908,7 +938,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PostPressID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(6423),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(607),
                             AddedUserID = 1,
                             Description = "Brak obróbki introligatorskiej",
                             IsActive = true,
@@ -917,7 +947,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PostPressID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(7004),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(2768),
                             AddedUserID = 1,
                             Description = "Docięcie do formatu",
                             IsActive = true,
@@ -926,7 +956,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PostPressID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(7030),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(2818),
                             AddedUserID = 1,
                             Description = "2 zszywki płaskie",
                             IsActive = true,
@@ -935,7 +965,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PostPressID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(7033),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(2826),
                             AddedUserID = 1,
                             Description = "Oprawa miękka klejona",
                             IsActive = true,
@@ -944,7 +974,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PostPressID = 5,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(7037),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(2833),
                             AddedUserID = 1,
                             Description = "Składanie do formatu",
                             IsActive = true,
@@ -953,7 +983,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PostPressID = 6,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(7040),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(2837),
                             AddedUserID = 1,
                             Description = "Szczgóły w opisie do zamówienia",
                             IsActive = true,
@@ -1002,7 +1032,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PrintColorID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(8343),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(6367),
                             AddedUserID = 1,
                             Description = "Nie dotyczy",
                             IsActive = true,
@@ -1011,7 +1041,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PrintColorID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(8836),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(7693),
                             AddedUserID = 1,
                             Description = "CMYK jednostronnie",
                             IsActive = true,
@@ -1020,7 +1050,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PrintColorID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(8859),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(7741),
                             AddedUserID = 1,
                             Description = "CMYK obustronnie",
                             IsActive = true,
@@ -1029,7 +1059,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PrintColorID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(8862),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(7748),
                             AddedUserID = 1,
                             Description = "Czarny jednostronnie",
                             IsActive = true,
@@ -1038,7 +1068,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PrintColorID = 5,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(8866),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(7754),
                             AddedUserID = 1,
                             Description = "Czarny obustronnie",
                             IsActive = true,
@@ -1047,7 +1077,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PrintColorID = 6,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(8870),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(7760),
                             AddedUserID = 1,
                             Description = "Okładka: CMYK obustronnie + Środek: czarny obustronnie",
                             IsActive = true,
@@ -1056,7 +1086,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PrintColorID = 7,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(8874),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(7765),
                             AddedUserID = 1,
                             Description = "Pantone jednostronnie",
                             IsActive = true,
@@ -1065,7 +1095,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             PrintColorID = 8,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 185, DateTimeKind.Local).AddTicks(8877),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 354, DateTimeKind.Local).AddTicks(7771),
                             AddedUserID = 1,
                             Description = "Szczegóły w uwagach do druku",
                             IsActive = true,
@@ -1114,7 +1144,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(2189),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(6438),
                             AddedUserID = 1,
                             Description = "Szczegóły w opisie zamówienia",
                             IsActive = true,
@@ -1123,7 +1153,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(2679),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(7532),
                             AddedUserID = 1,
                             Description = "Arkusze bez obróbki introligatorskiej",
                             IsActive = true,
@@ -1132,7 +1162,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(2701),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(7559),
                             AddedUserID = 1,
                             Description = "Ulotka standardowa cięta do formatu",
                             IsActive = true,
@@ -1141,7 +1171,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(2705),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(7563),
                             AddedUserID = 1,
                             Description = "Plakat standardowy cięty do formatu",
                             IsActive = true,
@@ -1150,7 +1180,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductID = 5,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(2708),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(7565),
                             AddedUserID = 1,
                             Description = "Szycie zeszytowe standrd lub oczkowe",
                             IsActive = true,
@@ -1159,7 +1189,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductID = 6,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(2711),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(7568),
                             AddedUserID = 1,
                             Description = "Oprawa miękka klejona",
                             IsActive = true,
@@ -1211,7 +1241,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductionStageID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(452),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(1652),
                             AddedUserID = 1,
                             Color = "#ffffff",
                             Description = "Nowe zamówienie przyjęte do realizacji",
@@ -1221,7 +1251,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductionStageID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(968),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(3040),
                             AddedUserID = 1,
                             Color = "#fdaa1c",
                             Description = "Naświetlanie CTP",
@@ -1231,7 +1261,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductionStageID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(992),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(3086),
                             AddedUserID = 1,
                             Color = "#1ae000",
                             Description = "Etap drukowania",
@@ -1241,7 +1271,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductionStageID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(996),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(3093),
                             AddedUserID = 1,
                             Color = "#f62323",
                             Description = "Produkcja zatrzymana/anulowana",
@@ -1251,7 +1281,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductionStageID = 5,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(999),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(3098),
                             AddedUserID = 1,
                             Color = "#00a8f0",
                             Description = "Obróbka introligatorska i uszlachetnienia",
@@ -1261,7 +1291,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductionStageID = 6,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(1002),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(3104),
                             AddedUserID = 1,
                             Color = "#000000",
                             Description = "Produkcja zakończona - zamówienie gotowe do wydania",
@@ -1271,7 +1301,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ProductionStageID = 7,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(1006),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(3110),
                             AddedUserID = 1,
                             Color = "#ffffff",
                             Description = "Zamówienie zrealizowane",
@@ -1321,7 +1351,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             SheetSizeID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(3890),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 355, DateTimeKind.Local).AddTicks(9760),
                             AddedUserID = 1,
                             Description = "Nie dotyczy",
                             IsActive = true,
@@ -1330,7 +1360,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             SheetSizeID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(4377),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 356, DateTimeKind.Local).AddTicks(614),
                             AddedUserID = 1,
                             Description = "630x440mm",
                             IsActive = true,
@@ -1339,7 +1369,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             SheetSizeID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(4400),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 356, DateTimeKind.Local).AddTicks(640),
                             AddedUserID = 1,
                             Description = "610x430mm",
                             IsActive = true,
@@ -1348,7 +1378,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             SheetSizeID = 4,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(4403),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 356, DateTimeKind.Local).AddTicks(644),
                             AddedUserID = 1,
                             Description = "440x315mm",
                             IsActive = true,
@@ -1357,7 +1387,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             SheetSizeID = 5,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(4406),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 356, DateTimeKind.Local).AddTicks(647),
                             AddedUserID = 1,
                             Description = "700x500mm",
                             IsActive = true,
@@ -1366,7 +1396,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             SheetSizeID = 6,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(4409),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 356, DateTimeKind.Local).AddTicks(650),
                             AddedUserID = 1,
                             Description = "500x350mm",
                             IsActive = true,
@@ -1375,7 +1405,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             SheetSizeID = 7,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(4412),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 356, DateTimeKind.Local).AddTicks(653),
                             AddedUserID = 1,
                             Description = "Szczegóły w uwagach do druku",
                             IsActive = true,
@@ -1427,9 +1457,9 @@ namespace Printo.Data.Migrations
                         new
                         {
                             ToDoID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(5967),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 356, DateTimeKind.Local).AddTicks(3375),
                             AddedUserID = 1,
-                            Date = new DateTime(2020, 8, 27, 23, 58, 28, 186, DateTimeKind.Local).AddTicks(5392),
+                            Date = new DateTime(2020, 9, 23, 22, 25, 8, 356, DateTimeKind.Local).AddTicks(2418),
                             Description = "Zamówić 2 ryzy papieru",
                             IsActive = true,
                             Name = "Przykładowa notatka"
@@ -1485,7 +1515,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             UserID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 183, DateTimeKind.Local).AddTicks(8331),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 350, DateTimeKind.Local).AddTicks(8837),
                             IsActive = true,
                             Login = "admin",
                             Name = "Admin",
@@ -1526,7 +1556,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             UserTypeID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(154),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(1658),
                             Description = "Administrator systemu",
                             IsActive = true,
                             Name = "Admin"
@@ -1534,7 +1564,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             UserTypeID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(494),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(2116),
                             Description = "Pracownik",
                             IsActive = true,
                             Name = "Pracownik"
@@ -1585,7 +1615,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             VatRateID = 1,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(1982),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(4587),
                             Description = "Standardowa stawka Vat",
                             IsActive = true,
                             Name = "23%",
@@ -1594,7 +1624,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             VatRateID = 2,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(2290),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(5070),
                             Description = "Stawka Vat przy numerze ISSN",
                             IsActive = true,
                             Name = "8%",
@@ -1603,7 +1633,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             VatRateID = 3,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(2307),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(5090),
                             Description = "Stawka Vat przy numerze ISBN",
                             IsActive = true,
                             Name = "5%",
@@ -1612,7 +1642,7 @@ namespace Printo.Data.Migrations
                         new
                         {
                             VatRateID = 5,
-                            AddedDate = new DateTime(2020, 8, 27, 23, 58, 28, 184, DateTimeKind.Local).AddTicks(2311),
+                            AddedDate = new DateTime(2020, 9, 23, 22, 25, 8, 351, DateTimeKind.Local).AddTicks(5093),
                             Description = "Nie dotyczy",
                             IsActive = true,
                             Name = "nd",

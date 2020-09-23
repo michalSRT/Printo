@@ -15,7 +15,6 @@
     <!-- Icons CSS -->
     <link rel="stylesheet" href="~/css/feather.css">
     <link rel="stylesheet" href="~/css/dataTables.bootstrap4.css">
-    @*<link rel="stylesheet" href="~/css/select2.css">*@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/dropzone.css">
     <link rel="stylesheet" href="~/css/uppy.min.css">
@@ -28,6 +27,11 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="~/css/app-light.css" id="lightTheme">
     <link rel="stylesheet" href="~/css/app-dark.css" id="darkTheme" disabled>
+    <!-- FULL CALENDAR -->
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.print.min.css"/>*@
+    <link rel="stylesheet" href="~/lib/fullcalendar-5.3.2/lib/main.css" />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css' rel='stylesheet'>
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="~/css/site.css" />
 
@@ -238,8 +242,6 @@
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/moment-with-locales.js"></script>
-    @*<script src="~/js/pl.js"></script>*@
-    @*<script src="/js/bootstrap.min.js"></script>*@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="~/js/simplebar.min.js"></script>
     <script src='~/js/daterangepicker.js'></script>
@@ -274,8 +276,115 @@
     <script src='~/js/quill.min.js'></script>
     <script src="~/js/jquery.datetimepicker.full.min.js"></script>
 
+    <script src="~/lib/fullcalendar-5.3.2/lib/main.js"></script>
+    <script src="~/lib/fullcalendar-5.3.2/lib/locales/pl.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/pl.min.js"></script>*@
 
     <script>
+        //document.addEventListener('DOMContentLoaded', function () {
+        //    var calendarEl = document.getElementById('calendar');
+        //    var calendar = new FullCalendar.Calendar(calendarEl, {
+        //        initialView: 'timeGridWeek',
+        //        initialDate: new Date(),
+        //        locale: 'pl',
+        //        headerToolbar: {
+        //            start: 'today prev,next',
+        //            center: 'title',
+        //            end: 'dayGridMonth,timeGridWeek,timeGridDay'
+        //        },
+        //        slotDuration: '00:30:00',
+        //        slotMinTime: "07:00:00",
+        //        slotMaxTime: "23:00:00",
+        //    });
+        //    calendar.render();
+        //});
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            var events = [];
+
+            $.ajax({
+                type: "GET",
+                url: "/home/GetEvents",
+                success: function (data) {
+                    $.each(data, function (i, v) {
+                        events.push({
+                            title: v.Title,
+                            start: v.Start,
+                            //description: v.Description,
+                            //start: moment(v.Start),
+                            //end: v.End != null ? moment(v.End) : null,
+                            //color: v.ThemeColor,
+                            //allDay: v.IsFullDay
+                        });
+                    })
+                    drawCalendar(events);
+                },
+                error: function (error) {
+                    alert('failed calendar');
+                }
+            })
+
+            function drawCalendar(events) {
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    themeSystem: 'bootstrap',
+                    initialView: 'timeGridWeek',
+                    initialDate: new Date(),
+                    locale: 'pl',
+                    headerToolbar: {
+                        start: 'today prev,next',
+                        center: 'title',
+                        end: 'timeGridWeek,timeGridDay'
+                    },
+                    slotDuration: '00:30:00',
+                    slotMinTime: "07:00:00",
+                    slotMaxTime: "23:00:00",
+                    events: {
+                        url: "/home/GetEvents"
+                    },
+                    eventClick: function (calEvent, jsEvent, view) {
+                        $('#eventModal #eventTitle').text(calEvent.title);
+                        var $description = $('<div/>');
+                        $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start));
+                        if (calEvent.end != null)
+                        $description.append($('<p/>').html('<b>Koniec:</b>' + calEvent.end));
+                        $description.append($('<p/>').html('<b>Opis:</b>' + calEvent.description));
+                        $('#eventModal #pDetails').empty().html($description);
+                        $('#eventModal').modal();
+                    }
+                });
+                calendar.render();
+            }
+
+            //function GenerateCalender(events) {
+            //    $('#calender').fullCalendar('destroy');
+            //    $('#calender').fullCalendar({
+            //        contentHeight: 400,
+            //        locale: 'pl',
+            //        defaultView: 'basicWeek',
+            //        defaultDate: new Date(),
+            //        timeFormat: 'H(:mm)',
+            //        header: {
+            //            left: 'prev,next today',
+            //            center: 'title',
+            //            right: 'month,basicWeek,basicDay,agenda'
+            //        },
+            //        eventLimit: true,
+            //        eventColor: '#378006',
+            //        events: events
+            //    })
+
+            //}
+        })
+    </script>
+
+    <script>
+
         $('.select2').select2(
             {
                 theme: 'bootstrap4',
@@ -304,29 +413,29 @@
             });
 
 
-            $.datetimepicker.setLocale('pl');
+        $.datetimepicker.setLocale('pl');
 
 
-            $('#startDate').datetimepicker({
-                contentWindow: window,
-                step: 30,
-                minTime: '7:00',
-                maxTime: '23:30',
-                format: 'd/m/Y H:i'
-            });
+        $('#startDate').datetimepicker({
+            contentWindow: window,
+            step: 30,
+            minTime: '7:00',
+            maxTime: '23:30',
+            format: 'd/m/Y H:i'
+        });
 
-            $('#endDate').datetimepicker({
-                contentWindow: window,
-                step: 30,
-                minTime: '7:00',
-                maxTime: '23:30',
-                format:'d/m/Y H:i'
-            });
+        $('#endDate').datetimepicker({
+            contentWindow: window,
+            step: 30,
+            minTime: '7:00',
+            maxTime: '23:30',
+            format: 'd/m/Y H:i'
+        });
 
-            $('#toDoDate').datetimepicker({
-                contentWindow: window,
-                format:'d/m/Y H:i'
-            });
+        $('#toDoDate').datetimepicker({
+            contentWindow: window,
+            format: 'd/m/Y H:i'
+        });
 
 
 

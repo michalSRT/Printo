@@ -29,6 +29,7 @@ namespace Printo.Data.Data
         public DbSet<SheetSize> SheetSizes { get; set; }
         public DbSet<VatRate> VatRates { get; set; }
         public DbSet<ToDo> ToDos { get; set; }
+        public DbSet<Event> Events { get; set; }
 
         // SEEDERY
 

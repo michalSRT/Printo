@@ -45,5 +45,13 @@ namespace Printo.Intranet.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public JsonResult GetEvents()
+        {
+            var events = _context.Events.ToList();
+            //return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return Json(events);
+            //return Json(events, new Newtonsoft.Json.JsonSerializerSettings());
+        }
     }
 }

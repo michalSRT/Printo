@@ -44,8 +44,23 @@
         </div>
     </div>
 
-<div class="text-center">
-    STRONA STARTOWA
-    <br />
-    Tu będzie kalendarz...
+<div class="container" id="calendar">
 </div>
+
+<div id="eventModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

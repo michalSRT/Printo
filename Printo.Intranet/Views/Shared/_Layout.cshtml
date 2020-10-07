@@ -334,19 +334,19 @@
                         calendar.unselect();
                     },
                     editable: true,
-                    //eventDrop: function (info) {
-                    //    var data = {
-                    //        EventID: info.id,
-                    //        Title: info.title,
-                    //        Start: moment(info.start).format('DD.MM.YYYY HH:mm'),
-                    //        End: info.end != null ? moment(info.end).format('DD.MM.YYYY HH:mm') : null,
-                    //        AllDay: info.allDay,
-                    //        Description: info.description,
-                    //        BackgroundColor: info.color,
-                    //    };
-                    //    console.log(data);
-                    //    SaveEvent(data);
-                    //}
+                    eventDrop: function (info) {
+                        var data = {
+                            EventID: info.event.id,
+                            Title: info.event.title,
+                            Start: moment(info.event.start).format('DD.MM.YYYY HH:mm'),
+                            End: info.event.end != null ? moment(info.event.end).format('DD.MM.YYYY HH:mm') : null,
+                            AllDay: info.event.allDay,
+                            Description: info.event.description,
+                            BackgroundColor: info.event.color,
+                        };
+                        console.log(data);
+                        SaveEvent(data);
+                    }
                 });
                 calendar.render();
             }

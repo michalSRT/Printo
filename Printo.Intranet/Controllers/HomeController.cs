@@ -75,7 +75,11 @@ namespace Printo.Intranet.Controllers
                     v.End = e.End;
                     v.Description = e.Description;
                     v.AllDay = e.AllDay;
-                    v.BackgroundColor = e.BackgroundColor;
+                    if(e.BackgroundColor == null)
+                    {
+                        v.BackgroundColor = "#3ad29f";
+                    }
+                    else v.BackgroundColor = e.BackgroundColor;
                 }
             }
             else

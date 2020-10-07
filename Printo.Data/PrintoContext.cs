@@ -779,15 +779,15 @@ namespace Printo.Data.Data
 
             #region SHEET SIZES
             modelBuilder.Entity<SheetSize>().HasData(
-                                new SheetSize
-                                {
-                                    SheetSizeID = 1,
-                                    Name = "N/D",
-                                    Description = "Nie dotyczy",
-                                    IsActive = true,
-                                    AddedDate = DateTime.Now,
-                                    AddedUserID = 1
-                                },
+                new SheetSize
+                {
+                    SheetSizeID = 1,
+                    Name = "N/D",
+                    Description = "Nie dotyczy",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
                 new SheetSize
                 {
                     SheetSizeID = 2,
@@ -806,15 +806,15 @@ namespace Printo.Data.Data
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
                 },
-                                new SheetSize
-                                {
-                                    SheetSizeID = 4,
-                                    Name = "A3+",
-                                    Description = "440x315mm",
-                                    IsActive = true,
-                                    AddedDate = DateTime.Now,
-                                    AddedUserID = 1
-                                },
+                new SheetSize
+                {
+                    SheetSizeID = 4,
+                    Name = "A3+",
+                    Description = "440x315mm",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
                 new SheetSize
                 {
                     SheetSizeID = 5,

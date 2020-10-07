@@ -26,7 +26,7 @@
                     <div class="row">
                         @foreach (var item in Model.Where(x => x.IsActive == true))
                         {
-                            <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="col-xl-3 col-lg-4 col-md-3 col-sm-6">
                                 <div class="card mb-4 border-success">
                                     <div class="card-header">
                                         <div class="row">
@@ -34,7 +34,7 @@
                                                 <h4 class="card-title" style="margin-bottom:0px">@Convert.ToString($"{ item.Date:dd/MM}" + ", godz. " + $"{item.Date:h:mm}")</h4>
                                             </div>
                                             <div class="col-2">
-                                                <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.ToDoID" role="button" data-toggle="tooltip" title="Edytuj">
+                                                <a class="btn btn-outline-success" style="float:right" asp-action="Edit" asp-route-id="@item.ToDoID" role="button" data-toggle="tooltip" title="Edytuj">
                                                     <i class="fe fe-edit fe-16"></i>
                                                 </a>
                                             </div>

@@ -471,3 +471,4 @@ C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\staticwe
 C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\staticwebassets\Printo.Intranet.StaticWebAssets.xml
 C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Printo.Intranet.genruntimeconfig.cache
 C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Printo.Intranet.csproj.CoreCompileInputs.cache
+C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\CopyAndCreate.cshtml.g.cs

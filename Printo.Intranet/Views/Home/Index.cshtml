@@ -55,10 +55,77 @@
                 <h4 class="modal-title"><span id="eventTitle"></span></h4>
             </div>
             <div class="modal-body">
+                <button id="btnDelete" class="btn btn-outline-danger float-right">
+                    Remove
+                </button>
+                <button id="btnEdit" class="btn btn-outline-danger float-right" style="margin-right:5px">
+                    Edit
+                </button>
                 <p id="pDetails"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="eventModalSave" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form" id="saveForm">
+                    @*<input type="hidden" id="hdEventID"/>*@
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="text" id="hdEventID" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="txtTitle" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Start</label>
+                        <div class="input-group date">
+                            <input type="text" id="txtStart" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>All day</label>
+                        <div class="custom-checkbox">
+                            <label>
+                                <input type="checkbox" id="chkIsFullDay" checked="checked" />Is all day event
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" id="divEndDate" style="display:none">
+                        <label>End</label>
+                        <div class="input-group date">
+                            <input type="text" id="txtEnd" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Color</label>
+                        <select id="ddThemeColor" class="form-control">
+                            <option selected="selected" value="#3ad29f">Default</option>
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                        </select>
+                    </div>
+                    <button form="saveForm" type="button" id="btnSave" class="btn btn-outline-primary float-right">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                </form>
             </div>
         </div>
     </div>

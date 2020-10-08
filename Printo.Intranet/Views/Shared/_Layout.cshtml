@@ -344,7 +344,6 @@
                             Description: info.event.description,
                             BackgroundColor: info.event.color,
                         };
-                        console.log(data);
                         SaveEvent(data);
                     }
                 });
@@ -499,7 +498,8 @@
             step: 30,
             minTime: '7:00',
             maxTime: '23:30',
-            format: 'd.m.Y H:i'
+            format: 'd.m.Y H:i',
+            defaultDate: new Date()
         });
 
         $('#endDate').datetimepicker({
@@ -507,12 +507,14 @@
             step: 30,
             minTime: '7:00',
             maxTime: '23:30',
-            format: 'd.m.Y H:i'
+            format: 'd.m.Y H:i',
+            defaultDate: new Date()
         });
 
         $('#toDoDate').datetimepicker({
             contentWindow: window,
-            format: 'd.m.Y H:i'
+            format: 'd.m.Y H:i',
+            defaultDate: new Date()
         });
 
 

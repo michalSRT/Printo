@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
 
@@ -100,6 +101,21 @@ namespace Printo.Intranet.Controllers
                 order.AddedDate = DateTime.Now;
                 _context.Add(order);
                 await _context.SaveChangesAsync();
+
+                var ord = _context.Orders.Where(x => x.OrderName == order.OrderName).FirstOrDefault();
+                var client = _context.Clients.Where(y => y.ClientID == order.ClientID).FirstOrDefault();
+
+                _context.Events.Add(new Event { 
+                    Title = client.Name + " - " + order.OrderName,
+                    Start = DateTime.Today.AddHours(7.0),
+                    End = DateTime.Today.AddHours(8.0),
+                    AllDay = false,
+                    OrderID = ord.OrderID,
+                    BackgroundColor = "gray",
+                    Description = null
+                });
+                _context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
@@ -255,6 +271,22 @@ namespace Printo.Intranet.Controllers
                 order.AddedDate = DateTime.Now;
                 _context.Add(order);
                 await _context.SaveChangesAsync();
+
+                var ord = _context.Orders.Where(x => x.OrderName == order.OrderName).FirstOrDefault();
+                var client = _context.Clients.Where(y => y.ClientID == order.ClientID).FirstOrDefault();
+
+                _context.Events.Add(new Event
+                {
+                    Title = client.Name + " - " + order.OrderName,
+                    Start = DateTime.Today.AddHours(7.0),
+                    End = DateTime.Today.AddHours(8.0),
+                    AllDay = false,
+                    OrderID = ord.OrderID,
+                    BackgroundColor = "gray",
+                    Description = order.Description
+                });
+                _context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);

@@ -28,8 +28,6 @@
     <link rel="stylesheet" href="~/css/app-light.css" id="lightTheme">
     <link rel="stylesheet" href="~/css/app-dark.css" id="darkTheme" disabled>
     <!-- FULL CALENDAR -->
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.print.min.css"/>*@
     <link rel="stylesheet" href="~/lib/fullcalendar-5.3.2/lib/main.css" />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css' rel='stylesheet'>
     <!-- CUSTOM CSS -->
@@ -298,7 +296,6 @@
                     locale: 'pl',
                     headerToolbar: {
                         start: 'today prev,next',
-                        center: 'title',
                         end: 'timeGridWeek,timeGridDay'
                     },
                     slotDuration: '00:30:00',
@@ -328,12 +325,14 @@
                             start: info.start,
                             end: info.end,
                             allDay: info.allDay,
-                            color: ''
+                            color: '',
+                            orderID: ''
                         };
                         openAddEditForm();
                         calendar.unselect();
                     },
                     editable: true,
+                    eventDurationEditable: true,
                     eventDrop: function (info) {
                         var data = {
                             EventID: info.event.id,
@@ -343,6 +342,20 @@
                             AllDay: info.event.allDay,
                             Description: info.event.description,
                             BackgroundColor: info.event.color,
+                            OrderID: info.event.orderID
+                        };
+                        SaveEvent(data);
+                    },
+                    eventResize: function (info) {
+                        var data = {
+                            EventID: info.event.id,
+                            Title: info.event.title,
+                            Start: moment(info.event.start).format('DD.MM.YYYY HH:mm'),
+                            End: info.event.end != null ? moment(info.event.end).format('DD.MM.YYYY HH:mm') : null,
+                            AllDay: info.event.allDay,
+                            Description: info.event.description,
+                            BackgroundColor: info.event.color,
+                            OrderID: info.event.orderID
                         };
                         SaveEvent(data);
                     }
@@ -364,6 +377,7 @@
                     $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.end).format('DD.MM.YYYY HH:mm') : '');
                     $('#txtDescription').val(selectedEvent.description);
                     $('#ddThemeColor').val(selectedEvent.color);
+                    $('#selectedOrder').val(selectedEvent.orderID);
 
                     $('#txtStart, #txtEnd').datetimepicker({
                         contentWindow: window,
@@ -401,6 +415,7 @@
                     AllDay: $('#chkIsFullDay').is(':checked') ? true : false,
                     Description: $('#txtDescription').val().trim(),
                     BackgroundColor: $('#ddThemeColor').val(),
+                    OrderID: $('#selectedOrder').val(),
                 }
                 //call function for submit data on the server
                 SaveEvent(data);

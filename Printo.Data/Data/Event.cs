@@ -22,5 +22,8 @@ namespace Printo.Data.Data
         public DateTime? End { get; set; }
         [Display(Name = "Cały dzień")]
         public bool AllDay { get; set; }
+
+        public int? OrderID { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

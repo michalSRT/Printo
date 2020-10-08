@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Printo.Data.Data;
 using Printo.Intranet.Models;
@@ -29,6 +30,7 @@ namespace Printo.Intranet.Controllers
         {
             ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "KONIEC").Count();
             ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderName");
             return View();
         }
 
@@ -55,8 +57,10 @@ namespace Printo.Intranet.Controllers
                 start = e.Start,
                 end = e.End,
                 color = e.BackgroundColor,
-                allDay = e.AllDay
+                allDay = e.AllDay,
+                orderID = e.OrderID
             }).ToList();
+            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderName");
             return new JsonResult(events);
         }
 
@@ -75,6 +79,7 @@ namespace Printo.Intranet.Controllers
                     v.End = e.End;
                     v.Description = e.Description;
                     v.AllDay = e.AllDay;
+                    v.OrderID = e.OrderID;
                     if(e.BackgroundColor == null)
                     {
                         v.BackgroundColor = "#3ad29f";
@@ -88,7 +93,7 @@ namespace Printo.Intranet.Controllers
             }
             _context.SaveChanges();
             status = true;
-
+            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderName");
             return new JsonResult(status);
         }
 

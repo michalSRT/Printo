@@ -401,5 +401,38 @@ namespace Printo.Intranet.Controllers
                 return RedirectToAction("Create", "Orders", new { id = OrderID });
 
         }
+
+        public async Task<IActionResult> PrintOrder(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await _context.Orders
+                .Include(o => o.AddedUser)
+                .Include(o => o.Client)
+                .Include(o => o.DeliveryType)
+                .Include(o => o.Finishing)
+                .Include(o => o.Format)
+                .Include(o => o.Machine)
+                .Include(o => o.PaperType)
+                .Include(o => o.PaperWeight)
+                .Include(o => o.PaymentType)
+                .Include(o => o.PostPress)
+                .Include(o => o.PrintColor)
+                .Include(o => o.Product)
+                .Include(o => o.ProductionStage)
+                .Include(o => o.SheetSize)
+                .Include(o => o.UpdatedUser)
+                .Include(o => o.VatRate)
+                .FirstOrDefaultAsync(m => m.OrderID == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
     }
 }

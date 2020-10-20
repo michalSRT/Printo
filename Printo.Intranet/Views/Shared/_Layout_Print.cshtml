@@ -35,16 +35,11 @@
 
 </head>
 
-<body class="vertical  light">
+<body>
     <div class="wrapper">
         @*NAVBAR TOP*@
         <nav class="topnav navbar navbar-light static-top">
             <ul class="nav">
-                <li class="nav-item">
-                    <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
-                        <i class="fe fe-menu navbar-toggler-icon"></i>
-                    </button>
-                </li>
                 <li class="nav-item">
                     <a class="btn mt-2 p-0 mr-3" asp-area="" asp-controller="Home" asp-action="Index">
                         <i class="fe fe-home fe-16"></i>
@@ -73,153 +68,7 @@
             </ul>
         </nav>
         <!-- navbar -->
-        @*SIDEBAR LEFT*@
-        <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
-            <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
-                <i class="fe fe-x"><span class="sr-only"></span></i>
-            </a>
 
-            <!-- nav bar -->
-            <nav class="vertnav navbar navbar-light">
-                <div class="w-100 mb-4 d-flex navbar-header">
-                    <a class="navbar-brand mx-auto mt-2 flex-fill text-center" asp-controller="Home" asp-action="Index">
-                        <img src="~/assets/images/logo.png" style="max-height:55px" alt="Printo">
-                    </a>
-                </div>
-
-                <p class="text-muted nav-heading mt-4 mb-1">
-                    <span>Menu główne</span>
-                </p>
-                <ul class="navbar-nav flex-fill w-100 mb-2">
-
-                    <li class="nav-item w-100">
-                        <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Create">
-                            <i class="fe fe-plus fe-16"></i>
-                            <span class="ml-3 item-text">Nowe zamówienie</span>
-                        </a>
-                    </li>
-                    <li class="nav-item w-100">
-                        <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Index">
-                            <i class="fe fe-monitor fe-16"></i>
-                            <span class="ml-3 item-text">Aktualne zamówienia</span>
-                        </a>
-                    </li>
-                    <li class="nav-item w-100">
-                        <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="FinishedOrders">
-                            <i class="fe fe-archive fe-16"></i>
-                            <span class="ml-3 item-text">Archiwum zamówień</span>
-                        </a>
-                    </li>
-
-                    <hr />
-
-                    <li class="nav-item w-100">
-                        <a class="nav-link" asp-area="" asp-controller="Clients" asp-action="Index">
-                            <i class="fe fe-users fe-16"></i>
-                            <span class="ml-3 item-text">Klienci</span>
-                        </a>
-                    </li>
-
-                    <hr />
-
-                    <li class="nav-item w-100">
-                        <a class="nav-link" asp-area="" asp-controller="ToDoes" asp-action="Index">
-                            <i class="fe fe-alert-circle fe-16"></i>
-                            <span class="ml-3 item-text">Do zrobienia</span>
-                        </a>
-                    </li>
-
-                </ul>
-                @*KONFIGURACJA*@
-                <p class="text-muted nav-heading mt-4 mb-1">
-                    <span>Inne</span>
-                </p>
-                <ul class="navbar-nav flex-fill w-100 mb-2">
-                    <li class="nav-item dropdown">
-                        <a href="#config" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                            <i class="fe fe-sliders fe-16"></i>
-                            <span class="ml-3 item-text">Konfiguracja</span>
-                        </a>
-                        <ul class="collapse list-unstyled pl-4 w-100" id="config">
-
-                            <a class="nav-link" asp-area="" asp-controller="PaperTypes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Papiery</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="PaperWeights" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Gramatury papieru</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Produkty</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="Formats" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Formaty produktów</span>
-                            </a>
-
-                            <hr />
-
-
-                            <a class="nav-link" asp-area="" asp-controller="SheetSizes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Arkusze drukarskie</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="PrintColors" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Kolory zadruku</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="ProductionStages" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Etapy produkcyjne</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="Finishings" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Uszlachetnienia druku</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="PostPresses" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Introligatornia</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="Machines" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Maszyny drukujące</span>
-                            </a>
-
-                            <hr />
-
-                            <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Użytkownicy</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="UserTypes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Rodzaje użytkowników</span>
-                            </a>
-
-                            <hr />
-
-                            <a class="nav-link" asp-area="" asp-controller="DeliveryTypes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Rodzaje dostawy</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="PaymentTypes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Rodzaje płatności</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="VatRates" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Stawki Vat</span>
-                            </a>
-                        </ul>
-                    </li>
-
-                </ul>
-
-            </nav>
-        </aside>
-        <!-- sidebar -->
         @*MAIN*@
         <main role="main" class="main-content">
             <div class="">

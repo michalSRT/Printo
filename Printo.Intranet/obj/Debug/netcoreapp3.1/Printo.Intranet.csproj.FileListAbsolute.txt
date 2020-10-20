@@ -473,3 +473,5 @@ C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Printo.I
 C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Printo.Intranet.csproj.CoreCompileInputs.cache
 C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\CopyAndCreate.cshtml.g.cs
 C:\Users\msier\Documents\Printo\Printo.Intranet\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\Printo - Web Deploy\profile.arm.json
+C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Orders\PrintOrder.cshtml.g.cs
+C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout_Print.cshtml.g.cs

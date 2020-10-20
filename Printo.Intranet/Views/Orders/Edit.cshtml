@@ -10,7 +10,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <h4 class="mb-2 page-title">Edycja zamówienia nr @Model.OrderID</h4>
+                        <h4 class="mb-2 page-title">Zamówienie nr @Model.OrderID - @Model.OrderName</h4>
                     </div>
                     <div class="col">
                         <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
@@ -281,6 +281,12 @@
                             }
                         }
 
+                    </div>
+                    <div class="col" style="text-align:center">
+                        <a class="btn btn-outline-secondary" role="button" aria-haspopup="true" aria-expanded="false" asp-action="PrintOrder" asp-route-id="@Model.OrderID">
+                            <i class="fe fe-printer" style="vertical-align:text-top"></i>
+                            Wydruk zlecenia
+                        </a>
                     </div>
                     <div class="col" style="text-align:right">
                         <input form="saveForm" type="submit" value="Zapisz" class="btn btn-success" />

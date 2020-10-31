@@ -150,6 +150,7 @@ namespace Printo.Intranet.Controllers
             {
                 return NotFound();
             }
+
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
@@ -202,6 +203,7 @@ namespace Printo.Intranet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientID", order.ClientID);
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);

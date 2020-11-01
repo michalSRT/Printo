@@ -241,6 +241,13 @@ $('#startDate').datetimepicker({
     defaultDate: new Date()
 });
 
+$('#PrintDate').datetimepicker({
+    contentWindow: window,
+    step: 5,
+    format: 'd.m.Y H:i',
+    defaultDate: new Date()
+});
+
 $('#endDate').datetimepicker({
     contentWindow: window,
     timepicker: false,

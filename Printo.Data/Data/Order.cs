@@ -69,13 +69,20 @@ namespace Printo.Data.Data
         public string Quantity { get; set; }
         [Display(Name = "Ilość arkuszy do druku")]
         public string SheetsNumber { get; set; }
+        [Display(Name = "Data i godzina druku")]
+        public DateTime? PrintDateTime { get; set; }
         [Display(Name = "Ilość arkuszy wydrukowanych")]
         public string SheetsNumberPrinted { get; set; }
         [Display(Name = "Uwagi do druku")]
         public string Comments { get; set; }
         [Display(Name = "Szczegóły dostawy")]
         public string DeliveryDetails { get; set; }
+        [Display(Name = "Szczegóły płatności")]
+        public string PaymentDetails { get; set; }
 
+        [Display(Name = "Drukarz")]
+        public int? PrintUserID { get; set; }
+        public virtual User PrintUser { get; set; }
 
         public bool IsActive { get; set; }
         public DateTime AddedDate { get; set; }
@@ -87,6 +94,8 @@ namespace Printo.Data.Data
         public virtual User UpdatedUser { get; set; }
 
         public virtual Client Client { get; set; }
+
+        public virtual User User { get; set; }
 
         public virtual DeliveryType DeliveryType { get; set; }
 

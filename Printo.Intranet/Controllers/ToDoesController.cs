@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,8 @@ namespace Printo.Intranet.Controllers
         // GET: ToDoes
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
+
             var printoContext = _context.ToDos.Include(t => t.AddedUser).Include(t => t.UpdatedUser);
             return View(await printoContext.ToListAsync());
         }
@@ -66,6 +69,8 @@ namespace Printo.Intranet.Controllers
                 toDo.AddedDate = DateTime.Now;
                 _context.Add(toDo);
                 await _context.SaveChangesAsync();
+                TempData["msg"] = "Notatka 'Do zrobienia' została dodana";
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", toDo.AddedUserID);
@@ -122,6 +127,8 @@ namespace Printo.Intranet.Controllers
                         throw;
                     }
                 }
+                TempData["msg"] = "Notatka 'Do zrobienia' została zmodyfikowana";
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", toDo.AddedUserID);
@@ -157,6 +164,8 @@ namespace Printo.Intranet.Controllers
             var toDo = await _context.ToDos.FindAsync(id);
             _context.ToDos.Remove(toDo);
             await _context.SaveChangesAsync();
+            TempData["msg"] = "Notatka 'Do zrobienia' została trwale usunięta";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -169,6 +178,8 @@ namespace Printo.Intranet.Controllers
             temp.IsActive = false;
             temp.UpdatedDate = DateTime.Now;
             await _context.SaveChangesAsync();
+            TempData["msg"] = "Notatka 'Do zrobienia' została usunięta";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -181,6 +192,7 @@ namespace Printo.Intranet.Controllers
             temp.IsActive = true;
             temp.UpdatedDate = DateTime.Now;
             await _context.SaveChangesAsync();
+            TempData["msg"] = "Notatka 'Do zrobienia' została przywrócona";
 
             return RedirectToAction(nameof(Index));
         }

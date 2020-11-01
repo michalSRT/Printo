@@ -25,14 +25,16 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-row">
                         <div class="form-group col-xl-6">
-                            <label asp-for="Name" class="control-label">Imię</label>
+                            <label asp-for="Name" class="control-label">Nazwa / imię i nazwisko</label>
                             <input asp-for="Name" type="text" class="form-control" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="form-group col-xl-6">
-                            <label asp-for="Surname" class="control-label">Nazwisko</label>
-                            <input asp-for="Surname" type="text" class="form-control" />
-                            <span asp-validation-for="Surname" class="text-danger"></span>
+                            <label asp-for="UserTypeID" class="control-label">Rodzaj użytkownika</label>
+                            <select asp-for="UserTypeID" class="myselect form-control" style="width: 100%" asp-items="ViewBag.UserTypeID">
+                                <option selected disabled value="0"></option>
+                            </select>
+                            <span asp-validation-for="UserTypeID" class="text-danger"></span>
                         </div>
                         <div class="form-group col-xl-6">
                             <label asp-for="Login" class="control-label">Login</label>
@@ -43,13 +45,6 @@
                             <label asp-for="Password" class="control-label">Hasło</label>
                             <input asp-for="Password" type="password" class="form-control" />
                             <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-xl-6">
-                            <label asp-for="UserTypeID" class="control-label">Rodzaj użytkownika</label>
-                            <select asp-for="UserTypeID" class="myselect form-control" style="width: 100%" asp-items="ViewBag.UserTypeID">
-                                <option selected disabled value="0"></option>
-                            </select>
-                            <span asp-validation-for="UserTypeID" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-row" style="float:right">

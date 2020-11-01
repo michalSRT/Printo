@@ -26,11 +26,9 @@
                     <thead>
                         <tr>
                             <th>
-                                Imię
+                                Nazwa użytkownika
                             </th>
-                            <th>
-                                Nazwisko
-                            </th>
+
                             <th>
                                 Login
                             </th>
@@ -46,9 +44,6 @@
                             <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Users", new { id = item.UserID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Surname)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Login)
@@ -95,10 +90,7 @@
                     <thead>
                         <tr>
                             <th>
-                                Imię
-                            </th>
-                            <th>
-                                Nazwisko
+                                Nazwa użytkownika
                             </th>
                             <th>
                                 Login
@@ -115,9 +107,6 @@
                             <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Users", new { id = item.UserID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Surname)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Login)

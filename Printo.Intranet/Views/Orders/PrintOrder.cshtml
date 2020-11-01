@@ -21,16 +21,16 @@
                     <div class="card mb-4" style="padding-top:10px">
                         <div class="form-row" style="margin-left:10px; margin-right:10px">
                             <div class="form-group col-12 col-md-4">
-                                <label class="control-label"><strong><u>Nr zamówienia: </u></strong></label>
-                                <label>@Model.OrderID</label>
-                            </div>
-                            <div class="form-group col-12 col-md-4">
                                 <label asp-for="StartDate" class="control-label"><strong><u>Data zamówienia:   </u></strong></label>
                                 <label>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.StartDate))</label>
                             </div>
                             <div class="form-group col-12 col-md-4">
                                 <label asp-for="EndDate" class="control-label"><strong><u>Termin realizacji:   </u></strong></label>
                                 <label>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.EndDate))</label>
+                            </div>
+                            <div class="form-group col-12 col-md-4">
+                                <label asp-for="Quantity" class="control-label"><strong><u>Nakład:   </u></strong></label>
+                                <label>@Model.Quantity</label>
                             </div>
                         </div>
 
@@ -44,25 +44,21 @@
                                 <label>@Model.OrderName</label>
                             </div>
                             <div class="form-group col-12 col-md-4">
-                                <label asp-for="Quantity" class="control-label"><strong><u>Nakład:   </u></strong></label>
-                                <label>@Model.Quantity</label>
+                                <label asp-for="ProductID" class="control-label"><strong><u>Produkt:   </u></strong></label>
+                                <label>@Model.Product.Name</label>
                             </div>
                         </div>
 
                         <div class="form-row" style="margin-left:10px; margin-right:10px">
-                            <div class="form-group col-12 col-md-3">
-                                <label asp-for="ProductID" class="control-label"><strong><u>Produkt:   </u></strong></label>
-                                <label>@Model.Product.Name</label>
-                            </div>
-                            <div class="form-group col-12 col-md-3">
+                            <div class="form-group col-12 col-md-4">
                                 <label asp-for="FormatID" class="control-label"><strong><u>Format:   </u></strong></label>
                                 <label>@Model.Format.Name</label>
                             </div>
-                            <div class="form-group col-12 col-md-3">
+                            <div class="form-group col-12 col-md-4">
                                 <label asp-for="PaperTypeID" class="control-label"><strong><u>Papier:   </u></strong></label>
                                 <label>@Model.PaperType.Name</label>
                             </div>
-                            <div class="form-group col-12 col-md-3">
+                            <div class="form-group col-12 col-md-4">
                                 <label asp-for="PaperWeightID" class="control-label"><strong><u>Gramatura:   </u></strong></label>
                                 <label>@Model.PaperWeight.Grammature</label>
                             </div>
@@ -94,28 +90,54 @@
 
                     <div class="card mb-4" style="padding-top:10px">
                         <div class="form-row" style="margin-left:10px; margin-right:10px">
-                            <div class="form-group col-6 col-md-4">
-                                <label asp-for="MachineID" class="control-label"><strong><u>Maszyna:   </u></strong></label>
-                                <label>@Model.Machine.Name</label>
-                            </div>
-                            <div class="form-group col-6 col-md-4">
-                                <label asp-for="SheetSizeID" class="control-label"><strong><u>Format arkusza:   </u></strong></label>
-                                <label>@Model.SheetSize.Name</label>
-                            </div>
-                            <div class="form-group col">
-                                <label asp-for="PrintColorID" class="control-label"><strong><u>Kolorystyka druku:   </u></strong></label>
-                                <label>@Model.PrintColor.Name</label>
-                            </div>
-                        </div>
-
-                        <div class="form-row" style="margin-left:10px; margin-right:10px; margin-bottom:10px">
-                            <div class="form-group col">
+                            <div class="col-4">
                                 <label asp-for="SheetsNumber" class="control-label"><strong><u>Ilość arkuszy do druku:   </u></strong></label>
-                                <textarea asp-for="SheetsNumber" class="form-control"></textarea>
+                                <textarea asp-for="SheetsNumber" rows="3" style="max-width:200px" class="form-control"></textarea>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label asp-for="MachineID" class="control-label"><strong><u>Maszyna:   </u></strong></label>
+                                        <label>@Model.Machine.Name</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label asp-for="SheetSizeID" class="control-label"><strong><u>Format arkusza:   </u></strong></label>
+                                        <label>@Model.SheetSize.Name</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label asp-for="PrintColorID" class="control-label"><strong><u>Kolorystyka druku:   </u></strong></label>
+                                        <label>@Model.PrintColor.Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label asp-for="PrintDateTime" class="control-label"><strong><u>Wydrukowano dnia:   </u></strong></label>
+                                        <label>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.PrintDateTime))</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <label asp-for="PrintUserID" class="control-label"><strong><u>Wydrukował:   </u></strong></label>
+                                        @if (Model.PrintUserID != null)
+                                        {
+                                            <label>@Model.PrintUser.Name</label>
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-row" style="margin-left:10px; margin-right:10px; margin-bottom:10px">
+                            <div class="form-group col">
+                                <label asp-for="SheetsNumberPrinted" class="control-label"><strong><u>Wydrukowano arkuszy:   </u></strong></label>
+                                <textarea asp-for="SheetsNumberPrinted" class="form-control"></textarea>
+                            </div>
                             <div class="form-group col">
                                 <label asp-for="Comments" class="control-label"><strong><u>Komentarz do druku:   </u></strong></label>
                                 <textarea asp-for="Comments" class="form-control"></textarea>
@@ -126,23 +148,28 @@
                     <div class="card mb-4" style="padding-top:10px">
                         <div class="form-row" style="margin-left:10px; margin-right:10px">
                             <div class="form-group col">
-                                <label asp-for="DeliveryDetails" class="control-label"><strong><u>Szczegóły dostawy i faktury:   </u></strong></label>
-                            </div>
-                            <div class="form-group col">
                                 <label asp-for="DeliveryTypeID" class="control-label"><strong><u>Rodzaj dostawy:   </u></strong></label>
                                 <label>@Model.DeliveryType.Name</label>
                             </div>
-                        </div>
-                        <div class="form-row" style="margin-left:10px; margin-right:10px; margin-bottom:10px">
-                            <textarea asp-for="DeliveryDetails" class="form-control"></textarea>
-                        </div>
-
-                        <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
-                            <div class="form-group col-8 col-md-4">
+                            <div class="form-group col">
                                 <label asp-for="PaymentTypeID" class="control-label"><strong><u>Sposób płatności:   </u></strong></label>
                                 <label>@Model.PaymentType.Name</label>
                             </div>
-                            <div class="form-group col-4 col-md-4">
+                        </div>
+
+                        <div class="form-row" style="margin-left:10px; margin-right:10px; margin-bottom:10px">
+                            <div class="form-group col">
+                                <label asp-for="DeliveryDetails" class="control-label"><strong><u>Szczegóły dostawy:   </u></strong></label>
+                                <textarea asp-for="DeliveryDetails" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="PaymentDetails" class="control-label"><strong><u>Szczegóły płatności:   </u></strong></label>
+                                <textarea asp-for="PaymentDetails" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
+                            <div class="form-group col">
                                 <label asp-for="VatRateID" class="control-label"><strong><u>Stawka Vat:   </u></strong></label>
                                 <label>@Model.VatRate.Name</label>
                             </div>

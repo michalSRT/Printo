@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,8 @@ namespace Printo.Intranet.Controllers
         // GET: Formats
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
+
             var printoContext = _context.Formats.Include(f => f.AddedUser).Include(f => f.UpdatedUser);
             return View(await printoContext.ToListAsync());
         }

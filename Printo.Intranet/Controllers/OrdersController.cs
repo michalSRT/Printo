@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -22,13 +23,17 @@ namespace Printo.Intranet.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Where(x =>x.ProductionStage.Name != "KONIEC");
+            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
+
+            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x =>x.ProductionStage.Name != "KONIEC");
             return View(await printoContext.ToListAsync());
         }
 
         public async Task<IActionResult> FinishedOrders()
         {
-            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Where(x => x.ProductionStage.Name == "KONIEC");
+            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
+
+            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ProductionStage.Name == "KONIEC");
             return View(await printoContext.ToListAsync());
         }
 
@@ -57,6 +62,7 @@ namespace Printo.Intranet.Controllers
                 .Include(o => o.SheetSize)
                 .Include(o => o.UpdatedUser)
                 .Include(o => o.VatRate)
+                .Include(o => o.PrintUser)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
             if (order == null)
             {
@@ -71,6 +77,7 @@ namespace Printo.Intranet.Controllers
         {
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name");
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name");
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name");
             ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name");
             ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name");
@@ -93,7 +100,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Order order)
+        public async Task<IActionResult> Create([Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID,PrintUserID,PrintDateTime,PaymentDetails,DeliveryDetails")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -116,10 +123,14 @@ namespace Printo.Intranet.Controllers
                 });
                 _context.SaveChanges();
 
+                Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
+                TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało dodane";
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name", order.PrintUserID);
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
             ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);
             ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name", order.FormatID);
@@ -153,6 +164,7 @@ namespace Printo.Intranet.Controllers
 
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name", order.PrintUserID);
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
             ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);
             ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name", order.FormatID);
@@ -167,6 +179,7 @@ namespace Printo.Intranet.Controllers
             ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name", order.SheetSizeID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.UpdatedUserID);
             ViewData["VatRateID"] = new SelectList(_context.VatRates, "VatRateID", "Name", order.VatRateID);
+            
             return View(order);
         }
 
@@ -175,7 +188,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID,PrintUserID,PrintDateTime,PaymentDetails,DeliveryDetails")] Order order)
         {
             if (id != order.OrderID)
             {
@@ -188,6 +201,8 @@ namespace Printo.Intranet.Controllers
                 {
                     order.UpdatedDate = DateTime.Now;
                     _context.Update(order);
+                    Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
+                    TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało zmodyfikowane";
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -201,11 +216,13 @@ namespace Printo.Intranet.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
 
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "ClientID", order.ClientID);
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name", order.PrintUserID);
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
             ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);
             ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name", order.FormatID);
@@ -220,7 +237,9 @@ namespace Printo.Intranet.Controllers
             ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name", order.SheetSizeID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.UpdatedUserID);
             ViewData["VatRateID"] = new SelectList(_context.VatRates, "VatRateID", "Name", order.VatRateID);
+
             return View(order);
+            
         }
 
         // GET: Orders/CopyAndCreate/5
@@ -238,6 +257,7 @@ namespace Printo.Intranet.Controllers
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name", order.PrintUserID);
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
             ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);
             ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name", order.FormatID);
@@ -252,6 +272,9 @@ namespace Printo.Intranet.Controllers
             ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name", order.SheetSizeID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.UpdatedUserID);
             ViewData["VatRateID"] = new SelectList(_context.VatRates, "VatRateID", "Name", order.VatRateID);
+
+            TempData["msg"] = "Skopiowano dane do nowego zamówienia";
+
             return View(order);
         }
 
@@ -260,7 +283,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CopyAndCreate(int id, [Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Order order)
+        public async Task<IActionResult> CopyAndCreate(int id, [Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID,PrintUserID,PrintDateTime,PaymentDetails,DeliveryDetails")] Order order)
         {
             if (id != order.OrderID)
             {
@@ -289,10 +312,14 @@ namespace Printo.Intranet.Controllers
                 });
                 _context.SaveChanges();
 
+                Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
+                TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało dodane";
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name", order.PrintUserID);
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
             ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);
             ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name", order.FormatID);
@@ -353,6 +380,7 @@ namespace Printo.Intranet.Controllers
             var order = await _context.Orders.FindAsync(id);
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
+            TempData["msg"] = "Zamówienie zostało trwale usunięte";
             return RedirectToAction(nameof(Index));
         }
 
@@ -365,6 +393,7 @@ namespace Printo.Intranet.Controllers
             temp.IsActive = false;
             temp.UpdatedDate = DateTime.Now;
             await _context.SaveChangesAsync();
+            TempData["msg"] = "Zamówienie zostało usunięte";
             return RedirectToAction(nameof(Index));
         }
 
@@ -377,6 +406,7 @@ namespace Printo.Intranet.Controllers
             temp.IsActive = true;
             temp.UpdatedDate = DateTime.Now;
             await _context.SaveChangesAsync();
+            TempData["msg"] = "Zamówienie zostało przywrócone";
 
             return RedirectToAction(nameof(Index));
         }
@@ -428,6 +458,8 @@ namespace Printo.Intranet.Controllers
                 .Include(o => o.SheetSize)
                 .Include(o => o.UpdatedUser)
                 .Include(o => o.VatRate)
+                .Include(o => o.PrintUser)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
             if (order == null)
             {

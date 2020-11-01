@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -30,6 +32,14 @@
     <!-- FULL CALENDAR -->
     <link rel="stylesheet" href="~/lib/fullcalendar-5.3.2/lib/main.css" />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css' rel='stylesheet'>
+
+    <script src="~/js/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" integrity="sha512-oe8OpYjBaDWPt2VmSFR+qYOdnTjeV9QPLJUeqZyprDEQvQLJ9C5PCFclxwNuvb/GQgQngdCXzKSFltuHD3eCxA==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous"></script>
+
+
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="~/css/site.css" />
 
@@ -58,19 +68,20 @@
                         <i class="fe fe-sun fe-16"></i>
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="avatar avatar-sm mt-2">
-                            <img src="~/assets/images/logo-only.png" alt="..." class="avatar-img rounded-circle">
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activities</a>
-                    </div>
-                </li>
             </ul>
+            @if (@Context.Session.GetString("UserID") != null)
+            {
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link"><b> Witaj, @Context.Session.GetString("Name") @Context.Session.GetString("Surname")</b></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn mt-2 p-0 mr-3" href="#" data-toggle="modal" data-target="#logoutModal">Wyloguj</a>
+                    </li>
+                </ul>
+            }
+
         </nav>
         <!-- navbar -->
         @*SIDEBAR LEFT*@
@@ -130,92 +141,96 @@
                     </li>
 
                 </ul>
-                @*KONFIGURACJA*@
-                <p class="text-muted nav-heading mt-4 mb-1">
-                    <span>Inne</span>
-                </p>
-                <ul class="navbar-nav flex-fill w-100 mb-2">
-                    <li class="nav-item dropdown">
-                        <a href="#config" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                            <i class="fe fe-sliders fe-16"></i>
-                            <span class="ml-3 item-text">Konfiguracja</span>
-                        </a>
-                        <ul class="collapse list-unstyled pl-4 w-100" id="config">
 
-                            <a class="nav-link" asp-area="" asp-controller="PaperTypes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Papiery</span>
+                @if (@Context.Session.GetString("UserTypeID") == 1.ToString())
+                {
+                    @*KONFIGURACJA*@
+                    <p class="text-muted nav-heading mt-4 mb-1">
+                        <span>Inne</span>
+                    </p>
+                    <ul class="navbar-nav flex-fill w-100 mb-2">
+                        <li class="nav-item dropdown">
+                            <a href="#config" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                                <i class="fe fe-sliders fe-16"></i>
+                                <span class="ml-3 item-text">Konfiguracja</span>
                             </a>
-                            <a class="nav-link" asp-area="" asp-controller="PaperWeights" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Gramatury papieru</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Produkty</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="Formats" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Formaty produktów</span>
-                            </a>
+                            <ul class="collapse list-unstyled pl-4 w-100" id="config">
 
-                            <hr />
+                                <a class="nav-link" asp-area="" asp-controller="PaperTypes" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Papiery</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="PaperWeights" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Gramatury papieru</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Produkty</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="Formats" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Formaty produktów</span>
+                                </a>
+
+                                <hr />
 
 
-                            <a class="nav-link" asp-area="" asp-controller="SheetSizes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Arkusze drukarskie</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="PrintColors" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Kolory zadruku</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="ProductionStages" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Etapy produkcyjne</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="Finishings" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Uszlachetnienia druku</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="PostPresses" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Introligatornia</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="Machines" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Maszyny drukujące</span>
-                            </a>
+                                <a class="nav-link" asp-area="" asp-controller="SheetSizes" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Arkusze drukarskie</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="PrintColors" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Kolory zadruku</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="ProductionStages" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Etapy produkcyjne</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="Finishings" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Uszlachetnienia druku</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="PostPresses" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Introligatornia</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="Machines" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Maszyny drukujące</span>
+                                </a>
 
-                            <hr />
+                                <hr />
 
-                            <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Użytkownicy</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="UserTypes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Rodzaje użytkowników</span>
-                            </a>
+                                <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Użytkownicy</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="UserTypes" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Rodzaje użytkowników</span>
+                                </a>
 
-                            <hr />
+                                <hr />
 
-                            <a class="nav-link" asp-area="" asp-controller="DeliveryTypes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Rodzaje dostawy</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="PaymentTypes" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Rodzaje płatności</span>
-                            </a>
-                            <a class="nav-link" asp-area="" asp-controller="VatRates" asp-action="Index">
-                                <i class="fe fe-arrow-right fe-16"></i>
-                                <span class="ml-3 item-text">Stawki Vat</span>
-                            </a>
-                        </ul>
-                    </li>
+                                <a class="nav-link" asp-area="" asp-controller="DeliveryTypes" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Rodzaje dostawy</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="PaymentTypes" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Rodzaje płatności</span>
+                                </a>
+                                <a class="nav-link" asp-area="" asp-controller="VatRates" asp-action="Index">
+                                    <i class="fe fe-arrow-right fe-16"></i>
+                                    <span class="ml-3 item-text">Stawki Vat</span>
+                                </a>
+                            </ul>
+                        </li>
 
-                </ul>
+                    </ul>
+                }
 
             </nav>
         </aside>
@@ -227,6 +242,31 @@
                     <div class="col">
                         <div class="card shadow mb-4">
                             <div class="">
+                                <script type="text/javascript">
+
+                                         @*var msg = "@(TempData["msg"] as string)";*@
+                                         var msg = "@Html.Raw(TempData["msg"])";
+                                         if (msg != "") {
+                                             toastr.options = {
+                                                 "closeButton": true,
+                                                 "debug": false,
+                                                 "newestOnTop": false,
+                                                 "progressBar": true,
+                                                 "positionClass": "toast-top-center",
+                                                 "preventDuplicates": false,
+                                                 "onclick": null,
+                                                 "showDuration": "50",
+                                                 "hideDuration": "100",
+                                                 "timeOut": "3000",
+                                                 "extendedTimeOut": "1000",
+                                                 "showEasing": "swing",
+                                                 "hideEasing": "linear",
+                                                 "showMethod": "fadeIn",
+                                                 "hideMethod": "fadeOut"
+                                             }
+                                             toastr["success"](msg)
+                                         }
+                                </script>
                                 @RenderBody()
                             </div> <!-- .card-body -->
                         </div> <!-- .card -->
@@ -237,7 +277,25 @@
         <!-- main -->
     </div>
     <!-- .wrapper -->
-    <script src="~/js/jquery.min.js"></script>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Wyloguj</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Czy na pewno chcesz się wylogować?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Nie, zostaję</button>
+                    <a class="btn btn-outline-success" asp-area="" asp-controller="Login" asp-action="Logout">Tak, wyloguj</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="~/js/popper.min.js"></script>
     <script src="~/js/moment-with-locales.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -277,11 +335,6 @@
 
     <script src="~/lib/fullcalendar-5.3.2/lib/main.js"></script>
     <script src="~/lib/fullcalendar-5.3.2/lib/locales/pl.js"></script>
-
-    <script>
-
-       
-    </script>
 
     <script src="~/js/apps.js"></script>
     <script src="~/js/site.js"></script>

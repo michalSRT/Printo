@@ -40,8 +40,8 @@ namespace Printo.Data.Data
                 new Client
                 {
                     ClientID = 1,
-                    Name = "Joe Doe",
-                    CompanyFullName = "Joe Doe Co",
+                    Name = "Duet",
+                    CompanyFullName = "PPHU Duet Piotr Bęben",
                     NIP = "123456789",
                     Street = "Lwowska",
                     HouseNumber = "218b",
@@ -56,8 +56,8 @@ namespace Printo.Data.Data
                 new Client
                 {
                     ClientID = 2,
-                    Name = "MikeShinoda",
-                    CompanyFullName = "MikeShinoda Co",
+                    Name = "Fakro",
+                    CompanyFullName = "Fakro Sp. z o.o.",
                     NIP = "123456789",
                     Street = "Wallstreet",
                     HouseNumber = "52669",
@@ -94,9 +94,8 @@ namespace Printo.Data.Data
                 {
                     UserID = 1,
                     Login = "admin",
-                    Password = "admin",
+                    Password = "21232f297a57a5a743894a0e4a801fc3", //admin
                     Name = "Admin",
-                    Surname = "Admin",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     UserTypeID = 1
@@ -117,6 +116,14 @@ namespace Printo.Data.Data
                 new UserType
                 {
                     UserTypeID = 2,
+                    Name = "Drukarz",
+                    Description = "Drukarz",
+                    IsActive = true,
+                    AddedDate = DateTime.Now
+                },
+                new UserType
+                {
+                    UserTypeID = 3,
                     Name = "Pracownik",
                     Description = "Pracownik",
                     IsActive = true,
@@ -171,7 +178,7 @@ namespace Printo.Data.Data
                 new DeliveryType
                 {
                     DeliveryTypeID = 1,
-                    Name = "Odbiór",
+                    Name = "Odbiór osobisty",
                     Description = "Odbiór osobisty przez klienta",
                     IsActive = true,
                     AddedDate = DateTime.Now,
@@ -668,9 +675,9 @@ namespace Printo.Data.Data
                 new ProductionStage
                 {
                     ProductionStageID = 3,
-                    Name = "START",
+                    Name = "DO DRUKU",
                     Description = "Etap drukowania",
-                    Color = "#1ae000",
+                    Color = "#00a8f0",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -688,9 +695,9 @@ namespace Printo.Data.Data
                 new ProductionStage
                 {
                     ProductionStageID = 5,
-                    Name = "INTRO",
-                    Description = "Obróbka introligatorska i uszlachetnienia",
-                    Color = "#00a8f0",
+                    Name = "WYDRUKOWANE",
+                    Description = "Zamówienie po wydruku",
+                    Color = "#1ae000",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -698,6 +705,16 @@ namespace Printo.Data.Data
                 new ProductionStage
                 {
                     ProductionStageID = 6,
+                    Name = "INTRO",
+                    Description = "Obróbka introligatorska i uszlachetnienia",
+                    Color = "#7400b8",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                }, 
+                new ProductionStage
+                {
+                    ProductionStageID = 7,
                     Name = "GOTOWE",
                     Description = "Produkcja zakończona - zamówienie gotowe do wydania",
                     Color = "#000000",
@@ -707,7 +724,7 @@ namespace Printo.Data.Data
                 },
                 new ProductionStage
                 {
-                    ProductionStageID = 7,
+                    ProductionStageID = 8,
                     Name = "KONIEC",
                     Description = "Zamówienie zrealizowane",
                     Color = "#ffffff",
@@ -859,6 +876,45 @@ namespace Printo.Data.Data
                 }
                 );
             #endregion
+
+            //#region ORDERS
+            //modelBuilder.Entity<Order>().HasData(
+            //new Order
+            //{
+            //    OrderID = 1,
+            //    ClientID = 1,
+            //    DeliveryTypeID = 1,
+            //    FinishingID = 1,
+            //    FormatID = 1,
+            //    MachineID = 1,
+            //    PaperWeightID = 1,
+            //    PaperTypeID = 1,
+            //    PaymentTypeID = 1,
+            //    PostPressID = 1,
+            //    PrintColorID = 1,
+            //    ProductID = 1,
+            //    ProductionStageID = 1,
+            //    SheetSizeID = 1,
+            //    VatRateID = 1,
+            //    StartDate = DateTime.Now,
+            //    EndDate = DateTime.Now,
+            //    OrderName = "Przykładowa nazwa zamówienia",
+            //    Description = "Opis zamówienia",
+            //    NetPrice = "9999",
+            //    IsReprint = true,
+            //    Quantity = "1000",
+            //    SheetsNumber = "2x1000",
+            //    SheetsNumberPrinted = "2x1050",
+            //    Comments = "komentarz do druku",
+            //    DeliveryDetails = "adres dostawy",
+            //    PaymentDetails = "dane do fv",
+            //    PrintUserID = null,
+            //    IsActive = true,
+            //    AddedDate = DateTime.Now,
+            //    AddedUserID = 1
+            //}
+            //);
+            //#endregion ORDERS
         }
 
     }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Printo.Data.Data;
 using Printo.Intranet.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Printo.Intranet.Controllers
 {
@@ -21,13 +22,10 @@ namespace Printo.Intranet.Controllers
             _context = context;
         }
 
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
-
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index","Login"); }
+
             ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "KONIEC").Count();
             ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
             ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderName");

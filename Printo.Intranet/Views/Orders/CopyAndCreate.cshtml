@@ -173,23 +173,25 @@
                                     </select>
                                     <span asp-validation-for="DeliveryTypeID" class="text-danger"></span>
                                 </div>
+                                <div class="form-group col col-md-6">
+                                    <label asp-for="PaymentTypeID" class="control-label">Sposób płatności</label>
+                                    <select asp-for="PaymentTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaymentTypeID">
+                                    </select>
+                                    <span asp-validation-for="PaymentTypeID" class="text-danger"></span>
+                                </div>
                             </div>
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col">
                                     <label asp-for="DeliveryDetails" class="control-label">Szczegóły dostawy</label>
                                     <textarea asp-for="DeliveryDetails" class="form-control"></textarea>
                                 </div>
-                            </div>
-
-
-                            <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
-                                <div class="form-group col-8 col-md-4">
-                                    <label asp-for="PaymentTypeID" class="control-label">Sposób płatności</label>
-                                    <select asp-for="PaymentTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaymentTypeID">
-                                    </select>
-                                    <span asp-validation-for="PaymentTypeID" class="text-danger"></span>
+                                <div class="form-group col">
+                                    <label asp-for="PaymentDetails" class="control-label">Szczegóły płatności</label>
+                                    <textarea asp-for="PaymentDetails" class="form-control"></textarea>
                                 </div>
-                                <div class="form-group col-4 col-md-4">
+                            </div>
+                            <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
+                                <div class="form-group col col-md-6">
                                     <label asp-for="VatRateID" class="control-label">Stawka Vat</label>
                                     <select asp-for="VatRateID" class="form-control myselect" style="width:100%" asp-items="ViewBag.VatRateID">
                                     </select>

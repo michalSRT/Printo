@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,8 @@ namespace Printo.Intranet.Controllers
         // GET: Clients
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
+
             var printoContext = _context.Clients.Include(c => c.AddedUser).Include(c => c.UpdatedUser);
             return View(await printoContext.ToListAsync());
         }
@@ -66,6 +69,7 @@ namespace Printo.Intranet.Controllers
                 client.AddedDate = DateTime.Now;
                 _context.Add(client);
                 await _context.SaveChangesAsync();
+                TempData["msg"] = "Klient: <br>" + client.Name + "<br> został dodany";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", client.AddedUserID);
@@ -125,6 +129,7 @@ namespace Printo.Intranet.Controllers
                         throw;
                     }
                 }
+                TempData["msg"] = "Klient: <br>" + client.Name + "<br> został zmodyfikowany";
                 return RedirectToAction(nameof(Index));
             }
             var ClientOrders = _context.Orders.Include(z=>z.ProductionStage).Where(x => x.IsActive == true && x.ClientID == id).ToList();
@@ -163,6 +168,8 @@ namespace Printo.Intranet.Controllers
             var client = await _context.Clients.FindAsync(id);
             _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
+            TempData["msg"] = "Klient został trwale usunięty";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -175,6 +182,8 @@ namespace Printo.Intranet.Controllers
             client.IsActive = false;
             client.UpdatedDate = DateTime.Now;
             await _context.SaveChangesAsync();
+            TempData["msg"] = "Klient został usunięty";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -187,6 +196,7 @@ namespace Printo.Intranet.Controllers
             client.IsActive = true;
             client.UpdatedDate = DateTime.Now;
             await _context.SaveChangesAsync();
+            TempData["msg"] = "Klient został przywrócony";
 
             return RedirectToAction(nameof(Index));
         }

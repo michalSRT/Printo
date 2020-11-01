@@ -19,20 +19,14 @@ namespace Printo.Data.Data
 
         [Required(ErrorMessage = "Wpisz hasło")]
         [MinLength(3, ErrorMessage = "Minimalna długość hasła to 3 znaki.")]
-        [MaxLength(20, ErrorMessage = "Maksymalna długość hasła to 20 znaków.")]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Wpisz imię")]
+        [Required(ErrorMessage = "Wpisz nazwę lub imię i nazwisko użytkownika")]
         [MinLength(3, ErrorMessage = "Minimalna długość to 3 znaki.")]
         [MaxLength(20, ErrorMessage = "Maksymalna długość to 20 znaków.")]
-        [Display(Name = "Imię")]
+        [Display(Name = "Nazwa użytkownika")]
         public string Name { get; set; }
-
-        [Required(ErrorMessage = "Wpisz nazwisko")]
-        [MinLength(3, ErrorMessage = "Minimalna długość to 3 znaki.")]
-        [MaxLength(20, ErrorMessage = "Maksymalna długość to 20 znaków.")]
-        public string Surname { get; set; }
 
         public bool IsActive { get; set; }
         public DateTime AddedDate { get; set; }

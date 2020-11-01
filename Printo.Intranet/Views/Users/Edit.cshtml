@@ -1,4 +1,6 @@
 ﻿@model Printo.Data.Data.User
+@using Microsoft.AspNetCore.Http;
+
 
 @{
     ViewData["Title"] = "Edycja użytkownika";
@@ -29,14 +31,14 @@
                     <input type="hidden" asp-for="UpdatedDate" />
                     <div class="form-row">
                         <div class="form-group col-xl-6">
-                            <label asp-for="Name" class="control-label">Imię</label>
+                            <label asp-for="Name" class="control-label">Nazwa / imię i nazwisko</label>
                             <input asp-for="Name" type="text" class="form-control" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="form-group col-xl-6">
-                            <label asp-for="Surname" class="control-label">Nazwisko</label>
-                            <input asp-for="Surname" type="text" class="form-control" />
-                            <span asp-validation-for="Surname" class="text-danger"></span>
+                            <label asp-for="UserTypeID" class="control-label">Rodzaj użytkownika</label>
+                            <select asp-for="UserTypeID" class="form-control" asp-items="ViewBag.UserTypeID"></select>
+                            <span asp-validation-for="UserTypeID" class="text-danger"></span>
                         </div>
                         <div class="form-group col-xl-6">
                             <label asp-for="Login" class="control-label">Login</label>
@@ -44,81 +46,80 @@
                             <span asp-validation-for="Login" class="text-danger"></span>
                         </div>
                         <div class="form-group col-xl-6">
-                            <label asp-for="Password" class="control-label">Hasło</label>
+                            <label asp-for="Password" class="control-label">Nowe hasło</label>
                             <input asp-for="Password" type="password" class="form-control" />
                             <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-xl-6">
-                            <label asp-for="UserTypeID" class="control-label">Rodzaj użytkownika</label>
-                            <select asp-for="UserTypeID" class="form-control" asp-items="ViewBag.UserTypeID"></select>
-                            <span asp-validation-for="UserTypeID" class="text-danger"></span>
                         </div>
                     </div>
                 </form>
                 <div class="row">
-                    <div class="col">
-                        @if (Model.IsActive)
-                        {
-                            <!-- Button to Open the Modal -->
-                            <button type="button" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDeactivate">
-                                Usuń
-                            </button>
-                            <!-- The Modal -->
-                            <div class="modal" id="myModalDeactivate">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Uwaga!</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            Czy chcesz usunąć tę pozycję?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <form asp-action="Deactivate" asp-route-id="@Model.UserID">
-                                                <input type="hidden" asp-for="UserID" />
-                                                <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
-                                                <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="input-group">
-                                <form asp-action="Restore" asp-route-id="@Model.UserID">
-                                    <input type="hidden" asp-for="UserID" />
-                                    <input type="submit" value="Przywróć" class="btn btn-outline-success buttMargin" style="margin:5px" />
-                                </form>
-                                <input type="button" value="Usuń trwale" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDelete" style="margin:5px" />
-                            </div>
-                            <!-- The Modal 2-->
-                            <div class="modal" id="myModalDelete">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Uwaga!</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            Czy chcesz trwale usunąć tę pozycję?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <form asp-action="Delete" asp-route-id="@Model.UserID">
-                                                <input type="hidden" asp-for="UserID" />
-                                                <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
-                                                <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
-                                            </form>
+                    @if (Context.Session.GetString("UserTypeID") != 1.ToString())
+                    {
+                        <div class="col">
+                            @if (Model.IsActive)
+                            {
+                                <!-- Button to Open the Modal -->
+                                <button type="button" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDeactivate">
+                                    Usuń
+                                </button>
+                                <!-- The Modal -->
+                                <div class="modal" id="myModalDeactivate">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Uwaga!</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                Czy chcesz usunąć tę pozycję?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form asp-action="Deactivate" asp-route-id="@Model.UserID">
+                                                    <input type="hidden" asp-for="UserID" />
+                                                    <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
+                                                    <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
-                    </div>
+                            }
+                            else
+                            {
+                                <div class="input-group">
+                                    <form asp-action="Restore" asp-route-id="@Model.UserID">
+                                        <input type="hidden" asp-for="UserID" />
+                                        <input type="submit" value="Przywróć" class="btn btn-outline-success buttMargin" style="margin:5px" />
+                                    </form>
+                                    <input type="button" value="Usuń trwale" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDelete" style="margin:5px" />
+                                </div>
+                                <!-- The Modal 2-->
+                                <div class="modal" id="myModalDelete">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Uwaga!</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                Czy chcesz trwale usunąć tę pozycję?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form asp-action="Delete" asp-route-id="@Model.UserID">
+                                                    <input type="hidden" asp-for="UserID" />
+                                                    <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
+                                                    <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+
                     <div class="col" style="text-align:right">
                         <input form="saveForm" type="submit" value="Zapisz" class="btn btn-success" />
                     </div>

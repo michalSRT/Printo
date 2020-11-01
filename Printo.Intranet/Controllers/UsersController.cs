@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
+using Printo.Data.Helpers;
 
 namespace Printo.Intranet.Controllers
 {
@@ -21,6 +23,8 @@ namespace Printo.Intranet.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
+
             var printoContext = _context.Users.Include(u => u.UserType);
             return View(await printoContext.ToListAsync());
         }
@@ -56,12 +60,13 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,Login,Password,Name,Surname,IsActive,AddedDate,UpdatedDate,UserTypeID")] User user)
+        public async Task<IActionResult> Create([Bind("UserID,Login,Password,Name,IsActive,AddedDate,UpdatedDate,UserTypeID")] User user)
         {
             if (ModelState.IsValid)
             {
                 user.IsActive = true;
                 user.AddedDate = DateTime.Now;
+                user.Password = HashPassword.GetMd5Hash(user.Password);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -92,7 +97,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,Login,Password,Name,Surname,IsActive,AddedDate,UpdatedDate,UserTypeID")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserID,Login,Password,Name,IsActive,AddedDate,UpdatedDate,UserTypeID")] User user)
         {
             if (id != user.UserID)
             {
@@ -104,6 +109,7 @@ namespace Printo.Intranet.Controllers
                 try
                 {
                     user.UpdatedDate = DateTime.Now;
+                    user.Password = HashPassword.GetMd5Hash(user.Password);
                     _context.Update(user);
                     await _context.SaveChangesAsync();
                 }

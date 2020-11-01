@@ -1,48 +1,47 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Printo - zarządzanie zamówieniami";
 }
-    <div class="row" style="place-content:center; margin-top:10px">
-        <div class="col" style="max-width: fit-content; min-width:215px">
-            <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Create", "Orders"))'">
-                <div class="card-body" style="padding:0.5rem">
-                    <div class="col" style="padding:0px">
-                        <i class="fe fe-plus fe-32"></i>
-                        <br />
-                        <a class="btn" asp-area="" asp-controller="Orders" asp-action="Create">
-                            <span style="font-weight:bold">Nowe zamówienie</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col" style="max-width: fit-content; min-width:215px">
-            <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "Orders"))'">
-                <div class="card-body" style="padding:0.5rem">
-                    <div class="col" style="padding:0px">
-                        <i class="fe fe-monitor fe-32"></i>
-                        <br />
-                        <a class="btn" asp-area="" asp-controller="Orders" asp-action="Index">
-                            <span style="font-weight:bold">Aktualne zamówienia : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.OrdersCount</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col" style="max-width: fit-content; min-width:215px">
-            <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "ToDoes"))'">
-                <div class="card-body" style="padding:0.5rem">
-                    <div class="col" style="padding:0px">
-                        <i class="fe fe-alert-circle fe-32"></i>
-                        <br />
-                        <a class="btn" asp-area="" asp-controller="ToDoes" asp-action="Index">
-                            <span style="font-weight:bold">Do zrobienia : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.ToDoesCount</span>
-                        </a>
-                    </div>
+<div class="row" style="place-content:center; margin-top:10px">
+    <div class="col" style="max-width: fit-content; min-width:215px">
+        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Create", "Orders"))'">
+            <div class="card-body" style="padding:0.5rem">
+                <div class="col" style="padding:0px">
+                    <i class="fe fe-plus fe-32"></i>
+                    <br />
+                    <a class="btn" asp-area="" asp-controller="Orders" asp-action="Create">
+                        <span style="font-weight:bold">Nowe zamówienie</span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col" style="max-width: fit-content; min-width:215px">
+        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "Orders"))'">
+            <div class="card-body" style="padding:0.5rem">
+                <div class="col" style="padding:0px">
+                    <i class="fe fe-monitor fe-32"></i>
+                    <br />
+                    <a class="btn" asp-area="" asp-controller="Orders" asp-action="Index">
+                        <span style="font-weight:bold">Aktualne zamówienia : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.OrdersCount</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col" style="max-width: fit-content; min-width:215px">
+        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "ToDoes"))'">
+            <div class="card-body" style="padding:0.5rem">
+                <div class="col" style="padding:0px">
+                    <i class="fe fe-alert-circle fe-32"></i>
+                    <br />
+                    <a class="btn" asp-area="" asp-controller="ToDoes" asp-action="Index">
+                        <span style="font-weight:bold">Do zrobienia : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.ToDoesCount</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container" id="calendar" style="padding-bottom:15px">
 </div>
@@ -123,7 +122,6 @@
                     <div class="form-group">
                         <label>Order</label>
                         <select id="selectOrder" class="form-control">
-
                         </select>
                     </div>
                     <button form="saveForm" type="button" id="btnSave" class="btn btn-outline-primary float-right">

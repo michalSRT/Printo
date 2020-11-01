@@ -1,0 +1,54 @@
+﻿@model Printo.Data.Data.User
+@{
+    ViewData["Title"] = "Logowanie";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+
+                    <h4 class="card-title text-center">Logowanie</h4>
+                    <form class="form-signin" asp-controller="Login" asp-action="Index" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-label-group">
+                            <input asp-for="Login" type="text" id="Login" class="form-control" placeholder="Login" required autofocus>
+                            <span asp-validation-for="Login" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <div class="form-label-group" id="passContainer">
+                                <input type="password" class="form-control" asp-for="Password" id="Password" placeholder="Hasło" required>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                                <div class="row" style="place-content: center; padding-top:20px">
+                                    <span id="passwordIcon" class="far fa-eye passEye" onclick="togglePass()"></span>
+
+                                </div>
+                        </div>
+                        <br />
+                        <button class="btn btn-lg btn-outline-success btn-block text-uppercase" type="submit">Zaloguj</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function togglePass() {
+        $('#passwordIcon').toggleClass("fa-eye fa-eye-slash");
+        var x = document.getElementById("Password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+

@@ -28,7 +28,7 @@ namespace Printo.Intranet.Controllers
 
             ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "KONIEC").Count();
             ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
-            ViewData["OrderID"] = new SelectList(_context.Orders, "OrderID", "OrderName");
+            ViewData["OrderID"] = new SelectList(_context.Orders.Where(o=>o.ProductionStage.Name != "KONIEC"), "OrderID", "ConcatDescription");
             return View();
         }
 
@@ -77,12 +77,14 @@ namespace Printo.Intranet.Controllers
                     v.End = e.End;
                     v.Description = e.Description;
                     v.AllDay = e.AllDay;
-                    v.OrderID = e.OrderID;
-                    if(e.BackgroundColor == null)
+                    if(e.OrderID != null)
                     {
-                        v.BackgroundColor = "#3ad29f";
+                        v.OrderID = e.OrderID;
                     }
-                    else v.BackgroundColor = e.BackgroundColor;
+                    if(e.BackgroundColor != null)
+                    {
+                        v.BackgroundColor = e.BackgroundColor;
+                    }
                 }
             }
             else

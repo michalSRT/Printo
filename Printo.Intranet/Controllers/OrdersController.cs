@@ -115,11 +115,11 @@ namespace Printo.Intranet.Controllers
                 _context.Events.Add(new Event { 
                     Title = client.Name + " - " + order.OrderName,
                     Start = DateTime.Today.AddHours(7.0),
-                    End = DateTime.Today.AddHours(8.0),
-                    AllDay = false,
+                    End = null,
+                    AllDay = true,
                     OrderID = ord.OrderID,
-                    BackgroundColor = "gray",
-                    Description = null
+                    BackgroundColor = "#3ad29f",
+                    Description = order.Description
                 });
                 _context.SaveChanges();
 
@@ -204,6 +204,16 @@ namespace Printo.Intranet.Controllers
                     Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
                     TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało zmodyfikowane";
                     await _context.SaveChangesAsync();
+
+
+                    var v = _context.Events.Where(a => a.OrderID == order.OrderID).FirstOrDefault();
+                    if (v != null)
+                    {
+                        v.Title = order.Client.Name + " - " + order.OrderName;
+                        v.Description = order.Description;
+                        _context.SaveChanges();
+                    }
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -304,10 +314,10 @@ namespace Printo.Intranet.Controllers
                 {
                     Title = client.Name + " - " + order.OrderName,
                     Start = DateTime.Today.AddHours(7.0),
-                    End = DateTime.Today.AddHours(8.0),
-                    AllDay = false,
+                    End = null,
+                    AllDay = true,
                     OrderID = ord.OrderID,
-                    BackgroundColor = "gray",
+                    BackgroundColor = "#3ad29f",
                     Description = order.Description
                 });
                 _context.SaveChanges();

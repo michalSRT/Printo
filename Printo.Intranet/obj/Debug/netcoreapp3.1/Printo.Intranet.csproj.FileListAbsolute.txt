@@ -477,3 +477,4 @@ C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout_Print.cshtml.g.cs
 C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginLayout.cshtml.g.cs
 C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
+C:\Users\msier\Documents\Printo\Printo.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Statistics\Index.cshtml.g.cs

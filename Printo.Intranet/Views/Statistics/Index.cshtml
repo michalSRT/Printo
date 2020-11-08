@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Printo.Data.Data.Product>
+
+@{
+    ViewData["Title"] = "Statystyki";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-header">
+                <h4 class="mb-2 page-title">Statystyki zamówień</h4>
+            </div>
+            <div class="card-body">
+                <label>Ilość zamówień: @ViewBag.OrdersNumber</label>
+
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders">
+                    <thead>
+                        <tr>
+                            <th>Produkt</th>
+                            <th>Ilość zamówień</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.IsActive == true))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

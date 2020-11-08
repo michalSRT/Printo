@@ -122,6 +122,14 @@ namespace Printo.Data.Data
         public virtual SheetSize SheetSize { get; set; }
 
         public virtual VatRate VatRate { get; set; }
+        
+        public string ConcatDescription
+        {
+            get
+            {
+                return string.Format("{0} - {1}", OrderID, OrderName);
+            }
+        }
 
     }
 }

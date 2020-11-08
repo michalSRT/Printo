@@ -62,13 +62,14 @@
                 </li>
             </ul>
 
-            <ul class="nav">
+            @*<ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
                         <i class="fe fe-sun fe-16"></i>
                     </a>
                 </li>
-            </ul>
+            </ul>*@
+
             @if (@Context.Session.GetString("UserID") != null)
             {
                 <ul class="nav">
@@ -103,6 +104,12 @@
                 </p>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
 
+                    <li class="nav-item w-100">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="fe fe-clock fe-16"></i>
+                            <span class="ml-3 item-text">Harmonogram</span>
+                        </a>
+                    </li>
                     <li class="nav-item w-100">
                         <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Create">
                             <i class="fe fe-plus fe-16"></i>
@@ -244,7 +251,6 @@
                             <div class="">
                                 <script type="text/javascript">
 
-                                         @*var msg = "@(TempData["msg"] as string)";*@
                                          var msg = "@Html.Raw(TempData["msg"])";
                                          if (msg != "") {
                                              toastr.options = {
@@ -252,7 +258,7 @@
                                                  "debug": false,
                                                  "newestOnTop": false,
                                                  "progressBar": true,
-                                                 "positionClass": "toast-top-center",
+                                                 "positionClass": "toast-top-right",
                                                  "preventDuplicates": false,
                                                  "onclick": null,
                                                  "showDuration": "50",
@@ -341,3 +347,213 @@
     @RenderSection("Scripts", false)
 </body>
 </html>
+
+<script>
+    $(document).ready(function () {
+
+    var selectedEvent = null;
+
+    drawCalendar();
+
+    function drawCalendar() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            themeSystem: 'default',
+            initialView: 'timeGridWeek',
+            eventColor: 'green',
+            initialDate: new Date(),
+            locale: 'pl',
+            headerToolbar: {
+                start: 'today prev,next',
+                end: 'timeGridWeek,timeGridDay'
+            },
+            slotDuration: '00:30:00',
+            slotMinTime: "07:00:00",
+            slotMaxTime: "23:00:00",
+            weekends: true,
+            extendedProps: {
+                description: 'description',
+                orderID: 'orderID'
+            },
+            events: { url: "/home/GetAllEvents" },
+            eventClick: function (info, jsEvent, view) {
+                selectedEvent = info.event;
+                $('#eventModal #eventTitle').text(selectedEvent.title);
+                var $desc = $('<div/>');
+                if (selectedEvent.extendedProps.orderID != null)
+                    $desc.append($('<p/>').html('<b>Nr. zamówienia: </b>' + selectedEvent.extendedProps.orderID));
+                $desc.append($('<p/>').html('<b>Start: </b>' + moment(selectedEvent.start).format('DD.MM.YYYY HH:mm')));
+                if (selectedEvent.end != null)
+                    $desc.append($('<p/>').html('<b>Koniec: </b>' + moment(selectedEvent.end).format('DD.MM.YYYY HH:mm')));
+                if (selectedEvent.extendedProps.description != null)
+                    $desc.append($('<p/>').html('<b>Opis: </b>' + selectedEvent.extendedProps.description));
+                $('#eventModal #pDetails').empty().html($desc);
+                $('#eventModal').modal();
+            },
+            selectable: true,
+            unselectAuto: true,
+            select: function (info, start, end, allDay) {
+                selectedEvent = {
+                    id: 0,
+                    title: '',
+                    description: '',
+                    start: info.start,
+                    end: info.end,
+                    allDay: info.allDay,
+                    color: '',
+                    orderID: ''
+                };
+                openAddEditForm();
+                calendar.unselect();
+            },
+            editable: true,
+            eventDurationEditable: true,
+            eventDrop: function (info) {
+                var data = {
+                    EventID: info.event.id,
+                    Title: info.event.title,
+                    Start: moment(info.event.start).format('DD.MM.YYYY HH:mm'),
+                    End: info.event.end != null ? moment(info.event.end).format('DD.MM.YYYY HH:mm') : null,
+                    AllDay: info.event.allDay,
+                    Description: info.event.description,
+                    BackgroundColor: info.event.color,
+                    OrderID: info.event.orderID
+                };
+                SaveEvent(data);
+            },
+            eventResize: function (info) {
+                var data = {
+                    EventID: info.event.id,
+                    Title: info.event.title,
+                    Start: moment(info.event.start).format('DD.MM.YYYY HH:mm'),
+                    End: info.event.end != null ? moment(info.event.end).format('DD.MM.YYYY HH:mm') : null,
+                    AllDay: info.event.allDay,
+                    Description: info.event.description,
+                    BackgroundColor: info.event.color,
+                    OrderID: info.event.orderID
+                };
+                SaveEvent(data);
+            }
+        });
+        calendar.render();
+    }
+
+    function openAddEditForm() {
+        if (selectedEvent != null) {
+
+            $('#txtStart, #txtEnd').datetimepicker('destroy');
+
+            $('#hdEventID').val(selectedEvent.id);
+            $('#txtTitle').val(selectedEvent.title);
+            $('#txtStart').val(moment(selectedEvent.start).format('DD.MM.YYYY HH:mm'));
+            $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
+            $('#chkIsFullDay').change();
+            $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.end).format('DD.MM.YYYY HH:mm') : '');
+            if (selectedEvent.description == '') {
+                $('#txtDescription').val(selectedEvent.description);
+            }
+            else {
+                $('#txtDescription').val(selectedEvent.extendedProps.description);
+            }
+            $('#ddThemeColor').val(selectedEvent.color);
+            $('#selectedOrder').val(selectedEvent.extendedProps.orderID);
+
+            $('#txtStart, #txtEnd').datetimepicker({
+                contentWindow: window,
+                step: 30,
+                minTime: '7:00',
+                maxTime: '22:30',
+                format: 'd.m.Y H:i'
+            });
+        }
+        $('#eventModal').modal('hide');
+        $('#eventModalSave').modal();
+    }
+
+    $('#btnEdit').click(function () {
+            openAddEditForm();
+    })
+
+    $('#btnSave').click(function () {
+        //Validation
+        if ($('#txtTitle').val().trim() == "") {
+            alert('Tytuł jest wymagany');
+            return;
+        }
+        if ($('#txtStart').val().trim() == "") {
+            alert('Data startu jest wymagana');
+            return;
+        }
+
+        if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
+            alert('Data końca jest wymagana');
+            return;
+        }
+
+        var data = {
+            EventID: $('#hdEventID').val(),
+            Title: $('#txtTitle').val().trim(),
+            Start: $('#txtStart').val().trim(),
+            End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+            AllDay: $('#chkIsFullDay').is(':checked') ? true : false,
+            Description: $('#txtDescription').val().trim(),
+            BackgroundColor: $('#ddThemeColor').val(),
+            OrderID: $('#selectedOrder').val(),
+        }
+        SaveEvent(data);
+    })
+
+    function SaveEvent(data) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SaveEvent", "Home")',
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                //REFRESH CALENDAR
+                drawCalendar();
+                $('#eventModalSave').modal('hide');
+            },
+            error: function () {
+                alert('Failed to refresh calendar after save');
+            }
+        })
+    }
+
+    $('#btnOrder').click(function () {
+        if (selectedEvent.extendedProps.orderID != null) {
+            window.location.href = '@Url.Action("Edit", "Orders")/' + selectedEvent.extendedProps.orderID + '';
+        }
+        else alert('Brak zamówienia przypisanego do tego bloku czasowego.');
+        })
+
+    $('#btnDelete').click(function () {
+        if (selectedEvent != null && confirm('Czy na pewno chcesz usunąć ten blok czasowy?')) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteEvent", "Home")',
+                data: { EventID: selectedEvent.id },
+                dataType: "json",
+                success: function () {
+                    //REFRESH CALENDAR
+                    drawCalendar();
+                    $('#eventModal').modal('hide');
+
+                },
+                error: function () {
+                    alert('Failed to refresh calendar after delete');
+                }
+            })
+        }
+    })
+
+    $('#chkIsFullDay').change(function () {
+        if ($(this).is(':checked')) {
+            $('#divEndDate').hide();
+        }
+        else {
+            $('#divEndDate').show();
+        }
+    });
+})
+</script>

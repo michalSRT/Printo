@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Printo.Data.Data.Order
+@{
     ViewData["Title"] = "Printo - zarządzanie zamówieniami";
 }
 <div class="row" style="place-content:center; margin-top:10px">
@@ -55,15 +56,18 @@
             </div>
             <div class="modal-body">
                 <button id="btnDelete" class="btn btn-outline-danger float-right">
-                    Remove
+                    Usuń
                 </button>
-                <button id="btnEdit" class="btn btn-outline-danger float-right" style="margin-right:5px">
-                    Edit
+                <button id="btnEdit" class="btn btn-outline-secondary float-right" style="margin-right:5px">
+                    Edytuj
+                </button>
+                <button id="btnOrder" class="btn btn-outline-success float-right" style="margin-right:5px">
+                    Zamówienie
                 </button>
                 <p id="pDetails"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Zamknij</button>
             </div>
         </div>
     </div>
@@ -73,17 +77,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                <h4 class="modal-title"><span id="eventTitle">Nowy blok czasowy</span></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form class="form" id="saveForm">
+                    <input type="text" id="hdEventID" class="form-control" hidden />
                     <div class="form-group">
-                        <label>ID</label>
-                        <input type="text" id="hdEventID" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>Title</label>
+                        <label>Tytuł</label>
                         <input type="text" id="txtTitle" class="form-control" />
                     </div>
                     <div class="form-group">
@@ -93,41 +94,43 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>All day</label>
                         <div class="custom-checkbox">
                             <label>
-                                <input type="checkbox" id="chkIsFullDay" checked="checked" />Is all day event
+                                <input type="checkbox" id="chkIsFullDay" checked="checked" style="margin-left:10px" />Wydarzenie całodniowe?
                             </label>
                         </div>
                     </div>
                     <div class="form-group" id="divEndDate" style="display:none">
-                        <label>End</label>
+                        <label>Koniec</label>
                         <div class="input-group date">
                             <input type="text" id="txtEnd" class="form-control" autocomplete="off" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
+                        <label>Opis</label>
                         <textarea id="txtDescription" rows="3" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Color</label>
-                        <select id="ddThemeColor" class="form-control">
-                            <option selected="selected" value="#3ad29f">Default</option>
-                            <option value="red">Red</option>
-                            <option value="green">Green</option>
-                            <option value="blue">Blue</option>
+                        <label>Kolor bloku</label>
+                        <select id="ddThemeColor" class="form-control myselect">
+                            <option selected disabled value="0"></option>
+                            <option value="#3ad29f">Zielony</option>
+                            <option value="red">Czerwony</option>
+                            <option value="black">Czarny</option>
+                            <option value="blue">Niebieski</option>
+                            <option value="gray">Szary</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Order</label>
-                        <select id="selectOrder" class="form-control">
+                        <label>Dotyczy zamówienia nr:</label>
+                        <select id="selectedOrder" class="form-control myselect" asp-items="ViewBag.OrderID" asp-for="OrderID">
+                            <option selected disabled value="0"></option>
                         </select>
                     </div>
-                    <button form="saveForm" type="button" id="btnSave" class="btn btn-outline-primary float-right">
-                        Save
+                    <button form="saveForm" type="button" id="btnSave" class="btn btn-outline-success float-right">
+                        Zapisz
                     </button>
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Zamknij</button>
                 </form>
             </div>
         </div>

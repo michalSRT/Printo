@@ -12,8 +12,8 @@ namespace Printo.Data.Data
         public int ClientID { get; set; }
         public string Name { get; set; }
         public string CompanyFullName { get; set; }
-        [MinLength(9, ErrorMessage = "Numer NIP powinien mieć 9 cyfr wpisywane bez pauz.")]
-        [MaxLength(9, ErrorMessage = "Numer NIP powinien mieć 9 cyfr wpisywane bez pauz.")]
+        [MinLength(10, ErrorMessage = "Numer NIP powinien mieć 10 cyfr wpisywane bez pauz.")]
+        [MaxLength(10, ErrorMessage = "Numer NIP powinien mieć 10 cyfr wpisywane bez pauz.")]
         public string NIP { get; set; }
 
         public string Street { get; set; }

@@ -37,7 +37,9 @@ namespace Printo.Intranet
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddSession();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(480);
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 

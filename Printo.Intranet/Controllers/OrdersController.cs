@@ -446,6 +446,8 @@ namespace Printo.Intranet.Controllers
 
         public async Task<IActionResult> PrintOrder(int? id)
         {
+            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
+
             if (id == null)
             {
                 return NotFound();

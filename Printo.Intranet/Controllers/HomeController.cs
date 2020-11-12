@@ -24,15 +24,15 @@ namespace Printo.Intranet.Controllers
 
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index","Login"); }
+            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
 
             ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "KONIEC").Count();
             ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
-            ViewData["OrderID"] = new SelectList(_context.Orders.Where(o=>o.ProductionStage.Name != "KONIEC"), "OrderID", "ConcatDescription");
+            ViewData["OrderID"] = new SelectList(_context.Orders.Where(o => o.ProductionStage.Name != "KONIEC"), "OrderID", "ConcatDescription");
             return View();
         }
 
-        
+
 
         public IActionResult Privacy()
         {
@@ -66,22 +66,22 @@ namespace Printo.Intranet.Controllers
         public IActionResult SaveEvent(Event e)
         {
             var status = false;
-            
-            if (e.EventID > 0 )
+
+            if (e.EventID > 0)
             {
                 var v = _context.Events.Where(a => a.EventID == e.EventID).FirstOrDefault();
-                if(v != null)
+                if (v != null)
                 {
                     v.Title = e.Title;
                     v.Start = e.Start;
                     v.End = e.End;
                     v.Description = e.Description;
                     v.AllDay = e.AllDay;
-                    if(e.OrderID != null)
+                    if (e.OrderID != null)
                     {
                         v.OrderID = e.OrderID;
                     }
-                    if(e.BackgroundColor != null)
+                    if (e.BackgroundColor != null)
                     {
                         v.BackgroundColor = e.BackgroundColor;
                     }
@@ -106,6 +106,21 @@ namespace Printo.Intranet.Controllers
             if (v != null)
             {
                 _context.Events.Remove(v);
+                _context.SaveChanges();
+                status = true;
+            }
+            return new JsonResult(status);
+        }
+
+        [HttpPost]
+        public IActionResult ChangeColor(int eventID, string color)
+        {
+            var status = false;
+            var v = _context.Events.Where(a => a.EventID == eventID).FirstOrDefault();
+            if (v != null)
+            {
+                v.BackgroundColor = color;
+                _context.Events.Update(v);
                 _context.SaveChanges();
                 status = true;
             }

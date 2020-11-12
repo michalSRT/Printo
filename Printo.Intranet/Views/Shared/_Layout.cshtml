@@ -250,7 +250,6 @@
                         <div class="card shadow mb-4">
                             <div class="">
                                 <script type="text/javascript">
-
                                          var msg = "@Html.Raw(TempData["msg"])";
                                          if (msg != "") {
                                              toastr.options = {
@@ -380,13 +379,12 @@
                 selectedEvent = info.event;
                 $('#eventModal #eventTitle').text(selectedEvent.title);
                 var $desc = $('<div/>');
-                if (selectedEvent.extendedProps.orderID != null)
-                    $desc.append($('<p/>').html('<b>Nr. zamówienia: </b>' + selectedEvent.extendedProps.orderID));
                 $desc.append($('<p/>').html('<b>Start: </b>' + moment(selectedEvent.start).format('DD.MM.YYYY HH:mm')));
                 if (selectedEvent.end != null)
                     $desc.append($('<p/>').html('<b>Koniec: </b>' + moment(selectedEvent.end).format('DD.MM.YYYY HH:mm')));
                 if (selectedEvent.extendedProps.description != null)
                     $desc.append($('<p/>').html('<b>Opis: </b>' + selectedEvent.extendedProps.description));
+                if (selectedEvent.extendedProps.orderID != null) { $('#DivBtnOrder').show(); } else { $('#DivBtnOrder').hide(); }
                 $('#eventModal #pDetails').empty().html($desc);
                 $('#eventModal').modal();
             },
@@ -441,6 +439,13 @@
     function openAddEditForm() {
         if (selectedEvent != null) {
 
+            //if () {
+            //    $('#divOrder').hide();
+            //}
+            //else {
+            //    $('#divOrder').show();
+            //}
+
             $('#txtStart, #txtEnd').datetimepicker('destroy');
 
             $('#hdEventID').val(selectedEvent.id);
@@ -456,7 +461,15 @@
                 $('#txtDescription').val(selectedEvent.extendedProps.description);
             }
             $('#ddThemeColor').val(selectedEvent.color);
-            $('#selectedOrder').val(selectedEvent.extendedProps.orderID);
+            if (selectedEvent.orderID == '') {
+                $('#divOrder').show();
+                $('#selectedOrder').val(selectedEvent.orderID);
+            }
+            else {
+                $('#divOrder').hide();
+                $('#selectedOrder').val(selectedEvent.extendedProps.orderID);
+            }
+
 
             $('#txtStart, #txtEnd').datetimepicker({
                 contentWindow: window,
@@ -488,6 +501,14 @@
         if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
             alert('Data końca jest wymagana');
             return;
+        }
+        else {
+            var startDate = moment($('#txtStart').val(), "DD.MM.YYYY HH:mm").toDate();
+            var endDate = moment($('#txtEnd').val(), "DD.MM.YYYY HH:mm").toDate();
+            if (startDate > endDate) {
+                alert("Nieprawidłowa data końcowa");
+                return;
+            }
         }
 
         var data = {
@@ -525,7 +546,90 @@
             window.location.href = '@Url.Action("Edit", "Orders")/' + selectedEvent.extendedProps.orderID + '';
         }
         else alert('Brak zamówienia przypisanego do tego bloku czasowego.');
-        })
+    })
+
+    $('#btnGray').click(function () {
+        if (selectedEvent != null) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeColor", "Home")',
+                data: { EventID: selectedEvent.id, color: "gray" },
+                dataType: "json",
+                success: function () {
+                    //REFRESH CALENDAR
+                    drawCalendar();
+                    $('#eventModal').modal('hide');
+
+                },
+                error: function () {
+                    alert('Failed to refresh calendar after update');
+                }
+            })
+        }
+    })
+
+    $('#btnGreen').click(function () {
+        if (selectedEvent != null) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeColor", "Home")',
+                data: { EventID: selectedEvent.id, color: "#3ad29f" },
+                dataType: "json",
+                success: function () {
+                    //REFRESH CALENDAR
+                    drawCalendar();
+                    $('#eventModal').modal('hide');
+
+                },
+                error: function () {
+                    alert('Failed to refresh calendar after update');
+                }
+            })
+        }
+    })
+
+    $('#btnBlue').click(function () {
+        if (selectedEvent != null) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeColor", "Home")',
+                data: { EventID: selectedEvent.id, color: "#03A9F4" },
+                dataType: "json",
+                success: function () {
+                    //REFRESH CALENDAR
+                    drawCalendar();
+                    $('#eventModal').modal('hide');
+
+                },
+                error: function () {
+                    alert('Failed to refresh calendar after update');
+                }
+            })
+        }
+    })
+
+    $('#btnRed').click(function () {
+        if (selectedEvent != null) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeColor", "Home")',
+                data: {
+                    EventID: selectedEvent.id,
+                    color: "#FF5722"
+                    },
+                dataType: "json",
+                success: function () {
+                    //REFRESH CALENDAR
+                    drawCalendar();
+                    $('#eventModal').modal('hide');
+
+                },
+                error: function () {
+                    alert('Failed to refresh calendar after update');
+                }
+            })
+        }
+    })
 
     $('#btnDelete').click(function () {
         if (selectedEvent != null && confirm('Czy na pewno chcesz usunąć ten blok czasowy?')) {

@@ -38,8 +38,10 @@ namespace Printo.Intranet
             });
 
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(480);
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
             });
+
+            services.ConfigureApplicationCookie(options => options.ExpireTimeSpan = TimeSpan.FromMinutes(60));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 

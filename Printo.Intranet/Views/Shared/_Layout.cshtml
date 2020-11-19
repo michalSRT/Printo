@@ -63,12 +63,12 @@
             </ul>
 
             @*<ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
-                        <i class="fe fe-sun fe-16"></i>
-                    </a>
-                </li>
-            </ul>*@
+                    <li class="nav-item">
+                        <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
+                            <i class="fe fe-sun fe-16"></i>
+                        </a>
+                    </li>
+                </ul>*@
 
             @if (@Context.Session.GetString("UserID") != null)
             {
@@ -144,6 +144,15 @@
                         <a class="nav-link" asp-area="" asp-controller="ToDoes" asp-action="Index">
                             <i class="fe fe-alert-circle fe-16"></i>
                             <span class="ml-3 item-text">Do zrobienia</span>
+                        </a>
+                    </li>
+
+                    <hr />
+
+                    <li class="nav-item w-100">
+                        <a class="nav-link" asp-area="" asp-controller="Statistics" asp-action="Index">
+                            <i class="fe fe-bar-chart-2 fe-16"></i>
+                            <span class="ml-3 item-text">Statystyki</span>
                         </a>
                     </li>
 
@@ -243,7 +252,7 @@
         </aside>
         <!-- sidebar -->
         @*MAIN*@
-        <main role="main" class="main-content">
+        <main role="main" class="main-content" style="padding-top: 0px;">
             <div class="">
                 <div class="row justify-content-center">
                     <div class="col">
@@ -341,6 +350,8 @@
     <script src="~/lib/fullcalendar-5.3.2/lib/main.js"></script>
     <script src="~/lib/fullcalendar-5.3.2/lib/locales/pl.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
     <script src="~/js/apps.js"></script>
     <script src="~/js/site.js"></script>
     @RenderSection("Scripts", false)
@@ -350,314 +361,314 @@
 <script>
     $(document).ready(function () {
 
-    var selectedEvent = null;
+        var selectedEvent = null;
+        var initDate = new Date();
 
-    drawCalendar();
+        drawCalendar();
 
-    function drawCalendar() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            themeSystem: 'default',
-            initialView: 'timeGridWeek',
-            eventColor: 'green',
-            initialDate: new Date(),
-            locale: 'pl',
-            headerToolbar: {
-                start: 'today prev,next',
-                end: 'timeGridWeek,timeGridDay'
-            },
-            slotDuration: '00:30:00',
-            slotMinTime: "07:00:00",
-            slotMaxTime: "23:00:00",
-            weekends: true,
-            extendedProps: {
-                description: 'description',
-                orderID: 'orderID'
-            },
-            events: { url: "/home/GetAllEvents" },
-            eventClick: function (info, jsEvent, view) {
-                selectedEvent = info.event;
-                $('#eventModal #eventTitle').text(selectedEvent.title);
-                var $desc = $('<div/>');
-                $desc.append($('<p/>').html('<b>Start: </b>' + moment(selectedEvent.start).format('DD.MM.YYYY HH:mm')));
-                if (selectedEvent.end != null)
-                    $desc.append($('<p/>').html('<b>Koniec: </b>' + moment(selectedEvent.end).format('DD.MM.YYYY HH:mm')));
-                if (selectedEvent.extendedProps.description != null)
-                    $desc.append($('<p/>').html('<b>Opis: </b>' + selectedEvent.extendedProps.description));
-                if (selectedEvent.extendedProps.orderID != null) { $('#DivBtnOrder').show(); } else { $('#DivBtnOrder').hide(); }
-                $('#eventModal #pDetails').empty().html($desc);
-                $('#eventModal').modal();
-            },
-            selectable: true,
-            unselectAuto: true,
-            select: function (info, start, end, allDay) {
-                selectedEvent = {
-                    id: 0,
-                    title: '',
-                    description: '',
-                    start: info.start,
-                    end: info.end,
-                    allDay: info.allDay,
-                    color: '',
-                    orderID: ''
-                };
-                openAddEditForm();
-                calendar.unselect();
-            },
-            editable: true,
-            eventDurationEditable: true,
-            eventDrop: function (info) {
-                var data = {
-                    EventID: info.event.id,
-                    Title: info.event.title,
-                    Start: moment(info.event.start).format('DD.MM.YYYY HH:mm'),
-                    End: info.event.end != null ? moment(info.event.end).format('DD.MM.YYYY HH:mm') : null,
-                    AllDay: info.event.allDay,
-                    Description: info.event.description,
-                    BackgroundColor: info.event.color,
-                    OrderID: info.event.orderID
-                };
-                SaveEvent(data);
-            },
-            eventResize: function (info) {
-                var data = {
-                    EventID: info.event.id,
-                    Title: info.event.title,
-                    Start: moment(info.event.start).format('DD.MM.YYYY HH:mm'),
-                    End: info.event.end != null ? moment(info.event.end).format('DD.MM.YYYY HH:mm') : null,
-                    AllDay: info.event.allDay,
-                    Description: info.event.description,
-                    BackgroundColor: info.event.color,
-                    OrderID: info.event.orderID
-                };
-                SaveEvent(data);
-            }
-        });
-        calendar.render();
-    }
-
-    function openAddEditForm() {
-        if (selectedEvent != null) {
-
-            //if () {
-            //    $('#divOrder').hide();
-            //}
-            //else {
-            //    $('#divOrder').show();
-            //}
-
-            $('#txtStart, #txtEnd').datetimepicker('destroy');
-
-            $('#hdEventID').val(selectedEvent.id);
-            $('#txtTitle').val(selectedEvent.title);
-            $('#txtStart').val(moment(selectedEvent.start).format('DD.MM.YYYY HH:mm'));
-            $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
-            $('#chkIsFullDay').change();
-            $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.end).format('DD.MM.YYYY HH:mm') : '');
-            if (selectedEvent.description == '') {
-                $('#txtDescription').val(selectedEvent.description);
-            }
-            else {
-                $('#txtDescription').val(selectedEvent.extendedProps.description);
-            }
-            $('#ddThemeColor').val(selectedEvent.color);
-            if (selectedEvent.orderID == '') {
-                $('#divOrder').show();
-                $('#selectedOrder').val(selectedEvent.orderID);
-            }
-            else {
-                $('#divOrder').hide();
-                $('#selectedOrder').val(selectedEvent.extendedProps.orderID);
-            }
-
-
-            $('#txtStart, #txtEnd').datetimepicker({
-                contentWindow: window,
-                step: 30,
-                minTime: '7:00',
-                maxTime: '22:30',
-                format: 'd.m.Y H:i'
+        function drawCalendar() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                themeSystem: 'default',
+                initialView: 'timeGridWeek',
+                initialDate: initDate,
+                eventColor: 'green',
+                locale: 'pl',
+                headerToolbar: {
+                    start: 'today prev,next',
+                    end: 'timeGridWeek,timeGridDay'
+                },
+                slotDuration: '00:30:00',
+                slotMinTime: "07:00:00",
+                slotMaxTime: "23:00:00",
+                weekends: true,
+                extendedProps: {
+                    description: 'description',
+                    orderID: 'orderID'
+                },
+                events: { url: "/home/GetAllEvents" },
+                eventClick: function (info, jsEvent, view) {
+                    selectedEvent = info.event;
+                    $('#eventModal #eventTitle').text(selectedEvent.title);
+                    var $desc = $('<div/>');
+                    $desc.append($('<p/>').html('<b>Start: </b>' + moment(selectedEvent.start).format('DD.MM.YYYY HH:mm')));
+                    if (selectedEvent.end != null)
+                        $desc.append($('<p/>').html('<b>Koniec: </b>' + moment(selectedEvent.end).format('DD.MM.YYYY HH:mm')));
+                    if (selectedEvent.extendedProps.description != null)
+                        $desc.append($('<p/>').html('<b>Opis: </b>' + selectedEvent.extendedProps.description));
+                    if (selectedEvent.extendedProps.orderID != null) { $('#DivBtnOrder').show(); } else { $('#DivBtnOrder').hide(); }
+                    $('#eventModal #pDetails').empty().html($desc);
+                    $('#eventModal').modal();
+                },
+                selectable: true,
+                unselectAuto: true,
+                select: function (info, start, end, allDay) {
+                    selectedEvent = {
+                        id: 0,
+                        title: '',
+                        description: '',
+                        start: info.start,
+                        end: info.end,
+                        allDay: info.allDay,
+                        color: '',
+                        orderID: ''
+                    };
+                    initDate = selectedEvent.start;
+                    openAddEditForm();
+                    calendar.unselect();
+                },
+                editable: true,
+                eventDurationEditable: true,
+                eventDrop: function (info) {
+                    var data = {
+                        EventID: info.event.id,
+                        Title: info.event.title,
+                        Start: moment(info.event.start).format('DD.MM.YYYY HH:mm'),
+                        End: info.event.end != null ? moment(info.event.end).format('DD.MM.YYYY HH:mm') : null,
+                        AllDay: info.event.allDay,
+                        Description: info.event.description,
+                        BackgroundColor: info.event.color,
+                        OrderID: info.event.orderID
+                    };
+                    SaveEvent(data);
+                },
+                eventResize: function (info) {
+                    var data = {
+                        EventID: info.event.id,
+                        Title: info.event.title,
+                        Start: moment(info.event.start).format('DD.MM.YYYY HH:mm'),
+                        End: info.event.end != null ? moment(info.event.end).format('DD.MM.YYYY HH:mm') : null,
+                        AllDay: info.event.allDay,
+                        Description: info.event.description,
+                        BackgroundColor: info.event.color,
+                        OrderID: info.event.orderID
+                    };
+                    SaveEvent(data);
+                }
             });
+            calendar.render();
         }
-        $('#eventModal').modal('hide');
-        $('#eventModalSave').modal();
-    }
 
-    $('#btnEdit').click(function () {
+        function openAddEditForm() {
+            if (selectedEvent != null) {
+                $('#txtStart, #txtEnd').datetimepicker('destroy');
+                $('#hdEventID').val(selectedEvent.id);
+                $('#txtTitle').val(selectedEvent.title);
+                $('#txtStart').val(moment(selectedEvent.start).format('DD.MM.YYYY HH:mm'));
+                $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
+                $('#chkIsFullDay').change();
+                $('#txtEnd').val(selectedEvent.end != null ? moment(selectedEvent.end).format('DD.MM.YYYY HH:mm') : '');
+                if (selectedEvent.description == '') {
+                    $('#txtDescription').val(selectedEvent.description);
+                }
+                else {
+                    $('#txtDescription').val(selectedEvent.extendedProps.description);
+                }
+                $('#ddThemeColor').val(selectedEvent.color);
+                if (selectedEvent.orderID == '') {
+                    $('#divOrder').show();
+                    $('#selectedOrder').val(selectedEvent.orderID);
+                }
+                else {
+                    $('#divOrder').hide();
+                    $('#selectedOrder').val(selectedEvent.extendedProps.orderID);
+                }
+                $('#txtStart, #txtEnd').datetimepicker({
+                    contentWindow: window,
+                    step: 30,
+                    minTime: '7:00',
+                    maxTime: '22:30',
+                    format: 'd.m.Y H:i'
+                });
+            }
+            $('#eventModal').modal('hide');
+            $('#eventModalSave').modal();
+        }
+
+        $('#btnEdit').click(function () {
             openAddEditForm();
-    })
+        })
 
-    $('#btnSave').click(function () {
-        //Validation
-        if ($('#txtTitle').val().trim() == "") {
-            alert('Tytuł jest wymagany');
-            return;
-        }
-        if ($('#txtStart').val().trim() == "") {
-            alert('Data startu jest wymagana');
-            return;
-        }
-
-        if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
-            alert('Data końca jest wymagana');
-            return;
-        }
-        else {
-            var startDate = moment($('#txtStart').val(), "DD.MM.YYYY HH:mm").toDate();
-            var endDate = moment($('#txtEnd').val(), "DD.MM.YYYY HH:mm").toDate();
-            if (startDate > endDate) {
-                alert("Nieprawidłowa data końcowa");
+        $('#btnSave').click(function () {
+            //Validation
+            if ($('#txtTitle').val().trim() == "") {
+                alert('Tytuł jest wymagany');
                 return;
             }
+            if ($('#txtStart').val().trim() == "") {
+                alert('Data startu jest wymagana');
+                return;
+            }
+
+            if ($('#chkIsFullDay').is(':checked') == false && $('#txtEnd').val().trim() == "") {
+                alert('Data końca jest wymagana');
+                return;
+            }
+            else {
+                var startDate = moment($('#txtStart').val(), "DD.MM.YYYY HH:mm").toDate();
+                var endDate = moment($('#txtEnd').val(), "DD.MM.YYYY HH:mm").toDate();
+                if (startDate > endDate) {
+                    alert("Nieprawidłowa data końcowa");
+                    return;
+                }
+            }
+
+            var data = {
+                EventID: $('#hdEventID').val(),
+                Title: $('#txtTitle').val().trim(),
+                Start: $('#txtStart').val().trim(),
+                End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+                AllDay: $('#chkIsFullDay').is(':checked') ? true : false,
+                Description: $('#txtDescription').val().trim(),
+                BackgroundColor: $('#ddThemeColor').val(),
+                OrderID: $('#selectedOrder').val(),
+            }
+            SaveEvent(data);
+        })
+
+        function SaveEvent(data) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SaveEvent", "Home")',
+                data: data,
+                dataType: "json",
+                success: function (data) {
+                    //REFRESH CALENDAR
+                    initDate = selectedEvent.start;
+                    drawCalendar();
+                    //calendar.render();
+                    $('#eventModalSave').modal('hide');
+                },
+                error: function () {
+                    alert('Failed to refresh calendar after save');
+                }
+            })
         }
 
-        var data = {
-            EventID: $('#hdEventID').val(),
-            Title: $('#txtTitle').val().trim(),
-            Start: $('#txtStart').val().trim(),
-            End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
-            AllDay: $('#chkIsFullDay').is(':checked') ? true : false,
-            Description: $('#txtDescription').val().trim(),
-            BackgroundColor: $('#ddThemeColor').val(),
-            OrderID: $('#selectedOrder').val(),
-        }
-        SaveEvent(data);
-    })
+        $('#btnOrder').click(function () {
+            if (selectedEvent.extendedProps.orderID != null) {
+                window.location.href = '@Url.Action("Edit", "Orders")/' + selectedEvent.extendedProps.orderID + '';
+            }
+            else alert('Brak zamówienia przypisanego do tego bloku czasowego.');
+        })
 
-    function SaveEvent(data) {
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("SaveEvent", "Home")',
-            data: data,
-            dataType: "json",
-            success: function (data) {
-                //REFRESH CALENDAR
-                drawCalendar();
-                $('#eventModalSave').modal('hide');
-            },
-            error: function () {
-                alert('Failed to refresh calendar after save');
+        $('#btnGray').click(function () {
+            if (selectedEvent != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ChangeColor", "Home")',
+                    data: { EventID: selectedEvent.id, color: "gray" },
+                    dataType: "json",
+                    success: function () {
+                        //REFRESH CALENDAR
+                        initDate = selectedEvent.start;
+                        drawCalendar();
+                        $('#eventModal').modal('hide');
+
+                    },
+                    error: function () {
+                        alert('Failed to refresh calendar after update');
+                    }
+                })
             }
         })
-    }
 
-    $('#btnOrder').click(function () {
-        if (selectedEvent.extendedProps.orderID != null) {
-            window.location.href = '@Url.Action("Edit", "Orders")/' + selectedEvent.extendedProps.orderID + '';
-        }
-        else alert('Brak zamówienia przypisanego do tego bloku czasowego.');
-    })
+        $('#btnGreen').click(function () {
+            if (selectedEvent != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ChangeColor", "Home")',
+                    data: { EventID: selectedEvent.id, color: "#3ad29f" },
+                    dataType: "json",
+                    success: function () {
+                        //REFRESH CALENDAR
+                        initDate = selectedEvent.start;
+                        drawCalendar();
+                        $('#eventModal').modal('hide');
 
-    $('#btnGray').click(function () {
-        if (selectedEvent != null) {
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("ChangeColor", "Home")',
-                data: { EventID: selectedEvent.id, color: "gray" },
-                dataType: "json",
-                success: function () {
-                    //REFRESH CALENDAR
-                    drawCalendar();
-                    $('#eventModal').modal('hide');
-
-                },
-                error: function () {
-                    alert('Failed to refresh calendar after update');
-                }
-            })
-        }
-    })
-
-    $('#btnGreen').click(function () {
-        if (selectedEvent != null) {
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("ChangeColor", "Home")',
-                data: { EventID: selectedEvent.id, color: "#3ad29f" },
-                dataType: "json",
-                success: function () {
-                    //REFRESH CALENDAR
-                    drawCalendar();
-                    $('#eventModal').modal('hide');
-
-                },
-                error: function () {
-                    alert('Failed to refresh calendar after update');
-                }
-            })
-        }
-    })
-
-    $('#btnBlue').click(function () {
-        if (selectedEvent != null) {
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("ChangeColor", "Home")',
-                data: { EventID: selectedEvent.id, color: "#03A9F4" },
-                dataType: "json",
-                success: function () {
-                    //REFRESH CALENDAR
-                    drawCalendar();
-                    $('#eventModal').modal('hide');
-
-                },
-                error: function () {
-                    alert('Failed to refresh calendar after update');
-                }
-            })
-        }
-    })
-
-    $('#btnRed').click(function () {
-        if (selectedEvent != null) {
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("ChangeColor", "Home")',
-                data: {
-                    EventID: selectedEvent.id,
-                    color: "#FF5722"
                     },
-                dataType: "json",
-                success: function () {
-                    //REFRESH CALENDAR
-                    drawCalendar();
-                    $('#eventModal').modal('hide');
+                    error: function () {
+                        alert('Failed to refresh calendar after update');
+                    }
+                })
+            }
+        })
 
-                },
-                error: function () {
-                    alert('Failed to refresh calendar after update');
-                }
-            })
-        }
+        $('#btnBlue').click(function () {
+            if (selectedEvent != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ChangeColor", "Home")',
+                    data: { EventID: selectedEvent.id, color: "#03A9F4" },
+                    dataType: "json",
+                    success: function () {
+                        //REFRESH CALENDAR
+                        initDate = selectedEvent.start;
+                        drawCalendar();
+                        $('#eventModal').modal('hide');
+
+                    },
+                    error: function () {
+                        alert('Failed to refresh calendar after update');
+                    }
+                })
+            }
+        })
+
+        $('#btnRed').click(function () {
+            if (selectedEvent != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ChangeColor", "Home")',
+                    data: {
+                        EventID: selectedEvent.id,
+                        color: "#FF5722"
+                    },
+                    dataType: "json",
+                    success: function () {
+                        //REFRESH CALENDAR
+                        initDate = selectedEvent.start;
+                        drawCalendar();
+                        $('#eventModal').modal('hide');
+
+                    },
+                    error: function () {
+                        alert('Failed to refresh calendar after update');
+                    }
+                })
+            }
+        })
+
+        $('#btnDelete').click(function () {
+            if (selectedEvent != null && confirm('Czy na pewno chcesz usunąć ten blok czasowy?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteEvent", "Home")',
+                    data: { EventID: selectedEvent.id },
+                    dataType: "json",
+                    success: function () {
+                        //REFRESH CALENDAR
+                        initDate = selectedEvent.start;
+                        drawCalendar();
+                        $('#eventModal').modal('hide');
+
+                    },
+                    error: function () {
+                        alert('Failed to refresh calendar after delete');
+                    }
+                })
+            }
+        })
+
+        $('#chkIsFullDay').change(function () {
+            if ($(this).is(':checked')) {
+                $('#divEndDate').hide();
+            }
+            else {
+                $('#divEndDate').show();
+            }
+        });
     })
-
-    $('#btnDelete').click(function () {
-        if (selectedEvent != null && confirm('Czy na pewno chcesz usunąć ten blok czasowy?')) {
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("DeleteEvent", "Home")',
-                data: { EventID: selectedEvent.id },
-                dataType: "json",
-                success: function () {
-                    //REFRESH CALENDAR
-                    drawCalendar();
-                    $('#eventModal').modal('hide');
-
-                },
-                error: function () {
-                    alert('Failed to refresh calendar after delete');
-                }
-            })
-        }
-    })
-
-    $('#chkIsFullDay').change(function () {
-        if ($(this).is(':checked')) {
-            $('#divEndDate').hide();
-        }
-        else {
-            $('#divEndDate').show();
-        }
-    });
-})
 </script>
+
+

@@ -24,7 +24,7 @@ namespace Printo.Intranet.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(User user)
+        public IActionResult Index(User user)
         {
 
             User account = _context.Users.FirstOrDefault(u => u.Login == user.Login);

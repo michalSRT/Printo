@@ -46,9 +46,18 @@
                             <span asp-validation-for="Login" class="text-danger"></span>
                         </div>
                         <div class="form-group col-xl-6">
-                            <label asp-for="Password" class="control-label">Nowe hasło</label>
-                            <input asp-for="Password" type="password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
+                                <div class="custom-checkbox">
+                                    <label>
+                                        <input type="checkbox" id="chkIsNewPassword" /><span style="margin-left:5px">Nowe hasło?</span>
+                                    </label>
+                                </div>
+                            <div class="form-group" id="newPassword" style="display:none">
+                                <input asp-for="Password" type="password" class="form-control" id="newPasswordInput" disabled/>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" asp-for="Password" id="oldPassword"/>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -132,3 +141,18 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    $('#chkIsNewPassword').change(function () {
+        if ($(this).is(':checked')) {
+            $('#oldPassword').prop('disabled', true);
+            $('#newPasswordInput').prop('disabled', false);
+            $('#newPassword').show();
+        }
+        else {
+            $('#oldPassword').prop('disabled', false);
+            $('#newPasswordInput').prop('disabled', true);
+            $('#newPassword').hide();
+        }
+    });
+</script>

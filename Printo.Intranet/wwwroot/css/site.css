@@ -115,3 +115,7 @@ body {
 .cardCursor {
     cursor: pointer !important;
 }
+
+.active-nav {
+    background: rgba(58, 210, 159, 0.5) !important;
+}

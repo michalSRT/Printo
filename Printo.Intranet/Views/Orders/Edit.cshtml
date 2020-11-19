@@ -12,12 +12,15 @@
                     <div class="col">
                         <h4 class="mb-2 page-title">Zamówienie nr @Model.OrderID - @Model.OrderName</h4>
                     </div>
+                    <div class="col" style="text-align:center">
+                        <input form="saveForm" type="submit" value="Zapisz" class="btn btn-success">
+                    </div>
                     <div class="col">
                         <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
                             <i class="fe fe-arrow-left" style="vertical-align:text-top"></i>
                             Powrót do listy
                         </a>
-                        <a class="btn btn-outline-success float-right" style="margin-right:5px" role="button" aria-haspopup="true" aria-expanded="false" asp-action="CopyAndCreate" asp-route-id="@Model.OrderID" >
+                        <a class="btn btn-outline-success float-right" style="margin-right:5px" role="button" aria-haspopup="true" aria-expanded="false" asp-action="CopyAndCreate" asp-route-id="@Model.OrderID">
                             <i class="fe fe-copy" style="vertical-align:text-top"></i>
                             Kopiuj do nowego
                         </a>
@@ -53,7 +56,8 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="ClientID" class="control-label">Klient</label>
-                                    <label><a class="btn-outline-success" role="button" aria-haspopup="true" aria-expanded="false" href="@Url.Action("AddClient", "Orders", new { OrderID = ViewData["OrderID"] })"><i class="fe fe-plus"></i></a></label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
+                                    <label data-toggle="tooltip" data-placement="top" title="Nowy klient"><a class="btn-outline-success" role="button" aria-haspopup="true" aria-expanded="false" href="@Url.Action("AddClient", "Orders", new { OrderID = ViewData["OrderID"] })"><i class="fe fe-plus"></i></a></label>
                                     <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID">
                                         <option selected disabled value="0"></option>
                                     </select>
@@ -61,6 +65,7 @@
                                 </div>
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="OrderName" class="control-label">Nazwa zamówienia</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <input asp-for="OrderName" class="form-control" />
                                     <span asp-validation-for="OrderName" class="text-danger"></span>
                                 </div>
@@ -68,6 +73,7 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col-12 col-md-4">
                                     <label asp-for="ProductID" class="control-label">Produkt</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="ProductID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ProductID">
                                         <option selected disabled value="0"></option>
                                     </select>
@@ -75,6 +81,7 @@
                                 </div>
                                 <div class="form-group col-12 col-md-4">
                                     <label asp-for="FormatID" class="control-label">Format</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="FormatID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FormatID">
                                         <option selected disabled value="0"></option>
                                     </select>
@@ -82,6 +89,7 @@
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="Quantity" class="control-label">Nakład</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <input asp-for="Quantity" class="form-control" />
                                     <span asp-validation-for="Quantity" class="text-danger"></span>
                                 </div>
@@ -89,6 +97,7 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="PaperTypeID" class="control-label">Papier</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="PaperTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperTypeID">
                                         <option selected disabled value="0"></option>
                                     </select>
@@ -96,6 +105,7 @@
                                 </div>
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="PaperWeightID" class="control-label">Gramatura</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="PaperWeightID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperWeightID">
                                         <option selected disabled value="0"></option>
                                     </select>
@@ -125,18 +135,21 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col-6 col-md-4">
                                     <label asp-for="MachineID" class="control-label">Maszyna</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="MachineID" class="form-control myselect" style="width:100%" asp-items="ViewBag.MachineID">
                                     </select>
                                     <span asp-validation-for="MachineID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-6 col-md-4">
                                     <label asp-for="SheetSizeID" class="control-label">Format arkusza</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="SheetSizeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.SheetSizeID">
                                     </select>
                                     <span asp-validation-for="SheetSizeID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="PrintColorID" class="control-label">Kolorystyka druku</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="PrintColorID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PrintColorID">
                                     </select>
                                     <span asp-validation-for="PrintColorID" class="text-danger"></span>
@@ -179,12 +192,14 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="FinishingID" class="control-label">Uszlachetnienia</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="FinishingID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FinishingID">
                                     </select>
                                     <span asp-validation-for="FinishingID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="PostPressID" class="control-label">Introligatornia</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="PostPressID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PostPressID">
                                     </select>
                                     <span asp-validation-for="PostPressID" class="text-danger"></span>
@@ -196,12 +211,14 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col">
                                     <label asp-for="DeliveryTypeID" class="control-label">Rodzaj dostawy</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="DeliveryTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.DeliveryTypeID">
                                     </select>
                                     <span asp-validation-for="DeliveryTypeID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col col-md-6">
                                     <label asp-for="PaymentTypeID" class="control-label">Sposób płatności</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="PaymentTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaymentTypeID">
                                     </select>
                                     <span asp-validation-for="PaymentTypeID" class="text-danger"></span>
@@ -220,6 +237,7 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
                                 <div class="form-group col col-md-6">
                                     <label asp-for="VatRateID" class="control-label">Stawka Vat</label>
+                                    <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
                                     <select asp-for="VatRateID" class="form-control myselect" style="width:100%" asp-items="ViewBag.VatRateID">
                                     </select>
                                     <span asp-validation-for="VatRateID" class="text-danger"></span>

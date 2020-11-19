@@ -20,6 +20,7 @@ namespace Printo.Intranet.Controllers
         public HomeController(PrintoContext context)
         {
             _context = context;
+
         }
 
         public IActionResult Index()

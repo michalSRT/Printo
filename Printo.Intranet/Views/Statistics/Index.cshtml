@@ -1,43 +1,105 @@
-﻿@model IEnumerable<Printo.Data.Data.Product>
-
+﻿@model Printo.Intranet.Models.HomeIndexVM
 @{
     ViewData["Title"] = "Statystyki";
 }
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
         <div class="card shadow">
-            <div class="card-header">
-                <h4 class="mb-2 page-title">Statystyki zamówień</h4>
+            <div class="card-body" style="padding-bottom: 0px;">
+                <div class="row" style="place-content: center;">
+                    <div class="col" style="max-width: 280px; min-width:280px">
+                        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "Orders"))'">
+                            <div class="card-body" style="padding:0.5rem">
+                                <div class="col" style="padding:0px">
+                                    <i class="fe fe-activity fe-32"></i>
+                                    <br />
+                                    <a class="btn" asp-area="" asp-controller="Orders" asp-action="Index">
+                                        <span style="font-weight:bold">Aktualne zamówienia : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.OrdersNumber</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col" style="max-width: 280px; min-width:280px">
+                        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("FinishedOrders", "Orders"))'">
+                            <div class="card-body" style="padding:0.5rem">
+                                <div class="col" style="padding:0px">
+                                    <i class="fe fe-activity fe-32"></i>
+                                    <br />
+                                    <a class="btn" asp-area="" asp-controller="Orders" asp-action="FinishedOrders">
+                                        <span style="font-weight:bold">Zrealizowane zamówienia : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.FinishedOrdersNumber</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col" style="max-width: 280px; min-width:280px">
+                        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "Products"))'">
+                            <div class="card-body" style="padding:0.5rem">
+                                <div class="col" style="padding:0px">
+                                    <i class="fe fe-activity fe-32"></i>
+                                    <br />
+                                    <a class="btn" asp-area="" asp-controller="Products" asp-action="Index">
+                                        <span style="font-weight:bold">Ilość produktów : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.ProductsNumber</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col" style="max-width: 280px; min-width:280px">
+                        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "Clients"))'">
+                            <div class="card-body" style="padding:0.5rem">
+                                <div class="col" style="padding:0px">
+                                    <i class="fe fe-activity fe-32"></i>
+                                    <br />
+                                    <a class="btn" asp-area="" asp-controller="Clients" asp-action="Index">
+                                        <span style="font-weight:bold">Ilość klientów : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.ClientsNumber</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card shadow" style=" padding-bottom: 17px;">
+            <div class="card-header" style="align-self: center;">
+                <h4 class="mb-2 page-title">Zamówienia wg produktów</h4>
             </div>
             <div class="card-body">
-                <label>Ilość zamówień: @ViewBag.OrdersNumber</label>
-
-                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders">
-                    <thead>
-                        <tr>
-                            <th>Produkt</th>
-                            <th>Ilość zamówień</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Where(x => x.IsActive == true))
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-
-
+                <canvas id="myBarChart"></canvas>
             </div>
         </div>
     </div>
 </div>
 
+
+@section Scripts {
+
+    <script type="text/javascript">
+    $(function () {
+                var ctx_bchart = document.getElementById("myBarChart").getContext('2d');
+
+                var myBarChart = new Chart(ctx_bchart, {
+        type: 'bar',
+                data: @Html.Raw(Json.Serialize(Model.BarChartData)),
+                    options: {
+                        legend: {
+                        display: false
+                        },
+                        scales: {
+                            yAxes: [{
+                            ticks: {
+                            stepSize: 10
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+    </script>
+
+}

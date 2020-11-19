@@ -1,8 +1,9 @@
 ﻿@model Printo.Data.Data.Order
 @{
     ViewData["Title"] = "Printo - zarządzanie zamówieniami";
+
 }
-<div class="row" style="place-content:center; margin-top:10px">
+<div class="row" style="place-content:center; margin-top:20px">
     <div class="col" style="max-width: 260px; min-width:215px">
         <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Create", "Orders"))'">
             <div class="card-body" style="padding:0.5rem">

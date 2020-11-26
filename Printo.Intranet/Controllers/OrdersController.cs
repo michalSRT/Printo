@@ -106,6 +106,7 @@ namespace Printo.Intranet.Controllers
             {
                 order.IsActive = true;
                 order.AddedDate = DateTime.Now;
+                order.AddedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                 _context.Add(order);
                 await _context.SaveChangesAsync();
 
@@ -200,17 +201,21 @@ namespace Printo.Intranet.Controllers
                 try
                 {
                     order.UpdatedDate = DateTime.Now;
+                    order.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                     _context.Update(order);
                     Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
                     TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało zmodyfikowane";
                     await _context.SaveChangesAsync();
-
 
                     var v = _context.Events.Where(a => a.OrderID == order.OrderID).FirstOrDefault();
                     if (v != null)
                     {
                         v.Title = order.Client.Name + " - " + order.OrderName;
                         v.Description = order.Description;
+                        if(order.ProductionStageID == 5 || order.ProductionStageID == 6 || order.ProductionStageID == 7 || order.ProductionStageID == 8)
+                        {
+                            v.BackgroundColor = "#6c757d";
+                        }
                         _context.SaveChanges();
                     }
 
@@ -304,6 +309,7 @@ namespace Printo.Intranet.Controllers
             {
                 order.IsActive = true;
                 order.AddedDate = DateTime.Now;
+                order.AddedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                 _context.Add(order);
                 await _context.SaveChangesAsync();
 
@@ -402,6 +408,14 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.Orders.FindAsync(id);
             temp.IsActive = false;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
+            var e = _context.Events.Where(a => a.OrderID == id).FirstOrDefault();
+            if (e != null)
+            {
+
+                _context.Remove(e);
+                _context.SaveChanges();
+            }
             await _context.SaveChangesAsync();
             TempData["msg"] = "Zamówienie zostało usunięte";
             return RedirectToAction(nameof(Index));
@@ -415,6 +429,23 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.Orders.FindAsync(id);
             temp.IsActive = true;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
+
+            var ord = _context.Orders.Where(x => x.OrderID == id).FirstOrDefault();
+            var client = _context.Clients.Where(y => y.ClientID == ord.ClientID).FirstOrDefault();
+
+            _context.Events.Add(new Event
+            {
+                Title = client.Name + " - " + ord.OrderName,
+                Start = DateTime.Today.AddHours(7.0),
+                End = null,
+                AllDay = true,
+                OrderID = ord.OrderID,
+                BackgroundColor = "#3ad29f",
+                Description = ord.Description
+            });
+            _context.SaveChanges();
+
             await _context.SaveChangesAsync();
             TempData["msg"] = "Zamówienie zostało przywrócone";
 

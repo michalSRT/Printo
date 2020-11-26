@@ -67,6 +67,7 @@ namespace Printo.Intranet.Controllers
             {
                 printColor.IsActive = true;
                 printColor.AddedDate = DateTime.Now;
+                printColor.AddedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                 _context.Add(printColor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -111,6 +112,7 @@ namespace Printo.Intranet.Controllers
                 try
                 {
                     printColor.UpdatedDate = DateTime.Now;
+                    printColor.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                     _context.Update(printColor);
                     await _context.SaveChangesAsync();
                 }
@@ -171,6 +173,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.PrintColors.FindAsync(id);
             temp.IsActive = false;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -183,6 +186,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.PrintColors.FindAsync(id);
             temp.IsActive = true;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

@@ -67,6 +67,7 @@ namespace Printo.Intranet.Controllers
             {
                 finishing.IsActive = true;
                 finishing.AddedDate = DateTime.Now;
+                finishing.AddedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                 _context.Add(finishing);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -111,6 +112,7 @@ namespace Printo.Intranet.Controllers
                 try
                 {
                     finishing.UpdatedDate = DateTime.Now;
+                    finishing.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                     _context.Update(finishing);
                     await _context.SaveChangesAsync();
                 }
@@ -171,6 +173,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.Finishings.FindAsync(id);
             temp.IsActive = false;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -183,6 +186,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.Finishings.FindAsync(id);
             temp.IsActive = true;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

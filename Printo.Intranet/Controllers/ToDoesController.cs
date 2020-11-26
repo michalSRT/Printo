@@ -67,6 +67,7 @@ namespace Printo.Intranet.Controllers
             {
                 toDo.IsActive = true;
                 toDo.AddedDate = DateTime.Now;
+                toDo.AddedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                 _context.Add(toDo);
                 await _context.SaveChangesAsync();
                 TempData["msg"] = "Notatka 'Do zrobienia' została dodana";
@@ -113,6 +114,7 @@ namespace Printo.Intranet.Controllers
                 try
                 {
                     toDo.UpdatedDate = DateTime.Now;
+                    toDo.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                     _context.Update(toDo);
                     await _context.SaveChangesAsync();
                 }
@@ -177,6 +179,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.ToDos.FindAsync(id);
             temp.IsActive = false;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
             TempData["msg"] = "Notatka 'Do zrobienia' została usunięta";
 
@@ -191,6 +194,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.ToDos.FindAsync(id);
             temp.IsActive = true;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
             TempData["msg"] = "Notatka 'Do zrobienia' została przywrócona";
 

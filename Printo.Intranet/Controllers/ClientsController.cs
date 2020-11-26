@@ -67,6 +67,7 @@ namespace Printo.Intranet.Controllers
             {
                 client.IsActive = true;
                 client.AddedDate = DateTime.Now;
+                client.AddedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                 _context.Add(client);
                 await _context.SaveChangesAsync();
                 TempData["msg"] = "Klient: <br>" + client.Name + "<br> został dodany";
@@ -115,6 +116,7 @@ namespace Printo.Intranet.Controllers
                 try
                 {
                     client.UpdatedDate = DateTime.Now;
+                    client.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                     _context.Update(client);
                     await _context.SaveChangesAsync();
                 }
@@ -181,6 +183,7 @@ namespace Printo.Intranet.Controllers
             var client = await _context.Clients.FindAsync(id);
             client.IsActive = false;
             client.UpdatedDate = DateTime.Now;
+            client.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
             TempData["msg"] = "Klient został usunięty";
 
@@ -195,6 +198,7 @@ namespace Printo.Intranet.Controllers
             var client = await _context.Clients.FindAsync(id);
             client.IsActive = true;
             client.UpdatedDate = DateTime.Now;
+            client.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
             TempData["msg"] = "Klient został przywrócony";
 

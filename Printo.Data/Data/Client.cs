@@ -14,12 +14,13 @@ namespace Printo.Data.Data
         public string CompanyFullName { get; set; }
         [MinLength(10, ErrorMessage = "Numer NIP powinien mieć 10 cyfr wpisywane bez pauz.")]
         [MaxLength(10, ErrorMessage = "Numer NIP powinien mieć 10 cyfr wpisywane bez pauz.")]
+        [RegularExpression(@"^[0-9]*$", ErrorMessage = "Numer NIP powinien mieć 10 cyfr wpisywane bez pauz.")]
         public string NIP { get; set; }
 
         public string Street { get; set; }
         public string HouseNumber { get; set; }
         public string AppartmentNumber { get; set; }
-        [RegularExpression(@"[0-9]{2}-[0-9]{3}", ErrorMessage = "Kod pocztowy nie jest poprawny (##-###")]
+        [RegularExpression(@"[0-9]{2}-[0-9]{3}", ErrorMessage = "Kod pocztowy nie jest poprawny (##-###)")]
         public string PostalCode { get; set; }
         public string City { get; set; }
 

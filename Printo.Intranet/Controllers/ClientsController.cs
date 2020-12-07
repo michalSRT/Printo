@@ -91,7 +91,8 @@ namespace Printo.Intranet.Controllers
             {
                 return NotFound();
             }
-            var ClientOrders = _context.Orders.Include(z => z.ProductionStage).Where(x => x.IsActive == true && x.ClientID == id).ToList();
+            var ClientOrders = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.IsActive == true && x.ClientID == id);
+
             ViewBag.ClientOrders = ClientOrders;
             ViewData["ClientOrders"] = ClientOrders;
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", client.AddedUserID);

@@ -104,8 +104,8 @@ body {
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #3ad29f;
-    border-color: #3ad29f;
+    background-color: #3ad29f !important;
+    border-color: #3ad29f !important;
 }
 
 .tableCursor td {

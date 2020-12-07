@@ -1,5 +1,5 @@
 ﻿@model Printo.Data.Data.Order
-
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = String.Format("Edycja zamówienia nr {0}", Model.OrderID);
 }
@@ -30,6 +30,7 @@
             <div class="card-body">
                 <form asp-action="Edit" id="saveForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="hdnSession" data-value="@Context.Session.GetString("UserTypeID")" />
                     <input type="hidden" asp-for="OrderID" />
                     <input type="hidden" asp-for="IsActive" />
                     <input type="hidden" asp-for="AddedDate" />
@@ -44,7 +45,7 @@
                                 </div>
                                 <div class="form-group col-12 col-md-4">
                                     <label asp-for="EndDate" class="control-label">Termin realizacji</label>
-                                    <input asp-for="EndDate" autocomplete="off" class="form-control" id="endDate" type="text" value="@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.EndDate))"/>
+                                    <input asp-for="EndDate" autocomplete="off" class="form-control" id="endDate" type="text" value="@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.EndDate))" />
                                     <span asp-validation-for="EndDate" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
@@ -57,16 +58,19 @@
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="ClientID" class="control-label">Klient</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <label data-toggle="tooltip" data-placement="top" title="Nowy klient"><a class="btn-outline-success" role="button" aria-haspopup="true" aria-expanded="false" href="@Url.Action("AddClient", "Orders", new { OrderID = ViewData["OrderID"] })"><i class="fe fe-plus"></i></a></label>
-                                    <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID">
-                                        <option selected disabled value="0"></option>
-                                    </select>
+                                    @if (@Context.Session.GetString("UserTypeID") != 2.ToString())
+                                    {
+                                        <label data-toggle="tooltip" data-placement="top" title="Nowy klient"><a class="btn-outline-success" role="button" aria-haspopup="true" aria-expanded="false" href="@Url.Action("AddClient", "Orders", new { OrderID = ViewData["OrderID"] })"><i class="fe fe-plus"></i></a></label>
+                                    }                                    
+                                        <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID" id="Client">
+                                            <option selected disabled value="0"></option>
+                                        </select>
                                     <span asp-validation-for="ClientID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="OrderName" class="control-label">Nazwa zamówienia</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <input asp-for="OrderName" class="form-control" />
+                                    <input asp-for="OrderName" class="form-control" id="OrderName" />
                                     <span asp-validation-for="OrderName" class="text-danger"></span>
                                 </div>
                             </div>
@@ -74,7 +78,7 @@
                                 <div class="form-group col-12 col-md-4">
                                     <label asp-for="ProductID" class="control-label">Produkt</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="ProductID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ProductID">
+                                    <select asp-for="ProductID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ProductID" id="Product">
                                         <option selected disabled value="0"></option>
                                     </select>
                                     <span asp-validation-for="ProductID" class="text-danger"></span>
@@ -82,7 +86,7 @@
                                 <div class="form-group col-12 col-md-4">
                                     <label asp-for="FormatID" class="control-label">Format</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="FormatID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FormatID">
+                                    <select asp-for="FormatID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FormatID" id="Format">
                                         <option selected disabled value="0"></option>
                                     </select>
                                     <span asp-validation-for="FormatID" class="text-danger"></span>
@@ -90,7 +94,7 @@
                                 <div class="form-group col">
                                     <label asp-for="Quantity" class="control-label">Nakład</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <input asp-for="Quantity" class="form-control" />
+                                    <input asp-for="Quantity" class="form-control" id="Quantity"/>
                                     <span asp-validation-for="Quantity" class="text-danger"></span>
                                 </div>
                             </div>
@@ -98,7 +102,7 @@
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="PaperTypeID" class="control-label">Papier</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="PaperTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperTypeID">
+                                    <select asp-for="PaperTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperTypeID" id="PaperType">
                                         <option selected disabled value="0"></option>
                                     </select>
                                     <span asp-validation-for="PaperTypeID" class="text-danger"></span>
@@ -106,7 +110,7 @@
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="PaperWeightID" class="control-label">Gramatura</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="PaperWeightID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperWeightID">
+                                    <select asp-for="PaperWeightID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperWeightID" id="PaperWeight">
                                         <option selected disabled value="0"></option>
                                     </select>
                                     <span asp-validation-for="PaperWeightID" class="text-danger"></span>
@@ -125,7 +129,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <textarea asp-for="Description" class="form-control"></textarea>
+                                    <textarea asp-for="Description" class="form-control" id="Description"></textarea>
                                     <span asp-validation-for="Description" class="text-danger"></span>
                                 </div>
                             </div>
@@ -159,7 +163,7 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col">
                                     <label asp-for="SheetsNumber" class="control-label">Ilość arkuszy do druku</label>
-                                    <textarea asp-for="SheetsNumber" class="form-control"></textarea>
+                                    <textarea asp-for="SheetsNumber" class="form-control" id="SheetsNumber"></textarea>
                                 </div>
                             </div>
 
@@ -193,14 +197,14 @@
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="FinishingID" class="control-label">Uszlachetnienia</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="FinishingID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FinishingID">
+                                    <select asp-for="FinishingID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FinishingID" id="Finishing">
                                     </select>
                                     <span asp-validation-for="FinishingID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="PostPressID" class="control-label">Introligatornia</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="PostPressID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PostPressID">
+                                    <select asp-for="PostPressID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PostPressID" id="PostPress">
                                     </select>
                                     <span asp-validation-for="PostPressID" class="text-danger"></span>
                                 </div>
@@ -212,14 +216,14 @@
                                 <div class="form-group col">
                                     <label asp-for="DeliveryTypeID" class="control-label">Rodzaj dostawy</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="DeliveryTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.DeliveryTypeID">
+                                    <select asp-for="DeliveryTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.DeliveryTypeID" id="DeliveryType">
                                     </select>
                                     <span asp-validation-for="DeliveryTypeID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col col-md-6">
                                     <label asp-for="PaymentTypeID" class="control-label">Sposób płatności</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="PaymentTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaymentTypeID">
+                                    <select asp-for="PaymentTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaymentTypeID" id="PaymentType">
                                     </select>
                                     <span asp-validation-for="PaymentTypeID" class="text-danger"></span>
                                 </div>
@@ -227,24 +231,24 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col">
                                     <label asp-for="DeliveryDetails" class="control-label">Szczegóły dostawy</label>
-                                    <textarea asp-for="DeliveryDetails" class="form-control"></textarea>
+                                    <textarea asp-for="DeliveryDetails" class="form-control" id="DeliveryDetails"></textarea>
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="PaymentDetails" class="control-label">Szczegóły płatności</label>
-                                    <textarea asp-for="PaymentDetails" class="form-control"></textarea>
+                                    <textarea asp-for="PaymentDetails" class="form-control" id="PaymentDetails"></textarea>
                                 </div>
                             </div>
                             <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
                                 <div class="form-group col col-md-6">
                                     <label asp-for="VatRateID" class="control-label">Stawka Vat</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="VatRateID" class="form-control myselect" style="width:100%" asp-items="ViewBag.VatRateID">
+                                    <select asp-for="VatRateID" class="form-control myselect" style="width:100%" asp-items="ViewBag.VatRateID" id="VatRate">
                                     </select>
                                     <span asp-validation-for="VatRateID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="NetPrice" class="control-label">Cena netto</label>
-                                    <input asp-for="NetPrice" class="form-control" />
+                                    <input id="NetPrice" asp-for="NetPrice" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -328,7 +332,7 @@
                         </a>
                     </div>
                     <div class="col" style="text-align:right">
-                        <input form="saveForm" type="submit" value="Zapisz" class="btn btn-success" >
+                        <input form="saveForm" type="submit" value="Zapisz" class="btn btn-success">
                     </div>
                 </div>
             </div>
@@ -340,3 +344,32 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    $(document).ready(function () {
+        var userTypeID = $("#hdnSession").data('value');
+        if (userTypeID == 2) {
+            document.getElementById("NetPrice").disabled = true;  
+            document.getElementById("VatRate").disabled = true;  
+            document.getElementById("PaymentDetails").disabled = true;  
+            document.getElementById("DeliveryDetails").disabled = true;  
+            document.getElementById("PaymentType").disabled = true;  
+            document.getElementById("DeliveryType").disabled = true;  
+            document.getElementById("PostPress").disabled = true;  
+            document.getElementById("Finishing").disabled = true;  
+            document.getElementById("Description").disabled = true;  
+            document.getElementById("OrderName").disabled = true;  
+            document.getElementById("OrderName").disabled = true;  
+            document.getElementById("Client").disabled = true;  
+            document.getElementById("startDate").disabled = true;  
+            document.getElementById("endDate").disabled = true;  
+            document.getElementById("Product").disabled = true;  
+            document.getElementById("Format").disabled = true;  
+            document.getElementById("Quantity").disabled = true;  
+            document.getElementById("SheetsNumber").disabled = true;  
+            document.getElementById("PaperWeight").disabled = true;  
+            document.getElementById("PaperType").disabled = true;  
+            document.getElementById("customCheck1").disabled = true;  
+        }
+    })
+</script>

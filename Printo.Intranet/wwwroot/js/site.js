@@ -3,6 +3,35 @@
 
 // Write your JavaScript code.
 
+// ORDERS/EDIT disable fields when UserType == 2
+$(document).ready(function () {
+    var userTypeID = $("#hdnSession").data('value');
+    if (userTypeID == 2) {
+        document.getElementById("NetPrice").disabled = true;
+        document.getElementById("VatRate").disabled = true;
+        document.getElementById("PaymentDetails").disabled = true;
+        document.getElementById("DeliveryDetails").disabled = true;
+        document.getElementById("PaymentType").disabled = true;
+        document.getElementById("DeliveryType").disabled = true;
+        document.getElementById("PostPress").disabled = true;
+        document.getElementById("Finishing").disabled = true;
+        document.getElementById("Description").disabled = true;
+        document.getElementById("OrderName").disabled = true;
+        document.getElementById("OrderName").disabled = true;
+        document.getElementById("Client").disabled = true;
+        document.getElementById("startDate").disabled = true;
+        document.getElementById("endDate").disabled = true;
+        document.getElementById("Product").disabled = true;
+        document.getElementById("Format").disabled = true;
+        document.getElementById("Quantity").disabled = true;
+        document.getElementById("SheetsNumber").disabled = true;
+        document.getElementById("PaperWeight").disabled = true;
+        document.getElementById("PaperType").disabled = true;
+        document.getElementById("customCheck1").disabled = true;
+    }
+})
+
+
 $(document).ready(function () {
     // get current URL path and assign 'active' class
     var pathname = window.location.pathname;

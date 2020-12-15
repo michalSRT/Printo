@@ -60,6 +60,8 @@ namespace Printo.Data.Data
         public string OrderName { get; set; }
         [Display(Name = "Dodatkowy opis zamówienia")]
         public string Description { get; set; }
+        [Display(Name = "Nr faktury")]
+        public string InvoiceNumber { get; set; }
         [Display(Name = "Cena netto")]
         public string NetPrice { get; set; }
         [Display(Name = "Czy dodruk?")]

@@ -17,6 +17,10 @@ namespace Printo.Data.Data
         public string Description { get; set; }
         [Display(Name = "Wybierz datę jeżeli dotyczy")]
         public DateTime? Date { get; set; }
+        [Display(Name = "Pracownik")]
+        public int? UserID { get; set; }
+        public virtual User User { get; set; }
+
 
         public bool IsActive { get; set; }
         public DateTime AddedDate { get; set; }

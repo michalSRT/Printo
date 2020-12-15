@@ -471,6 +471,7 @@ namespace Printo.Data.Migrations
                     Name = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: true),
+                    UserID = table.Column<int>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: true),
@@ -489,6 +490,12 @@ namespace Printo.Data.Migrations
                     table.ForeignKey(
                         name: "FK_ToDos_Users_UpdatedUserID",
                         column: x => x.UpdatedUserID,
+                        principalTable: "Users",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ToDos_Users_UserID",
+                        column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Restrict);
@@ -550,6 +557,7 @@ namespace Printo.Data.Migrations
                     EndDate = table.Column<DateTime>(nullable: true),
                     OrderName = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
+                    InvoiceNumber = table.Column<string>(nullable: true),
                     NetPrice = table.Column<string>(nullable: true),
                     IsReprint = table.Column<bool>(nullable: false),
                     Quantity = table.Column<string>(nullable: false),
@@ -710,9 +718,9 @@ namespace Printo.Data.Migrations
                 columns: new[] { "UserTypeID", "AddedDate", "Description", "IsActive", "Name", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 897, DateTimeKind.Local).AddTicks(5370), "Administrator systemu", true, "Admin", null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 897, DateTimeKind.Local).AddTicks(5725), "Drukarz", true, "Drukarz", null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 897, DateTimeKind.Local).AddTicks(5735), "Pracownik", true, "Pracownik", null }
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 64, DateTimeKind.Local).AddTicks(9719), "Administrator systemu", true, "Admin", null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(68), "Drukarz", true, "Drukarz", null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(79), "Pracownik", true, "Pracownik", null }
                 });
 
             migrationBuilder.InsertData(
@@ -720,25 +728,25 @@ namespace Printo.Data.Migrations
                 columns: new[] { "VatRateID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "Rate", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 897, DateTimeKind.Local).AddTicks(7814), null, "Standardowa stawka Vat", true, "23%", 23, null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 897, DateTimeKind.Local).AddTicks(8153), null, "Stawka Vat przy numerze ISSN", true, "8%", 8, null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 897, DateTimeKind.Local).AddTicks(8163), null, "Stawka Vat przy numerze ISBN", true, "5%", 5, null, null },
-                    { 5, new DateTime(2020, 11, 22, 15, 25, 39, 897, DateTimeKind.Local).AddTicks(8166), null, "Nie dotyczy", true, "nd", 0, null, null }
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(1986), null, "Standardowa stawka Vat", true, "23%", 23, null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(2322), null, "Stawka Vat przy numerze ISSN", true, "8%", 8, null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(2333), null, "Stawka Vat przy numerze ISBN", true, "5%", 5, null, null },
+                    { 5, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(2336), null, "Nie dotyczy", true, "nd", 0, null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserID", "AddedDate", "IsActive", "Login", "Name", "Password", "UpdatedDate", "UserTypeID" },
-                values: new object[] { 1, new DateTime(2020, 11, 22, 15, 25, 39, 897, DateTimeKind.Local).AddTicks(3002), true, "admin", "Admin", "21232f297a57a5a743894a0e4a801fc3", null, 1 });
+                values: new object[] { 1, new DateTime(2020, 12, 15, 22, 55, 51, 64, DateTimeKind.Local).AddTicks(7352), true, "admin", "Admin", "21232f297a57a5a743894a0e4a801fc3", null, 1 });
 
             migrationBuilder.InsertData(
                 table: "Clients",
                 columns: new[] { "ClientID", "AddedDate", "AddedUserID", "AppartmentNumber", "City", "CompanyFullName", "Description", "Email", "HouseNumber", "IsActive", "NIP", "Name", "Phone", "PostalCode", "Street", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 893, DateTimeKind.Local).AddTicks(6263), 1, null, "Nowy Sącz", "PPHU Duet Piotr Bęben", null, "jd@gmail.com", "218b", true, "1234567890", "Duet", "666666666", "33-300", "Lwowska", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 896, DateTimeKind.Local).AddTicks(108), 1, null, "Nowy Jork", "Fakro Sp. z o.o.", null, "mikeshinoda@gmail.com", "52669", true, "1234567890", "Fakro", "555777333", "52-300", "Wallstreet", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 896, DateTimeKind.Local).AddTicks(142), 1, null, "Nowy Sącz", "Vitberg Jacek Sikora", null, "js@gmail.com", "3", true, "1234567890", "Vitberg", "666666666", "33-300", "Borelowskiego", null, null }
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 61, DateTimeKind.Local).AddTicks(1465), 1, null, "Nowy Sącz", "PPHU Duet Piotr Bęben", null, "jd@gmail.com", "218b", true, "1234567890", "Duet", "666666666", "33-300", "Lwowska", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 63, DateTimeKind.Local).AddTicks(3950), 1, null, "Nowy Jork", "Fakro Sp. z o.o.", null, "mikeshinoda@gmail.com", "52669", true, "1234567890", "Fakro", "555777333", "52-300", "Wallstreet", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 63, DateTimeKind.Local).AddTicks(3981), 1, null, "Nowy Sącz", "Vitberg Jacek Sikora", null, "js@gmail.com", "3", true, "1234567890", "Vitberg", "666666666", "33-300", "Borelowskiego", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -746,10 +754,10 @@ namespace Printo.Data.Migrations
                 columns: new[] { "DeliveryTypeID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 897, DateTimeKind.Local).AddTicks(9825), 1, "Odbiór osobisty przez klienta", true, "Odbiór osobisty", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(479), 1, "Dostawa do klienta", true, "Dostawa", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(491), 1, "Wysyłka kurierska", true, "Wysyłka", null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(494), 1, "Wysyłka kurieska z opcją za pobraniem", true, "Wysyłka za pobraniem", null, null }
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(3961), 1, "Odbiór osobisty przez klienta", true, "Odbiór osobisty", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(4616), 1, "Dostawa do klienta", true, "Dostawa", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(4629), 1, "Wysyłka kurierska", true, "Wysyłka", null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(4632), 1, "Wysyłka kurieska z opcją za pobraniem", true, "Wysyłka za pobraniem", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -757,14 +765,14 @@ namespace Printo.Data.Migrations
                 columns: new[] { "FinishingID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 8, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(2799), 1, "Folia mat jednostronnie i lakier wybiórczo błysk na awersie", true, "1/0 Folia MAT + UV wybiórczo", null, null },
-                    { 7, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(2796), 1, "Folia soft-touch obustronnie", true, "1/1 Folia SOFT", null, null },
-                    { 6, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(2793), 1, "Folia mat obustronnie", true, "1/1 Folia MAT", null, null },
-                    { 5, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(2790), 1, "Folia błysk obustronnie", true, "1/1 Folia BŁYSK", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(2772), 1, "Folia błysk jednostronnie na awersie", true, "1/0 Folia BŁYSK", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(2784), 1, "Folia mat jednostronnie na awersie", true, "1/0 Folia MAT", null, null },
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(2133), 1, "Brak uszlachetnień druku", true, "Brak", null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(2787), 1, "Folia soft-touch jednostronnie na awersie", true, "1/0 Folia SOFT", null, null }
+                    { 8, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(6909), 1, "Folia mat jednostronnie i lakier wybiórczo błysk na awersie", true, "1/0 Folia MAT + UV wybiórczo", null, null },
+                    { 7, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(6906), 1, "Folia soft-touch obustronnie", true, "1/1 Folia SOFT", null, null },
+                    { 6, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(6903), 1, "Folia mat obustronnie", true, "1/1 Folia MAT", null, null },
+                    { 5, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(6900), 1, "Folia błysk obustronnie", true, "1/1 Folia BŁYSK", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(6882), 1, "Folia błysk jednostronnie na awersie", true, "1/0 Folia BŁYSK", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(6894), 1, "Folia mat jednostronnie na awersie", true, "1/0 Folia MAT", null, null },
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(6243), 1, "Brak uszlachetnień druku", true, "Brak", null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(6897), 1, "Folia soft-touch jednostronnie na awersie", true, "1/0 Folia SOFT", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -772,12 +780,12 @@ namespace Printo.Data.Migrations
                 columns: new[] { "FormatID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 5, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(5211), 1, "210x297mm", true, "A4", null, null },
-                    { 6, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(5215), 1, "148x210mm", true, "A5", null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(5208), 1, "297x420mm", true, "A3", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(5202), 1, "420x610mm", true, "A2", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(5190), 1, "440x630mm", true, "A2+", null, null },
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(4552), 1, "Wymiary w uwagach do druku", true, "Inny", null, null }
+                    { 5, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(9286), 1, "210x297mm", true, "A4", null, null },
+                    { 6, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(9289), 1, "148x210mm", true, "A5", null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(9284), 1, "297x420mm", true, "A3", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(9280), 1, "420x610mm", true, "A2", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(9268), 1, "440x630mm", true, "A2+", null, null },
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 65, DateTimeKind.Local).AddTicks(8553), 1, "Wymiary w uwagach do druku", true, "Inny", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -785,10 +793,10 @@ namespace Printo.Data.Migrations
                 columns: new[] { "MachineID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(6853), 1, "Nie dotyczy", true, "N/D", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(7493), 1, "Druk offsetowy KBA RAPIDA 75", true, "KBA", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(7504), 1, "Druk offsetowy RYOBI", true, "RYOBI", null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(7507), 1, "Druk cyfrowy XEROX D700", true, "XEROX", null, null }
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(919), 1, "Nie dotyczy", true, "N/D", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(1553), 1, "Druk offsetowy KBA RAPIDA 75", true, "KBA", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(1565), 1, "Druk offsetowy RYOBI", true, "RYOBI", null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(1569), 1, "Druk cyfrowy XEROX D700", true, "XEROX", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -796,10 +804,10 @@ namespace Printo.Data.Migrations
                 columns: new[] { "PaperTypeID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(9149), 1, "Szczegóły w uwagach do druku", true, "Inny", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(9786), 1, "Papier powlekany matowy", true, "Kreda mat", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(9797), 1, "Papier powlekany błyszczący", true, "Kreda błysk", null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 898, DateTimeKind.Local).AddTicks(9800), 1, "Papier niepowlekany typu offset", true, "Offset", null, null }
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(3219), 1, "Szczegóły w uwagach do druku", true, "Inny", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(3851), 1, "Papier powlekany matowy", true, "Kreda mat", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(3863), 1, "Papier powlekany błyszczący", true, "Kreda błysk", null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(3866), 1, "Papier niepowlekany typu offset", true, "Offset", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -807,12 +815,12 @@ namespace Printo.Data.Migrations
                 columns: new[] { "PaperWeightID", "AddedDate", "AddedUserID", "Description", "Grammature", "IsActive", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(1448), 1, "Szczegóły w opisie druku", "Inna", true, null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(2143), 1, "", "130g", true, null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(2155), 1, "", "170g", true, null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(2158), 1, "", "200g", true, null, null },
-                    { 5, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(2161), 1, "", "350g + 170g", true, null, null },
-                    { 6, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(2164), 1, "", "250g + 130g", true, null, null }
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(5484), 1, "Szczegóły w opisie druku", "Inna", true, null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(6121), 1, "", "130g", true, null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(6133), 1, "", "170g", true, null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(6136), 1, "", "200g", true, null, null },
+                    { 5, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(6139), 1, "", "350g + 170g", true, null, null },
+                    { 6, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(6142), 1, "", "250g + 130g", true, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -820,8 +828,8 @@ namespace Printo.Data.Migrations
                 columns: new[] { "PaymentTypeID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(4503), 1, "Gotówka przy odbiorze", true, "Gotówka", null, null },
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(3860), 1, "Przelew bankowy termin min. 14 dni", true, "Przelew", null, null }
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(8410), 1, "Gotówka przy odbiorze", true, "Gotówka", null, null },
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 66, DateTimeKind.Local).AddTicks(7752), 1, "Przelew bankowy termin min. 14 dni", true, "Przelew", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -829,12 +837,12 @@ namespace Printo.Data.Migrations
                 columns: new[] { "PostPressID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(6138), 1, "Brak obróbki introligatorskiej", true, "Brak", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(6780), 1, "Docięcie do formatu", true, "Docięcie", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(6791), 1, "2 zszywki płaskie", true, "Oprawa zeszytowa", null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(6795), 1, "Oprawa miękka klejona", true, "Oprawa klejona", null, null },
-                    { 5, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(6797), 1, "Składanie do formatu", true, "Falcowanie", null, null },
-                    { 6, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(6800), 1, "Szczgóły w opisie do zamówienia", true, "Inna obróbka", null, null }
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(14), 1, "Brak obróbki introligatorskiej", true, "Brak", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(645), 1, "Docięcie do formatu", true, "Docięcie", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(658), 1, "2 zszywki płaskie", true, "Oprawa zeszytowa", null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(661), 1, "Oprawa miękka klejona", true, "Oprawa klejona", null, null },
+                    { 5, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(664), 1, "Składanie do formatu", true, "Falcowanie", null, null },
+                    { 6, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(666), 1, "Szczgóły w opisie do zamówienia", true, "Inna obróbka", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -842,14 +850,14 @@ namespace Printo.Data.Migrations
                 columns: new[] { "PrintColorID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 8, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(9102), 1, "Szczegóły w uwagach do druku", true, "Inny", null, null },
-                    { 7, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(9099), 1, "Pantone jednostronnie", true, "1/0 Pantone", null, null },
-                    { 6, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(9096), 1, "Okładka: CMYK obustronnie + Środek: czarny obustronnie", true, "4/4 CMYK + 1/1 blacK", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(9072), 1, "CMYK jednostronnie", true, "4/0 CMYK", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(9084), 1, "CMYK obustronnie", true, "4/4 CMYK", null, null },
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(8430), 1, "Nie dotyczy", true, "N/D", null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(9089), 1, "Czarny jednostronnie", true, "1/0 blacK", null, null },
-                    { 5, new DateTime(2020, 11, 22, 15, 25, 39, 899, DateTimeKind.Local).AddTicks(9093), 1, "Czarny obustronnie", true, "1/1 blacK", null, null }
+                    { 8, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(2918), 1, "Szczegóły w uwagach do druku", true, "Inny", null, null },
+                    { 7, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(2915), 1, "Pantone jednostronnie", true, "1/0 Pantone", null, null },
+                    { 6, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(2912), 1, "Okładka: CMYK obustronnie + Środek: czarny obustronnie", true, "4/4 CMYK + 1/1 blacK", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(2891), 1, "CMYK jednostronnie", true, "4/0 CMYK", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(2903), 1, "CMYK obustronnie", true, "4/4 CMYK", null, null },
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(2262), 1, "Nie dotyczy", true, "N/D", null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(2906), 1, "Czarny jednostronnie", true, "1/0 blacK", null, null },
+                    { 5, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(2909), 1, "Czarny obustronnie", true, "1/1 blacK", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -857,14 +865,14 @@ namespace Printo.Data.Migrations
                 columns: new[] { "ProductionStageID", "AddedDate", "AddedUserID", "Color", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(1007), 1, "#ffffff", "Nowe zamówienie przyjęte do realizacji", true, "NOWE", null, null },
-                    { 5, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(1748), 1, "#1ae000", "Zamówienie po wydruku", true, "WYDRUKOWANE", null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(1745), 1, "#f62323", "Produkcja zatrzymana/anulowana", true, "STOP", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(1742), 1, "#00a8f0", "Etap drukowania", true, "DO DRUKU", null, null },
-                    { 7, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(1754), 1, "#000000", "Produkcja zakończona - zamówienie gotowe do wydania", true, "GOTOWE", null, null },
-                    { 8, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(1757), 1, "#ffffff", "Zamówienie zrealizowane", true, "KONIEC", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(1730), 1, "#fdaa1c", "Naświetlanie CTP", true, "CTP", null, null },
-                    { 6, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(1751), 1, "#7400b8", "Obróbka introligatorska i uszlachetnienia", true, "INTRO", null, null }
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(4832), 1, "#ffffff", "Nowe zamówienie przyjęte do realizacji", true, "NOWE", null, null },
+                    { 5, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(5459), 1, "#1ae000", "Zamówienie po wydruku", true, "WYDRUKOWANE", null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(5456), 1, "#f62323", "Produkcja zatrzymana/anulowana", true, "STOP", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(5453), 1, "#00a8f0", "Etap drukowania", true, "DO DRUKU", null, null },
+                    { 7, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(5466), 1, "#000000", "Produkcja zakończona - zamówienie gotowe do wydania", true, "GOTOWE", null, null },
+                    { 8, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(5468), 1, "#ffffff", "Zamówienie zrealizowane", true, "KONIEC", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(5440), 1, "#fdaa1c", "Naświetlanie CTP", true, "CTP", null, null },
+                    { 6, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(5462), 1, "#7400b8", "Obróbka introligatorska i uszlachetnienia", true, "INTRO", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -872,12 +880,12 @@ namespace Printo.Data.Migrations
                 columns: new[] { "ProductID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(4115), 1, "Plakat standardowy cięty do formatu", true, "Plakat", null, null },
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(3417), 1, "Szczegóły w opisie zamówienia", true, "Inny", null, null },
-                    { 5, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(4118), 1, "Szycie zeszytowe standrd lub oczkowe", true, "Katalog szyty", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(4111), 1, "Ulotka standardowa cięta do formatu", true, "Ulotka standardowa", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(4061), 1, "Arkusze bez obróbki introligatorskiej", true, "Arkusz plano", null, null },
-                    { 6, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(4121), 1, "Oprawa miękka klejona", true, "Katalog klejony", null, null }
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(7680), 1, "Plakat standardowy cięty do formatu", true, "Plakat", null, null },
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(7058), 1, "Szczegóły w opisie zamówienia", true, "Inny", null, null },
+                    { 5, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(7683), 1, "Szycie zeszytowe standrd lub oczkowe", true, "Katalog szyty", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(7677), 1, "Ulotka standardowa cięta do formatu", true, "Ulotka standardowa", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(7665), 1, "Arkusze bez obróbki introligatorskiej", true, "Arkusz plano", null, null },
+                    { 6, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(7686), 1, "Oprawa miękka klejona", true, "Katalog klejony", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -885,19 +893,19 @@ namespace Printo.Data.Migrations
                 columns: new[] { "SheetSizeID", "AddedDate", "AddedUserID", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
                 values: new object[,]
                 {
-                    { 5, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(6461), 1, "700x500mm", true, "B2", null, null },
-                    { 6, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(6464), 1, "500x350mm", true, "B3", null, null },
-                    { 4, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(6458), 1, "440x315mm", true, "A3+", null, null },
-                    { 7, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(6467), 1, "Szczegóły w uwagach do druku", true, "Inny", null, null },
-                    { 2, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(6444), 1, "630x440mm", true, "A2+", null, null },
-                    { 1, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(5764), 1, "Nie dotyczy", true, "N/D", null, null },
-                    { 3, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(6455), 1, "610x430mm", true, "A2", null, null }
+                    { 5, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(9938), 1, "700x500mm", true, "B2", null, null },
+                    { 6, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(9940), 1, "500x350mm", true, "B3", null, null },
+                    { 4, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(9935), 1, "440x315mm", true, "A3+", null, null },
+                    { 7, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(9943), 1, "Szczegóły w uwagach do druku", true, "Inny", null, null },
+                    { 2, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(9920), 1, "630x440mm", true, "A2+", null, null },
+                    { 1, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(9314), 1, "Nie dotyczy", true, "N/D", null, null },
+                    { 3, new DateTime(2020, 12, 15, 22, 55, 51, 67, DateTimeKind.Local).AddTicks(9932), 1, "610x430mm", true, "A2", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "ToDos",
-                columns: new[] { "ToDoID", "AddedDate", "AddedUserID", "Date", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID" },
-                values: new object[] { 1, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(8582), 1, new DateTime(2020, 11, 22, 15, 25, 39, 900, DateTimeKind.Local).AddTicks(7821), "Zamówić 2 ryzy papieru", true, "Przykładowa notatka", null, null });
+                columns: new[] { "ToDoID", "AddedDate", "AddedUserID", "Date", "Description", "IsActive", "Name", "UpdatedDate", "UpdatedUserID", "UserID" },
+                values: new object[] { 1, new DateTime(2020, 12, 15, 22, 55, 51, 68, DateTimeKind.Local).AddTicks(1952), 1, new DateTime(2020, 12, 15, 22, 55, 51, 68, DateTimeKind.Local).AddTicks(1236), "Zamówić 2 ryzy papieru", true, "Przykładowa notatka", null, null, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_AddedUserID",
@@ -1133,6 +1141,11 @@ namespace Printo.Data.Migrations
                 name: "IX_ToDos_UpdatedUserID",
                 table: "ToDos",
                 column: "UpdatedUserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToDos_UserID",
+                table: "ToDos",
+                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_UserTypeID",

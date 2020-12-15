@@ -872,49 +872,12 @@ namespace Printo.Data.Data
                     Date = DateTime.Now,
                     IsActive = true,
                     AddedDate = DateTime.Now,
-                    AddedUserID = 1
+                    AddedUserID = 1,
+                    UserID = 1
                 }
                 );
             #endregion
 
-            //#region ORDERS
-            //modelBuilder.Entity<Order>().HasData(
-            //new Order
-            //{
-            //    OrderID = 1,
-            //    ClientID = 1,
-            //    DeliveryTypeID = 1,
-            //    FinishingID = 1,
-            //    FormatID = 1,
-            //    MachineID = 1,
-            //    PaperWeightID = 1,
-            //    PaperTypeID = 1,
-            //    PaymentTypeID = 1,
-            //    PostPressID = 1,
-            //    PrintColorID = 1,
-            //    ProductID = 1,
-            //    ProductionStageID = 1,
-            //    SheetSizeID = 1,
-            //    VatRateID = 1,
-            //    StartDate = DateTime.Now,
-            //    EndDate = DateTime.Now,
-            //    OrderName = "Przykładowa nazwa zamówienia",
-            //    Description = "Opis zamówienia",
-            //    NetPrice = "9999",
-            //    IsReprint = true,
-            //    Quantity = "1000",
-            //    SheetsNumber = "2x1000",
-            //    SheetsNumberPrinted = "2x1050",
-            //    Comments = "komentarz do druku",
-            //    DeliveryDetails = "adres dostawy",
-            //    PaymentDetails = "dane do fv",
-            //    PrintUserID = null,
-            //    IsActive = true,
-            //    AddedDate = DateTime.Now,
-            //    AddedUserID = 1
-            //}
-            //);
-            //#endregion ORDERS
         }
 
     }

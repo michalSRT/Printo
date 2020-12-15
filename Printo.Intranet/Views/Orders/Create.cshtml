@@ -205,7 +205,7 @@
                                     <textarea asp-for="PaymentDetails" class="form-control"></textarea>
                                 </div>
                             </div>
-                            <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
+                            <div class="form-row" style="margin-left:10px; margin-right:10px;">
                                 <div class="form-group col col-md-6">
                                     <label asp-for="VatRateID" class="control-label">Stawka Vat</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
@@ -216,6 +216,12 @@
                                 <div class="form-group col">
                                     <label asp-for="NetPrice" class="control-label">Cena netto</label>
                                     <input asp-for="NetPrice" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6" style="margin-left:10px; margin-right:10px">
+                                    <label asp-for="InvoiceNumber" class="control-label">Nr faktury</label>
+                                    <input asp-for="InvoiceNumber" class="form-control" placeholder="np. 01/01/2020" />
                                 </div>
                             </div>
                         </div>

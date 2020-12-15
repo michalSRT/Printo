@@ -152,7 +152,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row" style="margin-left:10px; margin-right:10px; min-height:160px">
+                        <div class="form-row" style="margin-left:10px; margin-right:10px;">
                             <div class="form-group col">
                                 <label asp-for="VatRateID" class="control-label"><strong><u>Stawka Vat:   </u></strong></label>
                                 <label>@Model.VatRate.Name</label>
@@ -161,6 +161,12 @@
                                 <label asp-for="NetPrice" class="control-label"><strong><u>Cena netto:   </u></strong></label>
                                 <label>@Model.NetPrice</label>
                             </div>
+                        </div>
+                        <div class="form-row" style="margin-left:10px; margin-right:10px;">
+                            @if (Model.InvoiceNumber != null)
+                            {
+                                <span>FV @Model.InvoiceNumber</span>
+                            }
                         </div>
                     </div>
                 </div>

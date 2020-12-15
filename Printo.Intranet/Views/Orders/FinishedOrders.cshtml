@@ -28,7 +28,7 @@
                             <th>Nr</th>
                             <th>Start</th>
                             <th>Koniec</th>
-                            <th>Etap produkcji</th>
+                            <th>Nr faktury</th>
                             <th>Klient</th>
                             <th>Produkt</th>
                             <th>Nazwa zamówienia</th>
@@ -52,20 +52,9 @@
                                     {@item.EndDate.Value.ToString("dd/MM")}
                                 </td>
                                 <td>
-                                    @if (item.ProductionStage.Color != null)
+                                    @if (item.InvoiceNumber != null)
                                     {
-                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
+                                        @Html.DisplayFor(modelItem => item.InvoiceNumber)
                                     }
                                 </td>
                                 <td>
@@ -121,7 +110,7 @@
                             <th>Nr</th>
                             <th>Start</th>
                             <th>Koniec</th>
-                            <th>Etap produkcji</th>
+                            <th>Nr faktury</th>
                             <th>Klient</th>
                             <th>Produkt</th>
                             <th>Nazwa zamówienia</th>
@@ -151,20 +140,9 @@
                                     {@item.EndDate.Value.ToString("H:mm")}
                                 </td>
                                 <td>
-                                    @if (item.ProductionStage.Color != null)
+                                    @if (item.InvoiceNumber != null)
                                     {
-                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
+                                        @Html.DisplayFor(modelItem => item.InvoiceNumber)
                                     }
                                 </td>
                                 <td>

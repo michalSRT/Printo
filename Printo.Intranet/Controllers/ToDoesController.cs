@@ -53,6 +53,7 @@ namespace Printo.Intranet.Controllers
         {
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
+            ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Name");
             return View();
         }
 
@@ -61,7 +62,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ToDoID,Name,Description,Date,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] ToDo toDo)
+        public async Task<IActionResult> Create([Bind("ToDoID,Name,Description,Date,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID,UserID")] ToDo toDo)
         {
             if (ModelState.IsValid)
             {
@@ -94,6 +95,8 @@ namespace Printo.Intranet.Controllers
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", toDo.AddedUserID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", toDo.UpdatedUserID);
+            ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Name", toDo.UserID);
+
             return View(toDo);
         }
 
@@ -102,7 +105,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ToDoID,Name,Description,Date,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] ToDo toDo)
+        public async Task<IActionResult> Edit(int id, [Bind("ToDoID,Name,Description,Date,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID,UserID")] ToDo toDo)
         {
             if (id != toDo.ToDoID)
             {
@@ -135,6 +138,7 @@ namespace Printo.Intranet.Controllers
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", toDo.AddedUserID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", toDo.UpdatedUserID);
+            ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Name", toDo.UserID);
             return View(toDo);
         }
 

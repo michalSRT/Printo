@@ -31,7 +31,10 @@
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="col" style="margin-top:10px">
-                                                <h4 class="card-title" style="margin-bottom:0px">@Convert.ToString($"{ item.Date:dd/MM}" + ", godz. " + $"{item.Date:h:mm}")</h4>
+                                                @if (item.Date != null)
+                                                {
+                                                    <h4 class="card-title" style="margin-bottom:0px">@Convert.ToString($"{ item.Date:dd/MM}" + ", godz. " + $"{item.Date:h:mm}")</h4>
+                                                }
                                             </div>
                                             <div class="col-2">
                                                 <a class="btn btn-outline-success" style="float:right" asp-action="Edit" asp-route-id="@item.ToDoID" role="button" data-toggle="tooltip" title="Edytuj">
@@ -52,7 +55,13 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col" style="text-align: center;">
+                                            @if (item.UserID != null)
+                                            {
+                                             <div class="col">
+                                                <p><b>Kto?</b> @item.User.Name</p>
+                                             </div>
+                                            }
+                                            <div class="col" style="text-align: right;">
                                                 <form asp-action="Deactivate" asp-route-id="@item.ToDoID">
                                                     <input type="hidden" asp-for="@item.ToDoID" />
                                                     <input type="submit" value="OK!" class="btn btn-outline-dark buttMargin" />
@@ -100,7 +109,10 @@
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="col" style="margin-top:10px">
-                                                <h4 class="card-title" style="margin-bottom:0px">@Convert.ToString($"{ item.Date:dd/MM}" + ", godz. " + $"{item.Date:h:mm}")</h4>
+                                                @if (item.Date != null)
+                                                {
+                                                    <h4 class="card-title" style="margin-bottom:0px">@Convert.ToString($"{ item.Date:dd/MM}" + ", godz. " + $"{item.Date:h:mm}")</h4>
+                                                }
                                             </div>
                                             <div class="col-2">
                                                 <a class="btn btn-outline-success" style="float:right" asp-action="Edit" asp-route-id="@item.ToDoID" role="button" data-toggle="tooltip" title="Edytuj">
@@ -121,13 +133,21 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col" style="text-align: center;">
+                                            @if (item.UserID != null)
+                                            {
+                                                <div class="col">
+                                                    <p><b>Kto?</b> @item.User.Name</p>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="row">
+                                            <div class="col" style="text-align: left;">
                                                 <form asp-action="Restore" asp-route-id="@item.ToDoID">
                                                     <input type="hidden" asp-for="@item.ToDoID" />
                                                     <input type="submit" value="Przywróć" class="btn btn-outline-dark buttMargin" />
                                                 </form>
                                             </div>
-                                            <div class="col" style="text-align: center;">
+                                            <div class="col" style="text-align: right;">
                                                 <form asp-action="Delete" asp-route-id="@item.ToDoID">
                                                     <input type="hidden" asp-for="@item.ToDoID" />
                                                     <input type="submit" value="Usuń trwale" class="btn btn-outline-danger buttMargin" />

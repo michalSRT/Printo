@@ -60,12 +60,13 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,Login,Password,Name,IsActive,AddedDate,UpdatedDate,UserTypeID")] User user)
+        public async Task<IActionResult> Create([Bind("UserID,Login,Password,Name,IsActive,AddedDate,UpdatedDate,UserTypeID,AddedUserID,UpdatedUserID")] User user)
         {
             if (ModelState.IsValid)
             {
                 user.IsActive = true;
                 user.AddedDate = DateTime.Now;
+                user.AddedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                 user.Password = HashPassword.GetMd5Hash(user.Password);
                 _context.Add(user);
                 await _context.SaveChangesAsync();
@@ -97,7 +98,7 @@ namespace Printo.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,Login,Password,Name,IsActive,AddedDate,UpdatedDate,UserTypeID")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserID,Login,Password,Name,IsActive,AddedDate,UpdatedDate,UserTypeID,AddedUserID,UpdatedUserID")] User user)
         {
             if (id != user.UserID)
             {
@@ -109,6 +110,7 @@ namespace Printo.Intranet.Controllers
                 try
                 {
                     user.UpdatedDate = DateTime.Now;
+                    user.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                     user.Password = HashPassword.GetMd5Hash(user.Password);
                     _context.Update(user);
                     await _context.SaveChangesAsync();
@@ -168,6 +170,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.Users.FindAsync(id);
             temp.IsActive = false;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -180,6 +183,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.Users.FindAsync(id);
             temp.IsActive = true;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

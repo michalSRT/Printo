@@ -32,6 +32,9 @@ namespace Printo.Data.Data
         public DateTime AddedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
+        public int? AddedUserID { get; set; }
+        public int? UpdatedUserID { get; set; }
+
         [Required(ErrorMessage = "Wybierz rodzaj użytkownika!")]
         public int UserTypeID { get; set; }
         public virtual UserType UserType { get; set; }

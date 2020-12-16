@@ -29,6 +29,8 @@
                     <input type="hidden" asp-for="IsActive" />
                     <input type="hidden" asp-for="AddedDate" />
                     <input type="hidden" asp-for="UpdatedDate" />
+                    <input type="hidden" asp-for="AddedUserID" />
+                    <input type="hidden" asp-for="UpdatedUserID" />
                     <div class="form-row">
                         <div class="form-group col-xl-6">
                             <label asp-for="Name" class="control-label">Nazwa / imię i nazwisko</label>
@@ -46,17 +48,17 @@
                             <span asp-validation-for="Login" class="text-danger"></span>
                         </div>
                         <div class="form-group col-xl-6">
-                                <div class="custom-checkbox">
-                                    <label>
-                                        <input type="checkbox" id="chkIsNewPassword" /><span style="margin-left:5px">Nowe hasło?</span>
-                                    </label>
-                                </div>
+                            <div class="custom-checkbox">
+                                <label>
+                                    <input type="checkbox" id="chkIsNewPassword" /><span style="margin-left:5px">Nowe hasło?</span>
+                                </label>
+                            </div>
                             <div class="form-group" id="newPassword" style="display:none">
-                                <input asp-for="Password" type="password" class="form-control" id="newPasswordInput" disabled/>
+                                <input asp-for="Password" type="password" class="form-control" id="newPasswordInput" disabled />
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <input type="hidden" asp-for="Password" id="oldPassword"/>
+                                <input type="hidden" asp-for="Password" id="oldPassword" />
                             </div>
                         </div>
                     </div>

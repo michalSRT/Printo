@@ -35,6 +35,8 @@
                     <input type="hidden" asp-for="IsActive" />
                     <input type="hidden" asp-for="AddedDate" />
                     <input type="hidden" asp-for="UpdatedDate" />
+                    <input type="hidden" asp-for="AddedUserID" />
+                    <input type="hidden" asp-for="UpdatedUserID" />
                     <div class="card-columns">
                         <div class="card shadow mb-4" style="padding-top:10px">
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
@@ -61,10 +63,10 @@
                                     @if (@Context.Session.GetString("UserTypeID") != 2.ToString())
                                     {
                                         <label data-toggle="tooltip" data-placement="top" title="Nowy klient"><a class="btn-outline-success" role="button" aria-haspopup="true" aria-expanded="false" href="@Url.Action("AddClient", "Orders", new { OrderID = ViewData["OrderID"] })"><i class="fe fe-plus"></i></a></label>
-                                    }                                    
-                                        <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID" id="Client">
-                                            <option selected disabled value="0"></option>
-                                        </select>
+                                    }
+                                    <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID" id="Client">
+                                        <option selected disabled value="0"></option>
+                                    </select>
                                     <span asp-validation-for="ClientID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-12 col-md-6">
@@ -94,7 +96,7 @@
                                 <div class="form-group col">
                                     <label asp-for="Quantity" class="control-label">Nakład</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <input asp-for="Quantity" class="form-control" id="Quantity"/>
+                                    <input asp-for="Quantity" class="form-control" id="Quantity" />
                                     <span asp-validation-for="Quantity" class="text-danger"></span>
                                 </div>
                             </div>
@@ -254,7 +256,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6" style="margin-left:10px; margin-right:10px">
                                     <label asp-for="InvoiceNumber" class="control-label">Nr faktury</label>
-                                    <input asp-for="InvoiceNumber" class="form-control" placeholder="np. 01/01/2020"/>
+                                    <input asp-for="InvoiceNumber" class="form-control" placeholder="np. 01/01/2020" />
                                 </div>
                             </div>
                         </div>

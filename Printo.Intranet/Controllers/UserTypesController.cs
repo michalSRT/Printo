@@ -62,6 +62,7 @@ namespace Printo.Intranet.Controllers
             {
                 userType.IsActive = true;
                 userType.AddedDate = DateTime.Now;
+                userType.AddedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                 _context.Add(userType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -102,6 +103,7 @@ namespace Printo.Intranet.Controllers
                 try
                 {
                     userType.UpdatedDate = DateTime.Now;
+                    userType.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
                     _context.Update(userType);
                     await _context.SaveChangesAsync();
                 }
@@ -158,6 +160,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.UserTypes.FindAsync(id);
             temp.IsActive = false;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -170,6 +173,7 @@ namespace Printo.Intranet.Controllers
             var temp = await _context.UserTypes.FindAsync(id);
             temp.IsActive = true;
             temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

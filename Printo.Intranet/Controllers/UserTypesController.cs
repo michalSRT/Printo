@@ -7,23 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
+using Printo.Intranet.Controllers.Abstract;
 
 namespace Printo.Intranet.Controllers
 {
-    public class UserTypesController : Controller
+    public class UserTypesController : AbstractAdminPolicyController
     {
-        private readonly PrintoContext _context;
-
-        public UserTypesController(PrintoContext context)
-        {
-            _context = context;
-        }
+        public UserTypesController(PrintoContext context) :base(context) { }
 
         // GET: UserTypes
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
-
             return View(await _context.UserTypes.ToListAsync());
         }
 

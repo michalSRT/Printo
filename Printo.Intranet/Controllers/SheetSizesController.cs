@@ -7,23 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
+using Printo.Intranet.Controllers.Abstract;
 
 namespace Printo.Intranet.Controllers
 {
-    public class SheetSizesController : Controller
+    public class SheetSizesController : AbstractAdminPolicyController
     {
-        private readonly PrintoContext _context;
-
-        public SheetSizesController(PrintoContext context)
-        {
-            _context = context;
-        }
+        public SheetSizesController(PrintoContext context) : base(context) { }
 
         // GET: SheetSizes
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
-
             var printoContext = _context.SheetSizes.Include(s => s.AddedUser).Include(s => s.UpdatedUser);
             return View(await printoContext.ToListAsync());
         }

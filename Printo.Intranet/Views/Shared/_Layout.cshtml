@@ -8,7 +8,7 @@
     <meta name="description" content="Zarządzanie zamówieniami drukarni">
     <meta name="author" content="Michał Sierotowicz">
     <link rel="icon" href="~/favicon.ico">
-    <title>@ViewData["Title"] - Printo.Intranet</title>
+    <title>@ViewData["Title"] - Printo</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="~/css/simplebar.css">
@@ -32,8 +32,8 @@
     <!-- FULL CALENDAR -->
     <link rel="stylesheet" href="~/lib/fullcalendar-5.3.2/lib/main.css" />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css' rel='stylesheet'>
-        <script src="~/js/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" integrity="sha512-oe8OpYjBaDWPt2VmSFR+qYOdnTjeV9QPLJUeqZyprDEQvQLJ9C5PCFclxwNuvb/GQgQngdCXzKSFltuHD3eCxA==" crossorigin="anonymous" />
+    <script src="~/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" integrity="sha512-oe8OpYjBaDWPt2VmSFR+qYOdnTjeV9QPLJUeqZyprDEQvQLJ9C5PCFclxwNuvb/GQgQngdCXzKSFltuHD3eCxA==" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous"></script>
         <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="~/css/site.css" />
@@ -55,14 +55,6 @@
                     </a>
                 </li>
             </ul>
-
-            @*<ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
-                            <i class="fe fe-sun fe-16"></i>
-                        </a>
-                    </li>
-                </ul>*@
 
             @if (@Context.Session.GetString("UserID") != null)
             {
@@ -339,7 +331,6 @@
     <script src='~/js/uppy.min.js'></script>
     <script src='~/js/quill.min.js'></script>
     <script src="~/js/jquery.datetimepicker.full.min.js"></script>
-    @*<script src="~/js/moment.min.js"></script>*@
 
     <script src="~/lib/fullcalendar-5.3.2/lib/main.js"></script>
     <script src="~/lib/fullcalendar-5.3.2/lib/locales/pl.js"></script>
@@ -351,7 +342,7 @@
     @RenderSection("Scripts", false)
 </body>
 </html>
-
+@*CALENDAR*@
 <script>
     $(document).ready(function () {
 

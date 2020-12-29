@@ -82,7 +82,6 @@
     <script type="text/javascript">
     $(function () {
                 var ctx_bchart = document.getElementById("myBarChart").getContext('2d');
-
                 var myBarChart = new Chart(ctx_bchart, {
         type: 'bar',
                 data: @Html.Raw(Json.Serialize(Model.BarChartData)),

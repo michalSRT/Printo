@@ -2,28 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
+using Printo.Intranet.Controllers.Abstract;
 
 namespace Printo.Intranet.Controllers
 {
-    public class ClientsController : Controller
+    public class ClientsController : AbstractPolicyController
     {
-        private readonly PrintoContext _context;
-
-        public ClientsController(PrintoContext context)
-        {
-            _context = context;
-        }
+        public ClientsController(PrintoContext context) : base(context) {}
 
         // GET: Clients
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
-
             var printoContext = _context.Clients.Include(c => c.AddedUser).Include(c => c.UpdatedUser);
             return View(await printoContext.ToListAsync());
         }

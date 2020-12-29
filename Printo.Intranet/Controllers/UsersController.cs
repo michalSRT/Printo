@@ -8,23 +8,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
 using Printo.Data.Helpers;
+using Printo.Intranet.Controllers.Abstract;
 
 namespace Printo.Intranet.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : AbstractAdminPolicyController
     {
-        private readonly PrintoContext _context;
-
-        public UsersController(PrintoContext context)
-        {
-            _context = context;
-        }
+        public UsersController(PrintoContext context):base(context) { }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
-
             var printoContext = _context.Users.Include(u => u.UserType);
             return View(await printoContext.ToListAsync());
         }

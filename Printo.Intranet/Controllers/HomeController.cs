@@ -9,34 +9,19 @@ using Microsoft.Extensions.Logging;
 using Printo.Data.Data;
 using Printo.Intranet.Models;
 using Microsoft.AspNetCore.Http;
+using Printo.Intranet.Controllers.Abstract;
 
 namespace Printo.Intranet.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AbstractPolicyController
     {
-        //private readonly ILogger<HomeController> _logger;
-        private readonly PrintoContext _context;
-
-        public HomeController(PrintoContext context)
-        {
-            _context = context;
-
-        }
+        public HomeController(PrintoContext context) : base(context) { }
 
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
-
             ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "KONIEC").Count();
             ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
             ViewData["OrderID"] = new SelectList(_context.Orders.Where(o => o.ProductionStage.Name != "KONIEC"), "OrderID", "ConcatDescription");
-            return View();
-        }
-
-
-
-        public IActionResult Privacy()
-        {
             return View();
         }
 

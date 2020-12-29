@@ -7,23 +7,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
+using Printo.Intranet.Controllers.Abstract;
 
 namespace Printo.Intranet.Controllers
 {
-    public class PaperTypesController : Controller
+    public class PaperTypesController : AbstractAdminPolicyController
     {
-        private readonly PrintoContext _context;
 
-        public PaperTypesController(PrintoContext context)
-        {
-            _context = context;
-        }
+        public PaperTypesController(PrintoContext context) :base(context) {}
 
         // GET: PaperTypes
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
-
             var printoContext = _context.PaperTypes.Include(p => p.AddedUser).Include(p => p.UpdatedUser);
             return View(await printoContext.ToListAsync());
         }

@@ -7,23 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
+using Printo.Intranet.Controllers.Abstract;
 
 namespace Printo.Intranet.Controllers
 {
-    public class PaymentTypesController : Controller
+    public class PaymentTypesController : AbstractAdminPolicyController
     {
-        private readonly PrintoContext _context;
-
-        public PaymentTypesController(PrintoContext context)
-        {
-            _context = context;
-        }
+        public PaymentTypesController(PrintoContext context) : base(context) { }
 
         // GET: PaymentTypes
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
-
             var printoContext = _context.PaymentTypes.Include(p => p.AddedUser).Include(p => p.UpdatedUser);
             return View(await printoContext.ToListAsync());
         }

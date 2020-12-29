@@ -7,22 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
+using Printo.Intranet.Controllers.Abstract;
 
 namespace Printo.Intranet.Controllers
 {
-    public class VatRatesController : Controller
+    public class VatRatesController : AbstractAdminPolicyController
     {
-        private readonly PrintoContext _context;
-
-        public VatRatesController(PrintoContext context)
-        {
-            _context = context;
-        }
+        public VatRatesController(PrintoContext context) :base(context) { }
 
         // GET: VatRates
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
 
             var printoContext = _context.VatRates.Include(v => v.AddedUser).Include(v => v.UpdatedUser);
             return View(await printoContext.ToListAsync());

@@ -460,7 +460,6 @@ namespace Printo.Intranet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddClient(int? OrderID, [Bind("ClientID,Name,CompanyFullName,NIP,Street,HouseNumber,AppartmentNumber,PostalCode,City,Email,Phone,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] Client client)
         {
-
                 client.IsActive = true;
                 client.AddedDate = DateTime.Now;
                 _context.Add(client);

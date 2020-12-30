@@ -4,17 +4,25 @@
 }
 
 <div class="row">
-    <div class="col-md-4">
-        <div class="card shadow">
-            <div class="card-body" style="padding-bottom: 0px;">
-                <div class="row" style="place-content: center;">
+    <div class="col">
+        <div class="card shadow" style="padding-bottom: 17px;">
+            <div class="card-header">
+                <div class="row" style="justify-content:center">
+                    <div class="col-lg-12 col-xl-4" style=" padding-top: 15px; padding-bottom: 15px; min-width: 350px">
+                        <h4 class="mb-2 page-title" style=" text-align: center; ">Ilość zamówień wg. produktów</h4>
+                        <div class="col" style=" min-width: 200px; padding-left: 5px;">
+                            <select class="form-control selectClient" id="selectedClient" style="width:100%" asp-items="ViewBag.ClientID">
+                                <option selected disabled value="">Wszyscy klienci</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col" style="max-width: 280px; min-width:280px">
-                        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "Orders"))'">
+                        <div class="card mb-4 border-success cardCursor" style="text-align:center">
                             <div class="card-body" style="padding:0.5rem">
                                 <div class="col" style="padding:0px">
                                     <i class="fe fe-activity fe-32"></i>
                                     <br />
-                                    <a class="btn" asp-area="" asp-controller="Orders" asp-action="Index">
+                                    <a class="btn">
                                         <span style="font-weight:bold">Aktualne zamówienia : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.OrdersNumber</span>
                                     </a>
                                 </div>
@@ -22,39 +30,13 @@
                         </div>
                     </div>
                     <div class="col" style="max-width: 280px; min-width:280px">
-                        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("FinishedOrders", "Orders"))'">
+                        <div class="card mb-4 border-success cardCursor" style="text-align:center">
                             <div class="card-body" style="padding:0.5rem">
                                 <div class="col" style="padding:0px">
                                     <i class="fe fe-activity fe-32"></i>
                                     <br />
-                                    <a class="btn" asp-area="" asp-controller="Orders" asp-action="FinishedOrders">
+                                    <a class="btn">
                                         <span style="font-weight:bold">Zrealizowane zamówienia : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.FinishedOrdersNumber</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" style="max-width: 280px; min-width:280px">
-                        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "Products"))'">
-                            <div class="card-body" style="padding:0.5rem">
-                                <div class="col" style="padding:0px">
-                                    <i class="fe fe-activity fe-32"></i>
-                                    <br />
-                                    <a class="btn" asp-area="" asp-controller="Products" asp-action="Index">
-                                        <span style="font-weight:bold">Ilość produktów : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.ProductsNumber</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" style="max-width: 280px; min-width:280px">
-                        <div class="card mb-4 border-success cardCursor" style="text-align:center" onclick="location.href='@(Url.Action("Index", "Clients"))'">
-                            <div class="card-body" style="padding:0.5rem">
-                                <div class="col" style="padding:0px">
-                                    <i class="fe fe-activity fe-32"></i>
-                                    <br />
-                                    <a class="btn" asp-area="" asp-controller="Clients" asp-action="Index">
-                                        <span style="font-weight:bold">Ilość klientów : </span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.ClientsNumber</span>
                                     </a>
                                 </div>
                             </div>
@@ -62,15 +44,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-8">
-        <div class="card shadow" style=" padding-bottom: 17px;">
-            <div class="card-header" style="align-self: center;">
-                <h4 class="mb-2 page-title">Zamówienia wg produktów</h4>
-            </div>
             <div class="card-body">
-                <canvas id="myBarChart"></canvas>
+                <canvas id="chart" style="max-width:1000px"></canvas>
             </div>
         </div>
     </div>
@@ -81,8 +56,8 @@
 
     <script type="text/javascript">
     $(function () {
-                var ctx_bchart = document.getElementById("myBarChart").getContext('2d');
-                var myBarChart = new Chart(ctx_bchart, {
+                var ctx_bchart = document.getElementById("chart").getContext('2d');
+                var chart = new Chart(ctx_bchart, {
         type: 'bar',
                 data: @Html.Raw(Json.Serialize(Model.BarChartData)),
                     options: {
@@ -98,7 +73,32 @@
                         }
                     }
                 });
+
+        $('.selectClient').select2(
+            {
+                width: 'resolve',
+                height: 'resolve',
+                allowClear: true,
+                placeholder: {
+                    id: '0', // the value of the option
+                    text: 'Wybierz...'
+                },
+                sorter: function (data) {
+                    return data.sort(function (a, b) {
+                        return a.text < b.text ? -1 : a.text > b.text ? 1 : 0;
+                    })
+                }
+            }).on('change', function (e) {
+                window.location.href = "@Url.Action("Index", "Statistics", new { id = "" })/Index/" + e.target.value;
+                console.log(e);
             });
+    });
+
+        function updateChart(event) {
+            console.log(event);
+        }
+
+
     </script>
 
 }

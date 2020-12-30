@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Printo.Data.Data;
 using Printo.Intranet.Controllers.Abstract;
@@ -15,20 +16,31 @@ namespace Printo.Intranet.Controllers
     {
         public StatisticsController(PrintoContext context) : base(context) { }
 
-        public IActionResult Index()
+        public IActionResult Index(int? id)
         {
 
             var orders = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.IsActive == true);
 
-            ViewBag.OrdersNumber = orders.Where(x => x.ProductionStage.Name != "KONIEC").Count();
-            ViewBag.FinishedOrdersNumber = orders.Where(x => x.ProductionStage.Name == "KONIEC").Count();
-            ViewBag.ProductsNumber = _context.Products.Where(x => x.IsActive == true).Count();
-            ViewBag.ClientsNumber = _context.Clients.Where(x => x.IsActive == true).Count();
+            if(id == null)
+            {
+                ViewBag.OrdersNumber = orders.Where(x => x.ProductionStage.Name != "KONIEC").Count();
+                ViewBag.FinishedOrdersNumber = orders.Where(x => x.ProductionStage.Name == "KONIEC").Count();
+            }
+            else
+            {
+                ViewBag.OrdersNumber = orders.Where(x => x.ProductionStage.Name != "KONIEC" && x.ClientID == id).Count();
+                ViewBag.FinishedOrdersNumber = orders.Where(x => x.ProductionStage.Name == "KONIEC" && x.ClientID == id).Count();
+            }
+            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", id);
 
             var masterModel = new HomeIndexVM();
 
-            var barChartData = GetBarChartData();
-            masterModel.BarChartData = barChartData;
+            if (id != null)
+            {
+                masterModel.BarChartData = GetBarChartDataForClient(id);
+            }
+            else
+            masterModel.BarChartData = GetBarChartData();
 
             return View(masterModel);
         }
@@ -72,44 +84,44 @@ namespace Printo.Intranet.Controllers
             return barChartData;
         }
 
-        //private BarChartVM GetBarChartDataForClient(int? clientID)
-        //{
-        //    var orders = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ClientID == clientID);
-        //    var products = _context.Products.ToList();
+        private BarChartVM GetBarChartDataForClient(int? clientID)
+        {
+            var orders = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ClientID == clientID);
+            var products = _context.Products.ToList();
 
-        //    var barChartData = new BarChartVM();
+            var barChartData = new BarChartVM();
 
-        //    var labels = new List<string>();
+            var labels = new List<string>();
 
-        //    barChartData.labels = labels;
+            barChartData.labels = labels;
 
-        //    var datasets = new List<BarChartChildVM>();
+            var datasets = new List<BarChartChildVM>();
 
-        //    var childModel = new BarChartChildVM();
+            var childModel = new BarChartChildVM();
 
-        //    childModel.label = "Ilość zamówień";
-        //    childModel.backgroundColor = @"rgba(58, 210, 159, 0.2)";
-        //    childModel.borderColor = "#3ad29f";
-        //    childModel.borderWidth = 1;
-        //    childModel.hoverBackgroundColor = @"rgba(58, 210, 159, 0.8)";
-        //    childModel.hoverBorderColor = "#3ad29f";
+            childModel.label = "Ilość zamówień";
+            childModel.backgroundColor = @"rgba(58, 210, 159, 0.2)";
+            childModel.borderColor = "#3ad29f";
+            childModel.borderWidth = 1;
+            childModel.hoverBackgroundColor = @"rgba(58, 210, 159, 0.8)";
+            childModel.hoverBorderColor = "#3ad29f";
 
-        //    var dataList = new List<int>();
+            var dataList = new List<int>();
 
-        //    foreach (Product p in products)
-        //    {
-        //        labels.Add(p.Name);
-        //        dataList.Add(orders.Where(x => x.ProductID == p.ProductID).Count());
-        //    }
+            foreach (Product p in products)
+            {
+                labels.Add(p.Name);
+                dataList.Add(orders.Where(x => x.ProductID == p.ProductID).Count());
+            }
 
-        //    childModel.data = dataList;
+            childModel.data = dataList;
 
-        //    datasets.Add(childModel);
+            datasets.Add(childModel);
 
-        //    barChartData.datasets = datasets;
+            barChartData.datasets = datasets;
 
-        //    return barChartData;
-        //}
+            return barChartData;
+        }
 
     }
 }

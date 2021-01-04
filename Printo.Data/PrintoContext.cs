@@ -63,7 +63,7 @@ namespace Printo.Data.Data
                     HouseNumber = "52669",
                     PostalCode = "52-300",
                     City = "Nowy Jork",
-                    Email = "mikeshinoda@gmail.com",
+                    Email = "biuro@fakro.com",
                     Phone = "555777333",
                     IsActive = true,
                     AddedDate = DateTime.Now,
@@ -99,6 +99,26 @@ namespace Printo.Data.Data
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     UserTypeID = 1
+                },
+                new User
+                {
+                    UserID = 2,
+                    Login = "drukarz",
+                    Password = "af6aab224bf93b9d241bfa0773f43df9", //drukarz
+                    Name = "Drukarz",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    UserTypeID = 2
+                },
+                new User
+                {
+                    UserID = 3,
+                    Login = "pracownik",
+                    Password = "491910ff69cf9f888d5bed54630ffbaa", //pracownik
+                    Name = "Pracownik",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    UserTypeID = 3
                 }
                 );
             #endregion
@@ -346,6 +366,33 @@ namespace Printo.Data.Data
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
+                },
+                new Format
+                {
+                    FormatID = 7,
+                    Name = "A6",
+                    Description = "105x148mm",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new Format
+                {
+                    FormatID = 8,
+                    Name = "B2",
+                    Description = "700x500mm",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new Format
+                {
+                    FormatID = 9,
+                    Name = "210x210mm",
+                    Description = "",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
                 }
                 );
             #endregion
@@ -483,6 +530,15 @@ namespace Printo.Data.Data
                 {
                     PaperWeightID = 6,
                     Grammature = "250g + 130g",
+                    Description = "",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new PaperWeight
+                {
+                    PaperWeightID = 7,
+                    Grammature = "80g",
                     Description = "",
                     IsActive = true,
                     AddedDate = DateTime.Now,
@@ -777,7 +833,7 @@ namespace Printo.Data.Data
                 {
                     ProductID = 5,
                     Name = "Katalog szyty",
-                    Description = "Szycie zeszytowe standrd lub oczkowe",
+                    Description = "Szycie zeszytowe standard lub oczkowe",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -787,6 +843,24 @@ namespace Printo.Data.Data
                     ProductID = 6,
                     Name = "Katalog klejony",
                     Description = "Oprawa miękka klejona",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new Product
+                {
+                    ProductID = 7,
+                    Name = "Ulotka składana",
+                    Description = "Ulotka składana",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new Product
+                {
+                    ProductID = 8,
+                    Name = "Wizytówka",
+                    Description = "Wizytówki różnego rodzaju",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1

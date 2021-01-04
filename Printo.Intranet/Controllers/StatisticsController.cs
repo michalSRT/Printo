@@ -31,7 +31,7 @@ namespace Printo.Intranet.Controllers
                 ViewBag.OrdersNumber = orders.Where(x => x.ProductionStage.Name != "KONIEC" && x.ClientID == id).Count();
                 ViewBag.FinishedOrdersNumber = orders.Where(x => x.ProductionStage.Name == "KONIEC" && x.ClientID == id).Count();
             }
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", id);
+            ViewData["ClientID"] = new SelectList(_context.Clients.Where(x=>x.IsActive == true), "ClientID", "Name", id);
 
             var masterModel = new HomeIndexVM();
 

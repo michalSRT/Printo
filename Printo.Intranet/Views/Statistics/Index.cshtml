@@ -12,7 +12,7 @@
                         <h4 class="mb-2 page-title" style=" text-align: center; ">Ilość zamówień wg. produktów</h4>
                         <div class="col" style=" min-width: 200px; padding-left: 5px;">
                             <select class="form-control selectClient" id="selectedClient" style="width:100%" asp-items="ViewBag.ClientID">
-                                <option selected disabled value="">Wszyscy klienci</option>
+                                <option selected value="">Wszyscy klienci</option>
                             </select>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                 height: 'resolve',
                 allowClear: true,
                 placeholder: {
-                    id: '0', // the value of the option
+                    id: '0',
                     text: 'Wybierz...'
                 },
                 sorter: function (data) {

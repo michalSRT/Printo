@@ -342,6 +342,7 @@
     @RenderSection("Scripts", false)
 </body>
 </html>
+
 @*CALENDAR*@
 <script>
     $(document).ready(function () {
@@ -361,7 +362,7 @@
             locale: 'pl',
             headerToolbar: {
                 start: 'today prev,next',
-                end: 'timeGridWeek,timeGridDay'
+                end: 'timeGridDay,timeGridWeek,dayGridMonth'
             },
             slotDuration: '00:30:00',
             slotMinTime: "07:00:00",
@@ -492,8 +493,8 @@
         else {
             var startDate = moment($('#txtStart').val(), "DD.MM.YYYY HH:mm").toDate();
             var endDate = moment($('#txtEnd').val(), "DD.MM.YYYY HH:mm").toDate();
-            if (startDate > endDate) {
-                alert("Nieprawidłowa data końcowa");
+            if (startDate > endDate && $('#chkIsFullDay').is(':checked') == false) {
+                alert("Nieprawidłowa data końcowa (nie może być przed startem)");
                 return;
             }
         }

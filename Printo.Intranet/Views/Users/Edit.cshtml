@@ -64,7 +64,7 @@
                     </div>
                 </form>
                 <div class="row">
-                    @if (Context.Session.GetString("UserTypeID") != 1.ToString())
+                    @if (Context.Session.GetString("UserTypeID") == 1.ToString() && Model.UserID != 1)
                     {
                         <div class="col">
                             @if (Model.IsActive)

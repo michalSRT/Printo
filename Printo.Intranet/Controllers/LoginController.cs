@@ -33,7 +33,7 @@ namespace Printo.Intranet.Controllers
             {
                 if (account.IsActive == false)
                 {
-                    ModelState.AddModelError("", "Twoje konto jest zablokowane.");
+                    ModelState.AddModelError("", "Twoje konto zostało dezaktywowane.");
                     return View();
                 }
                 else

@@ -17,7 +17,6 @@ $(document).ready(function () {
         document.getElementById("Finishing").disabled = true;
         document.getElementById("Description").disabled = true;
         document.getElementById("OrderName").disabled = true;
-        document.getElementById("OrderName").disabled = true;
         document.getElementById("Client").disabled = true;
         document.getElementById("startDate").disabled = true;
         document.getElementById("endDate").disabled = true;
@@ -28,10 +27,11 @@ $(document).ready(function () {
         document.getElementById("PaperWeight").disabled = true;
         document.getElementById("PaperType").disabled = true;
         document.getElementById("customCheck1").disabled = true;
+        document.getElementById("Invoice").disabled = true;
     }
 })
 
-
+// Kolorowanie aktywnej zakładki w menu
 $(document).ready(function () {
     // get current URL path and assign 'active' class
     var pathname = window.location.pathname;
@@ -67,7 +67,6 @@ $('.select2-multi').select2(
     });
 
 //DATETIMEPICKERS
-
 $.datetimepicker.setLocale('pl');
 
 $('#startDate').datetimepicker({
@@ -107,10 +106,7 @@ $('#toDoDate').datetimepicker({
     defaultDate: new Date()
 });
 
-
-
-
-
+// DATA TABLES
 $('#dataTable-1').DataTable(
     {
         "language": {
@@ -182,19 +178,6 @@ $('#dataTable-orders').DataTable(
         "dom": "frtilp",
         //"scrollX": true
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 $('.drgpicker').daterangepicker(
     {

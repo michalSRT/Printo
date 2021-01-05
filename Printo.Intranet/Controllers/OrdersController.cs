@@ -25,8 +25,6 @@ namespace Printo.Intranet.Controllers
 
         public async Task<IActionResult> FinishedOrders()
         {
-            if (HttpContext.Session.GetString("UserID") == null) { return RedirectToAction("Index", "Login"); }
-
             var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ProductionStage.Name == "KONIEC");
             return View(await printoContext.ToListAsync());
         }
@@ -70,22 +68,22 @@ namespace Printo.Intranet.Controllers
         public IActionResult Create()
         {
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name");
+            ViewData["ClientID"] = new SelectList(_context.Clients.Where(x=>x.IsActive == true), "ClientID", "Name");
             ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name");
-            ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name");
-            ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name");
-            ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name");
-            ViewData["MachineID"] = new SelectList(_context.Machines, "MachineID", "Name");
-            ViewData["PaperTypeID"] = new SelectList(_context.PaperTypes, "PaperTypeID", "Name");
-            ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights, "PaperWeightID", "Grammature");
-            ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes, "PaymentTypeID", "Name");
-            ViewData["PostPressID"] = new SelectList(_context.PostPresses, "PostPressID", "Name");
-            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "PrintColorID", "Name");
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name");
-            ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages, "ProductionStageID", "Name");
-            ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name");
+            ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes.Where(x => x.IsActive == true), "DeliveryTypeID", "Name");
+            ViewData["FinishingID"] = new SelectList(_context.Finishings.Where(x => x.IsActive == true), "FinishingID", "Name");
+            ViewData["FormatID"] = new SelectList(_context.Formats.Where(x => x.IsActive == true), "FormatID", "Name");
+            ViewData["MachineID"] = new SelectList(_context.Machines.Where(x => x.IsActive == true), "MachineID", "Name");
+            ViewData["PaperTypeID"] = new SelectList(_context.PaperTypes.Where(x => x.IsActive == true), "PaperTypeID", "Name");
+            ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights.Where(x => x.IsActive == true), "PaperWeightID", "Grammature");
+            ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes.Where(x => x.IsActive == true), "PaymentTypeID", "Name");
+            ViewData["PostPressID"] = new SelectList(_context.PostPresses.Where(x => x.IsActive == true), "PostPressID", "Name");
+            ViewData["PrintColorID"] = new SelectList(_context.PrintColors.Where(x => x.IsActive == true), "PrintColorID", "Name");
+            ViewData["ProductID"] = new SelectList(_context.Products.Where(x => x.IsActive == true), "ProductID", "Name");
+            ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages.Where(x => x.IsActive == true), "ProductionStageID", "Name");
+            ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes.Where(x => x.IsActive == true), "SheetSizeID", "Name");
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
-            ViewData["VatRateID"] = new SelectList(_context.VatRates, "VatRateID", "Name");
+            ViewData["VatRateID"] = new SelectList(_context.VatRates.Where(x => x.IsActive == true), "VatRateID", "Name");
             return View();
         }
 
@@ -121,25 +119,26 @@ namespace Printo.Intranet.Controllers
                 Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
                 TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało dodane";
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
+
             }
-            ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
-            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name", order.PrintUserID);
-            ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
-            ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);
-            ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name", order.FormatID);
-            ViewData["MachineID"] = new SelectList(_context.Machines, "MachineID", "Name", order.MachineID);
-            ViewData["PaperTypeID"] = new SelectList(_context.PaperTypes, "PaperTypeID", "Name", order.PaperTypeID);
-            ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights, "PaperWeightID", "Grammature", order.PaperWeightID);
-            ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes, "PaymentTypeID", "Name", order.PaymentTypeID);
-            ViewData["PostPressID"] = new SelectList(_context.PostPresses, "PostPressID", "Name", order.PostPressID);
-            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "PrintColorID", "Name", order.PrintColorID);
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", order.ProductID);
-            ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages, "ProductionStageID", "Name", order.ProductionStageID);
-            ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name", order.SheetSizeID);
-            ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.UpdatedUserID);
-            ViewData["VatRateID"] = new SelectList(_context.VatRates, "VatRateID", "Name", order.VatRateID);
+            ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
+            ViewData["ClientID"] = new SelectList(_context.Clients.Where(x => x.IsActive == true), "ClientID", "Name");
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name");
+            ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes.Where(x => x.IsActive == true), "DeliveryTypeID", "Name");
+            ViewData["FinishingID"] = new SelectList(_context.Finishings.Where(x => x.IsActive == true), "FinishingID", "Name");
+            ViewData["FormatID"] = new SelectList(_context.Formats.Where(x => x.IsActive == true), "FormatID", "Name");
+            ViewData["MachineID"] = new SelectList(_context.Machines.Where(x => x.IsActive == true), "MachineID", "Name");
+            ViewData["PaperTypeID"] = new SelectList(_context.PaperTypes.Where(x => x.IsActive == true), "PaperTypeID", "Name");
+            ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights.Where(x => x.IsActive == true), "PaperWeightID", "Grammature");
+            ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes.Where(x => x.IsActive == true), "PaymentTypeID", "Name");
+            ViewData["PostPressID"] = new SelectList(_context.PostPresses.Where(x => x.IsActive == true), "PostPressID", "Name");
+            ViewData["PrintColorID"] = new SelectList(_context.PrintColors.Where(x => x.IsActive == true), "PrintColorID", "Name");
+            ViewData["ProductID"] = new SelectList(_context.Products.Where(x => x.IsActive == true), "ProductID", "Name");
+            ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages.Where(x => x.IsActive == true), "ProductionStageID", "Name");
+            ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes.Where(x => x.IsActive == true), "SheetSizeID", "Name");
+            ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
+            ViewData["VatRateID"] = new SelectList(_context.VatRates.Where(x => x.IsActive == true), "VatRateID", "Name");
             return View(order);
         }
 
@@ -151,30 +150,48 @@ namespace Printo.Intranet.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
+            var order = await _context.Orders
+                .Include(o => o.AddedUser)
+                .Include(o => o.Client)
+                .Include(o => o.DeliveryType)
+                .Include(o => o.Finishing)
+                .Include(o => o.Format)
+                .Include(o => o.Machine)
+                .Include(o => o.PaperType)
+                .Include(o => o.PaperWeight)
+                .Include(o => o.PaymentType)
+                .Include(o => o.PostPress)
+                .Include(o => o.PrintColor)
+                .Include(o => o.Product)
+                .Include(o => o.ProductionStage)
+                .Include(o => o.SheetSize)
+                .Include(o => o.UpdatedUser)
+                .Include(o => o.VatRate)
+                .Include(o => o.PrintUser)
+                .FirstOrDefaultAsync(m => m.OrderID == id);
             if (order == null)
             {
                 return NotFound();
             }
 
-            ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
-            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name", order.PrintUserID);
-            ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
-            ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);
-            ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name", order.FormatID);
-            ViewData["MachineID"] = new SelectList(_context.Machines, "MachineID", "Name", order.MachineID);
-            ViewData["PaperTypeID"] = new SelectList(_context.PaperTypes, "PaperTypeID", "Name", order.PaperTypeID);
-            ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights, "PaperWeightID", "Grammature", order.PaperWeightID);
-            ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes, "PaymentTypeID", "Name", order.PaymentTypeID);
-            ViewData["PostPressID"] = new SelectList(_context.PostPresses, "PostPressID", "Name", order.PostPressID);
-            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "PrintColorID", "Name", order.PrintColorID);
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", order.ProductID);
-            ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages, "ProductionStageID", "Name", order.ProductionStageID);
-            ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name", order.SheetSizeID);
-            ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.UpdatedUserID);
-            ViewData["VatRateID"] = new SelectList(_context.VatRates, "VatRateID", "Name", order.VatRateID);
-            
+            ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
+            ViewData["ClientID"] = new SelectList(_context.Clients.Where(x => x.IsActive == true), "ClientID", "Name");
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name");
+            ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes.Where(x => x.IsActive == true), "DeliveryTypeID", "Name");
+            ViewData["FinishingID"] = new SelectList(_context.Finishings.Where(x => x.IsActive == true), "FinishingID", "Name");
+            ViewData["FormatID"] = new SelectList(_context.Formats.Where(x => x.IsActive == true), "FormatID", "Name");
+            ViewData["MachineID"] = new SelectList(_context.Machines.Where(x => x.IsActive == true), "MachineID", "Name");
+            ViewData["PaperTypeID"] = new SelectList(_context.PaperTypes.Where(x => x.IsActive == true), "PaperTypeID", "Name");
+            ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights.Where(x => x.IsActive == true), "PaperWeightID", "Grammature");
+            ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes.Where(x => x.IsActive == true), "PaymentTypeID", "Name");
+            ViewData["PostPressID"] = new SelectList(_context.PostPresses.Where(x => x.IsActive == true), "PostPressID", "Name");
+            ViewData["PrintColorID"] = new SelectList(_context.PrintColors.Where(x => x.IsActive == true), "PrintColorID", "Name");
+            ViewData["ProductID"] = new SelectList(_context.Products.Where(x => x.IsActive == true), "ProductID", "Name");
+            ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages.Where(x => x.IsActive == true), "ProductionStageID", "Name");
+            ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes.Where(x => x.IsActive == true), "SheetSizeID", "Name");
+            ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
+            ViewData["VatRateID"] = new SelectList(_context.VatRates.Where(x => x.IsActive == true), "VatRateID", "Name");
+
             return View(order);
         }
 
@@ -206,9 +223,17 @@ namespace Printo.Intranet.Controllers
                     {
                         v.Title = order.Client.Name + " - " + order.OrderName;
                         v.Description = order.Description;
-                        if(order.ProductionStageID == 5 || order.ProductionStageID == 6 || order.ProductionStageID == 7 || order.ProductionStageID == 8)
+                        if (order.ProductionStageID >= 5)
                         {
-                            v.BackgroundColor = "#6c757d";
+                            v.BackgroundColor = "gray";
+                        }
+                        if (order.ProductionStageID == 4)
+                        {
+                            v.BackgroundColor = "#FF5722";
+                        }
+                        if (order.ProductionStageID < 4)
+                        {
+                            v.BackgroundColor = "#3ad29f";
                         }
                         _context.SaveChanges();
                     }
@@ -226,7 +251,11 @@ namespace Printo.Intranet.Controllers
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+                if(order.ProductionStageID == 8)
+                {
+                    return RedirectToAction("FinishedOrders", "Orders");
+                }
+                else return RedirectToAction(nameof(Index));
             }
 
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
@@ -264,23 +293,23 @@ namespace Printo.Intranet.Controllers
             {
                 return NotFound();
             }
-            ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
-            ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);
-            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name", order.PrintUserID);
-            ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes, "DeliveryTypeID", "Name", order.DeliveryTypeID);
-            ViewData["FinishingID"] = new SelectList(_context.Finishings, "FinishingID", "Name", order.FinishingID);
-            ViewData["FormatID"] = new SelectList(_context.Formats, "FormatID", "Name", order.FormatID);
-            ViewData["MachineID"] = new SelectList(_context.Machines, "MachineID", "Name", order.MachineID);
-            ViewData["PaperTypeID"] = new SelectList(_context.PaperTypes, "PaperTypeID", "Name", order.PaperTypeID);
-            ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights, "PaperWeightID", "Grammature", order.PaperWeightID);
-            ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes, "PaymentTypeID", "Name", order.PaymentTypeID);
-            ViewData["PostPressID"] = new SelectList(_context.PostPresses, "PostPressID", "Name", order.PostPressID);
-            ViewData["PrintColorID"] = new SelectList(_context.PrintColors, "PrintColorID", "Name", order.PrintColorID);
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", order.ProductID);
-            ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages, "ProductionStageID", "Name", order.ProductionStageID);
-            ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes, "SheetSizeID", "Name", order.SheetSizeID);
-            ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.UpdatedUserID);
-            ViewData["VatRateID"] = new SelectList(_context.VatRates, "VatRateID", "Name", order.VatRateID);
+            ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
+            ViewData["ClientID"] = new SelectList(_context.Clients.Where(x => x.IsActive == true), "ClientID", "Name");
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name");
+            ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes.Where(x => x.IsActive == true), "DeliveryTypeID", "Name");
+            ViewData["FinishingID"] = new SelectList(_context.Finishings.Where(x => x.IsActive == true), "FinishingID", "Name");
+            ViewData["FormatID"] = new SelectList(_context.Formats.Where(x => x.IsActive == true), "FormatID", "Name");
+            ViewData["MachineID"] = new SelectList(_context.Machines.Where(x => x.IsActive == true), "MachineID", "Name");
+            ViewData["PaperTypeID"] = new SelectList(_context.PaperTypes.Where(x => x.IsActive == true), "PaperTypeID", "Name");
+            ViewData["PaperWeightID"] = new SelectList(_context.PaperWeights.Where(x => x.IsActive == true), "PaperWeightID", "Grammature");
+            ViewData["PaymentTypeID"] = new SelectList(_context.PaymentTypes.Where(x => x.IsActive == true), "PaymentTypeID", "Name");
+            ViewData["PostPressID"] = new SelectList(_context.PostPresses.Where(x => x.IsActive == true), "PostPressID", "Name");
+            ViewData["PrintColorID"] = new SelectList(_context.PrintColors.Where(x => x.IsActive == true), "PrintColorID", "Name");
+            ViewData["ProductID"] = new SelectList(_context.Products.Where(x => x.IsActive == true), "ProductID", "Name");
+            ViewData["ProductionStageID"] = new SelectList(_context.ProductionStages.Where(x => x.IsActive == true), "ProductionStageID", "Name");
+            ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes.Where(x => x.IsActive == true), "SheetSizeID", "Name");
+            ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
+            ViewData["VatRateID"] = new SelectList(_context.VatRates.Where(x => x.IsActive == true), "VatRateID", "Name");
 
             TempData["msg"] = "Skopiowano dane do nowego zamówienia";
 
@@ -325,7 +354,7 @@ namespace Printo.Intranet.Controllers
                 Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
                 TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało dodane";
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
             ViewData["ClientID"] = new SelectList(_context.Clients, "ClientID", "Name", order.ClientID);

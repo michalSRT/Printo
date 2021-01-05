@@ -1,4 +1,5 @@
 ﻿@model Printo.Data.Data.Client
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = String.Format("Edycja klienta {0}", Model.Name);
 }
@@ -119,32 +120,35 @@
                     <div class="col">
                         @if (Model.IsActive)
                         {
-                            <!-- Button to Open the Modal -->
-                            <button type="button" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDeactivate">
-                                Usuń
-                            </button>
-                            <!-- The Modal -->
-                            <div class="modal" id="myModalDeactivate">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Uwaga!</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            Czy chcesz usunąć tego klienta?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <form asp-action="Deactivate" asp-route-id="@Model.ClientID">
-                                                <input type="hidden" asp-for="ClientID" />
-                                                <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
-                                                <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
-                                            </form>
+                            @if (@Context.Session.GetString("UserTypeID") != "2")
+                            {
+                                <!-- Button to Open the Modal -->
+                                <button type="button" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDeactivate">
+                                    Usuń
+                                </button>
+                                <!-- The Modal -->
+                                <div class="modal" id="myModalDeactivate">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Uwaga!</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                Czy chcesz usunąć tego klienta?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form asp-action="Deactivate" asp-route-id="@Model.ClientID">
+                                                    <input type="hidden" asp-for="ClientID" />
+                                                    <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
+                                                    <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                         else
                         {
@@ -153,9 +157,10 @@
                                     <input type="hidden" asp-for="ClientID" />
                                     <input type="submit" value="Przywróć" class="btn btn-outline-success buttMargin" style="margin:5px" />
                                 </form>
-
-                                <input type="button" value="Usuń trwale" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDelete" style="margin:5px" />
-
+                                @if (@Context.Session.GetString("UserTypeID") == "1")
+                                {
+                                    <input type="button" value="Usuń trwale" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDelete" style="margin:5px" />
+                                }
                             </div>
                             <!-- The Modal 2-->
                             <div class="modal" id="myModalDelete">
@@ -188,7 +193,6 @@
             </div>
         </div>
         @*ORDERS LIST*@
-
         <div class="row">
             <div class="col" style="text-align:center; margin:10px">
                 <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">

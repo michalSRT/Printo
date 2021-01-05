@@ -6,28 +6,17 @@
 // ORDERS/EDIT disable fields when UserType == 2
 $(document).ready(function () {
     var userTypeID = $("#hdnSession").data('value');
-    if (userTypeID == 2) {
-        document.getElementById("NetPrice").disabled = true;
-        document.getElementById("VatRate").disabled = true;
-        document.getElementById("PaymentDetails").disabled = true;
-        document.getElementById("DeliveryDetails").disabled = true;
-        document.getElementById("PaymentType").disabled = true;
-        document.getElementById("DeliveryType").disabled = true;
-        document.getElementById("PostPress").disabled = true;
-        document.getElementById("Finishing").disabled = true;
-        document.getElementById("Description").disabled = true;
-        document.getElementById("OrderName").disabled = true;
-        document.getElementById("Client").disabled = true;
-        document.getElementById("startDate").disabled = true;
-        document.getElementById("endDate").disabled = true;
-        document.getElementById("Product").disabled = true;
-        document.getElementById("Format").disabled = true;
-        document.getElementById("Quantity").disabled = true;
-        document.getElementById("SheetsNumber").disabled = true;
-        document.getElementById("PaperWeight").disabled = true;
-        document.getElementById("PaperType").disabled = true;
-        document.getElementById("customCheck1").disabled = true;
-        document.getElementById("Invoice").disabled = true;
+    if (userTypeID == "2") {
+        document.getElementById("NetPrice").readOnly = true;
+        document.getElementById("PaymentDetails").readOnly = true;
+        document.getElementById("DeliveryDetails").readOnly = true;
+        document.getElementById("SheetsNumber").readOnly = true;
+        document.getElementById("Description").readOnly = true;
+        document.getElementById("OrderName").readOnly = true;
+        document.getElementById("startDate").readOnly = true;
+        document.getElementById("endDate").readOnly = true;
+        document.getElementById("Quantity").readOnly = true;
+        document.getElementById("Invoice").readOnly = true;
     }
 })
 

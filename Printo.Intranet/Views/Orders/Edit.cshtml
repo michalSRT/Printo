@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = String.Format("Edycja zamówienia nr {0}", Model.OrderID);
+    var userType = @Context.Session.GetString("UserTypeID");
 }
 
 <div class="row">
@@ -30,7 +31,7 @@
             <div class="card-body">
                 <form asp-action="Edit" id="saveForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" id="hdnSession" data-value="@Context.Session.GetString("UserTypeID")" />
+                    <input type="hidden" id="hdnSession" data-value="@userType" />
                     <input type="hidden" asp-for="OrderID" />
                     <input type="hidden" asp-for="IsActive" />
                     <input type="hidden" asp-for="AddedDate" />
@@ -60,13 +61,18 @@
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="ClientID" class="control-label">Klient</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    @if (@Context.Session.GetString("UserTypeID") != 2.ToString())
+                                    <label data-toggle="tooltip" data-placement="top" title="Dane klienta"><a class="btn-outline-success" role="button" aria-haspopup="true" aria-expanded="false" href="@(Url.Action("Edit", "Clients", new { id = Model.ClientID }, null))"><i class="fe fe-help-circle"></i></a></label>
+                                    @if (userType == "2")
                                     {
-                                        <label data-toggle="tooltip" data-placement="top" title="Nowy klient"><a class="btn-outline-success" role="button" aria-haspopup="true" aria-expanded="false" href="@Url.Action("AddClient", "Orders", new { OrderID = ViewData["OrderID"] })"><i class="fe fe-plus"></i></a></label>
+                                        <input asp-for="@Model.Client.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="ClientID" />
                                     }
-                                    <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID" id="Client">
-                                        <option selected disabled value="0"></option>
-                                    </select>
+                                    else
+                                    {
+                                        <select asp-for="ClientID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ClientID" id="Client">
+                                            <option selected disabled value="0"></option>
+                                        </select>
+                                    }
                                     <span asp-validation-for="ClientID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-12 col-md-6">
@@ -80,17 +86,33 @@
                                 <div class="form-group col-12 col-md-4">
                                     <label asp-for="ProductID" class="control-label">Produkt</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="ProductID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ProductID" id="Product">
-                                        <option selected disabled value="0"></option>
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.Product.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="ProductID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="ProductID" class="form-control myselect" style="width:100%" asp-items="ViewBag.ProductID" id="Product">
+                                            <option selected disabled value="0"></option>
+                                        </select>
+                                    }
                                     <span asp-validation-for="ProductID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-12 col-md-4">
                                     <label asp-for="FormatID" class="control-label">Format</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="FormatID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FormatID" id="Format">
-                                        <option selected disabled value="0"></option>
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.Format.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="FormatID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="FormatID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FormatID" id="Format">
+                                            <option selected disabled value="0"></option>
+                                        </select>
+                                    }
                                     <span asp-validation-for="FormatID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
@@ -104,17 +126,33 @@
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="PaperTypeID" class="control-label">Papier</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="PaperTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperTypeID" id="PaperType">
-                                        <option selected disabled value="0"></option>
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.PaperType.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="PaperTypeID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="PaperTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperTypeID" id="PaperType">
+                                            <option selected disabled value="0"></option>
+                                        </select>
+                                    }
                                     <span asp-validation-for="PaperTypeID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="PaperWeightID" class="control-label">Gramatura</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="PaperWeightID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperWeightID" id="PaperWeight">
-                                        <option selected disabled value="0"></option>
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.PaperWeight.Grammature" class="form-control" readonly />
+                                        <input type="hidden" asp-for="PaperWeightID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="PaperWeightID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaperWeightID" id="PaperWeight">
+                                            <option selected disabled value="0"></option>
+                                        </select>
+                                    }
                                     <span asp-validation-for="PaperWeightID" class="text-danger"></span>
                                 </div>
                             </div>
@@ -125,10 +163,20 @@
                                             <label asp-for="Description" class="control-label">Opis zamówienia</label>
                                         </div>
                                         <div class="col">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1" asp-for="IsReprint">
-                                                <label class="custom-control-label" for="customCheck1">Dodruk</label>
-                                            </div>
+                                            @if (userType == "2")
+                                            {
+                                                @if (Model.IsReprint == true)
+                                                {
+                                                    <label>Uwaga! DODRUK</label>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck1" asp-for="IsReprint">
+                                                    <label class="custom-control-label" for="customCheck1">Dodruk</label>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                     <textarea asp-for="Description" class="form-control" id="Description"></textarea>
@@ -142,22 +190,46 @@
                                 <div class="form-group col-6 col-md-4">
                                     <label asp-for="MachineID" class="control-label">Maszyna</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="MachineID" class="form-control myselect" style="width:100%" asp-items="ViewBag.MachineID">
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.Machine.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="MachineID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="MachineID" class="form-control myselect" style="width:100%" asp-items="ViewBag.MachineID">
+                                        </select>
+                                    }
                                     <span asp-validation-for="MachineID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-6 col-md-4">
                                     <label asp-for="SheetSizeID" class="control-label">Format arkusza</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="SheetSizeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.SheetSizeID">
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.SheetSize.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="SheetSizeID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="SheetSizeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.SheetSizeID">
+                                        </select>
+                                    }
                                     <span asp-validation-for="SheetSizeID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="PrintColorID" class="control-label">Kolorystyka druku</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="PrintColorID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PrintColorID">
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.PrintColor.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="PrintColorID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="PrintColorID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PrintColorID">
+                                        </select>
+                                    }
                                     <span asp-validation-for="PrintColorID" class="text-danger"></span>
                                 </div>
                             </div>
@@ -199,15 +271,31 @@
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="FinishingID" class="control-label">Uszlachetnienia</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="FinishingID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FinishingID" id="Finishing">
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.Finishing.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="FinishingID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="FinishingID" class="form-control myselect" style="width:100%" asp-items="ViewBag.FinishingID" id="Finishing">
+                                        </select>
+                                    }
                                     <span asp-validation-for="FinishingID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-12 col-md-6">
                                     <label asp-for="PostPressID" class="control-label">Introligatornia</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="PostPressID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PostPressID" id="PostPress">
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.PostPress.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="PostPressID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="PostPressID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PostPressID" id="PostPress">
+                                        </select>
+                                    }
                                     <span asp-validation-for="PostPressID" class="text-danger"></span>
                                 </div>
                             </div>
@@ -218,15 +306,31 @@
                                 <div class="form-group col">
                                     <label asp-for="DeliveryTypeID" class="control-label">Rodzaj dostawy</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="DeliveryTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.DeliveryTypeID" id="DeliveryType">
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.DeliveryType.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="DeliveryTypeID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="DeliveryTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.DeliveryTypeID" id="DeliveryType">
+                                        </select>
+                                    }
                                     <span asp-validation-for="DeliveryTypeID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col col-md-6">
                                     <label asp-for="PaymentTypeID" class="control-label">Sposób płatności</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="PaymentTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaymentTypeID" id="PaymentType">
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.PaymentType.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="PaymentTypeID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="PaymentTypeID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PaymentTypeID" id="PaymentType">
+                                        </select>
+                                    }
                                     <span asp-validation-for="PaymentTypeID" class="text-danger"></span>
                                 </div>
                             </div>
@@ -244,8 +348,16 @@
                                 <div class="form-group col col-md-6">
                                     <label asp-for="VatRateID" class="control-label">Stawka Vat</label>
                                     <label style="color:mediumseagreen" data-toggle="tooltip" data-placement="top" title="Pole wymagane"> *</label>
-                                    <select asp-for="VatRateID" class="form-control myselect" style="width:100%" asp-items="ViewBag.VatRateID" id="VatRate">
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="@Model.VatRate.Name" class="form-control" readonly />
+                                        <input type="hidden" asp-for="VatRateID" />
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="VatRateID" class="form-control myselect" style="width:100%" asp-items="ViewBag.VatRateID" id="VatRate">
+                                        </select>
+                                    }
                                     <span asp-validation-for="VatRateID" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
@@ -256,7 +368,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6" style="margin-left:10px; margin-right:10px">
                                     <label asp-for="InvoiceNumber" class="control-label">Nr faktury</label>
-                                    <input asp-for="InvoiceNumber" class="form-control" placeholder="np. 01/01/2020" />
+                                    <input id="Invoice" asp-for="InvoiceNumber" class="form-control" placeholder="np. 01/01/2020" />
                                 </div>
                             </div>
                         </div>
@@ -265,7 +377,7 @@
                 </form>
                 <div class="row">
                     <div class="col">
-                        @if (Model.ProductionStage.Name != "KONIEC")
+                        @if (Model.ProductionStageID != 8)
                         {
                             @if (Model.IsActive)
                             {
@@ -352,32 +464,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
-<script>
-    $(document).ready(function () {
-        var userTypeID = $("#hdnSession").data('value');
-        if (userTypeID == 2) {
-            document.getElementById("NetPrice").disabled = true;  
-            document.getElementById("VatRate").disabled = true;  
-            document.getElementById("PaymentDetails").disabled = true;  
-            document.getElementById("DeliveryDetails").disabled = true;  
-            document.getElementById("PaymentType").disabled = true;  
-            document.getElementById("DeliveryType").disabled = true;  
-            document.getElementById("PostPress").disabled = true;  
-            document.getElementById("Finishing").disabled = true;  
-            document.getElementById("Description").disabled = true;  
-            document.getElementById("OrderName").disabled = true;  
-            document.getElementById("OrderName").disabled = true;  
-            document.getElementById("Client").disabled = true;  
-            document.getElementById("startDate").disabled = true;  
-            document.getElementById("endDate").disabled = true;  
-            document.getElementById("Product").disabled = true;  
-            document.getElementById("Format").disabled = true;  
-            document.getElementById("Quantity").disabled = true;  
-            document.getElementById("SheetsNumber").disabled = true;  
-            document.getElementById("PaperWeight").disabled = true;  
-            document.getElementById("PaperType").disabled = true;  
-            document.getElementById("customCheck1").disabled = true;  
-        }
-    })
-</script>

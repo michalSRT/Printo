@@ -34,9 +34,7 @@ namespace Printo.Intranet.Policy
 
         public async Task<bool> isAdmin()
         {
-            var currentUser = await context.Users.FindAsync(userId);
-
-            if (currentUser.UserTypeID == 1)
+            if (userTypeId == 1)
             {
                 return true;
             }

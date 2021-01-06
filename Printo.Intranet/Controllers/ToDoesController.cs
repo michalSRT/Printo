@@ -48,7 +48,7 @@ namespace Printo.Intranet.Controllers
         {
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
-            ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Name");
+            ViewData["UserID"] = new SelectList(_context.Users.Where(x=>x.IsActive == true), "UserID", "Name");
             return View();
         }
 

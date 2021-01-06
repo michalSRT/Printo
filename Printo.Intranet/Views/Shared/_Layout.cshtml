@@ -96,12 +96,16 @@
                             <span class="ml-3 item-text">Harmonogram</span>
                         </a>
                     </li>
-                    <li class="nav-item w-100">
-                        <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Create">
-                            <i class="fe fe-plus fe-16"></i>
-                            <span class="ml-3 item-text">Nowe zamówienie</span>
-                        </a>
-                    </li>
+                    @if (@Context.Session.GetString("UserTypeID") != "2")
+                    {
+                        <li class="nav-item w-100">
+                            <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Create">
+                                <i class="fe fe-plus fe-16"></i>
+                                <span class="ml-3 item-text">Nowe zamówienie</span>
+                            </a>
+                        </li>
+                    }
+
                     <li class="nav-item w-100">
                         <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Index">
                             <i class="fe fe-monitor fe-16"></i>
@@ -134,14 +138,15 @@
                     </li>
 
                     <hr />
-
-                    <li class="nav-item w-100">
-                        <a class="nav-link" asp-area="" asp-controller="Statistics" asp-action="Index">
-                            <i class="fe fe-bar-chart-2 fe-16"></i>
-                            <span class="ml-3 item-text">Statystyki</span>
-                        </a>
-                    </li>
-
+                    @if (@Context.Session.GetString("UserTypeID") != "2")
+                    {
+                        <li class="nav-item w-100">
+                            <a class="nav-link" asp-area="" asp-controller="Statistics" asp-action="Index">
+                                <i class="fe fe-bar-chart-2 fe-16"></i>
+                                <span class="ml-3 item-text">Statystyki</span>
+                            </a>
+                        </li>
+                    }
                 </ul>
 
                 @if (@Context.Session.GetString("UserTypeID") == 1.ToString())
@@ -366,7 +371,7 @@
             },
             slotDuration: '00:30:00',
             slotMinTime: "07:00:00",
-            slotMaxTime: "23:00:00",
+            slotMaxTime: "23:30:00",
             weekends: true,
             extendedProps: {
                 description: 'description',

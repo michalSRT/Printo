@@ -67,6 +67,8 @@ namespace Printo.Intranet.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("UserTypeID") == "2") { return RedirectToAction("Index", "Home"); }
+
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["ClientID"] = new SelectList(_context.Clients.Where(x=>x.IsActive == true), "ClientID", "Name");
             ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name");
@@ -94,7 +96,7 @@ namespace Printo.Intranet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID,PrintUserID,PrintDateTime,PaymentDetails,DeliveryDetails,InvoiceNumber")] Order order)
         {
-            if (ModelState.IsValid)
+                if (ModelState.IsValid)
             {
                 order.IsActive = true;
                 order.AddedDate = DateTime.Now;
@@ -283,6 +285,8 @@ namespace Printo.Intranet.Controllers
         // GET: Orders/CopyAndCreate/5
         public async Task<IActionResult> CopyAndCreate(int? id)
         {
+            if (HttpContext.Session.GetString("UserTypeID") == "2") { return RedirectToAction("Index", "Home"); }
+
             if (id == null)
             {
                 return NotFound();
@@ -380,6 +384,8 @@ namespace Printo.Intranet.Controllers
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("UserTypeID") == "2") { return RedirectToAction("Index", "Home"); }
+
             if (id == null)
             {
                 return NotFound();

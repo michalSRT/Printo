@@ -46,6 +46,8 @@ namespace Printo.Intranet.Controllers
         // GET: Clients/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("UserTypeID") == "2") { return RedirectToAction("Index", "Home"); }
+
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             return View();
@@ -141,6 +143,8 @@ namespace Printo.Intranet.Controllers
         // GET: Clients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("UserTypeID") == "2") { return RedirectToAction("Index", "Home"); }
+
             if (id == null)
             {
                 return NotFound();

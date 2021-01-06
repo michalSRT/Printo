@@ -61,9 +61,6 @@ $.datetimepicker.setLocale('pl');
 $('#startDate').datetimepicker({
     contentWindow: window,
     timepicker: false,
-    step: 30,
-    minTime: '7:00',
-    maxTime: '23:30',
     format: 'd.m.Y',
     dayOfWeekStart: 1,
     defaultDate: new Date()
@@ -71,8 +68,10 @@ $('#startDate').datetimepicker({
 
 $('#PrintDate').datetimepicker({
     contentWindow: window,
-    step: 5,
-    format: 'd.m.Y H:i',
+    step: 15,
+    minTime: '7:00',
+    maxTime: '23:15',
+    format: 'd.m.Y',
     dayOfWeekStart: 1,
     defaultDate: new Date()
 });
@@ -80,9 +79,6 @@ $('#PrintDate').datetimepicker({
 $('#endDate').datetimepicker({
     contentWindow: window,
     timepicker: false,
-    step: 30,
-    minTime: '7:00',
-    maxTime: '23:30',
     format: 'd.m.Y',
     dayOfWeekStart: 1,
     defaultDate: new Date()
@@ -90,7 +86,10 @@ $('#endDate').datetimepicker({
 
 $('#toDoDate').datetimepicker({
     contentWindow: window,
-    format: 'd.m.Y H:i',
+    step: 15,
+    minTime: '7:00',
+    maxTime: '23:15',
+    format: 'd.m.Y',
     dayOfWeekStart: 1,
     defaultDate: new Date()
 });

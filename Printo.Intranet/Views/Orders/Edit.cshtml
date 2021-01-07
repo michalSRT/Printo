@@ -247,7 +247,7 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col">
                                     <label asp-for="PrintDateTime" class="control-label">Wydrukowano dnia</label>
-                                    <input asp-for="PrintDateTime" autocomplete="off" class="form-control" id="PrintDate" type="text" value="@Convert.ToString(string.Format("{0:dd/MM/yyyy, HH:mm}", Model.PrintDateTime))" />
+                                    <input asp-for="PrintDateTime" autocomplete="off" class="form-control" id="PrintDate" type="text"  value="@Convert.ToString(string.Format("{0:dd/MM/yyyy, HH:mm}", Model.PrintDateTime))"/>
                                     <span asp-validation-for="PrintDateTime" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">

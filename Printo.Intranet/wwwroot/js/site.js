@@ -66,20 +66,20 @@ $('#startDate').datetimepicker({
     defaultDate: new Date()
 });
 
-$('#PrintDate').datetimepicker({
+$('#endDate').datetimepicker({
     contentWindow: window,
-    step: 15,
-    minTime: '7:00',
-    maxTime: '23:15',
+    timepicker: false,
     format: 'd.m.Y',
     dayOfWeekStart: 1,
     defaultDate: new Date()
 });
 
-$('#endDate').datetimepicker({
+$('#PrintDate').datetimepicker({
     contentWindow: window,
-    timepicker: false,
-    format: 'd.m.Y',
+    step: 15,
+    minTime: '7:00',
+    maxTime: '23:15',
+    format: 'd.m.Y H:i',
     dayOfWeekStart: 1,
     defaultDate: new Date()
 });
@@ -89,7 +89,7 @@ $('#toDoDate').datetimepicker({
     step: 15,
     minTime: '7:00',
     maxTime: '23:15',
-    format: 'd.m.Y',
+    format: 'd.m.Y H:i',
     dayOfWeekStart: 1,
     defaultDate: new Date()
 });

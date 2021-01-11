@@ -22,55 +22,6 @@ namespace Printo.Intranet.Controllers
             return View(await printoContext.ToListAsync());
         }
 
-        // GET: ProductionStages/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productionStage = await _context.ProductionStages
-                .Include(p => p.AddedUser)
-                .Include(p => p.UpdatedUser)
-                .FirstOrDefaultAsync(m => m.ProductionStageID == id);
-            if (productionStage == null)
-            {
-                return NotFound();
-            }
-
-            return View(productionStage);
-        }
-
-        // GET: ProductionStages/Create
-        public IActionResult Create()
-        {
-            ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
-            ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
-            return View();
-        }
-
-        // POST: ProductionStages/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductionStageID,Name,Color,Description,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID")] ProductionStage productionStage)
-        {
-            if (ModelState.IsValid)
-            {
-                productionStage.IsActive = true;
-                productionStage.AddedDate = DateTime.Now;
-                productionStage.AddedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
-                _context.Add(productionStage);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", productionStage.AddedUserID);
-            ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", productionStage.UpdatedUserID);
-            return View(productionStage);
-        }
-
         // GET: ProductionStages/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -126,37 +77,6 @@ namespace Printo.Intranet.Controllers
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", productionStage.AddedUserID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", productionStage.UpdatedUserID);
             return View(productionStage);
-        }
-
-        // GET: ProductionStages/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productionStage = await _context.ProductionStages
-                .Include(p => p.AddedUser)
-                .Include(p => p.UpdatedUser)
-                .FirstOrDefaultAsync(m => m.ProductionStageID == id);
-            if (productionStage == null)
-            {
-                return NotFound();
-            }
-
-            return View(productionStage);
-        }
-
-        // POST: ProductionStages/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var productionStage = await _context.ProductionStages.FindAsync(id);
-            _context.ProductionStages.Remove(productionStage);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         // POST: Patient/Deactivate/5

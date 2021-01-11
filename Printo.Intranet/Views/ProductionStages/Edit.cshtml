@@ -32,12 +32,12 @@
                     <div class="form-row">
                         <div class="form-group col-xl-6">
                             <label asp-for="Name" class="control-label">Nazwa etapu produkcji</label>
-                            <input asp-for="Name" type="text" class="form-control" />
+                            <input asp-for="Name" type="text" class="form-control" readonly/>
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="form-group col-xl-6">
                             <label asp-for="Description" class="control-label">Opis</label>
-                            <input asp-for="Description" type="text" class="form-control" />
+                            <input asp-for="Description" type="text" class="form-control" readonly/>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                         <div class="form-group col">
@@ -55,7 +55,7 @@
                             {
                                 <!-- Button to Open the Modal -->
                                 <button type="button" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDeactivate">
-                                    Usuń
+                                    Dezaktywuj
                                 </button>
                                 <!-- The Modal -->
                                 <div class="modal" id="myModalDeactivate">
@@ -67,7 +67,7 @@
                                             </div>
                                             <!-- Modal body -->
                                             <div class="modal-body">
-                                                Czy chcesz usunąć tę pozycję?
+                                                Czy chcesz usunąć tę dezaktywować?
                                             </div>
                                             <div class="modal-footer">
                                                 <form asp-action="Deactivate" asp-route-id="@Model.ProductionStageID">
@@ -87,29 +87,6 @@
                                         <input type="hidden" asp-for="ProductionStageID" />
                                         <input type="submit" value="Przywróć" class="btn btn-outline-success buttMargin" style="margin:5px" />
                                     </form>
-                                    <input type="button" value="Usuń trwale" class="btn btn-outline-danger buttMargin" data-toggle="modal" data-target="#myModalDelete" style="margin:5px" />
-                                </div>
-                                <!-- The Modal 2-->
-                                <div class="modal" id="myModalDelete">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Uwaga!</h4>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            <!-- Modal body -->
-                                            <div class="modal-body">
-                                                Czy chcesz trwale usunąć tę pozycję?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <form asp-action="Delete" asp-route-id="@Model.ProductionStageID">
-                                                    <input type="hidden" asp-for="ProductionStageID" />
-                                                    <input type="submit" value="Tak" class="btn btn-outline-danger buttMargin" />
-                                                    <button type="button" class="btn btn-outline-secondary buttMargin" data-dismiss="modal">Nie</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             }
                         </div>

@@ -17,6 +17,25 @@ $(document).ready(function () {
         document.getElementById("endDate").readOnly = true;
         document.getElementById("Quantity").readOnly = true;
         document.getElementById("Invoice").readOnly = true;
+        document.getElementById("clientName").readOnly = true;
+    }
+})
+
+// CLIENTS/EDIT disable fields when UserType == 2
+$(document).ready(function () {
+    var userTypeID = $("#hdnSessionClient").data('value');
+    if (userTypeID == "2") {
+        document.getElementById("clientName").readOnly = true;
+        document.getElementById("companyFullName").readOnly = true;
+        document.getElementById("nip").readOnly = true;
+        document.getElementById("phone").readOnly = true;
+        document.getElementById("email").readOnly = true;
+        document.getElementById("street").readOnly = true;
+        document.getElementById("houseNumber").readOnly = true;
+        document.getElementById("appartmentNumber").readOnly = true;
+        document.getElementById("postalCode").readOnly = true;
+        document.getElementById("city").readOnly = true;
+        document.getElementById("descriptionClient").readOnly = true;
     }
 })
 

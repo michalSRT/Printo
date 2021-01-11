@@ -524,14 +524,12 @@
             data: data,
             dataType: "json",
             success: function (data) {
-                //REFRESH CALENDAR
                 initDate = selectedEvent.start;
                 drawCalendar();
-                //calendar.render();
                 $('#eventModalSave').modal('hide');
             },
             error: function () {
-                alert('Failed to refresh calendar after save');
+                alert('Nie udało się odświeżyć kalendarza po zapisie.');
             }
         })
     }

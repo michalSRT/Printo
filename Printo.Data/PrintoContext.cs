@@ -129,7 +129,7 @@ namespace Printo.Data.Data
                 {
                     UserTypeID = 1,
                     Name = "Admin",
-                    Description = "Administrator systemu",
+                    Description = "Administrator systemu - pełna funkcjonalność i możliwości konfiguracji",
                     IsActive = true,
                     AddedDate = DateTime.Now
                 },
@@ -137,7 +137,7 @@ namespace Printo.Data.Data
                 {
                     UserTypeID = 2,
                     Name = "Drukarz",
-                    Description = "Drukarz",
+                    Description = "Drukarz - dostęp do harmonogramu i częściowej edycji zamówienia",
                     IsActive = true,
                     AddedDate = DateTime.Now
                 },
@@ -145,7 +145,7 @@ namespace Printo.Data.Data
                 {
                     UserTypeID = 3,
                     Name = "Pracownik",
-                    Description = "Pracownik",
+                    Description = "Pracownik - dostęp do harmonogramu, tworzenia i edycji zamówienia oraz klientów",
                     IsActive = true,
                     AddedDate = DateTime.Now
                 }

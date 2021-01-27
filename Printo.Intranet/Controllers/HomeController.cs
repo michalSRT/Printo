@@ -61,7 +61,10 @@ namespace Printo.Intranet.Controllers
                     v.Title = e.Title;
                     v.Start = e.Start;
                     v.End = e.End;
-                    v.Description = e.Description;
+                    if (e.Description != null)
+                    {
+                        v.Description = e.Description;
+                    }
                     v.AllDay = e.AllDay;
                     if (e.OrderID != null)
                     {

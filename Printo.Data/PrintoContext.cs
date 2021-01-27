@@ -5,11 +5,7 @@ namespace Printo.Data.Data
 {
     public class PrintoContext : DbContext
     {
-        public PrintoContext (DbContextOptions<PrintoContext> options)
-            :base(options)
-        {
-
-        }
+        public PrintoContext (DbContextOptions<PrintoContext> options) :base(options) { }
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<Order> Orders { get; set; }

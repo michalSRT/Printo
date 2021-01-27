@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<Printo.Data.Data.Order>
-
 @{
     ViewData["Title"] = "Archiwum - Zamówienia zakończone";
 }
-
 <div class="row">
     <div class="col-md-12">
         @*AKTYWNE*@
@@ -25,31 +23,21 @@
                 <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders">
                     <thead>
                         <tr>
-                            <th>Nr</th>
-                            <th>Start</th>
-                            <th>Koniec</th>
-                            <th>Nr faktury</th>
-                            <th>Klient</th>
-                            <th>Produkt</th>
-                            <th>Nazwa zamówienia</th>
-                            <th>Nakład</th>
-                            <th>Akcja</th>
+                            <th>Nr</th><th>Start</th><th>Koniec</th><th>Nr faktury</th><th>Klient</th<th>Produkt</th><th>Nazwa zamówienia</th><th>Nakład</th><th>Akcja</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.Where(x => x.IsActive == true))
                         {
-                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                            <tr class="tableCursor" onclick="location.href='@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.OrderID)
                                 </td>
                                 <td style="text-align:center">
-                                    @if (item.StartDate != null)
-                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                    @if (item.StartDate != null) {@item.StartDate.Value.ToString("dd/MM")}
                                 </td>
                                 <td style="text-align:center">
-                                    @if (item.EndDate != null)
-                                    {@item.EndDate.Value.ToString("dd/MM")}
+                                    @if (item.EndDate != null) {@item.EndDate.Value.ToString("dd/MM")}
                                 </td>
                                 <td>
                                     @if (item.InvoiceNumber != null)

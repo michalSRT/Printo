@@ -549,14 +549,13 @@
                 data: { EventID: selectedEvent.id, color: "gray" },
                 dataType: "json",
                 success: function () {
-                    //REFRESH CALENDAR
                     initDate = selectedEvent.start;
                     drawCalendar();
                     $('#eventModal').modal('hide');
 
                 },
                 error: function () {
-                    alert('Failed to refresh calendar after update');
+                    alert('Nie udało się odświeżyć kalendarza.');
                 }
             })
         }
@@ -577,7 +576,7 @@
 
                 },
                 error: function () {
-                    alert('Failed to refresh calendar after update');
+                    alert('Nie udało się odświeżyć kalendarza.');
                 }
             })
         }
@@ -598,7 +597,7 @@
 
                 },
                 error: function () {
-                    alert('Failed to refresh calendar after update');
+                    alert('Nie udało się odświeżyć kalendarza.');
                 }
             })
         }
@@ -622,7 +621,7 @@
 
                 },
                 error: function () {
-                    alert('Failed to refresh calendar after update');
+                    alert('Nie udało się odświeżyć kalendarza.');
                 }
             })
         }

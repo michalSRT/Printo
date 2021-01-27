@@ -95,8 +95,9 @@ namespace Printo.Intranet.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OrderID,ClientID,DeliveryTypeID,FinishingID,FormatID,MachineID,PaperWeightID,PaperTypeID,PaymentTypeID,PostPressID,PrintColorID,ProductID,ProductionStageID,SheetSizeID,VatRateID,StartDate,EndDate,OrderName,Description,NetPrice,IsReprint,Quantity,SheetsNumber,SheetsNumberPrinted,Comments,IsActive,AddedDate,UpdatedDate,AddedUserID,UpdatedUserID,PrintUserID,PrintDateTime,PaymentDetails,DeliveryDetails,InvoiceNumber")] Order order)
+
         {
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 order.IsActive = true;
                 order.AddedDate = DateTime.Now;
@@ -116,13 +117,12 @@ namespace Printo.Intranet.Controllers
                     BackgroundColor = "#3ad29f",
                     Description = order.Description
                 });
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
                 TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało dodane";
 
                 return RedirectToAction("Index", "Home");
-
             }
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["ClientID"] = new SelectList(_context.Clients.Where(x => x.IsActive == true), "ClientID", "Name");
@@ -237,7 +237,7 @@ namespace Printo.Intranet.Controllers
                         {
                             v.BackgroundColor = "#3ad29f";
                         }
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                     }
 
                 }
@@ -353,7 +353,7 @@ namespace Printo.Intranet.Controllers
                     BackgroundColor = "#3ad29f",
                     Description = order.Description
                 });
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
                 TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało dodane";

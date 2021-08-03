@@ -19,13 +19,14 @@ namespace Printo.Intranet.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x =>x.ProductionStage.Name != "KONIEC");
+            ViewData["ProductionStage"] = _context.ProductionStages.Where(x => x.IsActive == true).ToList();
+            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x =>x.ProductionStage.Name != "ARCHIWUM");
             return View(await printoContext.ToListAsync());
         }
 
         public async Task<IActionResult> FinishedOrders()
         {
-            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ProductionStage.Name == "KONIEC");
+            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ProductionStage.Name == "ARCHIWUM");
             return View(await printoContext.ToListAsync());
         }
 
@@ -107,16 +108,35 @@ namespace Printo.Intranet.Controllers
 
                 var ord = _context.Orders.Where(x => x.OrderName == order.OrderName).FirstOrDefault();
                 var client = _context.Clients.Where(y => y.ClientID == order.ClientID).FirstOrDefault();
+                Machine machineName = _context.Machines.Where(m => m.MachineID == order.MachineID).FirstOrDefault();
 
-                _context.Events.Add(new Event { 
-                    Title = client.Name + " - " + order.OrderName,
+
+                if (ord.MachineID != 1)
+                {
+                    _context.Events.Add(new Event { 
+                    Title = client.Name + " - " + order.OrderName + " | " + machineName.Name,
                     Start = DateTime.Today.AddHours(7.0),
                     End = null,
                     AllDay = true,
                     OrderID = ord.OrderID,
                     BackgroundColor = "#3ad29f",
                     Description = order.Description
-                });
+                    });
+                }
+                else
+                {
+                    _context.Events.Add(new Event
+                    {
+                        Title = client.Name + " - " + order.OrderName,
+                        Start = DateTime.Today.AddHours(7.0),
+                        End = null,
+                        AllDay = true,
+                        OrderID = ord.OrderID,
+                        BackgroundColor = "#3ad29f",
+                        Description = order.Description
+                    });
+                }
+                    
                 await _context.SaveChangesAsync();
 
                 Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
@@ -176,9 +196,11 @@ namespace Printo.Intranet.Controllers
                 return NotFound();
             }
 
+            var UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
+
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["ClientID"] = new SelectList(_context.Clients.Where(x => x.IsActive == true), "ClientID", "Name");
-            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name");
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2 && z.UserID == UpdatedUserID ), "UserID", "Name");
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes.Where(x => x.IsActive == true), "DeliveryTypeID", "Name");
             ViewData["FinishingID"] = new SelectList(_context.Finishings.Where(x => x.IsActive == true), "FinishingID", "Name");
             ViewData["FormatID"] = new SelectList(_context.Formats.Where(x => x.IsActive == true), "FormatID", "Name");
@@ -193,6 +215,7 @@ namespace Printo.Intranet.Controllers
             ViewData["SheetSizeID"] = new SelectList(_context.SheetSizes.Where(x => x.IsActive == true), "SheetSizeID", "Name");
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["VatRateID"] = new SelectList(_context.VatRates.Where(x => x.IsActive == true), "VatRateID", "Name");
+            ViewData["ProductionStage"] = _context.ProductionStages.Where(x => x.IsActive == true).ToList();
 
             return View(order);
         }
@@ -221,9 +244,15 @@ namespace Printo.Intranet.Controllers
                     await _context.SaveChangesAsync();
 
                     var v = _context.Events.Where(a => a.OrderID == order.OrderID).FirstOrDefault();
+                    Machine machineName = _context.Machines.Where(m => m.MachineID == order.MachineID).FirstOrDefault();
+
                     if (v != null)
                     {
-                        v.Title = order.Client.Name + " - " + order.OrderName;
+                        if (order.MachineID != 1)
+                        {
+                            v.Title = order.Client.Name + " - " + order.OrderName + " | " + machineName.Name;
+                        }
+                        else v.Title = order.Client.Name + " - " + order.OrderName;
                         v.Description = order.Description;
                         if (order.ProductionStageID >= 5)
                         {
@@ -538,6 +567,35 @@ namespace Printo.Intranet.Controllers
             }
 
             return View(order);
+        }
+
+        [HttpGet("ChangeProductionStage")]
+        public async Task<IActionResult> ChangeProductionStage(int id, int prodId)
+        {
+            var temp = await _context.Orders.FindAsync(id);
+            temp.ProductionStageID = prodId;
+            temp.UpdatedDate = DateTime.Now;
+            temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
+            await _context.SaveChangesAsync();
+            TempData["msg"] = "Zmieniono etap produkcyjny.";
+            return RedirectToAction("Index", "Orders");
+        }
+
+        [HttpGet("Index")]
+        public async Task<IActionResult> Index(int id)
+        {
+            ViewData["ProductionStage"] = _context.ProductionStages.Where(x => x.IsActive == true && x.Name != "ARCHIWUM").ToList();
+
+            if(id != 0)
+            {
+                var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ProductionStage.ProductionStageID == id);
+                return View(await printoContext.ToListAsync());
+            }
+            else
+            {
+                var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ProductionStage.Name != "ARCHIWUM");
+                return View(await printoContext.ToListAsync());
+            }
         }
     }
 }

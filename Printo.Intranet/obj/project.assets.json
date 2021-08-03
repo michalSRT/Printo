@@ -10190,11 +10190,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\msier\\Documents\\Printo\\Printo.Intranet\\Printo.Intranet.csproj",
+      "projectUniqueName": "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Intranet\\Printo.Intranet.csproj",
       "projectName": "Printo.Intranet",
-      "projectPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.Intranet\\Printo.Intranet.csproj",
+      "projectPath": "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Intranet\\Printo.Intranet.csproj",
       "packagesPath": "C:\\Users\\msier\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.Intranet\\obj\\",
+      "outputPath": "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Intranet\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -10215,8 +10215,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\msier\\Documents\\Printo\\Printo.Data\\Printo.Data.csproj": {
-              "projectPath": "C:\\Users\\msier\\Documents\\Printo\\Printo.Data\\Printo.Data.csproj"
+            "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Data\\Printo.Data.csproj": {
+              "projectPath": "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Data\\Printo.Data.csproj"
             }
           }
         }
@@ -10283,7 +10283,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.411\\RuntimeIdentifierGraph.json"
       }
     }
   }

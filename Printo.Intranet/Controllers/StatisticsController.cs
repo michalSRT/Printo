@@ -23,13 +23,13 @@ namespace Printo.Intranet.Controllers
 
             if(id == null)
             {
-                ViewBag.OrdersNumber = orders.Where(x => x.ProductionStage.Name != "KONIEC").Count();
-                ViewBag.FinishedOrdersNumber = orders.Where(x => x.ProductionStage.Name == "KONIEC").Count();
+                ViewBag.OrdersNumber = orders.Where(x => x.ProductionStage.Name != "ARCHIWUM").Count();
+                ViewBag.FinishedOrdersNumber = orders.Where(x => x.ProductionStage.Name == "ARCHIWUM").Count();
             }
             else
             {
-                ViewBag.OrdersNumber = orders.Where(x => x.ProductionStage.Name != "KONIEC" && x.ClientID == id).Count();
-                ViewBag.FinishedOrdersNumber = orders.Where(x => x.ProductionStage.Name == "KONIEC" && x.ClientID == id).Count();
+                ViewBag.OrdersNumber = orders.Where(x => x.ProductionStage.Name != "ARCHIWUM" && x.ClientID == id).Count();
+                ViewBag.FinishedOrdersNumber = orders.Where(x => x.ProductionStage.Name == "ARCHIWUM" && x.ClientID == id).Count();
             }
             ViewData["ClientID"] = new SelectList(_context.Clients.Where(x=>x.IsActive == true), "ClientID", "Name", id);
 

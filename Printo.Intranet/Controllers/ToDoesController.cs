@@ -18,7 +18,7 @@ namespace Printo.Intranet.Controllers
         // GET: ToDoes
         public async Task<IActionResult> Index()
         {
-            var printoContext = _context.ToDos.Include(t => t.AddedUser).Include(t => t.UpdatedUser).Include(t => t.User);
+            var printoContext = _context.ToDos.Include(t => t.AddedUser).Include(t => t.UpdatedUser).Include(t => t.User).OrderBy(t => t.Date);
             ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Name");
             return View(await printoContext.ToListAsync());
         }

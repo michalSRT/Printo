@@ -18,7 +18,7 @@ namespace Printo.Data.Data
         public string BackgroundColor { get; set; }
         [Display(Name = "Start")]
         public DateTime Start { get; set; }
-        [Display(Name = "Koniec")]
+        [Display(Name = "ARCHIWUM")]
         public DateTime? End { get; set; }
         [Display(Name = "Cały dzień")]
         public bool AllDay { get; set; }

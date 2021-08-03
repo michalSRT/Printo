@@ -51,6 +51,21 @@
 <div class="container" id="calendar" style="padding-bottom:15px; min-height:720px">
 </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col" style=" text-align: center; margin:10px ">
+            <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Kalendarz Google
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col collapse" id="collapseExample" style=" text-align: center; ">
+            <iframe src="https://calendar.google.com/calendar/embed?height=1000&amp;wkst=2&amp;bgcolor=%23616161&amp;ctz=Europe%2FWarsaw&amp;src=ZXNhNDgxa3Yya2hqdW1yMDdkamlhcGg0ZHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=cGwucG9saXNoI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%230B8043&amp;color=%230B8043&amp;showDate=1&amp;showPrint=0&amp;showTitle=0&amp;showCalendars=0&amp;showTz=0&amp;mode=WEEK" style="border:solid 1px #777" width="1000" height="800" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+</div>
+
 <div id="eventModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -130,7 +145,7 @@
                         </div>
                     </div>
                     <div class="form-group" id="divEndDate" style="display:none">
-                        <label>Koniec</label>
+                        <label>ARCHIWUM</label>
                         <div class="input-group date">
                             <input type="text" id="txtEnd" class="form-control" autocomplete="off" />
                         </div>
@@ -139,17 +154,6 @@
                         <label>Opis</label>
                         <textarea id="txtDescription" rows="3" class="form-control"></textarea>
                     </div>
-                    @*<div class="form-group">
-                            <label>Kolor bloku</label>
-                            <select id="ddThemeColor" class="form-control myselect">
-                                <option selected disabled value="0"></option>
-                                <option value="#3ad29f">Zielony</option>
-                                <option value="red">Czerwony</option>
-                                <option value="black">Czarny</option>
-                                <option value="blue">Niebieski</option>
-                                <option value="gray">Szary</option>
-                            </select>
-                        </div>*@
                     <div class="form-group" id="divOrder">
                         <label>Dotyczy zamówienia nr:</label>
                         <select id="selectedOrder" class="form-control myselect" asp-items="ViewBag.OrderID" asp-for="OrderID">

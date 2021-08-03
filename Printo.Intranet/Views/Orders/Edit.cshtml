@@ -13,9 +13,6 @@
                     <div class="col-lg-4">
                         <h4 class="mb-2 page-title">Zamówienie nr @Model.OrderID - @Model.OrderName</h4>
                     </div>
-                    <div class="col-lg-4" style="text-align:right; margin-bottom:5px">
-                        <input form="saveForm" type="submit" value="Zapisz" class="btn btn-success">
-                    </div>
                     <div class="col">
                         <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
                             <i class="fe fe-arrow-left" style="vertical-align:text-top"></i>
@@ -28,6 +25,7 @@
                                 Kopiuj do nowego
                             </a>
                         }
+                        <input form="saveForm" type="submit" value="Zapisz" class="btn btn-outline-success float-right" style="margin-right:5px">
                     </div>
                 </div>
             </div>
@@ -41,6 +39,16 @@
                     <input type="hidden" asp-for="UpdatedDate" />
                     <input type="hidden" asp-for="AddedUserID" />
                     <input type="hidden" asp-for="UpdatedUserID" />
+                    <div class="row" style="place-content: center; margin-bottom: 15px;">
+                        <div class="col" style=" text-align: center; ">
+                            @foreach (var item in ViewBag.ProductionStage)
+                            {
+                                <a class="btn btn-outline-secondary" style="margin:5px; border-color:@item.Color" role="button" aria-haspopup="true" aria-expanded="false" asp-action="ChangeProductionStage" asp-route-id="@Model.OrderID" asp-route-prodId="@item.ProductionStageID">
+                                    @item.Name
+                                </a>
+                            }
+                        </div>
+                    </div>
                     <div class="card-columns">
                         <div class="card shadow mb-4" style="padding-top:10px">
                             <div class="form-row" style="margin-left:10px; margin-right:10px">

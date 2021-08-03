@@ -84,19 +84,19 @@
                                 <div class="row">
                                     <div class="form-group col">
                                         <label asp-for="MachineID" class="control-label"><strong><u>Maszyna:   </u></strong></label>
-                                        <label>@Model.Machine.Name</label>
+                                        <label>@if (@Model.Machine.Name != "N/D") { @Model.Machine.Name}</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col">
                                         <label asp-for="SheetSizeID" class="control-label"><strong><u>Format arkusza:   </u></strong></label>
-                                        <label>@Model.SheetSize.Name</label>
+                                        <label>@if (@Model.SheetSize.Name != "N/D") { @Model.SheetSize.Name}</label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col">
                                         <label asp-for="PrintColorID" class="control-label"><strong><u>Kolorystyka druku:   </u></strong></label>
-                                        <label>@Model.PrintColor.Name</label>
+                                        <label>@if (@Model.PrintColor.Name != "N/D") { @Model.PrintColor.Name}</label>
                                     </div>
                                 </div>
                             </div>

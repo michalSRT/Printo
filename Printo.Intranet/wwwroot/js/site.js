@@ -186,6 +186,129 @@ $('#dataTable-orders').DataTable(
         //"scrollX": true
     });
 
+$('#dataTable-orders-finished').DataTable(
+    {
+        "language": {
+            "lengthMenu": "Pokaż _MENU_",
+            "search": "Szukaj:",
+            "zeroRecords": "Brak rekordów w tabeli",
+            "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
+            "infoEmpty": "Brak rekordów w tabeli",
+            "infoFiltered": "(sfiltrowano z łącznie _MAX_ pozycji)",
+            "paginate": {
+                "first": "Pierwsza",
+                "last": "Ostatnia",
+                "next": "Następna",
+                "previous": "Poprzednia"
+            }
+        },
+        "lengthMenu": [
+            [10, 50, 100, -1],
+            [10, 50, 100, "Wszystkie"]
+        ],
+        "dom": "frtilp",
+        //"scrollX": true
+    });
+
+$('#dataTable-orders-nd').DataTable(
+    {
+        "language": {
+            "lengthMenu": "Pokaż _MENU_",
+            "search": "Szukaj:",
+            "zeroRecords": "Brak rekordów w tabeli",
+            "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
+            "infoEmpty": "Brak rekordów w tabeli",
+            "infoFiltered": "(sfiltrowano z łącznie _MAX_ pozycji)",
+            "paginate": {
+                "first": "Pierwsza",
+                "last": "Ostatnia",
+                "next": "Następna",
+                "previous": "Poprzednia"
+            }
+        },
+        "lengthMenu": [
+            [10, 50, 100, -1],
+            [10, 50, 100, "Wszystkie"]
+        ],
+        "dom": "frtilp",
+        //"scrollX": true
+    });
+
+
+$('#dataTable-orders-kba').DataTable(
+    {
+        "language": {
+            "lengthMenu": "Pokaż _MENU_",
+            "search": "Szukaj:",
+            "zeroRecords": "Brak rekordów w tabeli",
+            "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
+            "infoEmpty": "Brak rekordów w tabeli",
+            "infoFiltered": "(sfiltrowano z łącznie _MAX_ pozycji)",
+            "paginate": {
+                "first": "Pierwsza",
+                "last": "Ostatnia",
+                "next": "Następna",
+                "previous": "Poprzednia"
+            }
+        },
+        "lengthMenu": [
+            [10, 50, 100, -1],
+            [10, 50, 100, "Wszystkie"]
+        ],
+        "dom": "frtilp",
+        //"scrollX": true
+    });
+
+
+$('#dataTable-orders-laser').DataTable(
+    {
+        "language": {
+            "lengthMenu": "Pokaż _MENU_",
+            "search": "Szukaj:",
+            "zeroRecords": "Brak rekordów w tabeli",
+            "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
+            "infoEmpty": "Brak rekordów w tabeli",
+            "infoFiltered": "(sfiltrowano z łącznie _MAX_ pozycji)",
+            "paginate": {
+                "first": "Pierwsza",
+                "last": "Ostatnia",
+                "next": "Następna",
+                "previous": "Poprzednia"
+            }
+        },
+        "lengthMenu": [
+            [10, 50, 100, -1],
+            [10, 50, 100, "Wszystkie"]
+        ],
+        "dom": "frtilp",
+        //"scrollX": true
+    });
+
+
+$('#dataTable-orders-ryobi').DataTable(
+    {
+        "language": {
+            "lengthMenu": "Pokaż _MENU_",
+            "search": "Szukaj:",
+            "zeroRecords": "Brak rekordów w tabeli",
+            "info": "Wyświetlono _START_ do _END_ z łącznie _TOTAL_ pozycji",
+            "infoEmpty": "Brak rekordów w tabeli",
+            "infoFiltered": "(sfiltrowano z łącznie _MAX_ pozycji)",
+            "paginate": {
+                "first": "Pierwsza",
+                "last": "Ostatnia",
+                "next": "Następna",
+                "previous": "Poprzednia"
+            }
+        },
+        "lengthMenu": [
+            [10, 50, 100, -1],
+            [10, 50, 100, "Wszystkie"]
+        ],
+        "dom": "frtilp",
+        //"scrollX": true
+    });
+
 $('.drgpicker').daterangepicker(
     {
         singleDatePicker: true,

@@ -21,12 +21,29 @@
                                 Dodaj
                             </a>
                         }
-
                     </div>
                 </div>
             </div>
+            <div class="row" style="place-content: center; margin-bottom: 15px;">
+                <div class="col" style=" text-align: center; ">
+                    <a class="btn btn-outline-secondary" style="margin:5px; role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index">
+                        Wszystkie
+                    </a>
+                    @foreach (var item in ViewBag.ProductionStage)
+                    {
+                        <a class="btn btn-outline-secondary" style="margin:5px; border-color:@item.Color" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Index" asp-route-id="@item.ProductionStageID">
+                            @item.Name
+                        </a>
+                    }
+                </div>
+            </div>
             <div class="card-body">
-                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="mb-2 page-title">Nieprzydzielone</h4>
+                    </div>
+                </div>
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-nd">
                     <thead>
                         <tr>
                             <th>Nr</th>
@@ -42,7 +59,241 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Where(x => x.IsActive == true))
+                        @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 1))
+                        {
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderID)
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.EndDate != null)
+                                    {@item.EndDate.Value.ToString("dd/MM")}
+                                </td>
+                                <td>
+                                    @if (item.ProductionStage.Color != null)
+                                    {
+                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Client.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Machine.Name)
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                        <i class="fe fe-edit fe-16"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="mb-2 page-title">KBA</h4>
+                    </div>
+                </div>
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-kba">
+                    <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Start</th>
+                            <th>Koniec</th>
+                            <th>Etap produkcji</th>
+                            <th>Klient</th>
+                            <th>Nazwa zamówienia</th>
+                            <th>Produkt</th>
+                            <th>Nakład</th>
+                            <th>Maszyna</th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 2))
+                        {
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderID)
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.EndDate != null)
+                                    {@item.EndDate.Value.ToString("dd/MM")}
+                                </td>
+                                <td>
+                                    @if (item.ProductionStage.Color != null)
+                                    {
+                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Client.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Machine.Name)
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                        <i class="fe fe-edit fe-16"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="mb-2 page-title">LASER</h4>
+                    </div>
+                </div>
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-laser">
+                    <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Start</th>
+                            <th>Koniec</th>
+                            <th>Etap produkcji</th>
+                            <th>Klient</th>
+                            <th>Nazwa zamówienia</th>
+                            <th>Produkt</th>
+                            <th>Nakład</th>
+                            <th>Maszyna</th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 4))
+                        {
+                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderID)
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.StartDate != null)
+                                    {@item.StartDate.Value.ToString("dd/MM")}
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.EndDate != null)
+                                    {@item.EndDate.Value.ToString("dd/MM")}
+                                </td>
+                                <td>
+                                    @if (item.ProductionStage.Color != null)
+                                    {
+                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                            </a>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Client.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Machine.Name)
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                        <i class="fe fe-edit fe-16"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="mb-2 page-title">RYOBI</h4>
+                    </div>
+                </div>
+                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-ryobi">
+                    <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Start</th>
+                            <th>Koniec</th>
+                            <th>Etap produkcji</th>
+                            <th>Klient</th>
+                            <th>Nazwa zamówienia</th>
+                            <th>Produkt</th>
+                            <th>Nakład</th>
+                            <th>Maszyna</th>
+                            <th>Akcja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 3))
                         {
                             <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
                                 <td>

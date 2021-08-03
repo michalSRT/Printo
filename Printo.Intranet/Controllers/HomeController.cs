@@ -19,9 +19,9 @@ namespace Printo.Intranet.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "KONIEC").Count();
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
             ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
-            ViewData["OrderID"] = new SelectList(_context.Orders.Where(o => o.ProductionStage.Name != "KONIEC"), "OrderID", "ConcatDescription");
+            ViewData["OrderID"] = new SelectList(_context.Orders.Where(o => o.ProductionStage.Name != "ARCHIWUM"), "OrderID", "ConcatDescription");
             return View();
         }
 

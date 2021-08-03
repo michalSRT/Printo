@@ -36,52 +36,20 @@ namespace Printo.Data.Data
                 new Client
                 {
                     ClientID = 1,
-                    Name = "Duet",
-                    CompanyFullName = "PPHU Duet Piotr Bęben",
+                    Name = "Klient testowy",
+                    CompanyFullName = "Klient testowy firma s.c.",
                     NIP = "1234567890",
                     Street = "Lwowska",
                     HouseNumber = "218b",
                     PostalCode = "33-300",
                     City = "Nowy Sącz",
-                    Email = "jd@gmail.com",
-                    Phone = "666666666",
-                    IsActive = true,
-                    AddedDate = DateTime.Now,
-                    AddedUserID = 1
-                },
-                new Client
-                {
-                    ClientID = 2,
-                    Name = "Fakro",
-                    CompanyFullName = "Fakro Sp. z o.o.",
-                    NIP = "1234567890",
-                    Street = "Wallstreet",
-                    HouseNumber = "52669",
-                    PostalCode = "52-300",
-                    City = "Nowy Jork",
-                    Email = "biuro@fakro.com",
-                    Phone = "555777333",
-                    IsActive = true,
-                    AddedDate = DateTime.Now,
-                    AddedUserID = 1
-                },
-                new Client
-                {
-                    ClientID = 3,
-                    Name = "Vitberg",
-                    CompanyFullName = "Vitberg Jacek Sikora",
-                    NIP = "1234567890",
-                    Street = "Borelowskiego",
-                    HouseNumber = "3",
-                    PostalCode = "33-300",
-                    City = "Nowy Sącz",
-                    Email = "js@gmail.com",
+                    Email = "firma@gmail.com",
                     Phone = "666666666",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
                 }
-                );
+            );
             #endregion
 
             #region USERS
@@ -384,8 +352,8 @@ namespace Printo.Data.Data
                 new Format
                 {
                     FormatID = 9,
-                    Name = "210x210mm",
-                    Description = "",
+                    Name = "B2+",
+                    Description = "720x510mm",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -425,8 +393,8 @@ namespace Printo.Data.Data
                 new Machine
                 {
                     MachineID = 4,
-                    Name = "XEROX",
-                    Description = "Druk cyfrowy XEROX D700",
+                    Name = "LASER",
+                    Description = "Druk cyfrowy",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -468,6 +436,15 @@ namespace Printo.Data.Data
                     PaperTypeID = 4,
                     Name = "Offset",
                     Description = "Papier niepowlekany typu offset",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new PaperType
+                {
+                    PaperTypeID = 5,
+                    Name = "Karton GC1",
+                    Description = "Karton jednostronnie powlekany z białym spodem",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -516,7 +493,7 @@ namespace Printo.Data.Data
                 new PaperWeight
                 {
                     PaperWeightID = 5,
-                    Grammature = "350g + 170g",
+                    Grammature = "250g",
                     Description = "",
                     IsActive = true,
                     AddedDate = DateTime.Now,
@@ -559,6 +536,15 @@ namespace Printo.Data.Data
                     PaymentTypeID = 2,
                     Name = "Gotówka",
                     Description = "Gotówka przy odbiorze",
+                    IsActive = true,
+                    AddedDate = DateTime.Now,
+                    AddedUserID = 1
+                },
+                new PaymentType
+                {
+                    PaymentTypeID = 3,
+                    Name = "Pobranie",
+                    Description = "Wysyłka z płatnością za pobraniem",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -777,7 +763,7 @@ namespace Printo.Data.Data
                 new ProductionStage
                 {
                     ProductionStageID = 8,
-                    Name = "KONIEC",
+                    Name = "ARCHIWUM",
                     Description = "Zamówienie zrealizowane",
                     Color = "#ffffff",
                     IsActive = true,
@@ -914,8 +900,8 @@ namespace Printo.Data.Data
                 new SheetSize
                 {
                     SheetSizeID = 6,
-                    Name = "B3",
-                    Description = "500x350mm",
+                    Name = "B2+",
+                    Description = "720x510mm",
                     IsActive = true,
                     AddedDate = DateTime.Now,
                     AddedUserID = 1
@@ -938,7 +924,7 @@ namespace Printo.Data.Data
                 {
                     ToDoID = 1,
                     Name = "Przykładowa notatka",
-                    Description = "Zamówić 2 ryzy papieru",
+                    Description = "Zamówić 2 ryzy offset 190g B1",
                     Date = DateTime.Now,
                     IsActive = true,
                     AddedDate = DateTime.Now,

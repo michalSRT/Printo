@@ -138,7 +138,7 @@
                         $desc.append($('<p/>').html('<b>EventID: </b>' + selectedEvent.id));
                         $desc.append($('<p/>').html('<b>Start: </b>' + moment(selectedEvent.start).format('DD.MM.YYYY HH:mm')));
                         if (selectedEvent.end != null)
-                            $desc.append($('<p/>').html('<b>ARCHIWUM: </b>' + moment(selectedEvent.end).format('DD.MM.YYYY HH:mm')));
+                            $desc.append($('<p/>').html('<b>Koniec: </b>' + moment(selectedEvent.end).format('DD.MM.YYYY HH:mm')));
                         $desc.append($('<p/>').html('<b>Opis: </b>' + selectedEvent.extendedProps.description));
                         $('#eventModal #pDetails').empty().html($desc);
                         $('#eventModal').modal();

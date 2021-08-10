@@ -384,7 +384,7 @@
                 var $desc = $('<div/>');
                 $desc.append($('<p/>').html('<b>Start: </b>' + moment(selectedEvent.start).format('DD.MM.YYYY HH:mm')));
                 if (selectedEvent.end != null)
-                    $desc.append($('<p/>').html('<b>ARCHIWUM: </b>' + moment(selectedEvent.end).format('DD.MM.YYYY HH:mm')));
+                    $desc.append($('<p/>').html('<b>Koniec: </b>' + moment(selectedEvent.end).format('DD.MM.YYYY HH:mm')));
                 if (selectedEvent.extendedProps.description != null)
                     $desc.append($('<p/>').html('<b>Opis: </b>' + selectedEvent.extendedProps.description));
                 if (selectedEvent.extendedProps.orderID != null) { $('#DivBtnOrder').show(); } else { $('#DivBtnOrder').hide(); }

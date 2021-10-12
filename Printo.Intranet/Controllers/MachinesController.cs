@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class MachinesController : AbstractAdminPolicyController
     {
-        public MachinesController(PrintoContext context) :base(context) {}
+        public MachinesController(PrintoContextDB context) :base(context) {}
 
         // GET: Machines
         public async Task<IActionResult> Index()

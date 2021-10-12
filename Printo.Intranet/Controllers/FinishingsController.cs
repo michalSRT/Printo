@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class FinishingsController : AbstractAdminPolicyController
     {
-        public FinishingsController(PrintoContext context) : base(context) { }
+        public FinishingsController(PrintoContextDB context) : base(context) { }
 
         // GET: Finishings
         public async Task<IActionResult> Index()

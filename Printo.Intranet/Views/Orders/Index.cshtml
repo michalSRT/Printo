@@ -37,319 +37,461 @@
                     }
                 </div>
             </div>
+            @if (Model.Where(x => x.IsActive == true && x.MachineID == 2).FirstOrDefault() != null)
+            {
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="mb-2 page-title">KBA</h4>
+                        </div>
+                    </div>
+                    <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-kba" style="zoom:0.75">
+                        <thead>
+                            <tr>
+                                <th>Nr</th>
+                                <th>Start</th>
+                                <th>Koniec</th>
+                                <th>Etap produkcji</th>
+                                <th>Klient</th>
+                                <th>Nazwa zamówienia</th>
+                                <th>Produkt</th>
+                                <th>Nakład</th>
+                                <th>Cena</th>
+                                <th style="width:200px">Akcja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 2))
+                            {
+                                <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderID)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.StartDate != null)
+                                        {@item.StartDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.EndDate != null)
+                                        {@item.EndDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td>
+                                        @if (item.ProductionStage.Color != null)
+                                        {
+                                            @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Client.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Product.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NetPrice)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-success" style="margin-bottom:1px" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                            <i class="fe fe-edit fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-info" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="3" role="button" data-toggle="tooltip" title="Do druku">
+                                            <i class="fe fe-printer fe-16"></i>
+                                        </a>                                        
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="7" role="button" data-toggle="tooltip" title="Gotowe">
+                                            <i class="fe fe-check fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="8" role="button" data-toggle="tooltip" title="Archiwum">
+                                            <i class="fe fe-archive fe-16"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            @if (Model.Where(x => x.IsActive == true && x.MachineID == 4).FirstOrDefault() != null)
+            {
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="mb-2 page-title">LASER</h4>
+                        </div>
+                    </div>
+                    <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-laser" style="zoom:0.75">
+                        <thead>
+                            <tr>
+                                <th>Nr</th>
+                                <th>Start</th>
+                                <th>Koniec</th>
+                                <th>Etap produkcji</th>
+                                <th>Klient</th>
+                                <th>Nazwa zamówienia</th>
+                                <th>Produkt</th>
+                                <th>Nakład</th>
+                                <th>Cena</th>
+                                <th style="width:200px">Akcja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 4))
+                            {
+                                <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderID)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.StartDate != null)
+                                        {@item.StartDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.EndDate != null)
+                                        {@item.EndDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td>
+                                        @if (item.ProductionStage.Color != null)
+                                        {
+                                            @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Client.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Product.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NetPrice)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-success" style="margin-bottom:1px" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                            <i class="fe fe-edit fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-info" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="3" role="button" data-toggle="tooltip" title="Do druku">
+                                            <i class="fe fe-printer fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="7" role="button" data-toggle="tooltip" title="Gotowe">
+                                            <i class="fe fe-check fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="8" role="button" data-toggle="tooltip" title="Archiwum">
+                                            <i class="fe fe-archive fe-16"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            @if (Model.Where(x => x.IsActive == true && x.MachineID == 3).FirstOrDefault() != null)
+            {
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="mb-2 page-title">RYOBI</h4>
+                        </div>
+                    </div>
+                    <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-ryobi" style="zoom:0.75">
+                        <thead>
+                            <tr>
+                                <th>Nr</th>
+                                <th>Start</th>
+                                <th>Koniec</th>
+                                <th>Etap produkcji</th>
+                                <th>Klient</th>
+                                <th>Nazwa zamówienia</th>
+                                <th>Produkt</th>
+                                <th>Nakład</th>
+                                <th>Cena</th>
+                                <th style="width:200px">Akcja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 3))
+                            {
+                                <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderID)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.StartDate != null)
+                                        {@item.StartDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.EndDate != null)
+                                        {@item.EndDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td>
+                                        @if (item.ProductionStage.Color != null)
+                                        {
+                                            @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Client.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Product.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NetPrice)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-success" style="margin-bottom:1px" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                            <i class="fe fe-edit fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-info" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="3" role="button" data-toggle="tooltip" title="Do druku">
+                                            <i class="fe fe-printer fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="7" role="button" data-toggle="tooltip" title="Gotowe">
+                                            <i class="fe fe-check fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="8" role="button" data-toggle="tooltip" title="Archiwum">
+                                            <i class="fe fe-archive fe-16"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            @if (Model.Where(x => x.IsActive == true && x.MachineID == 1).FirstOrDefault() != null)
+            {
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="mb-2 page-title">Nieprzydzielone</h4>
+                        </div>
+                    </div>
+                    <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-nd" style="zoom:0.75">
+                        <thead>
+                            <tr>
+                                <th>Nr</th>
+                                <th>Start</th>
+                                <th>Koniec</th>
+                                <th>Etap produkcji</th>
+                                <th>Klient</th>
+                                <th>Nazwa zamówienia</th>
+                                <th>Produkt</th>
+                                <th>Nakład</th>
+                                <th>Cena</th>
+                                <th style="width:200px">Akcja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 1))
+                            {
+                                <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderID)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.StartDate != null)
+                                        {@item.StartDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.EndDate != null)
+                                        {@item.EndDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td>
+                                        @if (item.ProductionStage.Color != null)
+                                        {
+                                            @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Client.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Product.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NetPrice)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-success" style="margin-bottom:1px" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                            <i class="fe fe-edit fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-info" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="3" role="button" data-toggle="tooltip" title="Do druku">
+                                            <i class="fe fe-printer fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="7" role="button" data-toggle="tooltip" title="Gotowe">
+                                            <i class="fe fe-check fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="8" role="button" data-toggle="tooltip" title="Archiwum">
+                                            <i class="fe fe-archive fe-16"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            @if (Model.Where(x => x.IsActive == true).FirstOrDefault() != null)
+            {
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="mb-2 page-title">WSZYSTKIE ZAMÓWIENIA</h4>
+                        </div>
+                    </div>
+                    <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-kba" style="zoom:0.75">
+                        <thead>
+                            <tr>
+                                <th>Nr</th>
+                                <th>Start</th>
+                                <th>Koniec</th>
+                                <th>Maszyna</th>
+                                <th>Etap produkcji</th>
+                                <th>Klient</th>
+                                <th>Nazwa zamówienia</th>
+                                <th>Produkt</th>
+                                <th>Nakład</th>
+                                <th>Cena</th>
+                                <th style="width:200px">Akcja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 2))
+                            {
+                                <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderID)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.StartDate != null)
+                                        {@item.StartDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td style="text-align:center">
+                                        @if (item.EndDate != null)
+                                        {@item.EndDate.Value.ToString("dd/MM")}
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Machine.Name)
+                                    </td>
+                                    <td>
+                                        @if (item.ProductionStage.Color != null)
+                                        {
+                                            @if (item.ProductionStage.Color.ToString() == "#ffffff")
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
+                                                    @Html.DisplayFor(modelItem => item.ProductionStage.Name)
+                                                </a>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Client.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OrderName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Product.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NetPrice)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-success" style="margin-bottom:1px" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                            <i class="fe fe-edit fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-info" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="3" role="button" data-toggle="tooltip" title="Do druku">
+                                            <i class="fe fe-printer fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="7" role="button" data-toggle="tooltip" title="Gotowe">
+                                            <i class="fe fe-check fe-16"></i>
+                                        </a>
+                                        <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="8" role="button" data-toggle="tooltip" title="Archiwum">
+                                            <i class="fe fe-archive fe-16"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
 
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <h4 class="mb-2 page-title">KBA</h4>
-                    </div>
-                </div>
-                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-kba">
-                    <thead>
-                        <tr>
-                            <th>Nr</th>
-                            <th>Start</th>
-                            <th>Koniec</th>
-                            <th>Etap produkcji</th>
-                            <th>Klient</th>
-                            <th>Nazwa zamówienia</th>
-                            <th>Produkt</th>
-                            <th>Nakład</th>
-                            <th>Maszyna</th>
-                            <th>Akcja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 2))
-                        {
-                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderID)
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.StartDate != null)
-                                    {@item.StartDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.EndDate != null)
-                                    {@item.EndDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td>
-                                    @if (item.ProductionStage.Color != null)
-                                    {
-                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                    }
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Client.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Product.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Quantity)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Machine.Name)
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
-                                        <i class="fe fe-edit fe-16"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <h4 class="mb-2 page-title">LASER</h4>
-                    </div>
-                </div>
-                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-laser">
-                    <thead>
-                        <tr>
-                            <th>Nr</th>
-                            <th>Start</th>
-                            <th>Koniec</th>
-                            <th>Etap produkcji</th>
-                            <th>Klient</th>
-                            <th>Nazwa zamówienia</th>
-                            <th>Produkt</th>
-                            <th>Nakład</th>
-                            <th>Maszyna</th>
-                            <th>Akcja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 4))
-                        {
-                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderID)
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.StartDate != null)
-                                    {@item.StartDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.EndDate != null)
-                                    {@item.EndDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td>
-                                    @if (item.ProductionStage.Color != null)
-                                    {
-                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                    }
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Client.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Product.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Quantity)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Machine.Name)
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
-                                        <i class="fe fe-edit fe-16"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <h4 class="mb-2 page-title">RYOBI</h4>
-                    </div>
-                </div>
-                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-ryobi">
-                    <thead>
-                        <tr>
-                            <th>Nr</th>
-                            <th>Start</th>
-                            <th>Koniec</th>
-                            <th>Etap produkcji</th>
-                            <th>Klient</th>
-                            <th>Nazwa zamówienia</th>
-                            <th>Produkt</th>
-                            <th>Nakład</th>
-                            <th>Maszyna</th>
-                            <th>Akcja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 3))
-                        {
-                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderID)
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.StartDate != null)
-                                    {@item.StartDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.EndDate != null)
-                                    {@item.EndDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td>
-                                    @if (item.ProductionStage.Color != null)
-                                    {
-                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                    }
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Client.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Product.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Quantity)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Machine.Name)
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
-                                        <i class="fe fe-edit fe-16"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <h4 class="mb-2 page-title">Nieprzydzielone</h4>
-                    </div>
-                </div>
-                <table class="table dataTable table-responsive-lg table-hover" id="dataTable-orders-nd">
-                    <thead>
-                        <tr>
-                            <th>Nr</th>
-                            <th>Start</th>
-                            <th>Koniec</th>
-                            <th>Etap produkcji</th>
-                            <th>Klient</th>
-                            <th>Nazwa zamówienia</th>
-                            <th>Produkt</th>
-                            <th>Nakład</th>
-                            <th>Maszyna</th>
-                            <th>Akcja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Where(x => x.IsActive == true && x.MachineID == 1))
-                        {
-                            <tr class="tableCursor" onclick="location.href = '@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderID)
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.StartDate != null)
-                                    {@item.StartDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.EndDate != null)
-                                    {@item.EndDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td>
-                                    @if (item.ProductionStage.Color != null)
-                                    {
-                                        @if (item.ProductionStage.Color.ToString() == "#ffffff")
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:black;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a class="btn disabled" type="button" style="padding-bottom:2px;color:white;background:@Html.DisplayFor(modelItem => item.ProductionStage.Color)">
-                                                @Html.DisplayFor(modelItem => item.ProductionStage.Name)
-                                            </a>
-                                        }
-                                    }
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Client.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Product.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Quantity)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Machine.Name)
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
-                                        <i class="fe fe-edit fe-16"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
         </div>
         @*NIEAKTYWNE*@
         @foreach (var item in Model)
@@ -386,7 +528,7 @@
                             <th>Nazwa zamówienia</th>
                             <th>Produkt</th>
                             <th>Nakład</th>
-                            <th>Akcja</th>
+                            <th style="width:73px">Akcja</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -442,6 +584,9 @@
                                 <td>
                                     <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
                                         <i class="fe fe-edit fe-16"></i>
+                                    </a>
+                                    <a class="btn btn-outline-dark" style="margin-bottom:1px" asp-action="ChangeProductionStage" asp-route-id="@item.OrderID" asp-route-prodId="8" role="button" data-toggle="tooltip" title="Archiwum">
+                                        <i class="fe fe-archive fe-16"></i>
                                     </a>
                                 </td>
                             </tr>

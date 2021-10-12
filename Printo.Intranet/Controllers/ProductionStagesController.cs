@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class ProductionStagesController : AbstractAdminPolicyController
     {
-        public ProductionStagesController(PrintoContext context) : base(context) { }
+        public ProductionStagesController(PrintoContextDB context) : base(context) { }
 
         // GET: ProductionStages
         public async Task<IActionResult> Index()

@@ -8,7 +8,7 @@ using Printo.Data.Data;
 
 namespace Printo.Data.Migrations
 {
-    [DbContext(typeof(PrintoContext))]
+    [DbContext(typeof(PrintoContextDB))]
     partial class PrintoContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -9,7 +9,7 @@ using Printo.Data.Data;
 
 namespace Printo.Data.Migrations
 {
-    [DbContext(typeof(PrintoContext))]
+    [DbContext(typeof(PrintoContextDB))]
     [Migration("20210803205811_InitialCreate")]
     partial class InitialCreate
     {

@@ -14,11 +14,14 @@ namespace Printo.Intranet.Controllers
 {
     public class OrdersController : AbstractPolicyController
     {
-        public OrdersController(PrintoContext context) : base(context) { }
+        public OrdersController(PrintoContextDB context) : base(context) { }
 
         // GET: Orders
         public async Task<IActionResult> Index()
         {
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             ViewData["ProductionStage"] = _context.ProductionStages.Where(x => x.IsActive == true).ToList();
             var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x =>x.ProductionStage.Name != "ARCHIWUM");
             return View(await printoContext.ToListAsync());
@@ -26,7 +29,19 @@ namespace Printo.Intranet.Controllers
 
         public async Task<IActionResult> FinishedOrders()
         {
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ProductionStage.Name == "ARCHIWUM");
+            return View(await printoContext.ToListAsync());
+        }        
+        
+        public async Task<IActionResult> ToInvoice()
+        {
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
+            var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ProductionStage.Name == "ARCHIWUM").Where(x=> x.InvoiceNumber == null);
             return View(await printoContext.ToListAsync());
         }
 
@@ -69,7 +84,9 @@ namespace Printo.Intranet.Controllers
         public IActionResult Create()
         {
             if (HttpContext.Session.GetString("UserTypeID") == "2") { return RedirectToAction("Index", "Home"); }
-
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["ClientID"] = new SelectList(_context.Clients.Where(x=>x.IsActive == true), "ClientID", "Name");
             ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name");
@@ -106,36 +123,24 @@ namespace Printo.Intranet.Controllers
                 _context.Add(order);
                 await _context.SaveChangesAsync();
 
-                var ord = _context.Orders.Where(x => x.OrderName == order.OrderName).FirstOrDefault();
                 var client = _context.Clients.Where(y => y.ClientID == order.ClientID).FirstOrDefault();
-                Machine machineName = _context.Machines.Where(m => m.MachineID == order.MachineID).FirstOrDefault();
+                var format = _context.Formats.Where(x => x.FormatID == order.FormatID).FirstOrDefault();
+                var paper = _context.PaperTypes.Where(x => x.PaperTypeID == order.PaperTypeID).FirstOrDefault();
+                var paperWeight = _context.PaperWeights.Where(x => x.PaperWeightID == order.PaperWeightID).FirstOrDefault();
+                var sheetSize = _context.SheetSizes.Where(x => x.SheetSizeID == order.SheetSizeID).FirstOrDefault();
+                var printColor = _context.PrintColors.Where(x => x.PrintColorID == order.PrintColorID).FirstOrDefault();
 
-
-                if (ord.MachineID != 1)
-                {
-                    _context.Events.Add(new Event { 
-                    Title = client.Name + " - " + order.OrderName + " | " + machineName.Name,
-                    Start = DateTime.Today.AddHours(7.0),
-                    End = null,
-                    AllDay = true,
-                    OrderID = ord.OrderID,
-                    BackgroundColor = "#3ad29f",
-                    Description = order.Description
-                    });
-                }
-                else
-                {
-                    _context.Events.Add(new Event
+                _context.Events.Add(new Event
                     {
-                        Title = client.Name + " - " + order.OrderName,
+                        Title = client.Name + " - " + order.OrderName + " | " + sheetSize.Name + " | " + printColor.Name,
                         Start = DateTime.Today.AddHours(7.0),
                         End = null,
                         AllDay = true,
-                        OrderID = ord.OrderID,
+                        OrderID = order.OrderID,
                         BackgroundColor = "#3ad29f",
-                        Description = order.Description
+                        Description = format.Name + " | " + paper.Name + " | " + paperWeight.Grammature + " | " + "Nakład: " + order.Quantity + " | " + order.Description + " | " + order.Comments
                     });
-                }
+                
                     
                 await _context.SaveChangesAsync();
 
@@ -197,10 +202,12 @@ namespace Printo.Intranet.Controllers
             }
 
             var UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
-
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["ClientID"] = new SelectList(_context.Clients.Where(x => x.IsActive == true), "ClientID", "Name");
-            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2 && z.UserID == UpdatedUserID ), "UserID", "Name");
+            ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2 ), "UserID", "Name");
             ViewData["DeliveryTypeID"] = new SelectList(_context.DeliveryTypes.Where(x => x.IsActive == true), "DeliveryTypeID", "Name");
             ViewData["FinishingID"] = new SelectList(_context.Finishings.Where(x => x.IsActive == true), "FinishingID", "Name");
             ViewData["FormatID"] = new SelectList(_context.Formats.Where(x => x.IsActive == true), "FormatID", "Name");
@@ -238,22 +245,26 @@ namespace Printo.Intranet.Controllers
                 {
                     order.UpdatedDate = DateTime.Now;
                     order.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
+                    if(order.ProductionStageID == 5)
+                    {
+                        order.PrintDateTime = DateTime.Now;
+                        order.PrintUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
+                    }
                     _context.Update(order);
                     Client clientName = _context.Clients.Where(o => o.ClientID == order.ClientID).FirstOrDefault();
+                    var format = _context.Formats.Where(x => x.FormatID == order.FormatID).FirstOrDefault();
+                    var paper = _context.PaperTypes.Where(x => x.PaperTypeID == order.PaperTypeID).FirstOrDefault();
+                    var paperWeight = _context.PaperWeights.Where(x => x.PaperWeightID == order.PaperWeightID).FirstOrDefault();
+                    var sheetSize = _context.SheetSizes.Where(x => x.SheetSizeID == order.SheetSizeID).FirstOrDefault();
+                    var printColor = _context.PrintColors.Where(x => x.PrintColorID == order.PrintColorID).FirstOrDefault();
                     TempData["msg"] = "Zamówienie: <br>" + clientName.Name + " - " + order.OrderName + "<br> zostało zmodyfikowane";
-                    await _context.SaveChangesAsync();
-
+                    // kod poniżej do naprarwy
                     var v = _context.Events.Where(a => a.OrderID == order.OrderID).FirstOrDefault();
-                    Machine machineName = _context.Machines.Where(m => m.MachineID == order.MachineID).FirstOrDefault();
-
                     if (v != null)
                     {
-                        if (order.MachineID != 1)
-                        {
-                            v.Title = order.Client.Name + " - " + order.OrderName + " | " + machineName.Name;
-                        }
-                        else v.Title = order.Client.Name + " - " + order.OrderName;
-                        v.Description = order.Description;
+                        v.Title = clientName.Name + " - " + order.OrderName + " | " + sheetSize.Name + " | " + printColor.Name;
+                        v.Description = format.Name + " | " + paper.Name + " | " + paperWeight.Grammature + " | " + "Nakład: " + order.Quantity + " | " + order.Description + " | " + order.Comments;
+
                         if (order.ProductionStageID >= 5)
                         {
                             v.BackgroundColor = "gray";
@@ -266,8 +277,11 @@ namespace Printo.Intranet.Controllers
                         {
                             v.BackgroundColor = "#3ad29f";
                         }
-                        await _context.SaveChangesAsync();
+                        _context.Events.Update(v);
+                        _context.SaveChanges();
                     }
+
+                await _context.SaveChangesAsync();
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -286,7 +300,7 @@ namespace Printo.Intranet.Controllers
                 {
                     return RedirectToAction("FinishedOrders", "Orders");
                 }
-                else return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Orders");
             }
 
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", order.AddedUserID);
@@ -326,6 +340,9 @@ namespace Printo.Intranet.Controllers
             {
                 return NotFound();
             }
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["ClientID"] = new SelectList(_context.Clients.Where(x => x.IsActive == true), "ClientID", "Name");
             ViewData["PrintUserID"] = new SelectList(_context.Users.Where(z => z.UserTypeID == 2), "UserID", "Name");
@@ -369,18 +386,21 @@ namespace Printo.Intranet.Controllers
                 _context.Add(order);
                 await _context.SaveChangesAsync();
 
-                var ord = _context.Orders.Where(x => x.OrderName == order.OrderName).FirstOrDefault();
                 var client = _context.Clients.Where(y => y.ClientID == order.ClientID).FirstOrDefault();
-
+                var format = _context.Formats.Where(x => x.FormatID == order.FormatID).FirstOrDefault();
+                var paper = _context.PaperTypes.Where(x => x.PaperTypeID == order.PaperTypeID).FirstOrDefault();
+                var paperWeight = _context.PaperWeights.Where(x => x.PaperWeightID == order.PaperWeightID).FirstOrDefault();
+                var sheetSize = _context.SheetSizes.Where(x => x.SheetSizeID == order.SheetSizeID).FirstOrDefault();
+                var printColor = _context.PrintColors.Where(x => x.PrintColorID == order.PrintColorID).FirstOrDefault();
                 _context.Events.Add(new Event
-                {
-                    Title = client.Name + " - " + order.OrderName,
+                {                
+                    Title = client.Name + " - " + order.OrderName + " | " + sheetSize.Name + " | " + printColor.Name,
                     Start = DateTime.Today.AddHours(7.0),
                     End = null,
                     AllDay = true,
-                    OrderID = ord.OrderID,
+                    OrderID = order.OrderID,
                     BackgroundColor = "#3ad29f",
-                    Description = order.Description
+                    Description = format.Name + " | " + paper.Name + " | " + paperWeight.Grammature + " | " + "Nakład: " + order.Quantity + " | " + order.Description + " | " + order.Comments
                 });
                 await _context.SaveChangesAsync();
 
@@ -576,17 +596,59 @@ namespace Printo.Intranet.Controllers
             temp.ProductionStageID = prodId;
             temp.UpdatedDate = DateTime.Now;
             temp.UpdatedUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
+            if (temp.ProductionStageID == 5)
+            {
+                temp.PrintDateTime = DateTime.Now;
+                temp.PrintUserID = Int32.Parse(HttpContext.Session.GetString("UserID"));
+            }
             await _context.SaveChangesAsync();
             TempData["msg"] = "Zmieniono etap produkcyjny.";
+            // kod poniżej do naprarwy
+            var v = _context.Events.Where(a => a.OrderID == temp.OrderID).FirstOrDefault();
+
+            if (v != null)
+            {
+                if (temp.ProductionStageID >= 5)
+                {
+                    v.BackgroundColor = "gray";
+                }
+                if (temp.ProductionStageID == 4)
+                {
+                    v.BackgroundColor = "#FF5722";
+                }
+                if (temp.ProductionStageID < 4)
+                {
+                    v.BackgroundColor = "#3ad29f";
+                }
+                _context.Events.Update(v);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index", "Orders");
+        }
+
+        public IActionResult ChangeColor(int eventID, string color)
+        {
+            var status = false;
+            var v = _context.Events.Where(a => a.EventID == eventID).FirstOrDefault();
+            if (v != null)
+            {
+                v.BackgroundColor = color;
+                _context.Events.Update(v);
+                _context.SaveChanges();
+                status = true;
+            }
+            return new JsonResult(status);
         }
 
         [HttpGet("Index")]
         public async Task<IActionResult> Index(int id)
         {
             ViewData["ProductionStage"] = _context.ProductionStages.Where(x => x.IsActive == true && x.Name != "ARCHIWUM").ToList();
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
 
-            if(id != 0)
+            if (id != 0)
             {
                 var printoContext = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.ProductionStage.ProductionStageID == id);
                 return View(await printoContext.ToListAsync());

@@ -3,9 +3,9 @@ using System;
 
 namespace Printo.Data.Data
 {
-    public class PrintoContext : DbContext
+    public class PrintoContextDB : DbContext
     {
-        public PrintoContext (DbContextOptions<PrintoContext> options) :base(options) { }
+        public PrintoContextDB (DbContextOptions<PrintoContextDB> options) :base(options) { }
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<Order> Orders { get; set; }

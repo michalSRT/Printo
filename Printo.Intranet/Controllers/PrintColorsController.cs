@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class PrintColorsController : AbstractAdminPolicyController
     {
-        public PrintColorsController(PrintoContext context) : base(context) { }
+        public PrintColorsController(PrintoContextDB context) : base(context) { }
 
         // GET: PrintColors
         public async Task<IActionResult> Index()

@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class VatRatesController : AbstractAdminPolicyController
     {
-        public VatRatesController(PrintoContext context) :base(context) { }
+        public VatRatesController(PrintoContextDB context) :base(context) { }
 
         // GET: VatRates
         public async Task<IActionResult> Index()

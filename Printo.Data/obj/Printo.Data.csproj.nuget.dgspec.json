@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Data\\Printo.Data.csproj": {}
+    "C:\\Users\\msier\\Desktop\\Printo\\Printo.Data\\Printo.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Data\\Printo.Data.csproj": {
+    "C:\\Users\\msier\\Desktop\\Printo\\Printo.Data\\Printo.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Data\\Printo.Data.csproj",
+        "projectUniqueName": "C:\\Users\\msier\\Desktop\\Printo\\Printo.Data\\Printo.Data.csproj",
         "projectName": "Printo.Data",
-        "projectPath": "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Data\\Printo.Data.csproj",
+        "projectPath": "C:\\Users\\msier\\Desktop\\Printo\\Printo.Data\\Printo.Data.csproj",
         "packagesPath": "C:\\Users\\msier\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\msier\\Desktop\\Praca dyplomowa\\Projekt\\Printo\\Printo\\Printo.Data\\obj\\",
+        "outputPath": "C:\\Users\\msier\\Desktop\\Printo\\Printo.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -105,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.411\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.413\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -39,16 +39,20 @@
                     <input type="hidden" asp-for="UpdatedDate" />
                     <input type="hidden" asp-for="AddedUserID" />
                     <input type="hidden" asp-for="UpdatedUserID" />
-                    <div class="row" style="place-content: center; margin-bottom: 15px;">
-                        <div class="col" style=" text-align: center; ">
-                            @foreach (var item in ViewBag.ProductionStage)
-                            {
-                                <a class="btn btn-outline-secondary" style="margin:5px; border-color:@item.Color" role="button" aria-haspopup="true" aria-expanded="false" asp-action="ChangeProductionStage" asp-route-id="@Model.OrderID" asp-route-prodId="@item.ProductionStageID">
-                                    @item.Name
-                                </a>
-                            }
+                    @if (userType != "2")
+                    {
+                        <div class="row" style="place-content: center; margin-bottom: 15px;">
+                            <div class="col" style=" text-align: center; ">
+                                @foreach (var item in ViewBag.ProductionStage)
+                                {
+                                    <a class="btn btn-outline-secondary" style="margin:5px; border-color:@item.Color" role="button" aria-haspopup="true" aria-expanded="false" asp-action="ChangeProductionStage" asp-route-id="@Model.OrderID" asp-route-prodId="@item.ProductionStageID">
+                                        @item.Name
+                                    </a>
+                                }
+                            </div>
                         </div>
-                    </div>
+                    }
+
                     <div class="card-columns">
                         <div class="card shadow mb-4" style="padding-top:10px">
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
@@ -178,7 +182,7 @@
                                             {
                                                 @if (Model.IsReprint == true)
                                                 {
-                                                    <label>Uwaga! DODRUK</label>
+                                                    <label style="color:red">Uwaga! DODRUK</label>
                                                 }
                                             }
                                             else
@@ -255,14 +259,30 @@
                             <div class="form-row" style="margin-left:10px; margin-right:10px">
                                 <div class="form-group col">
                                     <label asp-for="PrintDateTime" class="control-label">Wydrukowano dnia</label>
-                                    <input asp-for="PrintDateTime" autocomplete="off" class="form-control" id="PrintDate" type="text"  value="@Convert.ToString(string.Format("{0:dd/MM/yyyy, HH:mm}", Model.PrintDateTime))"/>
+                                    @if (userType == "2")
+                                    {
+                                        <input asp-for="PrintDateTime" autocomplete="off" class="form-control" id="PrintDate" type="text" value="@Convert.ToString(string.Format("{0:dd/MM/yyyy, HH:mm}", Model.PrintDateTime))" disabled readonly/>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="PrintDateTime" autocomplete="off" class="form-control" id="PrintDate" type="text" value="@Convert.ToString(string.Format("{0:dd/MM/yyyy, HH:mm}", Model.PrintDateTime))" />
+                                    }
                                     <span asp-validation-for="PrintDateTime" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col">
                                     <label asp-for="PrintUserID" class="control-label">Wydrukował</label>
-                                    <select asp-for="PrintUserID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PrintUserID">
-                                        <option selected disabled value="0"></option>
-                                    </select>
+                                    @if (userType == "2")
+                                    {
+                                        <select asp-for="PrintUserID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PrintUserID" disabled>
+                                            <option selected disabled value="0"></option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select asp-for="PrintUserID" class="form-control myselect" style="width:100%" asp-items="ViewBag.PrintUserID">
+                                            <option selected disabled value="0"></option>
+                                        </select>
+                                    }
                                     <span asp-validation-for="PrintUserID" class="text-danger"></span>
                                 </div>
                             </div>

@@ -11,9 +11,9 @@ namespace Printo.Intranet.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly PrintoContext _context;
+        private readonly PrintoContextDB _context;
 
-        public LoginController(PrintoContext context) 
+        public LoginController(PrintoContextDB context) 
         {
             _context = context;
         }

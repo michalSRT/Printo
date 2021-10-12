@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class SheetSizesController : AbstractAdminPolicyController
     {
-        public SheetSizesController(PrintoContext context) : base(context) { }
+        public SheetSizesController(PrintoContextDB context) : base(context) { }
 
         // GET: SheetSizes
         public async Task<IActionResult> Index()

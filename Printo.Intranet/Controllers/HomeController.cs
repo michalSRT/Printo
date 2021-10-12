@@ -15,12 +15,13 @@ namespace Printo.Intranet.Controllers
 {
     public class HomeController : AbstractPolicyController
     {
-        public HomeController(PrintoContext context) : base(context) { }
+        public HomeController(PrintoContextDB context) : base(context) { }
 
         public IActionResult Index()
         {
             ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
             ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             ViewData["OrderID"] = new SelectList(_context.Orders.Where(o => o.ProductionStage.Name != "ARCHIWUM"), "OrderID", "ConcatDescription");
             return View();
         }
@@ -106,6 +107,9 @@ namespace Printo.Intranet.Controllers
         {
             var status = false;
             var v = _context.Events.Where(a => a.EventID == eventID).FirstOrDefault();
+
+            var o = _context.Orders.Where(a => a.OrderID == v.OrderID).FirstOrDefault();
+
             if (v != null)
             {
                 v.BackgroundColor = color;

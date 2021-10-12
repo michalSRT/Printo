@@ -42,15 +42,20 @@ namespace Printo.Intranet
             });
 
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                options.Cookie.Name = ".Printo.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(99999999);
+                options.Cookie.IsEssential = true;
             });
 
-            services.ConfigureApplicationCookie(options => options.ExpireTimeSpan = TimeSpan.FromMinutes(60));
+            services.AddAuthentication().AddCookie(o =>
+            {
+                o.ExpireTimeSpan = TimeSpan.FromSeconds(10);
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddDbContext<PrintoContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PrintoContext")));
+            services.AddDbContext<PrintoContextDB>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("PrintoContextDB")));
 
             //services.AddControllersWithViews();
         }

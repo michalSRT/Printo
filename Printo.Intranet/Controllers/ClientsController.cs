@@ -14,11 +14,14 @@ namespace Printo.Intranet.Controllers
 {
     public class ClientsController : AbstractPolicyController
     {
-        public ClientsController(PrintoContext context) : base(context) {}
+        public ClientsController(PrintoContextDB context) : base(context) {}
 
         // GET: Clients
         public async Task<IActionResult> Index()
         {
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             var printoContext = _context.Clients.Include(c => c.AddedUser).Include(c => c.UpdatedUser);
             return View(await printoContext.ToListAsync());
         }
@@ -47,7 +50,9 @@ namespace Printo.Intranet.Controllers
         public IActionResult Create()
         {
             if (HttpContext.Session.GetString("UserTypeID") == "2") { return RedirectToAction("Index", "Home"); }
-
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             return View();
@@ -89,7 +94,9 @@ namespace Printo.Intranet.Controllers
                 return NotFound();
             }
             var ClientOrders = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.IsActive == true && x.ClientID == id);
-
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             ViewBag.ClientOrders = ClientOrders;
             ViewData["ClientOrders"] = ClientOrders;
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", client.AddedUserID);

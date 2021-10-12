@@ -12,9 +12,9 @@ namespace Printo.Intranet.Controllers.Abstract
 {
     public abstract class AbstractPolicyController : Controller
     {
-        protected readonly PrintoContext _context;
+        protected readonly PrintoContextDB _context;
 
-        public AbstractPolicyController(PrintoContext context)
+        public AbstractPolicyController(PrintoContextDB context)
         {
             _context = context;
         }

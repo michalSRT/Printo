@@ -135,7 +135,7 @@ $('#dataTable-1').DataTable(
             [10, 50, 100, "Wszystkie"]
         ],
         "dom": "frtilp",
-        //"scrollX": true,
+        "order": [[0, "desc"]]
     });
 
 $('#dataTable-2').DataTable(
@@ -159,7 +159,7 @@ $('#dataTable-2').DataTable(
             [10, 50, 100, "Wszystkie"]
         ],
         "dom": "frtilp",
-        //"scrollX": true,
+        "order": [[0, "desc"]]
     });
 
 $('#dataTable-orders').DataTable(
@@ -183,7 +183,7 @@ $('#dataTable-orders').DataTable(
             [10, 50, 100, "Wszystkie"]
         ],
         "dom": "frtilp",
-        //"scrollX": true
+        "order": [[0, "desc"]]
     });
 
 $('#dataTable-orders-finished').DataTable(
@@ -203,11 +203,11 @@ $('#dataTable-orders-finished').DataTable(
             }
         },
         "lengthMenu": [
-            [10, 50, 100, -1],
-            [10, 50, 100, "Wszystkie"]
+            [50, 100, -1],
+            [50, 100, "Wszystkie"]
         ],
         "dom": "frtilp",
-        //"scrollX": true
+        "order": [[0, "desc"]]
     });
 
 $('#dataTable-orders-nd').DataTable(
@@ -231,7 +231,7 @@ $('#dataTable-orders-nd').DataTable(
             [10, 50, 100, "Wszystkie"]
         ],
         "dom": "frtilp",
-        //"scrollX": true
+        "order": [[0, "desc"]]
     });
 
 
@@ -256,7 +256,7 @@ $('#dataTable-orders-kba').DataTable(
             [10, 50, 100, "Wszystkie"]
         ],
         "dom": "frtilp",
-        //"scrollX": true
+        "order": [[0, "desc"]]
     });
 
 
@@ -281,7 +281,7 @@ $('#dataTable-orders-laser').DataTable(
             [10, 50, 100, "Wszystkie"]
         ],
         "dom": "frtilp",
-        //"scrollX": true
+        "order": [[0, "desc"]]
     });
 
 
@@ -306,7 +306,7 @@ $('#dataTable-orders-ryobi').DataTable(
             [10, 50, 100, "Wszystkie"]
         ],
         "dom": "frtilp",
-        //"scrollX": true
+        "order": [[0, "desc"]]
     });
 
 $('.drgpicker').daterangepicker(

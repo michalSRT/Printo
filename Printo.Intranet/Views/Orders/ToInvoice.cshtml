@@ -9,7 +9,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <h4 class="mb-2 page-title">Archiwum - zamówienia zakończone</h4>
+                        <h4 class="mb-2 page-title">Archiwum - zamówienia do fakturowania</h4>
                     </div>
                     <div class="col">
                         <a class="btn btn-outline-success float-right" role="button" aria-haspopup="true" aria-expanded="false" asp-action="Create">
@@ -29,43 +29,45 @@
                     <tbody>
                         @foreach (var item in Model.Where(x => x.IsActive == true))
                         {
-                            <tr class="tableCursor" onclick="location.href='@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderID)
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.StartDate != null) {@item.StartDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td style="text-align:center">
-                                    @if (item.EndDate != null) {@item.EndDate.Value.ToString("dd/MM")}
-                                </td>
-                                <td>
-                                    @if (item.InvoiceNumber != null)
-                                    {
-                                        @Html.DisplayFor(modelItem => item.InvoiceNumber)
-                                    }
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Client.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.OrderName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Product.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Quantity)
-                                </td>                                
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.NetPrice)
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
-                                        <i class="fe fe-edit fe-16"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr class="tableCursor" onclick="location.href='@(Url.Action("Edit", "Orders", new { id = item.OrderID }, null))'">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderID)
+                            </td>
+                            <td style="text-align:center">
+                                @if (item.StartDate != null)
+                                {@item.StartDate.Value.ToString("dd/MM")}
+                            </td>
+                            <td style="text-align:center">
+                                @if (item.EndDate != null)
+                                {@item.EndDate.Value.ToString("dd/MM")}
+                            </td>
+                            <td>
+                                @if (item.InvoiceNumber != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Client.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NetPrice)
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.OrderID" role="button" data-toggle="tooltip" title="Edytuj">
+                                    <i class="fe fe-edit fe-16"></i>
+                                </a>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

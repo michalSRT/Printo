@@ -14,7 +14,7 @@ namespace Printo.Intranet.Controllers
     public class PaperTypesController : AbstractAdminPolicyController
     {
 
-        public PaperTypesController(PrintoContext context) :base(context) {}
+        public PaperTypesController(PrintoContextDB context) :base(context) {}
 
         // GET: PaperTypes
         public async Task<IActionResult> Index()

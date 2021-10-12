@@ -109,7 +109,13 @@
                     <li class="nav-item w-100">
                         <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="Index">
                             <i class="fe fe-monitor fe-16"></i>
-                            <span class="ml-3 item-text">Aktualne zamówienia</span>
+                            <span class="ml-3 item-text">Aktualne zamówienia</span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.OrdersCount</span>
+                        </a>
+                    </li>
+                    <li class="nav-item w-100">
+                        <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="ToInvoice">
+                            <i class="fe fe-check-square fe-16"></i>
+                            <span class="ml-3 item-text">Do fakturowania</span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.InvoiceCount</span>
                         </a>
                     </li>
                     <li class="nav-item w-100">
@@ -133,7 +139,7 @@
                     <li class="nav-item w-100">
                         <a class="nav-link" asp-area="" asp-controller="ToDoes" asp-action="Index">
                             <i class="fe fe-alert-circle fe-16"></i>
-                            <span class="ml-3 item-text">Do zrobienia</span>
+                            <span class="ml-3 item-text">Do zrobienia</span><span class="badge badge-success" style="font-weight:bold;color:white;padding:5px">@ViewBag.ToDoesCount</span>
                         </a>
                     </li>
 
@@ -362,7 +368,6 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
             themeSystem: 'default',
             initialView: 'timeGridWeek',
-            initialDate: initDate,
             eventColor: 'green',
             locale: 'pl',
             headerToolbar: {
@@ -462,7 +467,7 @@
             }
             else {
                 $('#divOrder').hide();
-                $('#selectedOrder').val(selectedEvent.extendedProps.orderID);
+                $('#selectedOrder').val(selectedEvent.orderID);
             }
             $('#txtStart, #txtEnd').datetimepicker({
                 contentWindow: window,
@@ -547,6 +552,26 @@
                 type: "POST",
                 url: '@Url.Action("ChangeColor", "Home")',
                 data: { EventID: selectedEvent.id, color: "gray" },
+                dataType: "json",
+                success: function () {
+                    initDate = selectedEvent.start;
+                    drawCalendar();
+                    $('#eventModal').modal('hide');
+
+                },
+                error: function () {
+                    alert('Nie udało się odświeżyć kalendarza.');
+                }
+            })
+        }
+    })
+
+    $('#btnBlack').click(function () {
+        if (selectedEvent != null) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeColor", "Home")',
+                data: { EventID: selectedEvent.id, color: "black" },
                 dataType: "json",
                 success: function () {
                     initDate = selectedEvent.start;

@@ -13,11 +13,14 @@ namespace Printo.Intranet.Controllers
 {
     public class ToDoesController : AbstractPolicyController
     {
-        public ToDoesController(PrintoContext context): base(context) { }
+        public ToDoesController(PrintoContextDB context): base(context) { }
 
         // GET: ToDoes
         public async Task<IActionResult> Index()
         {
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             var printoContext = _context.ToDos.Include(t => t.AddedUser).Include(t => t.UpdatedUser).Include(t => t.User).OrderBy(t => t.Date);
             ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Name");
             return View(await printoContext.ToListAsync());
@@ -46,6 +49,9 @@ namespace Printo.Intranet.Controllers
         // GET: ToDoes/Create
         public IActionResult Create()
         {
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login");
             ViewData["UserID"] = new SelectList(_context.Users.Where(x=>x.IsActive == true), "UserID", "Name");
@@ -88,6 +94,9 @@ namespace Printo.Intranet.Controllers
             {
                 return NotFound();
             }
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
             ViewData["AddedUserID"] = new SelectList(_context.Users, "UserID", "Login", toDo.AddedUserID);
             ViewData["UpdatedUserID"] = new SelectList(_context.Users, "UserID", "Login", toDo.UpdatedUserID);
             ViewData["UserID"] = new SelectList(_context.Users, "UserID", "Name", toDo.UserID);

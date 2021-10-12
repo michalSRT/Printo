@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class UserTypesController : AbstractAdminPolicyController
     {
-        public UserTypesController(PrintoContext context) :base(context) { }
+        public UserTypesController(PrintoContextDB context) :base(context) { }
 
         // GET: UserTypes
         public async Task<IActionResult> Index()

@@ -9,11 +9,11 @@ namespace Printo.Intranet.Policy
 {
     public class UserPolicy : Controller
     {
-        private readonly PrintoContext context;
+        private readonly PrintoContextDB context;
         private readonly int userId;
         private readonly int userTypeId;
 
-        public UserPolicy(PrintoContext _context, HttpContext _session, RouteData _routeData)
+        public UserPolicy(PrintoContextDB _context, HttpContext _session, RouteData _routeData)
         {
             context = _context;
             userId = Convert.ToInt32(_session.Session.GetString("UserID"));

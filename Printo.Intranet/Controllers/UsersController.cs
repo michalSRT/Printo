@@ -14,7 +14,7 @@ namespace Printo.Intranet.Controllers
 {
     public class UsersController : AbstractAdminPolicyController
     {
-        public UsersController(PrintoContext context):base(context) { }
+        public UsersController(PrintoContextDB context):base(context) { }
 
         // GET: Users
         public async Task<IActionResult> Index()

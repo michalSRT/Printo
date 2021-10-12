@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class DeliveryTypesController : AbstractAdminPolicyController
     {
-        public DeliveryTypesController(PrintoContext context) : base(context) { }
+        public DeliveryTypesController(PrintoContextDB context) : base(context) { }
 
         // GET: DeliveryTypes
         public async Task<IActionResult> Index()

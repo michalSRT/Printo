@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class PaymentTypesController : AbstractAdminPolicyController
     {
-        public PaymentTypesController(PrintoContext context) : base(context) { }
+        public PaymentTypesController(PrintoContextDB context) : base(context) { }
 
         // GET: PaymentTypes
         public async Task<IActionResult> Index()

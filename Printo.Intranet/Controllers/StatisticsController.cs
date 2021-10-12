@@ -14,14 +14,16 @@ namespace Printo.Intranet.Controllers
 {
     public class StatisticsController : AbstractPolicyController
     {
-        public StatisticsController(PrintoContext context) : base(context) { }
+        public StatisticsController(PrintoContextDB context) : base(context) { }
 
         public IActionResult Index(int? id)
         {
 
             var orders = _context.Orders.Include(o => o.AddedUser).Include(o => o.Client).Include(o => o.DeliveryType).Include(o => o.Finishing).Include(o => o.Format).Include(o => o.Machine).Include(o => o.PaperType).Include(o => o.PaperWeight).Include(o => o.PaymentType).Include(o => o.PostPress).Include(o => o.PrintColor).Include(o => o.Product).Include(o => o.ProductionStage).Include(o => o.SheetSize).Include(o => o.UpdatedUser).Include(o => o.VatRate).Include(o => o.PrintUser).Where(x => x.IsActive == true);
-
-            if(id == null)
+            ViewBag.OrdersCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name != "ARCHIWUM").Count();
+            ViewBag.ToDoesCount = _context.ToDos.Where(x => x.IsActive == true).Count();
+            ViewBag.InvoiceCount = _context.Orders.Where(x => x.IsActive == true && x.ProductionStage.Name == "ARCHIWUM" && x.InvoiceNumber == null).Count();
+            if (id == null)
             {
                 ViewBag.OrdersNumber = orders.Where(x => x.ProductionStage.Name != "ARCHIWUM").Count();
                 ViewBag.FinishedOrdersNumber = orders.Where(x => x.ProductionStage.Name == "ARCHIWUM").Count();

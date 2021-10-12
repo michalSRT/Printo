@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class PostPressesController : AbstractAdminPolicyController
     {
-        public PostPressesController(PrintoContext context) : base(context) { }
+        public PostPressesController(PrintoContextDB context) : base(context) { }
 
         // GET: PostPresses
         public async Task<IActionResult> Index()

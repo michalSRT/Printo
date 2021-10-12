@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class PaperWeightsController : AbstractAdminPolicyController
     {
-        public PaperWeightsController(PrintoContext context) : base(context) { }
+        public PaperWeightsController(PrintoContextDB context) : base(context) { }
 
         // GET: PaperWeights
         public async Task<IActionResult> Index()

@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class ProductsController : AbstractAdminPolicyController
     {
-        public ProductsController(PrintoContext context) : base(context) { }
+        public ProductsController(PrintoContextDB context) : base(context) { }
 
         // GET: Products
         public async Task<IActionResult> Index()

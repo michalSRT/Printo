@@ -13,7 +13,7 @@ namespace Printo.Intranet.Controllers
 {
     public class FormatsController : AbstractAdminPolicyController
     {
-        public FormatsController(PrintoContext context) : base(context) { }
+        public FormatsController(PrintoContextDB context) : base(context) { }
 
         // GET: Formats
         public async Task<IActionResult> Index()
